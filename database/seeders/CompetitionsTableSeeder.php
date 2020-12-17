@@ -1,6 +1,9 @@
 <?php
 
+namespace Partymeister\Competitions\Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class AccountsTableSeeder
