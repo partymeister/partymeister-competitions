@@ -43,15 +43,16 @@
     </div>
 </div>
 {!! form_end($form) !!}
-
 @section ('right-sidebar')
     <motor-media-mediapool></motor-media-mediapool>
 @endsection
+@section('right-sidebar-header')<h5 class="pb-0 mb-0">Media</h5>@endsection
+
 @section('view_scripts')
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $('#has_prizegiving').change(function(){
+            $('#has_prizegiving').change(function () {
                 if ($(this).prop('checked')) {
                     $('.has-prizegiving').removeClass('hide');
                 } else {

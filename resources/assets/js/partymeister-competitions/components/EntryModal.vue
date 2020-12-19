@@ -269,16 +269,6 @@
 </style>
 
 <script>
-    import {Ziggy} from 'ziggy-js';
-    import route from 'ziggy-js/src/js/route';
-
-    window.Ziggy = Ziggy; // this was missing from your setup
-
-    Vue.mixin({
-        methods: {
-            route: route
-        }
-    });
 
     export default {
         name: 'partymeister-competitions-entry-modal',
