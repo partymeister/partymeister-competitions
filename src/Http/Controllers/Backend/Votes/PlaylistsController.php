@@ -72,12 +72,12 @@ class PlaylistsController extends Controller
         $prizegivingTemplate = SlideTemplate::where('template_for', 'prizegiving')->first();
         $comingupTemplate    = SlideTemplate::where('template_for', 'coming_up')->first();
         $nowTemplate         = SlideTemplate::where('template_for', 'now')->first();
-        $endTemplate         = SlideTemplate::where('template_for', 'end')->first();
+        $endTemplate         = SlideTemplate::where('template_for', 'end_of_pg')->first();
         $commentsTemplate    = SlideTemplate::where('template_for', 'comments')->first();
 
         foreach ($results as $key => $competition) {
             foreach ($competition['entries'] as $entryKey => $entry) {
-                if ($entryKey > 6) {
+                if ($entryKey > config('partymeister-slides-prizegiving.entries')-1) {
                     unset($results[$key]['entries'][$entryKey]);
                 }
             }
