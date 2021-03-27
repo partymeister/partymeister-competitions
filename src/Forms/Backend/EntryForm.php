@@ -93,6 +93,11 @@ class EntryForm extends Form
                  'empty_value' => trans('partymeister-competitions::backend/entries.choose'),
                  'choices'     => $files
              ])
+            ->add(
+                'discord_name',
+                'text',
+                [ 'label' => trans('partymeister-competitions::backend/entries.discord_name') ]
+            )
              ->add('author_name', 'text', [ 'label' => trans('partymeister-competitions::backend/entries.name') ])
              ->add('author_email', 'text', [ 'label' => trans('partymeister-competitions::backend/entries.email') ])
              ->add('author_phone', 'text', [ 'label' => trans('partymeister-competitions::backend/entries.phone') ])

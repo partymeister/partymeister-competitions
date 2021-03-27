@@ -113,6 +113,11 @@ class EntryUploadForm extends Form
                  'default_value' => 'DE',
                  'choices'       => Countries::getNames()
              ])
+            ->add(
+                'discord_name',
+                'text',
+                [ 'label' => trans('partymeister-competitions::backend/entries.discord_name') ]
+            )
              ->add('options', 'form', [
                  'wrapper' => [],
                  'class'   => '\Partymeister\Competitions\Forms\Backend\EntryOptionForm',

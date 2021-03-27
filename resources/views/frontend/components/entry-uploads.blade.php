@@ -31,6 +31,7 @@
             <div class="@boxBody">
                 {!! form_row($entryUploadForm->description) !!}
                 {!! form_row($entryUploadForm->organizer_description) !!}
+                {!! form_row($entryUploadForm->discord_name) !!}
                 @if ($entryUploadForm->has('running_time'))
                     {!! form_row($entryUploadForm->running_time) !!}
                 @endif
