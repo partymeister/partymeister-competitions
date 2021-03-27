@@ -41,7 +41,7 @@ class PlaylistsController extends Controller
         $specialVotes = VoteService::getAllSpecialVotesByRank();
 
         foreach ($specialVotes as $entryKey => $entry) {
-            if ($entryKey > 6) {
+            if ($entryKey > config('partymeister-slides-prizegiving.entries')-1) {
                 unset($specialVotes[$entryKey]);
             }
         }
