@@ -84,7 +84,7 @@
             </dd>
             @if ($record->discord_name !== '')
             <dt class="small-4">
-                {{trans('partymeister-competitions::backend/entries.discord_name')}}
+                {{trans('partymeister-competitions::backend/entries.discord_name_short')}}
             </dt>
             <dd class="small-8">
                 <p>{{nl2br($record->discord_name)}}</p>
