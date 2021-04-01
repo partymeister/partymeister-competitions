@@ -147,7 +147,7 @@ class ComponentEntryComments
         $c->message         = $this->request->input($this->entryCommentForm->getName() . '.message');
         $c->save();
 
-        StuhlService::send($this->visitor->name . ' just wrote a comment for his entry ' . $this->record->name . ' in the ' . $this->record->competition->name . ' competition!');
+        StuhlService::send($this->visitor->name . ' just wrote a comment for the entry ' . $this->record->name . ' in the ' . $this->record->competition->name . ' competition!');
 
         return redirect($this->request->url() . '?entry_id=' . $this->record->id);
     }
