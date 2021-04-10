@@ -4,6 +4,10 @@ namespace Partymeister\Competitions\Transformers\Entry;
 
 use Illuminate\Support\Collection;
 use League\Fractal;
+
+use Illuminate\Support\Facades\Log;
+
+
 use League\Fractal\ParamBag;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;
@@ -26,10 +30,21 @@ class SimpleTransformer extends Fractal\TransformerAbstract
      * @var array
      */
     private $validParams = [
-        'visitor_id',
+	    'visitor_id',
+	    'visitorid',
         'vote_category_id'
     ];
 
+
+    public $visitorId;
+
+
+    public function __construct($visitorId = null) {
+	    if (!is_null($visitorId)) {
+	    	$this->visitorId = $visitorId;
+	    }
+
+     }
 
     /**
      * @param Entry    $entry
@@ -41,14 +56,21 @@ class SimpleTransformer extends Fractal\TransformerAbstract
         $voteCategory = null;
         if ($entry->competition->vote_categories->count() > 0) {
             $voteCategory = $entry->competition->vote_categories[0];
-        }
+	}
+
+	if (!$params->get('visitor_id')) {
+		$visitorId = $this->visitorId;
+	} else {
+		$visitorId = $params->get('visitor_id');
+	}
+
 
         if (is_null($voteCategory)) {
             $votes = new Collection();
         } else {
             $votes = Vote::where('entry_id', $entry->id)
                          ->where('vote_category_id', $voteCategory->id)
-                         ->where('visitor_id', $params->get('visitor_id'))
+                         ->where('visitor_id', $visitorId) //$params->get('visitor_id'))
                          ->get();
         }
 

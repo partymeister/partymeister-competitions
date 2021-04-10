@@ -8,7 +8,7 @@ return [
             'icon'        => 'fa fa-trophy',
             'route'       => null,
             'roles'       => [ 'SuperAdmin' ],
-            'permissions' => [ 'partymeister-competitions.read' ],
+            'permissions' => [ 'competitions.read' ],
             'items'       => [
                 100 => [ // <-- !!! replace 170 with your own sort position !!!
                     'slug'        => 'competitions',
