@@ -12,8 +12,8 @@
     }
   ],
   "require": {
-    "partymeister/core": "^1.0",
-    "kwn/number-to-words": "^1.9",
+    "partymeister/core": "^1.1",
+    "kwn/number-to-words": "^1.12",
     "setasign/fpdi-tcpdf": "^2.3",
     "tecnickcom/tcpdf": "^6.3"
   },

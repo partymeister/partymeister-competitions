@@ -21,9 +21,9 @@ use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 use Motor\Media\Models\FileAssociation;
 use Spatie\Image\Exceptions\InvalidManipulation;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Partymeister\Competitions\Models\Competition
@@ -76,7 +76,7 @@ use Spatie\MediaLibrary\Models\Media;
  */
 class Competition extends Model implements HasMedia
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
     use Searchable;
     use Filterable;
     use Blameable, CreatedBy, UpdatedBy, DeletedBy;
@@ -118,7 +118,7 @@ class Competition extends Model implements HasMedia
      * @param Media|null $media
      * @throws InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')->width(320)->height(240)->nonQueued();
 
