@@ -133,6 +133,7 @@
             {!! form_row($form->author_zip) !!}
             {!! form_row($form->author_city) !!}
             {!! form_row($form->author_country_iso_3166_1) !!}
+            {!! form_row($form->discord_name) !!}
         </div>
         <!-- /.box-body -->
     </div>

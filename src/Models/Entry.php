@@ -177,6 +177,7 @@ class Entry extends Model implements HasMedia
         'composer_country_iso_3166_1',
         'final_file_media_id',
         'status',
+        'discord_name',
     ];
 
 

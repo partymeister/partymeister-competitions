@@ -33,6 +33,8 @@ return [
     'final_file_media_id'                         => 'Final file',
     'choose'                                      => '=== Select final file for release ===',
     'config_file'                                 => 'Config (not to be released, for compo only)',
+    'discord_name'                                => 'Discord name so we can easily reach you (e.g D.Fox#7589)',
+    'discord_name_short'                          => 'Discord name',
 
     'name'            => 'Name',
     'email'           => 'Email',

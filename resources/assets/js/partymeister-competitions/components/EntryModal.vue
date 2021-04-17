@@ -207,6 +207,12 @@
                                     {{ entry.author_address }} {{ entry.author_zip }} {{ entry.author_city }} {{
                                     entry.author_country }}
                                 </dd>
+                              <dt v-if="entry.discord_name !== ''" class="col-sm-4">
+                                {{$t('partymeister-competitions.backend.entries.discord_name_short')}}
+                              </dt>
+                              <dd class="col-sm-8">
+                                <p>{{ entry.discord_name }}<input type="hidden" id="discord-name" :value="entry.discord_name"> <button class="btn btn-sm btn-success" v-on:click="copyDiscordName">Copy</button></p>
+                              </dd>
                             </dl>
                         </div>
                         <template v-if="entry.competition && entry.competition.data.competition_type.data.has_composer">
@@ -281,10 +287,28 @@
         mounted: function() {
             this.$eventHub.$on('partymeister-competitions:show-entry-modal', (entry) => {
                 this.entry = entry;
-                // console.log(entry);
+                console.log(entry);
             });
         },
         methods: {
+            copyDiscordName() {
+              let textToCopy = document.querySelector('#discord-name')
+              textToCopy.setAttribute('type', 'text');
+              textToCopy.select();
+              textToCopy.remove
+
+              try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                // alert('Discord name was copied ' + msg);
+              } catch (err) {
+                // alert('Oops, unable to copy');
+              }
+
+              /* unselect the range */
+              textToCopy.setAttribute('type', 'hidden')
+              window.getSelection().removeAllRanges()
+            },
             loadEntry(entryId) {
 
             },
@@ -319,4 +343,8 @@
 
 
 <style lang="scss">
+#discord-name {
+  border: none;
+  color: rgb(60, 75, 100);
+}
 </style>

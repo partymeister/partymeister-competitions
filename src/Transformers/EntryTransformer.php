@@ -99,6 +99,7 @@ class EntryTransformer extends Fractal\TransformerAbstract
             'author_city'                                 => $record->author_city,
             'author_country_iso_3166_1'                   => $record->author_country_iso_3166_1,
             'author_country'                              => $record->author_country_iso_3166_1 == '' ? '' : Countries::getName($record->author_country_iso_3166_1),
+            'discord_name'                                => $record->discord_name,
             'composer_name'                               => $record->composer_name,
             'composer_email'                              => $record->composer_email,
             'composer_phone'                              => $record->composer_phone,
