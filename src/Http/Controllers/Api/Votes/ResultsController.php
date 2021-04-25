@@ -2,37 +2,74 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Api\Votes;
 
-use Illuminate\Http\Response;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Backend\Http\Controllers\ApiController;
 use Partymeister\Competitions\Services\VoteService;
-use Partymeister\Competitions\Transformers\Vote\ResultsTransformer;
 
 /**
  * Class ResultsController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api\Votes
  */
-class ResultsController extends Controller
+class ResultsController extends ApiController
 {
-
     /**
+     * @OA\Post (
+     *   tags={"VoteResultsController"},
+     *   path="/api/votes/results",
+     *   summary="Generate results",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Results generated"
+     *       ),
+     *       @OA\Property(
+     *         property="results",
+     *         type="array",
+     *         @OA\Items(
+     *           ref="#/components/schemas/ResultResource"
+     *         ),
+     *       ),
+     *       @OA\Property(
+     *         property="special",
+     *         type="array",
+     *         @OA\Items(
+     *           ref="#/components/schemas/ResultResource"
+     *         ),
+     *       ),
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   )
+     * )
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $results = VoteService::getAllVotesByRank();
-        $special = VoteService::getAllSpecialVotesByRank();
+        $resultsData = VoteService::getAllVotesByRank();
+        $specialData = VoteService::getAllSpecialVotesByRank();
 
-        $transformedResults = $this->transformCollection($results, ResultsTransformer::class);
-        $resultsData        = $this->fractal->createData($transformedResults)->toArray();
-
-        $transformedSpecialResults = $this->transformCollection($special, ResultsTransformer::class);
-        $specialData               = $this->fractal->createData($transformedSpecialResults)->toArray();
-
-        return $this->respondWithJson(
-            'Results read',
-            [ 'results' => $resultsData['data'], 'special' => $specialData['data'] ]
-        );
+        return response()->json([
+            'message' => 'Results generated',
+            'results' => $resultsData['data'],
+            'special' => $specialData['data'],
+        ]);
     }
 }

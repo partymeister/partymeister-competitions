@@ -3,12 +3,11 @@
 namespace Partymeister\Competition\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competition\Models\AccessKey;
 use Partymeister\Competition\Http\Requests\Backend\AccessKeyRequest;
-use Partymeister\Competition\Services\AccessKeyService;
-use Partymeister\Competition\Http\Resources\AccessKeyResource;
 use Partymeister\Competition\Http\Resources\AccessKeyCollection;
+use Partymeister\Competition\Http\Resources\AccessKeyResource;
+use Partymeister\Competitions\Models\AccessKey;
+use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
  * Class AccessKeysController

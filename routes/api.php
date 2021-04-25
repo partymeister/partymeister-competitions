@@ -5,6 +5,8 @@ Route::group([
     'prefix'     => 'api',
     'as'         => 'api.',
 ], function () {
+    Route::post('access_keys/generate', 'AccessKeys\GenerateController@index')
+         ->name('access_keys.generate');
     Route::apiResource('option_groups', 'OptionGroupsController');
     Route::apiResource('competition_types', 'CompetitionTypesController');
     Route::apiResource('competitions', 'CompetitionsController');
@@ -14,12 +16,14 @@ Route::group([
     Route::apiResource('entries', 'EntriesController');
     Route::apiResource('access_keys', 'AccessKeysController');
     Route::apiResource('competition_prizes', 'CompetitionPrizesController');
-    Route::resource('votes/results', 'Votes\ResultsController');
+    Route::post('votes/results', 'Votes\ResultsController@index')
+         ->name('votes.results');
     Route::apiResource('votes', 'VotesController');
     Route::apiResource('live_votes', 'LiveVotesController');
     Route::apiResource('manual_votes', 'ManualVotesController');
 });
 
+// TODO: is this still needed?
 Route::group([
     'middleware' => ['web', 'web_auth', 'bindings', 'permission'],
     'namespace'  => 'Partymeister\Competitions\Http\Controllers\Api',

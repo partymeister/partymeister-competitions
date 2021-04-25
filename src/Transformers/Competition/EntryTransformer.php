@@ -7,11 +7,11 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class EntryTransformer
+ *
  * @package Partymeister\Competitions\Transformers\Competition
  */
 class EntryTransformer extends Fractal\TransformerAbstract
 {
-
     /**
      * Transform record to array
      *
@@ -25,7 +25,7 @@ class EntryTransformer extends Fractal\TransformerAbstract
             'title'             => $record->title,
             'author'            => ($record->competition->competition_type->is_anonymous ? trans('partymeister-competitions::backend/competitions.anonymized') : $record->author),
             'playlist_position' => $record->sort_position,
-            'is_remote'         => (bool) $record->is_remote
+            'is_remote'         => (bool) $record->is_remote,
         ];
     }
 }
