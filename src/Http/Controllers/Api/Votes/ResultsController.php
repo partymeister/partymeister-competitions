@@ -13,7 +13,7 @@ use Partymeister\Competitions\Services\VoteService;
 class ResultsController extends ApiController
 {
     /**
-     * @OA\Post (
+     * @OA\Get (
      *   tags={"VoteResultsController"},
      *   path="/api/votes/results",
      *   summary="Generate results",

@@ -53,7 +53,7 @@ class GenerateController extends ApiController
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function index(GenerateRequest $request)
+    public function store(GenerateRequest $request)
     {
         AccessKeyService::generate($request);
 
