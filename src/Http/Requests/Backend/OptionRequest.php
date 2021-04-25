@@ -5,31 +5,29 @@ namespace Partymeister\Competition\Http\Requests\Backend;
 use Motor\Backend\Http\Requests\Request;
 
 /**
- * Class OptionGroupRequest
+ * Class OptionRequest
  *
  * @package Partymeister\Competition\Http\Requests\Backend
  */
-class OptionGroupRequest extends Request
+class OptionRequest extends Request
 {
     /**
      * @OA\Schema(
-     *   schema="OptionGroupRequest",
+     *   schema="OptionRequest",
+     *   @OA\Property(
+     *     property="option_group_id",
+     *     type="integer",
+     *     example="1"
+     *   ),
+     *   @OA\Property(
+     *     property="sort_position",
+     *     type="integer",
+     *     example="1"
+     *   ),
      *   @OA\Property(
      *     property="name",
      *     type="string",
-     *     example="Graphics"
-     *   ),
-     *   @OA\Property(
-     *     property="type",
-     *     type="string",
-     *     example="single_choice"
-     *   ),
-     *   @OA\Property(
-     *     property="options",
-     *     type="array",
-     *     @OA\Items(
-     *       ref="#/components/schemas/OptionRequest"
-     *     )
+     *     example="Intel CPU"
      *   ),
      *   required={"name"},
      * )
@@ -53,9 +51,9 @@ class OptionGroupRequest extends Request
     public function rules()
     {
         return [
-            'name'    => 'required',
-            'type'    => 'required|in:'.trans('partymeister-core::backend/option_groups.types'),
-            'options' => 'nullable|array',
+            'option_group_id' => 'nullable|integer',
+            'sort_position'   => 'nullable|integer',
+            'name'            => 'required',
         ];
     }
 }

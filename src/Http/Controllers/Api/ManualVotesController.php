@@ -4,26 +4,26 @@ namespace Partymeister\Competition\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
 
-use Partymeister\Competition\Models\AccessKey;
-use Partymeister\Competition\Http\Requests\Backend\AccessKeyRequest;
-use Partymeister\Competition\Services\AccessKeyService;
-use Partymeister\Competition\Http\Resources\AccessKeyResource;
-use Partymeister\Competition\Http\Resources\AccessKeyCollection;
+use Partymeister\Competition\Models\ManualVote;
+use Partymeister\Competition\Http\Requests\Backend\ManualVoteRequest;
+use Partymeister\Competition\Services\ManualVoteService;
+use Partymeister\Competition\Http\Resources\ManualVoteResource;
+use Partymeister\Competition\Http\Resources\ManualVoteCollection;
 
 /**
- * Class AccessKeysController
+ * Class ManualVotesController
  * @package Partymeister\Competition\Http\Controllers\Api
  */
-class AccessKeysController extends ApiController
+class ManualVotesController extends ApiController
 {
 
-    protected string $modelResource = 'access_key';
+    protected string $modelResource = 'manual_vote';
 
     /**
      * @OA\Get (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys",
-     *   summary="Get access_key collection",
+     *   tags={"ManualVotesController"},
+     *   path="/api/manual_votes",
+     *   summary="Get manual_vote collection",
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
      *     in="query",
@@ -39,7 +39,7 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="array",
-     *         @OA\Items(ref="#/components/schemas/AccessKeyResource")
+     *         @OA\Items(ref="#/components/schemas/ManualVoteResource")
      *       ),
      *       @OA\Property(
      *         property="meta",
@@ -65,21 +65,21 @@ class AccessKeysController extends ApiController
      *
      * Display a listing of the resource.
      *
-     * @return AccessKeyCollection
+     * @return ManualVoteCollection
      */
     public function index()
     {
-        $paginator = AccessKeyService::collection()->getPaginator();
-        return (new AccessKeyCollection($paginator))->additional(['message' => 'AccessKey collection read']);
+        $paginator = ManualVoteService::collection()->getPaginator();
+        return (new ManualVoteCollection($paginator))->additional(['message' => 'ManualVote collection read']);
     }
 
     /**
      * @OA\Post (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys",
-     *   summary="Create new access_key",
+     *   tags={"ManualVotesController"},
+     *   path="/api/manual_votes",
+     *   summary="Create new manual_vote",
      *   @OA\RequestBody(
-     *     @OA\JsonContent(ref="#/components/schemas/AccessKeyRequest")
+     *     @OA\JsonContent(ref="#/components/schemas/ManualVoteRequest")
      *   ),
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
@@ -96,12 +96,12 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="object",
-     *         ref="#/components/schemas/AccessKeyResource"
+     *         ref="#/components/schemas/ManualVoteResource"
      *       ),
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey created"
+     *         example="ManualVote created"
      *       )
      *     )
      *   ),
@@ -119,21 +119,21 @@ class AccessKeysController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param AccessKeyRequest $request
+     * @param ManualVoteRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(AccessKeyRequest $request)
+    public function store(ManualVoteRequest $request)
     {
-        $result = AccessKeyService::create($request)->getResult();
-        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey created'])->response()->setStatusCode(201);
+        $result = ManualVoteService::create($request)->getResult();
+        return (new ManualVoteResource($result))->additional(['message' => 'ManualVote created'])->response()->setStatusCode(201);
     }
 
 
     /**
      * @OA\Get (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys/{access_key}",
-     *   summary="Get single access_key",
+     *   tags={"ManualVotesController"},
+     *   path="/api/manual_votes/{manual_vote}",
+     *   summary="Get single manual_vote",
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
      *     in="query",
@@ -145,9 +145,9 @@ class AccessKeysController extends ApiController
      *   @OA\Parameter(
      *     @OA\Schema(type="integer"),
      *     in="path",
-     *     name="access_key",
-     *     parameter="access_key",
-     *     description="AccessKey id"
+     *     name="manual_vote",
+     *     parameter="manual_vote",
+     *     description="ManualVote id"
      *   ),
      *   @OA\Response(
      *     response=200,
@@ -156,12 +156,12 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="object",
-     *         ref="#/components/schemas/AccessKeyResource"
+     *         ref="#/components/schemas/ManualVoteResource"
      *       ),
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey read"
+     *         example="ManualVote read"
      *       )
      *     )
      *   ),
@@ -179,23 +179,23 @@ class AccessKeysController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param AccessKey $record
-     * @return AccessKeyResource
+     * @param ManualVote $record
+     * @return ManualVoteResource
      */
-    public function show(AccessKey $record)
+    public function show(ManualVote $record)
     {
-        $result = AccessKeyService::show($record)->getResult();
-        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey read']);
+        $result = ManualVoteService::show($record)->getResult();
+        return (new ManualVoteResource($result))->additional(['message' => 'ManualVote read']);
     }
 
 
     /**
      * @OA\Put (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys/{access_key}",
-     *   summary="Update an existing access_key",
+     *   tags={"ManualVotesController"},
+     *   path="/api/manual_votes/{manual_vote}",
+     *   summary="Update an existing manual_vote",
      *   @OA\RequestBody(
-     *     @OA\JsonContent(ref="#/components/schemas/AccessKeyRequest")
+     *     @OA\JsonContent(ref="#/components/schemas/ManualVoteRequest")
      *   ),
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
@@ -208,9 +208,9 @@ class AccessKeysController extends ApiController
      *   @OA\Parameter(
      *     @OA\Schema(type="integer"),
      *     in="path",
-     *     name="access_key",
-     *     parameter="access_key",
-     *     description="AccessKey id"
+     *     name="manual_vote",
+     *     parameter="manual_vote",
+     *     description="ManualVote id"
      *   ),
      *   @OA\Response(
      *     response=200,
@@ -219,12 +219,12 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="object",
-     *         ref="#/components/schemas/AccessKeyResource"
+     *         ref="#/components/schemas/ManualVoteResource"
      *       ),
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey updated"
+     *         example="ManualVote updated"
      *       )
      *     )
      *   ),
@@ -242,22 +242,22 @@ class AccessKeysController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param AccessKeyRequest $request
-     * @param AccessKey        $record
-     * @return AccessKeyResource
+     * @param ManualVoteRequest $request
+     * @param ManualVote        $record
+     * @return ManualVoteResource
      */
-    public function update(AccessKeyRequest $request, AccessKey $record)
+    public function update(ManualVoteRequest $request, ManualVote $record)
     {
-        $result = AccessKeyService::update($record, $request)->getResult();
-        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey updated']);
+        $result = ManualVoteService::update($record, $request)->getResult();
+        return (new ManualVoteResource($result))->additional(['message' => 'ManualVote updated']);
     }
 
 
     /**
      * @OA\Delete (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys/{access_key}",
-     *   summary="Delete a access_key",
+     *   tags={"ManualVotesController"},
+     *   path="/api/manual_votes/{manual_vote}",
+     *   summary="Delete a manual_vote",
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
      *     in="query",
@@ -269,9 +269,9 @@ class AccessKeysController extends ApiController
      *   @OA\Parameter(
      *     @OA\Schema(type="integer"),
      *     in="path",
-     *     name="access_key",
-     *     parameter="access_key",
-     *     description="AccessKey id"
+     *     name="manual_vote",
+     *     parameter="manual_vote",
+     *     description="ManualVote id"
      *   ),
      *   @OA\Response(
      *     response=200,
@@ -280,7 +280,7 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey deleted"
+     *         example="ManualVote deleted"
      *       )
      *     )
      *   ),
@@ -301,7 +301,7 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="Problem deleting access_key"
+     *         example="Problem deleting manual_vote"
      *       )
      *     )
      *   )
@@ -309,16 +309,16 @@ class AccessKeysController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param AccessKey $record
+     * @param ManualVote $record
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(AccessKey $record)
+    public function destroy(ManualVote $record)
     {
-        $result = AccessKeyService::delete($record)->getResult();
+        $result = ManualVoteService::delete($record)->getResult();
 
         if ($result) {
-            return response()->json(['message' => 'AccessKey deleted']);
+            return response()->json(['message' => 'ManualVote deleted']);
         }
-        return response()->json(['message' => 'Problem deleting AccessKey'], 404);
+        return response()->json(['message' => 'Problem deleting ManualVote'], 404);
     }
 }

@@ -1,37 +1,122 @@
 <?php
 
-namespace Partymeister\Competitions\Http\Controllers\Api;
+namespace Partymeister\Competition\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Motor\Backend\Http\Controllers\Controller;
-use Partymeister\Competitions\Http\Requests\Backend\EntryRequest;
-use Partymeister\Competitions\Models\Entry;
-use Partymeister\Competitions\Services\EntryService;
-use Partymeister\Competitions\Transformers\EntryTransformer;
+use Motor\Backend\Http\Controllers\ApiController;
+
+use Partymeister\Competition\Models\Entry;
+use Partymeister\Competition\Http\Requests\Backend\EntryRequest;
+use Partymeister\Competition\Services\EntryService;
+use Partymeister\Competition\Http\Resources\EntryResource;
+use Partymeister\Competition\Http\Resources\EntryCollection;
 
 /**
  * Class EntriesController
- * @package Partymeister\Competitions\Http\Controllers\Api
+ * @package Partymeister\Competition\Http\Controllers\Api
  */
-class EntriesController extends Controller
+class EntriesController extends ApiController
 {
 
+    protected string $modelResource = 'entry';
+
     /**
+     * @OA\Get (
+     *   tags={"EntriesController"},
+     *   path="/api/entries",
+     *   summary="Get entry collection",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="array",
+     *         @OA\Items(ref="#/components/schemas/EntryResource")
+     *       ),
+     *       @OA\Property(
+     *         property="meta",
+     *         ref="#/components/schemas/PaginationMeta"
+     *       ),
+     *       @OA\Property(
+     *         property="links",
+     *         ref="#/components/schemas/PaginationLinks"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Collection read"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   )
+     * )
+     *
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return EntryCollection
      */
     public function index()
     {
         $paginator = EntryService::collection()->getPaginator();
-        $resource  = $this->transformPaginator($paginator, EntryTransformer::class);
-
-        return $this->respondWithJson('Entry collection read', $resource);
+        return (new EntryCollection($paginator))->additional(['message' => 'Entry collection read']);
     }
 
-
     /**
+     * @OA\Post (
+     *   tags={"EntriesController"},
+     *   path="/api/entries",
+     *   summary="Create new entry",
+     *   @OA\RequestBody(
+     *     @OA\JsonContent(ref="#/components/schemas/EntryRequest")
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/EntryResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Entry created"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Store a newly created resource in storage.
      *
      * @param EntryRequest $request
@@ -39,45 +124,189 @@ class EntriesController extends Controller
      */
     public function store(EntryRequest $request)
     {
-        $result   = EntryService::create($request)->getResult();
-        $resource = $this->transformItem($result, EntryTransformer::class);
-
-        return $this->respondWithJson('Entry created', $resource);
+        $result = EntryService::create($request)->getResult();
+        return (new EntryResource($result))->additional(['message' => 'Entry created'])->response()->setStatusCode(201);
     }
 
 
     /**
+     * @OA\Get (
+     *   tags={"EntriesController"},
+     *   path="/api/entries/{entry}",
+     *   summary="Get single entry",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="integer"),
+     *     in="path",
+     *     name="entry",
+     *     parameter="entry",
+     *     description="Entry id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/EntryResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Entry read"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Display the specified resource.
      *
      * @param Entry $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return EntryResource
      */
     public function show(Entry $record)
     {
-        $result   = EntryService::show($record)->getResult();
-        $resource = $this->transformItem($result, EntryTransformer::class);
-
-        return $this->respondWithJson('Entry read', $resource);
+        $result = EntryService::show($record)->getResult();
+        return (new EntryResource($result))->additional(['message' => 'Entry read']);
     }
 
 
     /**
+     * @OA\Put (
+     *   tags={"EntriesController"},
+     *   path="/api/entries/{entry}",
+     *   summary="Update an existing entry",
+     *   @OA\RequestBody(
+     *     @OA\JsonContent(ref="#/components/schemas/EntryRequest")
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="integer"),
+     *     in="path",
+     *     name="entry",
+     *     parameter="entry",
+     *     description="Entry id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/EntryResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Entry updated"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Update the specified resource in storage.
      *
      * @param EntryRequest $request
      * @param Entry        $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return EntryResource
      */
     public function update(EntryRequest $request, Entry $record)
     {
-        $result   = EntryService::update($record, $request)->getResult();
-        $resource = $this->transformItem($result, EntryTransformer::class);
-
-        return $this->respondWithJson('Entry updated', $resource);
+        $result = EntryService::update($record, $request)->getResult();
+        return (new EntryResource($result))->additional(['message' => 'Entry updated']);
     }
 
 
     /**
+     * @OA\Delete (
+     *   tags={"EntriesController"},
+     *   path="/api/entries/{entry}",
+     *   summary="Delete a entry",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="integer"),
+     *     in="path",
+     *     name="entry",
+     *     parameter="entry",
+     *     description="Entry id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Entry deleted"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   ),
+     *   @OA\Response(
+     *     response="400",
+     *     description="Bad request",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Problem deleting entry"
+     *       )
+     *     )
+     *   )
+     * )
+     *
      * Remove the specified resource from storage.
      *
      * @param Entry $record
@@ -88,9 +317,8 @@ class EntriesController extends Controller
         $result = EntryService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('Entry deleted', [ 'success' => true ]);
+            return response()->json(['message' => 'Entry deleted']);
         }
-
-        return $this->respondWithJson('Entry NOT deleted', [ 'success' => false ]);
+        return response()->json(['message' => 'Problem deleting Entry'], 404);
     }
 }

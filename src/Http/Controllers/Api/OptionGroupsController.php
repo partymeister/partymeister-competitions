@@ -1,37 +1,122 @@
 <?php
 
-namespace Partymeister\Competitions\Http\Controllers\Api;
+namespace Partymeister\Competition\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Motor\Backend\Http\Controllers\Controller;
-use Partymeister\Competitions\Http\Requests\Backend\OptionGroupRequest;
-use Partymeister\Competitions\Models\OptionGroup;
-use Partymeister\Competitions\Services\OptionGroupService;
-use Partymeister\Competitions\Transformers\OptionGroupTransformer;
+use Motor\Backend\Http\Controllers\ApiController;
+
+use Partymeister\Competition\Models\OptionGroup;
+use Partymeister\Competition\Http\Requests\Backend\OptionGroupRequest;
+use Partymeister\Competition\Services\OptionGroupService;
+use Partymeister\Competition\Http\Resources\OptionGroupResource;
+use Partymeister\Competition\Http\Resources\OptionGroupCollection;
 
 /**
  * Class OptionGroupsController
- * @package Partymeister\Competitions\Http\Controllers\Api
+ * @package Partymeister\Competition\Http\Controllers\Api
  */
-class OptionGroupsController extends Controller
+class OptionGroupsController extends ApiController
 {
 
+    protected string $modelResource = 'option_group';
+
     /**
+     * @OA\Get (
+     *   tags={"OptionGroupsController"},
+     *   path="/api/option_groups",
+     *   summary="Get option_group collection",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="array",
+     *         @OA\Items(ref="#/components/schemas/OptionGroupResource")
+     *       ),
+     *       @OA\Property(
+     *         property="meta",
+     *         ref="#/components/schemas/PaginationMeta"
+     *       ),
+     *       @OA\Property(
+     *         property="links",
+     *         ref="#/components/schemas/PaginationLinks"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Collection read"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   )
+     * )
+     *
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return OptionGroupCollection
      */
     public function index()
     {
         $paginator = OptionGroupService::collection()->getPaginator();
-        $resource  = $this->transformPaginator($paginator, OptionGroupTransformer::class);
-
-        return $this->respondWithJson('OptionGroup collection read', $resource);
+        return (new OptionGroupCollection($paginator))->additional(['message' => 'OptionGroup collection read']);
     }
 
-
     /**
+     * @OA\Post (
+     *   tags={"OptionGroupsController"},
+     *   path="/api/option_groups",
+     *   summary="Create new option_group",
+     *   @OA\RequestBody(
+     *     @OA\JsonContent(ref="#/components/schemas/OptionGroupRequest")
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/OptionGroupResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="OptionGroup created"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Store a newly created resource in storage.
      *
      * @param OptionGroupRequest $request
@@ -39,45 +124,189 @@ class OptionGroupsController extends Controller
      */
     public function store(OptionGroupRequest $request)
     {
-        $result   = OptionGroupService::create($request)->getResult();
-        $resource = $this->transformItem($result, OptionGroupTransformer::class);
-
-        return $this->respondWithJson('OptionGroup created', $resource);
+        $result = OptionGroupService::create($request)->getResult();
+        return (new OptionGroupResource($result))->additional(['message' => 'OptionGroup created'])->response()->setStatusCode(201);
     }
 
 
     /**
+     * @OA\Get (
+     *   tags={"OptionGroupsController"},
+     *   path="/api/option_groups/{option_group}",
+     *   summary="Get single option_group",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="integer"),
+     *     in="path",
+     *     name="option_group",
+     *     parameter="option_group",
+     *     description="OptionGroup id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/OptionGroupResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="OptionGroup read"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Display the specified resource.
      *
      * @param OptionGroup $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return OptionGroupResource
      */
     public function show(OptionGroup $record)
     {
-        $result   = OptionGroupService::show($record)->getResult();
-        $resource = $this->transformItem($result, OptionGroupTransformer::class);
-
-        return $this->respondWithJson('OptionGroup read', $resource);
+        $result = OptionGroupService::show($record)->getResult();
+        return (new OptionGroupResource($result))->additional(['message' => 'OptionGroup read']);
     }
 
 
     /**
+     * @OA\Put (
+     *   tags={"OptionGroupsController"},
+     *   path="/api/option_groups/{option_group}",
+     *   summary="Update an existing option_group",
+     *   @OA\RequestBody(
+     *     @OA\JsonContent(ref="#/components/schemas/OptionGroupRequest")
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="integer"),
+     *     in="path",
+     *     name="option_group",
+     *     parameter="option_group",
+     *     description="OptionGroup id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="data",
+     *         type="object",
+     *         ref="#/components/schemas/OptionGroupResource"
+     *       ),
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="OptionGroup updated"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   )
+     * )
+     *
      * Update the specified resource in storage.
      *
      * @param OptionGroupRequest $request
      * @param OptionGroup        $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return OptionGroupResource
      */
     public function update(OptionGroupRequest $request, OptionGroup $record)
     {
-        $result   = OptionGroupService::update($record, $request)->getResult();
-        $resource = $this->transformItem($result, OptionGroupTransformer::class);
-
-        return $this->respondWithJson('OptionGroup updated', $resource);
+        $result = OptionGroupService::update($record, $request)->getResult();
+        return (new OptionGroupResource($result))->additional(['message' => 'OptionGroup updated']);
     }
 
 
     /**
+     * @OA\Delete (
+     *   tags={"OptionGroupsController"},
+     *   path="/api/option_groups/{option_group}",
+     *   summary="Delete a option_group",
+     *   @OA\Parameter(
+     *     @OA\Schema(type="string"),
+     *     in="query",
+     *     allowReserved=true,
+     *     name="api_token",
+     *     parameter="api_token",
+     *     description="Personal api_token of the user"
+     *   ),
+     *   @OA\Parameter(
+     *     @OA\Schema(type="integer"),
+     *     in="path",
+     *     name="option_group",
+     *     parameter="option_group",
+     *     description="OptionGroup id"
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Success",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="OptionGroup deleted"
+     *       )
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response="403",
+     *     description="Access denied",
+     *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Not found",
+     *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
+     *   ),
+     *   @OA\Response(
+     *     response="400",
+     *     description="Bad request",
+     *     @OA\JsonContent(
+     *       @OA\Property(
+     *         property="message",
+     *         type="string",
+     *         example="Problem deleting option_group"
+     *       )
+     *     )
+     *   )
+     * )
+     *
      * Remove the specified resource from storage.
      *
      * @param OptionGroup $record
@@ -88,9 +317,8 @@ class OptionGroupsController extends Controller
         $result = OptionGroupService::delete($record)->getResult();
 
         if ($result) {
-            return $this->respondWithJson('OptionGroup deleted', [ 'success' => true ]);
+            return response()->json(['message' => 'OptionGroup deleted']);
         }
-
-        return $this->respondWithJson('OptionGroup NOT deleted', [ 'success' => false ]);
+        return response()->json(['message' => 'Problem deleting OptionGroup'], 404);
     }
 }

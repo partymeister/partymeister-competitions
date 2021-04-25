@@ -5,36 +5,41 @@ namespace Partymeister\Competition\Http\Requests\Backend;
 use Motor\Backend\Http\Requests\Request;
 
 /**
- * Class CompetitionPrizeRequest
+ * Class LiveVoteRequest
  *
  * @package Partymeister\Competition\Http\Requests\Backend
  */
-class CompetitionPrizeRequest extends Request
+class LiveVoteRequest extends Request
 {
     /**
      * @OA\Schema(
-     *   schema="CompetitionPrizeRequest",
+     *   schema="LiveVoteRequest",
      *   @OA\Property(
      *     property="competition_id",
      *     type="integer",
      *     example="1"
      *   ),
      *   @OA\Property(
-     *     property="amount",
-     *     type="string",
-     *     example="200"
+     *     property="entry_id",
+     *     type="integer",
+     *     example="2"
      *   ),
      *   @OA\Property(
-     *     property="additional",
-     *     type="text",
-     *     example="Additional prizes like a GPU!"
+     *     property="sort_position",
+     *     type="integer",
+     *     example="5"
      *   ),
      *   @OA\Property(
-     *     property="rank",
+     *     property="title",
      *     type="string",
-     *     example="1"
+     *     example="Great Entry"
      *   ),
-     *   required={"competition_id", "rank"},
+     *   @OA\Property(
+     *     property="author",
+     *     type="string",
+     *     example="Grate Artiste"
+     *   ),
+     *   required={"competition_id", "entry_id", "sort_position", "title", "author"},
      * )
      */
 
@@ -57,9 +62,10 @@ class CompetitionPrizeRequest extends Request
     {
         return [
             'competition_id' => 'required|integer',
-            'amount'         => 'nullable',
-            'additional'     => 'nullable',
-            'rank'           => 'required|in:1,2,3',
+            'entry_id'       => 'required|integer',
+            'sort_position'  => 'required|integer',
+            'title'          => 'required',
+            'author'         => 'required',
         ];
     }
 }

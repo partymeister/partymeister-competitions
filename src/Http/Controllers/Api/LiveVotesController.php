@@ -4,26 +4,26 @@ namespace Partymeister\Competition\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
 
-use Partymeister\Competition\Models\AccessKey;
-use Partymeister\Competition\Http\Requests\Backend\AccessKeyRequest;
-use Partymeister\Competition\Services\AccessKeyService;
-use Partymeister\Competition\Http\Resources\AccessKeyResource;
-use Partymeister\Competition\Http\Resources\AccessKeyCollection;
+use Partymeister\Competition\Models\LiveVote;
+use Partymeister\Competition\Http\Requests\Backend\LiveVoteRequest;
+use Partymeister\Competition\Services\LiveVoteService;
+use Partymeister\Competition\Http\Resources\LiveVoteResource;
+use Partymeister\Competition\Http\Resources\LiveVoteCollection;
 
 /**
- * Class AccessKeysController
+ * Class LiveVotesController
  * @package Partymeister\Competition\Http\Controllers\Api
  */
-class AccessKeysController extends ApiController
+class LiveVotesController extends ApiController
 {
 
-    protected string $modelResource = 'access_key';
+    protected string $modelResource = 'live_vote';
 
     /**
      * @OA\Get (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys",
-     *   summary="Get access_key collection",
+     *   tags={"LiveVotesController"},
+     *   path="/api/live_votes",
+     *   summary="Get live_vote collection",
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
      *     in="query",
@@ -39,7 +39,7 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="array",
-     *         @OA\Items(ref="#/components/schemas/AccessKeyResource")
+     *         @OA\Items(ref="#/components/schemas/LiveVoteResource")
      *       ),
      *       @OA\Property(
      *         property="meta",
@@ -65,21 +65,21 @@ class AccessKeysController extends ApiController
      *
      * Display a listing of the resource.
      *
-     * @return AccessKeyCollection
+     * @return LiveVoteCollection
      */
     public function index()
     {
-        $paginator = AccessKeyService::collection()->getPaginator();
-        return (new AccessKeyCollection($paginator))->additional(['message' => 'AccessKey collection read']);
+        $paginator = LiveVoteService::collection()->getPaginator();
+        return (new LiveVoteCollection($paginator))->additional(['message' => 'LiveVote collection read']);
     }
 
     /**
      * @OA\Post (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys",
-     *   summary="Create new access_key",
+     *   tags={"LiveVotesController"},
+     *   path="/api/live_votes",
+     *   summary="Create new live_vote",
      *   @OA\RequestBody(
-     *     @OA\JsonContent(ref="#/components/schemas/AccessKeyRequest")
+     *     @OA\JsonContent(ref="#/components/schemas/LiveVoteRequest")
      *   ),
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
@@ -96,12 +96,12 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="object",
-     *         ref="#/components/schemas/AccessKeyResource"
+     *         ref="#/components/schemas/LiveVoteResource"
      *       ),
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey created"
+     *         example="LiveVote created"
      *       )
      *     )
      *   ),
@@ -119,21 +119,21 @@ class AccessKeysController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param AccessKeyRequest $request
+     * @param LiveVoteRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(AccessKeyRequest $request)
+    public function store(LiveVoteRequest $request)
     {
-        $result = AccessKeyService::create($request)->getResult();
-        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey created'])->response()->setStatusCode(201);
+        $result = LiveVoteService::create($request)->getResult();
+        return (new LiveVoteResource($result))->additional(['message' => 'LiveVote created'])->response()->setStatusCode(201);
     }
 
 
     /**
      * @OA\Get (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys/{access_key}",
-     *   summary="Get single access_key",
+     *   tags={"LiveVotesController"},
+     *   path="/api/live_votes/{live_vote}",
+     *   summary="Get single live_vote",
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
      *     in="query",
@@ -145,9 +145,9 @@ class AccessKeysController extends ApiController
      *   @OA\Parameter(
      *     @OA\Schema(type="integer"),
      *     in="path",
-     *     name="access_key",
-     *     parameter="access_key",
-     *     description="AccessKey id"
+     *     name="live_vote",
+     *     parameter="live_vote",
+     *     description="LiveVote id"
      *   ),
      *   @OA\Response(
      *     response=200,
@@ -156,12 +156,12 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="object",
-     *         ref="#/components/schemas/AccessKeyResource"
+     *         ref="#/components/schemas/LiveVoteResource"
      *       ),
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey read"
+     *         example="LiveVote read"
      *       )
      *     )
      *   ),
@@ -179,23 +179,23 @@ class AccessKeysController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param AccessKey $record
-     * @return AccessKeyResource
+     * @param LiveVote $record
+     * @return LiveVoteResource
      */
-    public function show(AccessKey $record)
+    public function show(LiveVote $record)
     {
-        $result = AccessKeyService::show($record)->getResult();
-        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey read']);
+        $result = LiveVoteService::show($record)->getResult();
+        return (new LiveVoteResource($result))->additional(['message' => 'LiveVote read']);
     }
 
 
     /**
      * @OA\Put (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys/{access_key}",
-     *   summary="Update an existing access_key",
+     *   tags={"LiveVotesController"},
+     *   path="/api/live_votes/{live_vote}",
+     *   summary="Update an existing live_vote",
      *   @OA\RequestBody(
-     *     @OA\JsonContent(ref="#/components/schemas/AccessKeyRequest")
+     *     @OA\JsonContent(ref="#/components/schemas/LiveVoteRequest")
      *   ),
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
@@ -208,9 +208,9 @@ class AccessKeysController extends ApiController
      *   @OA\Parameter(
      *     @OA\Schema(type="integer"),
      *     in="path",
-     *     name="access_key",
-     *     parameter="access_key",
-     *     description="AccessKey id"
+     *     name="live_vote",
+     *     parameter="live_vote",
+     *     description="LiveVote id"
      *   ),
      *   @OA\Response(
      *     response=200,
@@ -219,12 +219,12 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="data",
      *         type="object",
-     *         ref="#/components/schemas/AccessKeyResource"
+     *         ref="#/components/schemas/LiveVoteResource"
      *       ),
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey updated"
+     *         example="LiveVote updated"
      *       )
      *     )
      *   ),
@@ -242,22 +242,22 @@ class AccessKeysController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param AccessKeyRequest $request
-     * @param AccessKey        $record
-     * @return AccessKeyResource
+     * @param LiveVoteRequest $request
+     * @param LiveVote        $record
+     * @return LiveVoteResource
      */
-    public function update(AccessKeyRequest $request, AccessKey $record)
+    public function update(LiveVoteRequest $request, LiveVote $record)
     {
-        $result = AccessKeyService::update($record, $request)->getResult();
-        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey updated']);
+        $result = LiveVoteService::update($record, $request)->getResult();
+        return (new LiveVoteResource($result))->additional(['message' => 'LiveVote updated']);
     }
 
 
     /**
      * @OA\Delete (
-     *   tags={"AccessKeysController"},
-     *   path="/api/access_keys/{access_key}",
-     *   summary="Delete a access_key",
+     *   tags={"LiveVotesController"},
+     *   path="/api/live_votes/{live_vote}",
+     *   summary="Delete a live_vote",
      *   @OA\Parameter(
      *     @OA\Schema(type="string"),
      *     in="query",
@@ -269,9 +269,9 @@ class AccessKeysController extends ApiController
      *   @OA\Parameter(
      *     @OA\Schema(type="integer"),
      *     in="path",
-     *     name="access_key",
-     *     parameter="access_key",
-     *     description="AccessKey id"
+     *     name="live_vote",
+     *     parameter="live_vote",
+     *     description="LiveVote id"
      *   ),
      *   @OA\Response(
      *     response=200,
@@ -280,7 +280,7 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="AccessKey deleted"
+     *         example="LiveVote deleted"
      *       )
      *     )
      *   ),
@@ -301,7 +301,7 @@ class AccessKeysController extends ApiController
      *       @OA\Property(
      *         property="message",
      *         type="string",
-     *         example="Problem deleting access_key"
+     *         example="Problem deleting live_vote"
      *       )
      *     )
      *   )
@@ -309,16 +309,16 @@ class AccessKeysController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param AccessKey $record
+     * @param LiveVote $record
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(AccessKey $record)
+    public function destroy(LiveVote $record)
     {
-        $result = AccessKeyService::delete($record)->getResult();
+        $result = LiveVoteService::delete($record)->getResult();
 
         if ($result) {
-            return response()->json(['message' => 'AccessKey deleted']);
+            return response()->json(['message' => 'LiveVote deleted']);
         }
-        return response()->json(['message' => 'Problem deleting AccessKey'], 404);
+        return response()->json(['message' => 'Problem deleting LiveVote'], 404);
     }
 }
