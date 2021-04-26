@@ -1,13 +1,13 @@
 <?php
 
-namespace Partymeister\Competition\Http\Requests\Backend;
+namespace Partymeister\Competitions\Http\Requests\Backend;
 
 use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class OptionGroupRequest
  *
- * @package Partymeister\Competition\Http\Requests\Backend
+ * @package Partymeister\Competitions\Http\Requests\Backend
  */
 class OptionGroupRequest extends Request
 {

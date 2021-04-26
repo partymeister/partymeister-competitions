@@ -1,13 +1,13 @@
 <?php
 
-namespace Partymeister\Competition\Http\Requests\Backend\AccessKey;
+namespace Partymeister\Competitions\Http\Requests\Backend\AccessKey;
 
 use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class GenerateRequest
  *
- * @package Partymeister\Competition\Http\Requests\Backend\AccessKey
+ * @package Partymeister\Competitions\Http\Requests\Backend\AccessKey
  */
 class GenerateRequest extends Request
 {

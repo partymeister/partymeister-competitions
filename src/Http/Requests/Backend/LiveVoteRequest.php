@@ -1,13 +1,13 @@
 <?php
 
-namespace Partymeister\Competition\Http\Requests\Backend;
+namespace Partymeister\Competitions\Http\Requests\Backend;
 
 use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class LiveVoteRequest
  *
- * @package Partymeister\Competition\Http\Requests\Backend
+ * @package Partymeister\Competitions\Http\Requests\Backend
  */
 class LiveVoteRequest extends Request
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Partymeister\Competition\Http\Controllers\Api;
+namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
 
-use Partymeister\Competition\Models\ManualVote;
-use Partymeister\Competition\Http\Requests\Backend\ManualVoteRequest;
-use Partymeister\Competition\Services\ManualVoteService;
-use Partymeister\Competition\Http\Resources\ManualVoteResource;
-use Partymeister\Competition\Http\Resources\ManualVoteCollection;
+use Partymeister\Competitions\Models\ManualVote;
+use Partymeister\Competitions\Http\Requests\Backend\ManualVoteRequest;
+use Partymeister\Competitions\Services\ManualVoteService;
+use Partymeister\Competitions\Http\Resources\ManualVoteResource;
+use Partymeister\Competitions\Http\Resources\ManualVoteCollection;
 
 /**
  * Class ManualVotesController
- * @package Partymeister\Competition\Http\Controllers\Api
+ * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class ManualVotesController extends ApiController
 {

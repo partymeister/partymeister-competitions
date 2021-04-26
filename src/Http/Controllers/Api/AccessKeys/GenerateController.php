@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Http\Controllers\Api\AccessKeys;
 
 use Motor\Backend\Http\Controllers\ApiController;
-use Partymeister\Competition\Http\Requests\Backend\AccessKey\GenerateRequest;
+use Partymeister\Competitions\Http\Requests\Backend\AccessKey\GenerateRequest;
 use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
@@ -49,7 +49,7 @@ class GenerateController extends ApiController
      *
      * Display a listing of the resource.
      *
-     * @param \Partymeister\Competition\Http\Requests\Backend\AccessKey\GenerateRequest $request
+     * @param \Partymeister\Competitions\Http\Requests\Backend\AccessKey\GenerateRequest $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */

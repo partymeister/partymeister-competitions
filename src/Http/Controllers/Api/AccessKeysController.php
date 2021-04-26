@@ -1,17 +1,17 @@
 <?php
 
-namespace Partymeister\Competition\Http\Controllers\Api;
+namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-use Partymeister\Competition\Http\Requests\Backend\AccessKeyRequest;
-use Partymeister\Competition\Http\Resources\AccessKeyCollection;
-use Partymeister\Competition\Http\Resources\AccessKeyResource;
+use Partymeister\Competitions\Http\Requests\Backend\AccessKeyRequest;
+use Partymeister\Competitions\Http\Resources\AccessKeyCollection;
+use Partymeister\Competitions\Http\Resources\AccessKeyResource;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
  * Class AccessKeysController
- * @package Partymeister\Competition\Http\Controllers\Api
+ * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class AccessKeysController extends ApiController
 {

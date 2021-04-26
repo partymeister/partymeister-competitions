@@ -1,18 +1,18 @@
 <?php
 
-namespace Partymeister\Competition\Http\Controllers\Api;
+namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
 
-use Partymeister\Competition\Models\CompetitionPrize;
-use Partymeister\Competition\Http\Requests\Backend\CompetitionPrizeRequest;
-use Partymeister\Competition\Services\CompetitionPrizeService;
-use Partymeister\Competition\Http\Resources\CompetitionPrizeResource;
-use Partymeister\Competition\Http\Resources\CompetitionPrizeCollection;
+use Partymeister\Competitions\Models\CompetitionPrize;
+use Partymeister\Competitions\Http\Requests\Backend\CompetitionPrizeRequest;
+use Partymeister\Competitions\Services\CompetitionPrizeService;
+use Partymeister\Competitions\Http\Resources\CompetitionPrizeResource;
+use Partymeister\Competitions\Http\Resources\CompetitionPrizeCollection;
 
 /**
  * Class CompetitionPrizesController
- * @package Partymeister\Competition\Http\Controllers\Api
+ * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class CompetitionPrizesController extends ApiController
 {

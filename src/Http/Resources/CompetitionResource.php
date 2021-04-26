@@ -1,6 +1,6 @@
 <?php
 
-namespace Partymeister\Competition\Http\Resources;
+namespace Partymeister\Competitions\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Motor\Media\Http\Resources\FileResource;

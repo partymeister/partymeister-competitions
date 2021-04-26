@@ -1,6 +1,6 @@
 <?php
 
-namespace Partymeister\Competition\Policies;
+namespace Partymeister\Competitions\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Motor\Backend\Models\User;

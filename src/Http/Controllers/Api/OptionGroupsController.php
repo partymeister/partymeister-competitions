@@ -1,22 +1,21 @@
 <?php
 
-namespace Partymeister\Competition\Http\Controllers\Api;
+namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competition\Models\OptionGroup;
-use Partymeister\Competition\Http\Requests\Backend\OptionGroupRequest;
-use Partymeister\Competition\Services\OptionGroupService;
-use Partymeister\Competition\Http\Resources\OptionGroupResource;
-use Partymeister\Competition\Http\Resources\OptionGroupCollection;
+use Partymeister\Competitions\Http\Requests\Backend\OptionGroupRequest;
+use Partymeister\Competitions\Http\Resources\OptionGroupCollection;
+use Partymeister\Competitions\Http\Resources\OptionGroupResource;
+use Partymeister\Competitions\Models\OptionGroup;
+use Partymeister\Competitions\Services\OptionGroupService;
 
 /**
  * Class OptionGroupsController
- * @package Partymeister\Competition\Http\Controllers\Api
+ *
+ * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class OptionGroupsController extends ApiController
 {
-
     protected string $modelResource = 'option_group';
 
     /**
@@ -69,7 +68,9 @@ class OptionGroupsController extends ApiController
      */
     public function index()
     {
-        $paginator = OptionGroupService::collection()->getPaginator();
+        $paginator = OptionGroupService::collection()
+                                       ->getPaginator();
+
         return (new OptionGroupCollection($paginator))->additional(['message' => 'OptionGroup collection read']);
     }
 
@@ -124,10 +125,13 @@ class OptionGroupsController extends ApiController
      */
     public function store(OptionGroupRequest $request)
     {
-        $result = OptionGroupService::create($request)->getResult();
-        return (new OptionGroupResource($result))->additional(['message' => 'OptionGroup created'])->response()->setStatusCode(201);
-    }
+        $result = OptionGroupService::create($request)
+                                    ->getResult();
 
+        return (new OptionGroupResource($result))->additional(['message' => 'OptionGroup created'])
+                                                 ->response()
+                                                 ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +188,11 @@ class OptionGroupsController extends ApiController
      */
     public function show(OptionGroup $record)
     {
-        $result = OptionGroupService::show($record)->getResult();
+        $result = OptionGroupService::show($record)
+                                    ->getResult();
+
         return (new OptionGroupResource($result))->additional(['message' => 'OptionGroup read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +248,16 @@ class OptionGroupsController extends ApiController
      * Update the specified resource in storage.
      *
      * @param OptionGroupRequest $request
-     * @param OptionGroup        $record
+     * @param OptionGroup $record
      * @return OptionGroupResource
      */
     public function update(OptionGroupRequest $request, OptionGroup $record)
     {
-        $result = OptionGroupService::update($record, $request)->getResult();
+        $result = OptionGroupService::update($record, $request)
+                                    ->getResult();
+
         return (new OptionGroupResource($result))->additional(['message' => 'OptionGroup updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +320,13 @@ class OptionGroupsController extends ApiController
      */
     public function destroy(OptionGroup $record)
     {
-        $result = OptionGroupService::delete($record)->getResult();
+        $result = OptionGroupService::delete($record)
+                                    ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'OptionGroup deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting OptionGroup'], 404);
     }
 }

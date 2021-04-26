@@ -1,18 +1,18 @@
 <?php
 
-namespace Partymeister\Competition\Http\Controllers\Api;
+namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
 
-use Partymeister\Competition\Models\VoteCategory;
-use Partymeister\Competition\Http\Requests\Backend\VoteCategoryRequest;
-use Partymeister\Competition\Services\VoteCategoryService;
-use Partymeister\Competition\Http\Resources\VoteCategoryResource;
-use Partymeister\Competition\Http\Resources\VoteCategoryCollection;
+use Partymeister\Competitions\Models\VoteCategory;
+use Partymeister\Competitions\Http\Requests\Backend\VoteCategoryRequest;
+use Partymeister\Competitions\Services\VoteCategoryService;
+use Partymeister\Competitions\Http\Resources\VoteCategoryResource;
+use Partymeister\Competitions\Http\Resources\VoteCategoryCollection;
 
 /**
  * Class VoteCategoriesController
- * @package Partymeister\Competition\Http\Controllers\Api
+ * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class VoteCategoriesController extends ApiController
 {

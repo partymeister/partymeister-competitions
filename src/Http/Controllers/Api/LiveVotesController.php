@@ -1,18 +1,18 @@
 <?php
 
-namespace Partymeister\Competition\Http\Controllers\Api;
+namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
 
-use Partymeister\Competition\Models\LiveVote;
-use Partymeister\Competition\Http\Requests\Backend\LiveVoteRequest;
-use Partymeister\Competition\Services\LiveVoteService;
-use Partymeister\Competition\Http\Resources\LiveVoteResource;
-use Partymeister\Competition\Http\Resources\LiveVoteCollection;
+use Partymeister\Competitions\Models\LiveVote;
+use Partymeister\Competitions\Http\Requests\Backend\LiveVoteRequest;
+use Partymeister\Competitions\Services\LiveVoteService;
+use Partymeister\Competitions\Http\Resources\LiveVoteResource;
+use Partymeister\Competitions\Http\Resources\LiveVoteCollection;
 
 /**
  * Class LiveVotesController
- * @package Partymeister\Competition\Http\Controllers\Api
+ * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class LiveVotesController extends ApiController
 {
