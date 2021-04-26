@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Motor\Backend\Models\User;
-use {{ namespacedModel }};
+use Partymeister\Competitions\Models\AccessKey;
 
 class AccessKeyPolicy
 {
@@ -30,21 +30,21 @@ class AccessKeyPolicy
      * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
-    public function viewAny({{ user }} $user)
+    public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('{{ permission }}.read');
+        return $user->hasPermissionTo('access_keys.read');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\AccessKey  $accessKey
      * @return mixed
      */
-    public function view({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function view(User $user, AccessKey $accessKey)
     {
-        return $user->hasPermissionTo('{{ permission }}.read');
+        return $user->hasPermissionTo('access_keys.read');
     }
 
     /**
@@ -53,43 +53,43 @@ class AccessKeyPolicy
      * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
-    public function create({{ user }} $user)
+    public function create(User $user)
     {
-        return $user->hasPermissionTo('{{ permission }}.write');
+        return $user->hasPermissionTo('access_keys.write');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\AccessKey  $accessKey
      * @return mixed
      */
-    public function update({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function update(User $user, AccessKey $accessKey)
     {
-        return $user->hasPermissionTo('{{ permission }}.write');
+        return $user->hasPermissionTo('access_keys.write');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\AccessKey  $accessKey
      * @return mixed
      */
-    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function delete(User $user, AccessKey $accessKey)
     {
-        return $user->hasPermissionTo('{{ permission }}.delete');
+        return $user->hasPermissionTo('access_keys.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\AccessKey  $accessKey
      * @return mixed
      */
-    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function restore(User $user, AccessKey $accessKey)
     {
         //
     }
@@ -98,10 +98,10 @@ class AccessKeyPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\AccessKey  $accessKey
      * @return mixed
      */
-    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function forceDelete(User $user, AccessKey $accessKey)
     {
         //
     }

@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Motor\Backend\Models\User;
-use {{ namespacedModel }};
+use Partymeister\Competitions\Models\VoteCategory;
 
 class VoteCategoryPolicy
 {
@@ -30,21 +30,21 @@ class VoteCategoryPolicy
      * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
-    public function viewAny({{ user }} $user)
+    public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('{{ permission }}.read');
+        return $user->hasPermissionTo('vote_categories.read');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\VoteCategory  $voteCategory
      * @return mixed
      */
-    public function view({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function view(User $user, VoteCategory $voteCategory)
     {
-        return $user->hasPermissionTo('{{ permission }}.read');
+        return $user->hasPermissionTo('vote_categories.read');
     }
 
     /**
@@ -53,43 +53,43 @@ class VoteCategoryPolicy
      * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
-    public function create({{ user }} $user)
+    public function create(User $user)
     {
-        return $user->hasPermissionTo('{{ permission }}.write');
+        return $user->hasPermissionTo('vote_categories.write');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\VoteCategory  $voteCategory
      * @return mixed
      */
-    public function update({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function update(User $user, VoteCategory $voteCategory)
     {
-        return $user->hasPermissionTo('{{ permission }}.write');
+        return $user->hasPermissionTo('vote_categories.write');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\VoteCategory  $voteCategory
      * @return mixed
      */
-    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function delete(User $user, VoteCategory $voteCategory)
     {
-        return $user->hasPermissionTo('{{ permission }}.delete');
+        return $user->hasPermissionTo('vote_categories.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\VoteCategory  $voteCategory
      * @return mixed
      */
-    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function restore(User $user, VoteCategory $voteCategory)
     {
         //
     }
@@ -98,10 +98,10 @@ class VoteCategoryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\VoteCategory  $voteCategory
      * @return mixed
      */
-    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function forceDelete(User $user, VoteCategory $voteCategory)
     {
         //
     }

@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Motor\Backend\Models\User;
-use {{ namespacedModel }};
+use Partymeister\Competitions\Models\Entry;
 
 class EntryPolicy
 {
@@ -30,21 +30,21 @@ class EntryPolicy
      * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
-    public function viewAny({{ user }} $user)
+    public function viewAny(User $user)
     {
-        return $user->hasPermissionTo('{{ permission }}.read');
+        return $user->hasPermissionTo('entries.read');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\Entry  $entry
      * @return mixed
      */
-    public function view({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function view(User $user, Entry $entry)
     {
-        return $user->hasPermissionTo('{{ permission }}.read');
+        return $user->hasPermissionTo('entries.read');
     }
 
     /**
@@ -53,43 +53,43 @@ class EntryPolicy
      * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
-    public function create({{ user }} $user)
+    public function create(User $user)
     {
-        return $user->hasPermissionTo('{{ permission }}.write');
+        return $user->hasPermissionTo('entries.write');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\Entry  $entry
      * @return mixed
      */
-    public function update({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function update(User $user, Entry $entry)
     {
-        return $user->hasPermissionTo('{{ permission }}.write');
+        return $user->hasPermissionTo('entries.write');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\Entry  $entry
      * @return mixed
      */
-    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function delete(User $user, Entry $entry)
     {
-        return $user->hasPermissionTo('{{ permission }}.delete');
+        return $user->hasPermissionTo('entries.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\Entry  $entry
      * @return mixed
      */
-    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function restore(User $user, Entry $entry)
     {
         //
     }
@@ -98,10 +98,10 @@ class EntryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \Motor\Backend\Models\User  $user
-     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @param  \Partymeister\Competitions\Models\Entry  $entry
      * @return mixed
      */
-    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }})
+    public function forceDelete(User $user, Entry $entry)
     {
         //
     }
