@@ -41,14 +41,11 @@ class OptionGroupResource extends JsonResource
      */
     public function toArray($request)
     {
-        $comesFromOptionGroupsEndpoint = ($request->route()
-                                                  ->uri() === 'api/option_groups') ? true : false;
-
         return [
             'id'      => (int) $this->id,
             'name'    => $this->name,
             'type'    => $this->type,
-            'options' => $this->when(! $comesFromOptionGroupsEndpoint, OptionResource::collection($this->options)),
+            'options' => OptionResource::collection($this->whenLoaded('options')),
         ];
     }
 }

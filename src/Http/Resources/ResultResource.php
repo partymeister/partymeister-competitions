@@ -25,7 +25,7 @@ class ResultResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'tbd' => 'to be doneE'
+            'tbd' => 'to be done'
         ];
     }
 }

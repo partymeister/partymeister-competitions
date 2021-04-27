@@ -46,7 +46,7 @@ class CompetitionPrizeResource extends JsonResource
     {
         return [
             'id'          => (int) $this->id,
-            'competition' => new CompetitionResource($this->competition),
+            'competition' => new CompetitionResource($this->whenLoaded('competition')),
             'amount'      => $this->amount,
             'additional'  => $this->additional,
             'rank'        => $this->rank,
