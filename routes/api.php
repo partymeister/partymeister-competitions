@@ -5,13 +5,11 @@ Route::group([
     'prefix'     => 'api',
     'as'         => 'api.',
 ], function () {
-    Route::post('access_keys/generate', 'AccessKeys\GenerateController@store')
-         ->name('access_keys.generate');
     Route::apiResource('option_groups', 'OptionGroupsController');
     Route::apiResource('competition_types', 'CompetitionTypesController');
     Route::apiResource('competitions', 'CompetitionsController');
-    Route::get('competitions/{competition}/playlist', 'Competitions\PlaylistsController@index')
-         ->name('competitions.playlist.index');
+    //Route::get('competitions/{competition}/playlist', 'Competitions\PlaylistsController@index')
+    //     ->name('competitions.playlist.index');
     Route::apiResource('vote_categories', 'VoteCategoriesController');
     Route::apiResource('entries', 'EntriesController');
     Route::apiResource('access_keys', 'AccessKeysController');
@@ -23,14 +21,13 @@ Route::group([
     Route::apiResource('manual_votes', 'ManualVotesController');
 });
 
-// TODO: is this still needed?
 Route::group([
-    'middleware' => ['web', 'web_auth', 'bindings', 'permission'],
-    'namespace'  => 'Partymeister\Competitions\Http\Controllers\Api',
-    'prefix'     => 'ajax',
-    'as'         => 'ajax.',
+    'middleware' => ['auth:api', 'bindings', 'permission'],
+    'namespace'  => 'Partymeister\Competitions\Http\Controllers\ApiRPC',
+    'prefix'     => 'api-rpc',
+    'as'         => 'api-rpc.',
 ], function () {
-    Route::post('access_keys/generate', 'AccessKeys\GenerateController@index')
+    Route::post('access_keys/generate', 'AccessKeys\GenerateController@store')
          ->name('access_keys.generate');
 });
 
@@ -47,3 +44,15 @@ Route::group([
     Route::post('votes/{api_token}/submit', 'VotesController@store')
          ->name('votes.submit');
 });
+
+// TODO: remove once we abandon the php powered backend
+Route::group([
+    'middleware' => ['web', 'web_auth', 'bindings', 'permission'],
+    'namespace'  => 'Partymeister\Competitions\Http\Controllers\ApiRPC',
+    'prefix'     => 'ajax',
+    'as'         => 'ajax.',
+], function () {
+    Route::post('access_keys/generate', 'AccessKeys\GenerateController@store')
+         ->name('access_keys.generate');
+});
+

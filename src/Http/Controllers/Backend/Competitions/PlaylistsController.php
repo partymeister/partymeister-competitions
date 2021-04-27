@@ -5,7 +5,6 @@ namespace Partymeister\Competitions\Http\Controllers\Backend\Competitions;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -13,9 +12,9 @@ use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Helpers\MediaHelper;
 use Motor\Backend\Http\Controllers\Controller;
+use Partymeister\Competitions\Http\Resources\CompetitionResource;
+use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Competition;
-use Partymeister\Competitions\Transformers\Competition\EntryTransformer;
-use Partymeister\Competitions\Transformers\Entry\SlideTransformer;
 use Partymeister\Slides\Models\SlideTemplate;
 use Partymeister\Slides\Services\PlaylistService;
 
@@ -53,21 +52,22 @@ class PlaylistsController extends Controller
         $filename = Str::slug($competition->name . '_' . date('Y-m-d_H-i-s'));
         switch ($request->get('format', 'json')) {
             case 'json':
-                $resource = $this->transformCollection($competition->sorted_entries, EntryTransformer::class);
 
-                $data = $this->fractal->createData($resource)->toArray();
-                $data = Arr::get($data, 'data');
+                $entryCollection = new CompetitionResource($competition->load('qualified_entries'));
 
-                $data = [
-                    'message' => 'Competition playlist for \'' . $competition->name . '\', generated ' . date('Y-m-d H:i:s'),
-                    'data'    => [
-                        'competition' => [
-                            'name'         => $competition->name,
-                            'is_anonymous' => (bool) $competition->competition_type->is_anonymous
-                        ],
-                        'entries'     => [ 'data' => $data ]
-                    ]
-                ];
+                $entriesResponse = $entryCollection->toResponse($request);
+                $data = Arr::get(json_decode($entriesResponse->getContent(), true), 'data');
+
+                //$data = [
+                //    'message' => 'Competition playlist for \'' . $competition->name . '\', generated ' . date('Y-m-d H:i:s'),
+                //    'data'    => [
+                //        'competition' => [
+                //            'name'         => $competition->name,
+                //            'is_anonymous' => (bool) $competition->competition_type->is_anonymous
+                //        ],
+                //        'entries'     => [ 'data' => $data ]
+                //    ]
+                //];
 
                 if ($request->get('download')) {
                     return response()->streamDownload(function () use ($data) {
@@ -77,7 +77,7 @@ class PlaylistsController extends Controller
 
                 return response()->json($data);
             case 'm3u':
-                $m3u = $this->generateM3u($competition->sorted_entries);
+                $m3u = $this->generateM3u($competition->qualified_entries);
 
                 if ($request->get('download')) {
                     return response()->streamDownload(function () use ($m3u) {
@@ -88,18 +88,14 @@ class PlaylistsController extends Controller
                 return $m3u;
                 break;
             case 'slides':
-                $resource = $this->transformCollection(
-                    $competition->sorted_entries,
-                    SlideTransformer::class
-                );
+                $entryCollection = EntryResource::collection($competition->qualified_entries->load('competition'));
 
-                $data    = $this->fractal->createData($resource)->toArray();
-                $entries = Arr::get($data, 'data');
+                $entriesResponse = $entryCollection->toResponse($request);
+                $entries = Arr::get(json_decode($entriesResponse->getContent(), true), 'data');
 
                 foreach ($entries as $key => $entry) {
-                    //var_dump($entry);
-                    $entries[$key]['competition_name'] = strtoupper($entries[$key]['competition_name']);
-                    if ($entries[$key]['filesize_bytes'] == 0) {
+                    $entries[$key]['competition']['name'] = strtoupper($entries[$key]['competition']['name']);
+                    if ($entries[$key]['filesize'] == 0) {
                         $entries[$key]['filesize_human'] = ' ';
                     }
                     if ($entries[$key]['description'] == '') {
@@ -155,7 +151,7 @@ class PlaylistsController extends Controller
 
                 $response = $this->checkIfCompetitionIsValid($competition);
 
-                foreach ($competition->sorted_entries as $entry) {
+                foreach ($competition->qualified_entries as $entry) {
                     if ($entry->getMedia('file')->count() == 1) {
                         $entry->final_file_media_id = $entry->getFirstMedia('file')->id;
                         $entry->save();

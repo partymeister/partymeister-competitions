@@ -1,6 +1,6 @@
 <?php
 
-namespace Partymeister\Competitions\Http\Controllers\Api\AccessKeys;
+namespace Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys;
 
 use Motor\Backend\Http\Controllers\ApiController;
 use Partymeister\Competitions\Http\Requests\Backend\AccessKey\GenerateRequest;
@@ -9,7 +9,7 @@ use Partymeister\Competitions\Services\AccessKeyService;
 /**
  * Class GenerateController
  *
- * @package Partymeister\Competitions\Http\Controllers\Api\AccessKeys
+ * @package Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys
  */
 class GenerateController extends ApiController
 {

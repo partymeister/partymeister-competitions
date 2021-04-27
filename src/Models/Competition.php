@@ -28,50 +28,50 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 /**
  * Partymeister\Competitions\Models\Competition
  *
- * @property int                                                                                                $id
- * @property int|null                                                                                           $competition_type_id
- * @property int                                                                                                $sort_position
- * @property int                                                                                                $prizegiving_sort_position
- * @property string                                                                                             $name
- * @property int                                                                                                $has_prizegiving
- * @property int                                                                                                $upload_enabled
- * @property int                                                                                                $voting_enabled
- * @property int                               $created_by
- * @property int                               $updated_by
- * @property int|null                          $deleted_by
- * @property Carbon|null   $created_at
- * @property Carbon|null   $updated_at
- * @property-read CompetitionType|null         $competition_type
- * @property-read User                         $creator
- * @property-read Collection|Entry[]           $entries
- * @property-read User|null                    $eraser
+ * @property int $id
+ * @property int|null $competition_type_id
+ * @property int $sort_position
+ * @property int $prizegiving_sort_position
+ * @property string $name
+ * @property int $has_prizegiving
+ * @property int $upload_enabled
+ * @property int $voting_enabled
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read CompetitionType|null $competition_type
+ * @property-read User $creator
+ * @property-read Collection|Entry[] $entries
+ * @property-read User|null $eraser
  * @property-read Collection|FileAssociation[] $file_associations
- * @property-read mixed                        $entry_count
- * @property-read mixed                        $sorted_entries
- * @property-read Collection|Media[]                                     $media
- * @property-read Collection|OptionGroup[]                               $option_groups
- * @property-read Collection|CompetitionPrize[]                          $prizes
- * @property-read User                                                   $updater
- * @property-read Collection|VoteCategory[]                            $vote_categories
- * @method static Builder|Competition filteredBy( Filter $filter, $column )
- * @method static Builder|Competition filteredByMultiple( Filter $filter )
+ * @property-read mixed $entry_count
+ * @property-read mixed $sorted_entries
+ * @property-read Collection|Media[] $media
+ * @property-read Collection|OptionGroup[] $option_groups
+ * @property-read Collection|CompetitionPrize[] $prizes
+ * @property-read User $updater
+ * @property-read Collection|VoteCategory[] $vote_categories
+ * @method static Builder|Competition filteredBy(Filter $filter, $column)
+ * @method static Builder|Competition filteredByMultiple(Filter $filter)
  * @method static Builder|Competition newModelQuery()
  * @method static Builder|Competition newQuery()
  * @method static Builder|Competition query()
- * @method static Builder|Competition search( $q, $full_text = false )
- * @method static Builder|Competition whereCompetitionTypeId( $value )
- * @method static Builder|Competition whereCreatedAt( $value )
- * @method static Builder|Competition whereCreatedBy( $value )
- * @method static Builder|Competition whereDeletedBy( $value )
- * @method static Builder|Competition whereHasPrizegiving( $value )
- * @method static Builder|Competition whereId( $value )
- * @method static Builder|Competition whereName( $value )
- * @method static Builder|Competition wherePrizegivingSortPosition( $value )
- * @method static Builder|Competition whereSortPosition( $value )
- * @method static Builder|Competition whereUpdatedAt( $value )
- * @method static Builder|Competition whereUpdatedBy( $value )
- * @method static Builder|Competition whereUploadEnabled( $value )
- * @method static Builder|Competition whereVotingEnabled( $value )
+ * @method static Builder|Competition search($q, $full_text = false)
+ * @method static Builder|Competition whereCompetitionTypeId($value)
+ * @method static Builder|Competition whereCreatedAt($value)
+ * @method static Builder|Competition whereCreatedBy($value)
+ * @method static Builder|Competition whereDeletedBy($value)
+ * @method static Builder|Competition whereHasPrizegiving($value)
+ * @method static Builder|Competition whereId($value)
+ * @method static Builder|Competition whereName($value)
+ * @method static Builder|Competition wherePrizegivingSortPosition($value)
+ * @method static Builder|Competition whereSortPosition($value)
+ * @method static Builder|Competition whereUpdatedAt($value)
+ * @method static Builder|Competition whereUpdatedBy($value)
+ * @method static Builder|Competition whereUploadEnabled($value)
+ * @method static Builder|Competition whereVotingEnabled($value)
  * @mixin Eloquent
  */
 class Competition extends Model implements HasMedia
@@ -86,7 +86,7 @@ class Competition extends Model implements HasMedia
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -95,7 +95,7 @@ class Competition extends Model implements HasMedia
      */
     protected $searchableColumns = [
         'competitions.name',
-        'competition_type.name'
+        'competition_type.name',
     ];
 
     /**
@@ -110,9 +110,8 @@ class Competition extends Model implements HasMedia
         'sort_position',
         'prizegiving_sort_position',
         'upload_enabled',
-        'voting_enabled'
+        'voting_enabled',
     ];
-
 
     /**
      * @param Media|null $media
@@ -120,20 +119,36 @@ class Competition extends Model implements HasMedia
      */
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')->width(320)->height(240)->nonQueued();
+        $this->addMediaConversion('thumb')
+             ->width(320)
+             ->height(240)
+             ->nonQueued();
 
-        $this->addMediaConversion('preview')->width(1280)->height(1024)->nonQueued();
+        $this->addMediaConversion('preview')
+             ->width(1280)
+             ->height(1024)
+             ->nonQueued();
     }
 
+    ///**
+    // * @return Collection
+    // */
+    //public function getSortedEntriesAttribute()
+    //{
+    //    return $this->entries()
+    //                ->where('status', 1)
+    //                ->orderBy('sort_position', 'ASC')
+    //                ->with('competition')
+    //                ->get();
+    //}
 
     /**
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function getSortedEntriesAttribute()
+    public function qualified_entries()
     {
-        return $this->entries()->where('status', 1)->orderBy('sort_position', 'ASC')->get();
+        return $this->hasMany(Entry::class)->where('status', 1)->orderBy('sort_position', 'ASC');
     }
-
 
     /**
      * @return HasMany
@@ -143,15 +158,14 @@ class Competition extends Model implements HasMedia
         return $this->hasMany(Entry::class);
     }
 
-
     /**
      * @return int
      */
     public function getEntryCountAttribute()
     {
-        return $this->entries()->count();
+        return $this->entries()
+                    ->count();
     }
-
 
     /**
      * @return BelongsTo
@@ -161,7 +175,6 @@ class Competition extends Model implements HasMedia
         return $this->belongsTo(CompetitionType::class);
     }
 
-
     /**
      * @return BelongsToMany
      */
@@ -169,7 +182,6 @@ class Competition extends Model implements HasMedia
     {
         return $this->belongsToMany(OptionGroup::class);
     }
-
 
     /**
      * @return BelongsToMany
@@ -179,7 +191,6 @@ class Competition extends Model implements HasMedia
         return $this->belongsToMany(VoteCategory::class);
     }
 
-
     /**
      * @return MorphMany
      */
@@ -187,7 +198,6 @@ class Competition extends Model implements HasMedia
     {
         return $this->morphMany(FileAssociation::class, 'model');
     }
-
 
     /**
      * @return HasMany

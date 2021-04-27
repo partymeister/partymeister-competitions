@@ -123,8 +123,9 @@ class CompetitionResource extends JsonResource
             'video_3'                   => new FileResource($this->file_associations()
                                                                  ->where('identifier', 'video_3')
                                                                  ->first()),
-            'prizes'                    => CompetitionPrizeResource::collection($this->prizes),
-            'entries'                   => EntryResource::collection($this->entries),
+            'prizes'                    => CompetitionPrizeResource::collection($this->whenloaded('prizes')),
+            'entries'                   => EntryResource::collection($this->whenLoaded('entries')),
+            'qualified_entries'         => EntryResource::collection($this->whenLoaded('qualified_entries')),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace Partymeister\Competitions\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Motor\Backend\Helpers\Filesize;
 use Motor\Backend\Http\Resources\MediaResource;
 use Partymeister\Core\Http\Resources\VisitorResource;
 
@@ -33,6 +34,11 @@ use Partymeister\Core\Http\Resources\VisitorResource;
  *     property="sort_position",
  *     type="integer",
  *     example="1"
+ *   ),
+ *   @OA\Property(
+ *     property="sort_position_prefixed",
+ *     type="string",
+ *     example="01"
  *   ),
  *   @OA\Property(
  *     property="title",
@@ -234,13 +240,15 @@ class EntryResource extends JsonResource
 
         return [
             'id'                                          => (int) $this->id,
-            'competition'                                 => new CompetitionResource($this->competition),
+            'competition'                                 => new CompetitionResource($this->whenLoaded('competition')),
             'visitor'                                     => new VisitorResource($this->visitor),
             'ip_address'                                  => $this->ip_address,
             'sort_position'                               => (int) $this->sort_position,
+            'sort_position_prefixed'                      => (strlen($this->sort_position) == 1 ? '0' . $this->sort_position : $this->sort_position),
             'title'                                       => $this->title,
             'author'                                      => $this->author,
-            'filesize'                                    => $this->filesize,
+            'filesize'                                    => (int) $this->filesize,
+            'filesize_human'                              => Filesize::bytesToHuman((int) $this->filesize),
             'platform'                                    => $this->platform,
             'description'                                 => $this->description,
             'organizer_description'                       => $this->organizer_description,
