@@ -24,7 +24,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   ),
  *   @OA\Property(
  *     property="additional",
- *     type="text",
+ *     type="string",
  *     example="Additional prizes like a GPU!"
  *   ),
  *   @OA\Property(
