@@ -15,7 +15,7 @@ use Partymeister\Competitions\Services\AccessKeyService;
  */
 class AccessKeysController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Competitions\Models\AccessKey';
     protected string $modelResource = 'access_key';
 
     /**

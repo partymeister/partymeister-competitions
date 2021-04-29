@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\VoteForm;
+use Partymeister\Competitions\Http\Requests\Backend\ManualVoteRequest;
 use Partymeister\Competitions\Http\Requests\Backend\VoteRequest;
 use Partymeister\Competitions\Models\Vote;
 use Partymeister\Competitions\Services\VoteService;
@@ -63,7 +64,7 @@ class VotesController extends Controller
      * @param VoteRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(VoteRequest $request)
+    public function store(ManualVoteRequest $request)
     {
         $form = $this->form(VoteForm::class);
 

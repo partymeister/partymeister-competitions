@@ -78,7 +78,7 @@ class CompetitionPrizesController extends Controller
 
         flash()->success(trans('partymeister-competitions::backend/competition_prizes.created'));
 
-        return redirect('backend/competition_prizes');
+        return redirect('backend/competition_prizes/create');
     }
 
 

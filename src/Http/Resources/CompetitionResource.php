@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Motor\Backend\Http\Resources\BaseResource;
 use Motor\Media\Http\Resources\FileResource;
 
 /**
@@ -93,7 +93,7 @@ use Motor\Media\Http\Resources\FileResource;
  *   ),
  * )
  */
-class CompetitionResource extends JsonResource
+class CompetitionResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

@@ -16,7 +16,7 @@ use Partymeister\Competitions\Http\Resources\EntryCollection;
  */
 class EntriesController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Competitions\Models\Entry';
     protected string $modelResource = 'entry';
 
     /**

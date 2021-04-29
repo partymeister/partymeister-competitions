@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use Motor\Backend\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
@@ -31,7 +31,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *   ),
  * )
  */
-class OptionGroupResource extends JsonResource
+class OptionGroupResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

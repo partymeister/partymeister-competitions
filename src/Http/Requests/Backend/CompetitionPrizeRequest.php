@@ -56,10 +56,9 @@ class CompetitionPrizeRequest extends Request
     public function rules()
     {
         return [
-            'competition_id' => 'required|integer',
-            'amount'         => 'nullable',
-            'additional'     => 'nullable',
-            'rank'           => 'required|in:1,2,3',
+            'amount'         => 'array',
+            'additional'     => 'array',
+            'rank'           => 'array',
         ];
     }
 }

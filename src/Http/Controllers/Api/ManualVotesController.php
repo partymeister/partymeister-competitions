@@ -16,7 +16,7 @@ use Partymeister\Competitions\Http\Resources\ManualVoteCollection;
  */
 class ManualVotesController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Competitions\Models\ManualVote';
     protected string $modelResource = 'manual_vote';
 
     /**

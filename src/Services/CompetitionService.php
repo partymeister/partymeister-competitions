@@ -10,7 +10,7 @@ use Motor\Core\Filter\Renderers\SelectRenderer;
 use Motor\Media\Models\FileAssociation;
 use Partymeister\Competitions\Events\CompetitionSaved;
 use Partymeister\Competitions\Models\Competition;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class CompetitionService
@@ -116,7 +116,7 @@ class CompetitionService extends BaseService
         }
 
         // Hardlink the files in the correct order, clear directory beforehand
-        foreach ($competition->sorted_entries as $entry) {
+        foreach ($competition->qualified_entries as $entry) {
             if ($entry->final_file_media_id > 0) {
                 Log::channel('debug')->info($entry->final_file_media_id);
                 $media = Media::find($entry->final_file_media_id);

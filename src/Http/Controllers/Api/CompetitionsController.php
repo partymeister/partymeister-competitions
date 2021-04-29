@@ -16,7 +16,7 @@ use Partymeister\Competitions\Http\Resources\CompetitionCollection;
  */
 class CompetitionsController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Competitions\Models\Competition';
     protected string $modelResource = 'competition';
 
     /**

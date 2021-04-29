@@ -2,8 +2,8 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use Motor\Backend\Helpers\Filesize;
+use Motor\Backend\Http\Resources\BaseResource;
 use Motor\Backend\Http\Resources\MediaResource;
 use Partymeister\Core\Http\Resources\VisitorResource;
 
@@ -224,7 +224,7 @@ use Partymeister\Core\Http\Resources\VisitorResource;
  *   ),
  * )
  */
-class EntryResource extends JsonResource
+class EntryResource extends BaseResource
 {
     /**
      * Transform the resource into an array.

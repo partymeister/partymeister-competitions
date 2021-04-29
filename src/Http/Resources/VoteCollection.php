@@ -2,9 +2,9 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Motor\Backend\Http\Resources\BaseCollection;
 
-class VoteCollection extends ResourceCollection
+class VoteCollection extends BaseCollection
 {
     /**
      * Transform the resource collection into an array.

@@ -51,9 +51,7 @@ class ManualVoteRequest extends Request
     public function rules()
     {
         return [
-            'competition_id' => 'required|integer',
-            'entry_id'       => 'required|integer',
-            'points'         => 'required|integer',
+            'entry' => 'required|array',
         ];
     }
 }

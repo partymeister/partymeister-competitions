@@ -16,7 +16,7 @@ use Partymeister\Competitions\Http\Resources\LiveVoteCollection;
  */
 class LiveVotesController extends ApiController
 {
-
+    protected string $model = 'Partymeister\Competitions\Models\LiveVote';
     protected string $modelResource = 'live_vote';
 
     /**
