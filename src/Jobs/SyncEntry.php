@@ -11,11 +11,12 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Entry;
-use Partymeister\Competitions\Transformers\Entry\SyncTransformer;
 
 /**
  * Class SyncEntry
+ *
  * @package Partymeister\Competitions\Jobs
  */
 class SyncEntry implements ShouldQueue
@@ -27,18 +28,17 @@ class SyncEntry implements ShouldQueue
      */
     public $entry;
 
-
     /**
      * Create a new job instance.
      *
      * SyncEntry constructor.
+     *
      * @param Entry $entry
      */
     public function __construct(Entry $entry)
     {
         $this->entry = $entry;
     }
-
 
     /**
      * Execute the job.
@@ -47,22 +47,17 @@ class SyncEntry implements ShouldQueue
      */
     public function handle()
     {
-        if (!config('partymeister-competitions-sync.active')) {
+        if (! config('partymeister-competitions-sync.active')) {
             return;
         }
 
-        $data = fractal()->item($this->entry)->transformWith(new SyncTransformer())->toJson();
+        $data = (new EntryResource($this->entry))->toArrayRecursive();
 
         $client = new Client([
-            'verify' => false
+            'verify' => false,
         ]);
 
-        $request = new Request(
-            'POST',
-            config('partymeister-competitions-sync.server') . config('partymeister-competitions-sync.api.entry'),
-            [ 'content-type' => 'application/json' ],
-            $data
-        );
+        $request = new Request('POST', config('partymeister-competitions-sync.server').config('partymeister-competitions-sync.api.entry'), ['content-type' => 'application/json'], $data);
 
         try {
             $response = $client->send($request);

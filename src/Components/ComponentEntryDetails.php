@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Competitions\Models\Entry;
-use Partymeister\Competitions\Transformers\Entry\SlideTransformer;
+use Partymeister\Slides\Http\Resources\SlideResource;
 use Partymeister\Slides\Models\SlideTemplate;
 
 /**
  * Class ComponentEntryDetails
+ *
  * @package Partymeister\Competitions\Components
  */
 class ComponentEntryDetails
 {
-
     /**
      * @var PageVersionComponent
      */
@@ -30,9 +30,9 @@ class ComponentEntryDetails
      */
     protected $data = [];
 
-
     /**
      * ComponentEntryDetails constructor.
+     *
      * @param PageVersionComponent $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
@@ -40,14 +40,14 @@ class ComponentEntryDetails
         $this->pageVersionComponent = $pageVersionComponent;
     }
 
-
     /**
      * @param Request $request
      * @return Factory|RedirectResponse|View
      */
     public function index(Request $request)
     {
-        $visitor = Auth::guard('visitor')->user();
+        $visitor = Auth::guard('visitor')
+                       ->user();
 
         if (is_null($visitor)) {
             return redirect()->back();
@@ -66,12 +66,12 @@ class ComponentEntryDetails
             return redirect()->back();
         }
 
-        $data = fractal($record, SlideTransformer::class)->toArray();
+        $data = (new SlideResource($record))->toArrayRecursive();
 
         $entry = $data['data'];
 
         foreach (Arr::get($entry, 'options.data', []) as $i => $option) {
-            $entry['option_' . ($i + 1)] = $option['name'];
+            $entry['option_'.($i + 1)] = $option['name'];
         }
 
         $entry['competition_name'] = strtoupper($entry['competition_name']);
@@ -81,32 +81,29 @@ class ComponentEntryDetails
         if ($entry['description'] == '') {
             $entry['description'] = ' ';
         }
-        $entry['description']            = nl2br($entry['description']);
+        $entry['description'] = nl2br($entry['description']);
         $entry['sort_position_prefixed'] = rand(10, 99);
         $entry['previous_sort_position'] = ' ';
-        $entry['previous_author']        = ' ';
-        $entry['previous_title']         = ' ';
+        $entry['previous_author'] = ' ';
+        $entry['previous_title'] = ' ';
 
-        $competitionTemplate = SlideTemplate::where('template_for', 'competition')->first();
+        $competitionTemplate = SlideTemplate::where('template_for', 'competition')
+                                            ->first();
 
         $this->data = [
             'entry'               => $entry,
             'record'              => $record,
-            'competitionTemplate' => $competitionTemplate
+            'competitionTemplate' => $competitionTemplate,
         ];
 
         return $this->render();
     }
-
 
     /**
      * @return Factory|View
      */
     public function render()
     {
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            $this->data
-        );
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), $this->data);
     }
 }
