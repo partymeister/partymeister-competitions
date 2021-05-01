@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Motor\CMS\Models\PageVersionComponent;
+use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Slides\Http\Resources\SlideResource;
 use Partymeister\Slides\Models\SlideTemplate;
@@ -66,15 +67,14 @@ class ComponentEntryDetails
             return redirect()->back();
         }
 
-        $data = (new SlideResource($record))->toArrayRecursive();
-
-        $entry = $data['data'];
+        $entry = (new EntryResource($record->load('competition')))->toArrayRecursive();
 
         foreach (Arr::get($entry, 'options.data', []) as $i => $option) {
             $entry['option_'.($i + 1)] = $option['name'];
         }
 
-        $entry['competition_name'] = strtoupper($entry['competition_name']);
+        $entry['competition_name'] = strtoupper($entry['competition']['name']);
+        $entry['filesize_bytes'] = $entry['filesize'];
         if ($entry['filesize_bytes'] == 0) {
             $entry['filesize_human'] = ' ';
         }

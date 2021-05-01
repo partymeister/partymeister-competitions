@@ -70,7 +70,7 @@ class ComponentEntries
                     'entries'   => $this->visitor->entries,
                 ]);
         } else {
-            return redirect('/f/start');
+            return redirect('/start');
         }
     }
 }
