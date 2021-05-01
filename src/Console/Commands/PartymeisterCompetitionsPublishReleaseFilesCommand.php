@@ -8,11 +8,11 @@ use Partymeister\Competitions\Services\CompetitionService;
 
 /**
  * Class PartymeisterCompetitionsPublishReleaseFilesCommand
+ *
  * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsPublishReleaseFilesCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -27,7 +27,6 @@ class PartymeisterCompetitionsPublishReleaseFilesCommand extends Command
      */
     protected $description = 'Make symlinks to all uploaded files';
 
-
     /**
      * Execute the console command.
      *
@@ -39,7 +38,6 @@ class PartymeisterCompetitionsPublishReleaseFilesCommand extends Command
             CompetitionService::hardLinkReleases($competition);
         }
     }
-
 
     /**
      * @param $directory

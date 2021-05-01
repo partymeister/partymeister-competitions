@@ -3,20 +3,21 @@
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competitions\Models\LiveVote;
 use Partymeister\Competitions\Http\Requests\Backend\LiveVoteRequest;
-use Partymeister\Competitions\Services\LiveVoteService;
-use Partymeister\Competitions\Http\Resources\LiveVoteResource;
 use Partymeister\Competitions\Http\Resources\LiveVoteCollection;
+use Partymeister\Competitions\Http\Resources\LiveVoteResource;
+use Partymeister\Competitions\Models\LiveVote;
+use Partymeister\Competitions\Services\LiveVoteService;
 
 /**
  * Class LiveVotesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class LiveVotesController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\LiveVote';
+
     protected string $modelResource = 'live_vote';
 
     /**
@@ -69,7 +70,9 @@ class LiveVotesController extends ApiController
      */
     public function index()
     {
-        $paginator = LiveVoteService::collection()->getPaginator();
+        $paginator = LiveVoteService::collection()
+                                    ->getPaginator();
+
         return (new LiveVoteCollection($paginator))->additional(['message' => 'LiveVote collection read']);
     }
 
@@ -124,10 +127,13 @@ class LiveVotesController extends ApiController
      */
     public function store(LiveVoteRequest $request)
     {
-        $result = LiveVoteService::create($request)->getResult();
-        return (new LiveVoteResource($result))->additional(['message' => 'LiveVote created'])->response()->setStatusCode(201);
-    }
+        $result = LiveVoteService::create($request)
+                                 ->getResult();
 
+        return (new LiveVoteResource($result))->additional(['message' => 'LiveVote created'])
+                                              ->response()
+                                              ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +190,11 @@ class LiveVotesController extends ApiController
      */
     public function show(LiveVote $record)
     {
-        $result = LiveVoteService::show($record)->getResult();
+        $result = LiveVoteService::show($record)
+                                 ->getResult();
+
         return (new LiveVoteResource($result))->additional(['message' => 'LiveVote read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +250,16 @@ class LiveVotesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param LiveVoteRequest $request
-     * @param LiveVote        $record
+     * @param LiveVote $record
      * @return LiveVoteResource
      */
     public function update(LiveVoteRequest $request, LiveVote $record)
     {
-        $result = LiveVoteService::update($record, $request)->getResult();
+        $result = LiveVoteService::update($record, $request)
+                                 ->getResult();
+
         return (new LiveVoteResource($result))->additional(['message' => 'LiveVote updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +322,13 @@ class LiveVotesController extends ApiController
      */
     public function destroy(LiveVote $record)
     {
-        $result = LiveVoteService::delete($record)->getResult();
+        $result = LiveVoteService::delete($record)
+                                 ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'LiveVote deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting LiveVote'], 404);
     }
 }

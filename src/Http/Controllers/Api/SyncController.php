@@ -12,11 +12,11 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class SyncController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class SyncController extends Controller
 {
-
     /**
      * @param Request $request
      * @return JsonResponse
@@ -33,13 +33,13 @@ class SyncController extends Controller
         if (is_null($competition)) {
             $competition = new Competition();
         }
-        $competition->competition_type_id       = Arr::get($data, 'competition_type_id');
-        $competition->name                      = Arr::get($data, 'name');
-        $competition->sort_position             = Arr::get($data, 'sort_position');
+        $competition->competition_type_id = Arr::get($data, 'competition_type_id');
+        $competition->name = Arr::get($data, 'name');
+        $competition->sort_position = Arr::get($data, 'sort_position');
         $competition->prizegiving_sort_position = Arr::get($data, 'prizegiving_sort_position');
-        $competition->has_prizegiving           = Arr::get($data, 'has_prizegiving');
-        $competition->upload_enabled            = Arr::get($data, 'upload_enabled');
-        $competition->voting_enabled            = Arr::get($data, 'voting_enabled');
+        $competition->has_prizegiving = Arr::get($data, 'has_prizegiving');
+        $competition->upload_enabled = Arr::get($data, 'upload_enabled');
+        $competition->voting_enabled = Arr::get($data, 'voting_enabled');
         $competition->save();
 
         if ($competition->id != Arr::get($data, 'id')) {
@@ -47,7 +47,6 @@ class SyncController extends Controller
             $competition->save();
         }
     }
-
 
     /**
      * @param Request $request
@@ -67,11 +66,10 @@ class SyncController extends Controller
             $liveVote = new LiveVote();
         }
         $liveVote->competition_id = Arr::get($data, 'competition_id');
-        $liveVote->entry_id       = Arr::get($data, 'entry_id');
-        $liveVote->sort_position  = Arr::get($data, 'sort_position');
+        $liveVote->entry_id = Arr::get($data, 'entry_id');
+        $liveVote->sort_position = Arr::get($data, 'sort_position');
         $liveVote->save();
     }
-
 
     /**
      * @param Request $request
@@ -93,28 +91,25 @@ class SyncController extends Controller
             $entry = new Entry();
         }
         $entry->competition_id = Arr::get($data, 'competition_id');
-        $entry->title          = Arr::get($data, 'title');
-        $entry->description    = Arr::get($data, 'description');
-        $entry->author         = Arr::get($data, 'author');
-        $entry->sort_position  = Arr::get($data, 'sort_position');
-        $entry->status         = Arr::get($data, 'status');
-        $entry->is_remote      = Arr::get($data, 'is_remote');
+        $entry->title = Arr::get($data, 'title');
+        $entry->description = Arr::get($data, 'description');
+        $entry->author = Arr::get($data, 'author');
+        $entry->sort_position = Arr::get($data, 'sort_position');
+        $entry->status = Arr::get($data, 'status');
+        $entry->is_remote = Arr::get($data, 'is_remote');
         $entry->save();
 
         $screenshot = Arr::get($data, 'screenshot.file_base64', null);
         if (! is_null($screenshot)) {
-            file_put_contents(
-                storage_path() . '/' . Arr::get($data, 'screenshot.file_name'),
-                base64_decode($screenshot)
-            );
-            $entry->addMedia(storage_path() . '/' . Arr::get($data, 'screenshot.file_name'))
+            file_put_contents(storage_path().'/'.Arr::get($data, 'screenshot.file_name'), base64_decode($screenshot));
+            $entry->addMedia(storage_path().'/'.Arr::get($data, 'screenshot.file_name'))
                   ->toMediaCollection('screenshot', 'media');
         }
 
         $audio = Arr::get($data, 'audio.file_base64', null);
         if (! is_null($audio)) {
-            file_put_contents(storage_path() . '/' . Arr::get($data, 'audio.file_name'), base64_decode($audio));
-            $entry->addMedia(storage_path() . '/' . Arr::get($data, 'audio.file_name'))
+            file_put_contents(storage_path().'/'.Arr::get($data, 'audio.file_name'), base64_decode($audio));
+            $entry->addMedia(storage_path().'/'.Arr::get($data, 'audio.file_name'))
                   ->toMediaCollection('audio', 'media');
         }
 

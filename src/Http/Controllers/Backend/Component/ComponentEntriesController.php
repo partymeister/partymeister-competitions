@@ -12,12 +12,12 @@ use Partymeister\Competitions\Services\Component\ComponentEntryService;
 
 /**
  * Class ComponentEntriesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend\Component
  */
 class ComponentEntriesController extends ComponentController
 {
     use FormBuilderTrait;
-
 
     /**
      * Show the form for creating a new resource.
@@ -28,9 +28,8 @@ class ComponentEntriesController extends ComponentController
     {
         $this->form = $this->form(ComponentEntryForm::class);
 
-        return response()->json($this->getFormData('component.entries.store', [ 'mediapool' => false ]));
+        return response()->json($this->getFormData('component.entries.store', ['mediapool' => false]));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -48,9 +47,8 @@ class ComponentEntriesController extends ComponentController
 
         ComponentEntryService::createWithForm($request, $this->form);
 
-        return response()->json([ 'message' => trans('partymeister-competitions::component/entries.created') ]);
+        return response()->json(['message' => trans('partymeister-competitions::component/entries.created')]);
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -61,17 +59,16 @@ class ComponentEntriesController extends ComponentController
     public function edit(ComponentEntry $record)
     {
         $this->form = $this->form(ComponentEntryForm::class, [
-            'model' => $record
+            'model' => $record,
         ]);
 
-        return response()->json($this->getFormData('component.entries.update', [ 'mediapool' => false ]));
+        return response()->json($this->getFormData('component.entries.update', ['mediapool' => false]));
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request        $request
+     * @param Request $request
      * @param ComponentEntry $record
      * @return \Illuminate\Http\JsonResponse
      */
@@ -85,6 +82,6 @@ class ComponentEntriesController extends ComponentController
 
         ComponentEntryService::updateWithForm($record, $request, $form);
 
-        return response()->json([ 'message' => trans('partymeister-competitions::component/entries.updated') ]);
+        return response()->json(['message' => trans('partymeister-competitions::component/entries.updated')]);
     }
 }

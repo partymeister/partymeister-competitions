@@ -19,7 +19,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'live-voting'       => [
             'name'            => 'LiveVoting',
@@ -32,7 +32,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'competition-list'  => [
             'name'            => 'CompetitionList',
@@ -45,7 +45,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'releases'          => [
             'name'            => 'Releases',
@@ -58,7 +58,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'entries'           => [
             'name'            => 'Entry',
@@ -72,7 +72,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'entry-details'     => [
             'name'            => 'EntryDetail',
@@ -85,7 +85,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'entry-screenshots' => [
             'name'            => 'EntryScreenshot',
@@ -99,7 +99,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'entry-uploads'     => [
             'name'            => 'EntryUpload',
@@ -113,7 +113,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
         'entry-comments'    => [
             'name'            => 'EntryComment',
@@ -126,7 +126,7 @@ return [
             'permissions'     => [
 
             ],
-            'group'           => 'partymeister-competitions'
+            'group'           => 'partymeister-competitions',
         ],
     ],
 ];

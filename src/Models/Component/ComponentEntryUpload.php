@@ -14,24 +14,23 @@ use Motor\CMS\Models\PageVersionComponent;
 /**
  * Partymeister\Competitions\Models\Component\ComponentEntryUpload
  *
- * @property int                                                                  $id
- * @property int|null                                                             $entries_page_id
- * @property Carbon|null                                      $created_at
- * @property Carbon|null                                      $updated_at
+ * @property int $id
+ * @property int|null $entries_page_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
- * @property-read Navigation|null                                                 $entries_page
+ * @property-read Navigation|null $entries_page
  * @method static Builder|ComponentEntryUpload newModelQuery()
  * @method static Builder|ComponentEntryUpload newQuery()
  * @method static Builder|ComponentEntryUpload query()
- * @method static Builder|ComponentEntryUpload whereCreatedAt( $value )
- * @method static Builder|ComponentEntryUpload whereEntriesPageId( $value )
- * @method static Builder|ComponentEntryUpload whereId( $value )
- * @method static Builder|ComponentEntryUpload whereUpdatedAt( $value )
+ * @method static Builder|ComponentEntryUpload whereCreatedAt($value)
+ * @method static Builder|ComponentEntryUpload whereEntriesPageId($value)
+ * @method static Builder|ComponentEntryUpload whereId($value)
+ * @method static Builder|ComponentEntryUpload whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class ComponentEntryUpload extends ComponentBaseModel
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -40,7 +39,6 @@ class ComponentEntryUpload extends ComponentBaseModel
     protected $fillable = [
         'entries_page_id',
     ];
-
 
     /**
      * Preview function for the page editor
@@ -51,10 +49,9 @@ class ComponentEntryUpload extends ComponentBaseModel
     {
         return [
             'name'    => trans('partymeister-competitions::component/entry-uploads.component'),
-            'preview' => 'Preview for ComponentEntryUpload component'
+            'preview' => 'Preview for ComponentEntryUpload component',
         ];
     }
-
 
     /**
      * @return BelongsTo

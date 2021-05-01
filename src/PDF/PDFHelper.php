@@ -4,11 +4,11 @@ namespace Partymeister\Competitions\PDF;
 
 /**
  * Class PDFHelper
+ *
  * @package Partymeister\Competitions\PDF
  */
 class PDFHelper
 {
-
     /**
      * @param $value
      * @return float
@@ -17,7 +17,6 @@ class PDFHelper
     {
         return round($value * 0.351, 4);
     }
-
 
     /**
      * @param     $value
@@ -29,7 +28,6 @@ class PDFHelper
         return round($value * 2.54 / $dpi, 4) * 10; // Pixel * 2,54 / 300 dpi
     }
 
-
     /**
      * @param     $value
      * @param int $dpi
@@ -39,7 +37,6 @@ class PDFHelper
     {
         return round($value / 10 * $dpi / 2.54, 4); // Size in cm * 400 dpi / 2,54
     }
-
 
     /**
      * @param $fontsize
@@ -51,10 +48,9 @@ class PDFHelper
         return $pica / $fontsize;
     }
 
-
     /**
      * @param        $value
-     * @param int    $decimals
+     * @param int $decimals
      * @param string $dec_point
      * @param string $thousands_sep
      * @return string
@@ -64,10 +60,9 @@ class PDFHelper
         return @number_format($value, $decimals, $dec_point, $thousands_sep);
     }
 
-
     /**
      * @param        $value
-     * @param int    $decimals
+     * @param int $decimals
      * @param string $suffix
      * @param string $dec_point
      * @param string $thousands_sep
@@ -75,9 +70,8 @@ class PDFHelper
      */
     public static function format_tax($value, $decimals = 2, $suffix = '%', $dec_point = ',', $thousands_sep = '.')
     {
-        return number_format($value, $decimals, $dec_point, $thousands_sep) . $suffix;
+        return number_format($value, $decimals, $dec_point, $thousands_sep).$suffix;
     }
-
 
     /**
      * @param        $date
@@ -90,11 +84,11 @@ class PDFHelper
             if (count(explode("-", $date)) >= 3) {
                 $date = strtotime($date);
             } elseif (count(explode(".", $date)) >= 3) {
-                $day   = substr($date, 0, 2);
+                $day = substr($date, 0, 2);
                 $month = substr($date, 3, 2);
-                $year  = substr($date, 6, 4);
+                $year = substr($date, 6, 4);
                 $hours = substr($date, 11);
-                $date  = strtotime($year . "-" . $month . "-" . $day . " " . $hours);
+                $date = strtotime($year."-".$month."-".$day." ".$hours);
             }
         }
 

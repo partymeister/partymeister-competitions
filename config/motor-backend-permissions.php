@@ -6,63 +6,63 @@ return [
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
     'competition_types'  => [
         'name'   => 'partymeister-competitions::backend/competition_types.competition_types',
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
     'competitions'       => [
         'name'   => 'partymeister-competitions::backend/competitions.competitions',
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
     'vote_categories'    => [
         'name'   => 'partymeister-competitions::backend/vote_categories.vote_categories',
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
     'entries'            => [
         'name'   => 'partymeister-competitions::backend/entries.entries',
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
     'access_keys'        => [
         'name'   => 'partymeister-competitions::backend/access_keys.access_keys',
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
     'competition_prizes' => [
         'name'   => 'partymeister-competitions::backend/competition_prizes.competition_prizes',
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
     'votes'              => [
         'name'   => 'partymeister-competitions::backend/votes.votes',
         'values' => [
             'read',
             'write',
-            'delete'
-        ]
+            'delete',
+        ],
     ],
 ];

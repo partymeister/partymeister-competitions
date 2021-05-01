@@ -17,6 +17,7 @@ use Partymeister\Competitions\Services\OptionGroupService;
 class OptionGroupsController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\OptionGroup';
+
     protected string $modelResource = 'option_group';
 
     /**

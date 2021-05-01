@@ -6,11 +6,11 @@ use Partymeister\Competitions\Events\LiveVoteUpdated;
 
 /**
  * Class SyncLiveVote
+ *
  * @package Partymeister\Competitions\Listeners
  */
 class SyncLiveVote
 {
-
     /**
      * Create the event listener.
      *
@@ -20,7 +20,6 @@ class SyncLiveVote
     {
         //
     }
-
 
     /**
      * Handle the event.

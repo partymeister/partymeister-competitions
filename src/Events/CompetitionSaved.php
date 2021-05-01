@@ -11,6 +11,7 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class CompetitionSaved
+ *
  * @package Partymeister\Competitions\Events
  */
 class CompetitionSaved
@@ -22,18 +23,17 @@ class CompetitionSaved
      */
     public $competition;
 
-
     /**
      * Create a new event instance.
      *
      * CompetitionSaved constructor.
+     *
      * @param Competition $competition
      */
     public function __construct(Competition $competition)
     {
         $this->competition = $competition;
     }
-
 
     /**
      * Get the channels the event should broadcast on.

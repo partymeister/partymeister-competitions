@@ -2,7 +2,6 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Http\Controllers\Controller;
@@ -15,12 +14,12 @@ use Partymeister\Competitions\Services\CompetitionPrizeService;
 
 /**
  * Class CompetitionPrizesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class CompetitionPrizesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -39,7 +38,6 @@ class CompetitionPrizesController extends Controller
         return view('partymeister-competitions::backend.competition_prizes.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -50,14 +48,15 @@ class CompetitionPrizesController extends Controller
         $form = $this->form(CompetitionPrizeForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.competition_prizes.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
-        $competitions = Competition::where('has_prizegiving', true)->orderBy('prizegiving_sort_position', 'ASC')->get();
+        $competitions = Competition::where('has_prizegiving', true)
+                                   ->orderBy('prizegiving_sort_position', 'ASC')
+                                   ->get();
 
         return view('partymeister-competitions::backend.competition_prizes.create', compact('form', 'competitions'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -71,7 +70,10 @@ class CompetitionPrizesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         CompetitionPrizeService::createOrUpdatePrizes($request);
@@ -80,7 +82,6 @@ class CompetitionPrizesController extends Controller
 
         return redirect('backend/competition_prizes/create');
     }
-
 
     /**
      * Display the specified resource.
@@ -92,7 +93,6 @@ class CompetitionPrizesController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -103,20 +103,19 @@ class CompetitionPrizesController extends Controller
     {
         $form = $this->form(CompetitionPrizeForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.competition_prizes.update', [ $record->id ]),
+            'url'     => route('backend.competition_prizes.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-competitions::backend.competition_prizes.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param CompetitionPrizeRequest $request
-     * @param CompetitionPrize        $record
+     * @param CompetitionPrize $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CompetitionPrizeRequest $request, CompetitionPrize $record)
@@ -125,7 +124,10 @@ class CompetitionPrizesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         CompetitionPrizeService::updateWithForm($record, $request, $form);
@@ -134,7 +136,6 @@ class CompetitionPrizesController extends Controller
 
         return redirect('backend/competition_prizes');
     }
-
 
     /**
      * Remove the specified resource from storage.

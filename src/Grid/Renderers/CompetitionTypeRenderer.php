@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Class CompetitionTypeRenderer
+ *
  * @package Partymeister\Competitions\Grid\Renderers
  */
 class CompetitionTypeRenderer
 {
-
     /**
      * @var string
      */
@@ -21,18 +21,17 @@ class CompetitionTypeRenderer
      */
     protected $options = [];
 
-
     /**
      * CompetitionTypeRenderer constructor.
+     *
      * @param $value
      * @param $options
      */
     public function __construct($value, $options)
     {
-        $this->value   = $value;
+        $this->value = $value;
         $this->options = $options;
     }
-
 
     /**
      * @return string
@@ -47,6 +46,7 @@ class CompetitionTypeRenderer
         //foreach ($this->value as $property) {
         //    $list[] = trans('partymeister-competitions::backend/competition_types.'.$property);
         //}
-        return App::make('html')->ul($this->value, [ 'class' => 'list-unstyled' ]);
+        return App::make('html')
+                  ->ul($this->value, ['class' => 'list-unstyled']);
     }
 }

@@ -14,33 +14,32 @@ use Motor\CMS\Models\PageVersionComponent;
 /**
  * Partymeister\Competitions\Models\Component\ComponentEntry
  *
- * @property int                                                                  $id
- * @property int|null                                                             $entry_comments_page_id
- * @property int|null                                                             $entry_screenshots_page_id
- * @property int|null                                                             $entry_edit_page_id
- * @property int|null                                                             $entry_detail_page_id
- * @property Carbon|null                                      $created_at
- * @property Carbon|null                                      $updated_at
+ * @property int $id
+ * @property int|null $entry_comments_page_id
+ * @property int|null $entry_screenshots_page_id
+ * @property int|null $entry_edit_page_id
+ * @property int|null $entry_detail_page_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
- * @property-read Navigation|null                                                 $entry_comments_page
- * @property-read Navigation|null                                                 $entry_detail_page
- * @property-read Navigation|null                                                 $entry_edit_page
- * @property-read Navigation|null                                                 $entry_screenshots_page
+ * @property-read Navigation|null $entry_comments_page
+ * @property-read Navigation|null $entry_detail_page
+ * @property-read Navigation|null $entry_edit_page
+ * @property-read Navigation|null $entry_screenshots_page
  * @method static Builder|ComponentEntry newModelQuery()
  * @method static Builder|ComponentEntry newQuery()
  * @method static Builder|ComponentEntry query()
- * @method static Builder|ComponentEntry whereCreatedAt( $value )
- * @method static Builder|ComponentEntry whereEntryCommentsPageId( $value )
- * @method static Builder|ComponentEntry whereEntryDetailPageId( $value )
- * @method static Builder|ComponentEntry whereEntryEditPageId( $value )
- * @method static Builder|ComponentEntry whereEntryScreenshotsPageId( $value )
- * @method static Builder|ComponentEntry whereId( $value )
- * @method static Builder|ComponentEntry whereUpdatedAt( $value )
+ * @method static Builder|ComponentEntry whereCreatedAt($value)
+ * @method static Builder|ComponentEntry whereEntryCommentsPageId($value)
+ * @method static Builder|ComponentEntry whereEntryDetailPageId($value)
+ * @method static Builder|ComponentEntry whereEntryEditPageId($value)
+ * @method static Builder|ComponentEntry whereEntryScreenshotsPageId($value)
+ * @method static Builder|ComponentEntry whereId($value)
+ * @method static Builder|ComponentEntry whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class ComponentEntry extends ComponentBaseModel
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -53,7 +52,6 @@ class ComponentEntry extends ComponentBaseModel
         'entry_detail_page_id',
     ];
 
-
     /**
      * Preview function for the page editor
      *
@@ -63,10 +61,9 @@ class ComponentEntry extends ComponentBaseModel
     {
         return [
             'name'    => trans('partymeister-competitions::component/entries.component'),
-            'preview' => 'Preview for ComponentEntry component'
+            'preview' => 'Preview for ComponentEntry component',
         ];
     }
-
 
     /**
      * @return BelongsTo
@@ -76,7 +73,6 @@ class ComponentEntry extends ComponentBaseModel
         return $this->belongsTo(Navigation::class, 'entry_comments_page_id');
     }
 
-
     /**
      * @return BelongsTo
      */
@@ -85,7 +81,6 @@ class ComponentEntry extends ComponentBaseModel
         return $this->belongsTo(Navigation::class, 'entry_screenshots_page_id');
     }
 
-
     /**
      * @return BelongsTo
      */
@@ -93,7 +88,6 @@ class ComponentEntry extends ComponentBaseModel
     {
         return $this->belongsTo(Navigation::class, 'entry_edit_page_id');
     }
-
 
     /**
      * @return BelongsTo

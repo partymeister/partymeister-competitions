@@ -3,7 +3,6 @@
 namespace Partymeister\Competitions\Http\Controllers\Backend\Component;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\CMS\Http\Controllers\Component\ComponentController;
 use Partymeister\Competitions\Forms\Backend\Component\ComponentVotingForm;
@@ -12,12 +11,12 @@ use Partymeister\Competitions\Services\Component\ComponentVotingService;
 
 /**
  * Class ComponentVotingsController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend\Component
  */
 class ComponentVotingsController extends ComponentController
 {
     use FormBuilderTrait;
-
 
     /**
      * Show the form for creating a new resource.
@@ -28,9 +27,8 @@ class ComponentVotingsController extends ComponentController
     {
         $this->form = $this->form(ComponentVotingForm::class);
 
-        return response()->json($this->getFormData('component.votings.store', [ 'mediapool' => false ]));
+        return response()->json($this->getFormData('component.votings.store', ['mediapool' => false]));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -48,9 +46,8 @@ class ComponentVotingsController extends ComponentController
 
         ComponentVotingService::createWithForm($request, $this->form);
 
-        return response()->json([ 'message' => trans('partymeister-competitions::component/votings.created') ]);
+        return response()->json(['message' => trans('partymeister-competitions::component/votings.created')]);
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -61,17 +58,16 @@ class ComponentVotingsController extends ComponentController
     public function edit(ComponentVoting $record)
     {
         $this->form = $this->form(ComponentVotingForm::class, [
-            'model' => $record
+            'model' => $record,
         ]);
 
-        return response()->json($this->getFormData('component.votings.update', [ 'mediapool' => false ]));
+        return response()->json($this->getFormData('component.votings.update', ['mediapool' => false]));
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request         $request
+     * @param Request $request
      * @param ComponentVoting $record
      * @return \Illuminate\Http\JsonResponse
      */
@@ -85,6 +81,6 @@ class ComponentVotingsController extends ComponentController
 
         ComponentVotingService::updateWithForm($record, $request, $form);
 
-        return response()->json([ 'message' => trans('partymeister-competitions::component/votings.updated') ]);
+        return response()->json(['message' => trans('partymeister-competitions::component/votings.updated')]);
     }
 }

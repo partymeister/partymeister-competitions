@@ -9,11 +9,11 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class EntryOptionForm
+ *
  * @package Partymeister\Competitions\Forms\Backend
  */
 class EntryOptionForm extends Form
 {
-
     /**
      * @return mixed|void
      */
@@ -31,7 +31,6 @@ class EntryOptionForm extends Form
                 foreach ($options as $option) {
                     $selected[] = $option->id;
                 }
-
             }
         }
 
@@ -46,10 +45,10 @@ class EntryOptionForm extends Form
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
                             'choices'        => $options,
                             'selected'       => $selected,
-                            'wrapper'        => [ 'class' => 'row' ],
+                            'wrapper'        => ['class' => 'row'],
                             'choice_options' => [
-                                'wrapper'    => [ 'class' => 'col-md-3' ],
-                                'label_attr' => [ 'class' => 'form-label' ],
+                                'wrapper'    => ['class' => 'col-md-3'],
+                                'label_attr' => ['class' => 'form-label'],
                             ],
                             'expanded'       => true,
                             'multiple'       => true,
@@ -60,10 +59,10 @@ class EntryOptionForm extends Form
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
                             'choices'        => $options,
                             'selected'       => $selected,
-                            'wrapper'        => [ 'class' => 'row' ],
+                            'wrapper'        => ['class' => 'row'],
                             'choice_options' => [
-                                'wrapper'    => [ 'class' => 'col-md-3' ],
-                                'label_attr' => [ 'class' => 'form-label' ],
+                                'wrapper'    => ['class' => 'col-md-3'],
+                                'label_attr' => ['class' => 'form-label'],
                             ],
                             'expanded'       => true,
                             'label'          => false,

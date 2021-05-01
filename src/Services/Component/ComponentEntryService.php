@@ -7,11 +7,11 @@ use Partymeister\Competitions\Models\Component\ComponentEntry;
 
 /**
  * Class ComponentEntryService
+ *
  * @package Partymeister\Competitions\Services\Component
  */
 class ComponentEntryService extends ComponentBaseService
 {
-
     /**
      * @var string
      */

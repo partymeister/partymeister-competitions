@@ -19,36 +19,36 @@ use Motor\Core\Traits\Searchable;
 /**
  * Partymeister\Competitions\Models\CompetitionPrize
  *
- * @property int                                                $id
- * @property int                                                $competition_id
- * @property string                                             $amount
- * @property string                          $additional
- * @property string                          $rank
+ * @property int $id
+ * @property int $competition_id
+ * @property string $amount
+ * @property string $additional
+ * @property string $rank
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property int                             $created_by
- * @property int                             $updated_by
- * @property int|null                        $deleted_by
- * @property-read Competition                $competition
- * @property-read User                       $creator
- * @property-read User|null                  $eraser
- * @property-read User                       $updater
- * @method static Builder|CompetitionPrize filteredBy( Filter $filter, $column )
- * @method static Builder|CompetitionPrize filteredByMultiple( Filter $filter )
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
+ * @property-read Competition $competition
+ * @property-read User $creator
+ * @property-read User|null $eraser
+ * @property-read User $updater
+ * @method static Builder|CompetitionPrize filteredBy(Filter $filter, $column)
+ * @method static Builder|CompetitionPrize filteredByMultiple(Filter $filter)
  * @method static Builder|CompetitionPrize newModelQuery()
  * @method static Builder|CompetitionPrize newQuery()
  * @method static Builder|CompetitionPrize query()
- * @method static Builder|CompetitionPrize search( $q, $full_text = false )
- * @method static Builder|CompetitionPrize whereAdditional( $value )
- * @method static Builder|CompetitionPrize whereAmount( $value )
- * @method static Builder|CompetitionPrize whereCompetitionId( $value )
- * @method static Builder|CompetitionPrize whereCreatedAt( $value )
- * @method static Builder|CompetitionPrize whereCreatedBy( $value )
- * @method static Builder|CompetitionPrize whereDeletedBy( $value )
- * @method static Builder|CompetitionPrize whereId( $value )
- * @method static Builder|CompetitionPrize whereRank( $value )
- * @method static Builder|CompetitionPrize whereUpdatedAt( $value )
- * @method static Builder|CompetitionPrize whereUpdatedBy( $value )
+ * @method static Builder|CompetitionPrize search($q, $full_text = false)
+ * @method static Builder|CompetitionPrize whereAdditional($value)
+ * @method static Builder|CompetitionPrize whereAmount($value)
+ * @method static Builder|CompetitionPrize whereCompetitionId($value)
+ * @method static Builder|CompetitionPrize whereCreatedAt($value)
+ * @method static Builder|CompetitionPrize whereCreatedBy($value)
+ * @method static Builder|CompetitionPrize whereDeletedBy($value)
+ * @method static Builder|CompetitionPrize whereId($value)
+ * @method static Builder|CompetitionPrize whereRank($value)
+ * @method static Builder|CompetitionPrize whereUpdatedAt($value)
+ * @method static Builder|CompetitionPrize whereUpdatedBy($value)
  * @mixin Eloquent
  */
 class CompetitionPrize extends Model
@@ -62,7 +62,7 @@ class CompetitionPrize extends Model
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -72,7 +72,7 @@ class CompetitionPrize extends Model
     protected $searchableColumns = [
         'amount',
         'competition.name',
-        'additional'
+        'additional',
     ];
 
     /**
@@ -84,9 +84,8 @@ class CompetitionPrize extends Model
         'competition_id',
         'amount',
         'additional',
-        'rank'
+        'rank',
     ];
-
 
     /**
      * @return BelongsTo

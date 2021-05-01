@@ -7,16 +7,15 @@ use Partymeister\Competitions\Models\AccessKey;
 
 /**
  * Class AccessKeyService
+ *
  * @package Partymeister\Competitions\Services
  */
 class AccessKeyService extends BaseService
 {
-
     /**
      * @var string
      */
     protected $model = AccessKey::class;
-
 
     /**
      * @param $request
@@ -27,10 +26,10 @@ class AccessKeyService extends BaseService
         $quantity = (int) $request->get('quantity');
 
         // Chars to use
-        $chars       = config('partymeister-competitions-access-key.chars');
-        $length      = config('partymeister-competitions-access-key.length');
+        $chars = config('partymeister-competitions-access-key.chars');
+        $length = config('partymeister-competitions-access-key.length');
         $divideEvery = config('partymeister-competitions-access-key.divide_every');
-        $divider     = config('partymeister-competitions-access-key.divider');
+        $divider = config('partymeister-competitions-access-key.divider');
 
         // Initialize the array to check for unique keys
         $keys = [];
@@ -56,7 +55,7 @@ class AccessKeyService extends BaseService
             if (! in_array($key, $keys)) {
 
                 // Save Access key in Database
-                $accessKey             = new AccessKey();
+                $accessKey = new AccessKey();
                 $accessKey->access_key = $key;
                 $accessKey->save();
 

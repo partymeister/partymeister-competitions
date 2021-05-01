@@ -14,33 +14,31 @@ use Motor\CMS\Models\PageVersionComponent;
 /**
  * Partymeister\Competitions\Models\Component\ComponentVoting
  *
- * @property int                                                                  $id
- * @property int|null                                                             $live_voting_page_id
- * @property Carbon|null                                      $created_at
- * @property Carbon|null                                      $updated_at
+ * @property int $id
+ * @property int|null $live_voting_page_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
- * @property-read Navigation|null                                                 $live_voting_page
+ * @property-read Navigation|null $live_voting_page
  * @method static Builder|ComponentVoting newModelQuery()
  * @method static Builder|ComponentVoting newQuery()
  * @method static Builder|ComponentVoting query()
- * @method static Builder|ComponentVoting whereCreatedAt( $value )
- * @method static Builder|ComponentVoting whereId( $value )
- * @method static Builder|ComponentVoting whereLiveVotingPageId( $value )
- * @method static Builder|ComponentVoting whereUpdatedAt( $value )
+ * @method static Builder|ComponentVoting whereCreatedAt($value)
+ * @method static Builder|ComponentVoting whereId($value)
+ * @method static Builder|ComponentVoting whereLiveVotingPageId($value)
+ * @method static Builder|ComponentVoting whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class ComponentVoting extends ComponentBaseModel
 {
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'live_voting_page_id'
+        'live_voting_page_id',
     ];
-
 
     /**
      * Preview function for the page editor
@@ -51,10 +49,9 @@ class ComponentVoting extends ComponentBaseModel
     {
         return [
             'name'    => trans('partymeister-competitions::component/votings.component'),
-            'preview' => 'Preview for ComponentVoting component'
+            'preview' => 'Preview for ComponentVoting component',
         ];
     }
-
 
     /**
      * @return BelongsTo

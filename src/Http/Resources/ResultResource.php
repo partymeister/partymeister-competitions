@@ -25,7 +25,7 @@ class ResultResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'tbd' => 'to be done'
+            'tbd' => 'to be done',
         ];
     }
 }

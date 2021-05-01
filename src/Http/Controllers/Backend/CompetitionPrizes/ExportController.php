@@ -2,7 +2,6 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend\CompetitionPrizes;
 
-use Illuminate\Http\Response;
 use Motor\Backend\Http\Controllers\Controller;
 use Partymeister\Competitions\Http\Requests\Backend\CompetitionPrizeRequest;
 use Partymeister\Competitions\Models\Competition;
@@ -13,11 +12,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Class ExportController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend\CompetitionPrizes
  */
 class ExportController extends Controller
 {
-
     /**
      * @return StreamedResponse
      * @throws \setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException
@@ -45,7 +44,6 @@ class ExportController extends Controller
             $pdf->Close();
         }, 'empty-receipt.pdf');
     }
-
 
     /**
      * @param CompetitionPrizeRequest $request
@@ -89,7 +87,9 @@ class ExportController extends Controller
                     if ($num >= 4) {
                         continue;
                     }
-                    $pdf->renderCompetitionRankings($e, $c->prizes()->where('rank', $num)->first());
+                    $pdf->renderCompetitionRankings($e, $c->prizes()
+                                                          ->where('rank', $num)
+                                                          ->first());
                     $num++;
                 }
             }
@@ -104,7 +104,9 @@ class ExportController extends Controller
                         continue;
                     }
 
-                    $prize = $c->prizes()->where('rank', $num)->first();
+                    $prize = $c->prizes()
+                               ->where('rank', $num)
+                               ->first();
                     if ((int) $prize->amount > 0) {
                         $pdf->addPage();
                         $pdf->UseTemplate('receipt');

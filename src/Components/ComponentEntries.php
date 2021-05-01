@@ -13,11 +13,11 @@ use Partymeister\Competitions\Models\Component\ComponentEntry;
 
 /**
  * Class ComponentEntries
+ *
  * @package Partymeister\Competitions\Components
  */
 class ComponentEntries
 {
-
     /**
      * @var ComponentEntry
      */
@@ -33,20 +33,19 @@ class ComponentEntries
      */
     protected $visitor;
 
-
     /**
      * ComponentEntries constructor.
-     * @param PageVersionComponent                                       $pageVersionComponent
+     *
+     * @param PageVersionComponent $pageVersionComponent
      * @param ComponentEntry $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
         ComponentEntry $component
     ) {
-        $this->component            = $component;
+        $this->component = $component;
         $this->pageVersionComponent = $pageVersionComponent;
     }
-
 
     /**
      * @param Request $request
@@ -54,11 +53,11 @@ class ComponentEntries
      */
     public function index(Request $request)
     {
-        $this->visitor = Auth::guard('visitor')->user();
+        $this->visitor = Auth::guard('visitor')
+                             ->user();
 
         return $this->render();
     }
-
 
     /**
      * @return Factory|RedirectResponse|Redirector|View
@@ -66,10 +65,10 @@ class ComponentEntries
     public function render()
     {
         if (! is_null($this->visitor)) {
-            return view(
-                config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-                [ 'component' => $this->component, 'entries' => $this->visitor->entries ]
-            );
+            return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
+                    'component' => $this->component,
+                    'entries'   => $this->visitor->entries,
+                ]);
         } else {
             return redirect('/f/start');
         }

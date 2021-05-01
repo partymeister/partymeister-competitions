@@ -3,20 +3,21 @@
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competitions\Models\ManualVote;
 use Partymeister\Competitions\Http\Requests\Backend\ManualVoteRequest;
-use Partymeister\Competitions\Services\ManualVoteService;
-use Partymeister\Competitions\Http\Resources\ManualVoteResource;
 use Partymeister\Competitions\Http\Resources\ManualVoteCollection;
+use Partymeister\Competitions\Http\Resources\ManualVoteResource;
+use Partymeister\Competitions\Models\ManualVote;
+use Partymeister\Competitions\Services\ManualVoteService;
 
 /**
  * Class ManualVotesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class ManualVotesController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\ManualVote';
+
     protected string $modelResource = 'manual_vote';
 
     /**
@@ -69,7 +70,9 @@ class ManualVotesController extends ApiController
      */
     public function index()
     {
-        $paginator = ManualVoteService::collection()->getPaginator();
+        $paginator = ManualVoteService::collection()
+                                      ->getPaginator();
+
         return (new ManualVoteCollection($paginator))->additional(['message' => 'ManualVote collection read']);
     }
 
@@ -124,10 +127,13 @@ class ManualVotesController extends ApiController
      */
     public function store(ManualVoteRequest $request)
     {
-        $result = ManualVoteService::create($request)->getResult();
-        return (new ManualVoteResource($result))->additional(['message' => 'ManualVote created'])->response()->setStatusCode(201);
-    }
+        $result = ManualVoteService::create($request)
+                                   ->getResult();
 
+        return (new ManualVoteResource($result))->additional(['message' => 'ManualVote created'])
+                                                ->response()
+                                                ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +190,11 @@ class ManualVotesController extends ApiController
      */
     public function show(ManualVote $record)
     {
-        $result = ManualVoteService::show($record)->getResult();
+        $result = ManualVoteService::show($record)
+                                   ->getResult();
+
         return (new ManualVoteResource($result))->additional(['message' => 'ManualVote read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +250,16 @@ class ManualVotesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param ManualVoteRequest $request
-     * @param ManualVote        $record
+     * @param ManualVote $record
      * @return ManualVoteResource
      */
     public function update(ManualVoteRequest $request, ManualVote $record)
     {
-        $result = ManualVoteService::update($record, $request)->getResult();
+        $result = ManualVoteService::update($record, $request)
+                                   ->getResult();
+
         return (new ManualVoteResource($result))->additional(['message' => 'ManualVote updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +322,13 @@ class ManualVotesController extends ApiController
      */
     public function destroy(ManualVote $record)
     {
-        $result = ManualVoteService::delete($record)->getResult();
+        $result = ManualVoteService::delete($record)
+                                   ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'ManualVote deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting ManualVote'], 404);
     }
 }

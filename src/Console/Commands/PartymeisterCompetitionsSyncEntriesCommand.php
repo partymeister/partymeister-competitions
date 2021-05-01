@@ -8,11 +8,11 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class PartymeisterCompetitionsSyncEntriesCommand
+ *
  * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsSyncEntriesCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -27,7 +27,6 @@ class PartymeisterCompetitionsSyncEntriesCommand extends Command
      */
     protected $description = 'Sync all entries';
 
-
     /**
      * Execute the console command.
      *
@@ -36,7 +35,8 @@ class PartymeisterCompetitionsSyncEntriesCommand extends Command
     public function handle()
     {
         foreach (Competition::all() as $competition) {
-            foreach ($competition->entries()->get() as $entry) {
+            foreach ($competition->entries()
+                                 ->get() as $entry) {
                 event(new EntrySaved($entry));
             }
         }

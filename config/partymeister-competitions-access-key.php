@@ -24,7 +24,7 @@ return [
         "W",
         "X",
         "Y",
-        "Z"
+        "Z",
     ],
     'length'       => 8,
     'divider'      => '-',

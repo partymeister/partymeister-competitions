@@ -6,11 +6,11 @@ use Partymeister\Competitions\Events\CompetitionSaved;
 
 /**
  * Class SyncCompetition
+ *
  * @package Partymeister\Competitions\Listeners
  */
 class SyncCompetition
 {
-
     /**
      * Create the event listener.
      *
@@ -20,7 +20,6 @@ class SyncCompetition
     {
         //
     }
-
 
     /**
      * Handle the event.

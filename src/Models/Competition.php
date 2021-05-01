@@ -147,7 +147,9 @@ class Competition extends Model implements HasMedia
      */
     public function qualified_entries()
     {
-        return $this->hasMany(Entry::class)->where('status', 1)->orderBy('sort_position', 'ASC');
+        return $this->hasMany(Entry::class)
+                    ->where('status', 1)
+                    ->orderBy('sort_position', 'ASC');
     }
 
     /**

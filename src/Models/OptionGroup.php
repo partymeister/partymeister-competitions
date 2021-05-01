@@ -21,33 +21,33 @@ use Motor\Core\Traits\Searchable;
 /**
  * Partymeister\Competitions\Models\OptionGroup
  *
- * @property int                                                                                           $id
- * @property string                                                                                        $name
- * @property string                                                                                        $type
- * @property int                                                                                           $created_by
- * @property int                             $updated_by
- * @property int|null                        $deleted_by
+ * @property int $id
+ * @property string $name
+ * @property string $type
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Competition[]   $competitions
- * @property-read User                       $creator
- * @property-read User|null                  $eraser
- * @property-read Collection|Option[]        $options
- * @property-read User                       $updater
- * @method static Builder|OptionGroup filteredBy( Filter $filter, $column )
- * @method static Builder|OptionGroup filteredByMultiple( Filter $filter )
+ * @property-read Collection|Competition[] $competitions
+ * @property-read User $creator
+ * @property-read User|null $eraser
+ * @property-read Collection|Option[] $options
+ * @property-read User $updater
+ * @method static Builder|OptionGroup filteredBy(Filter $filter, $column)
+ * @method static Builder|OptionGroup filteredByMultiple(Filter $filter)
  * @method static Builder|OptionGroup newModelQuery()
  * @method static Builder|OptionGroup newQuery()
  * @method static Builder|OptionGroup query()
- * @method static Builder|OptionGroup search( $q, $full_text = false )
- * @method static Builder|OptionGroup whereCreatedAt( $value )
- * @method static Builder|OptionGroup whereCreatedBy( $value )
- * @method static Builder|OptionGroup whereDeletedBy( $value )
- * @method static Builder|OptionGroup whereId( $value )
- * @method static Builder|OptionGroup whereName( $value )
- * @method static Builder|OptionGroup whereType( $value )
- * @method static Builder|OptionGroup whereUpdatedAt( $value )
- * @method static Builder|OptionGroup whereUpdatedBy( $value )
+ * @method static Builder|OptionGroup search($q, $full_text = false)
+ * @method static Builder|OptionGroup whereCreatedAt($value)
+ * @method static Builder|OptionGroup whereCreatedBy($value)
+ * @method static Builder|OptionGroup whereDeletedBy($value)
+ * @method static Builder|OptionGroup whereId($value)
+ * @method static Builder|OptionGroup whereName($value)
+ * @method static Builder|OptionGroup whereType($value)
+ * @method static Builder|OptionGroup whereUpdatedAt($value)
+ * @method static Builder|OptionGroup whereUpdatedBy($value)
  * @mixin Eloquent
  */
 class OptionGroup extends Model
@@ -61,7 +61,7 @@ class OptionGroup extends Model
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -82,7 +82,6 @@ class OptionGroup extends Model
         'type',
     ];
 
-
     /**
      * @return HasMany
      */
@@ -90,7 +89,6 @@ class OptionGroup extends Model
     {
         return $this->hasMany(Option::class);
     }
-
 
     /**
      * @return BelongsToMany

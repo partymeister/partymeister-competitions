@@ -10,11 +10,11 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class ComponentReleases
+ *
  * @package Partymeister\Competitions\Components
  */
 class ComponentReleases
 {
-
     /**
      * @var PageVersionComponent
      */
@@ -25,16 +25,15 @@ class ComponentReleases
      */
     protected $competition;
 
-
     /**
      * ComponentReleases constructor.
+     *
      * @param PageVersionComponent $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
         $this->pageVersionComponent = $pageVersionComponent;
     }
-
 
     /**
      * @param Request $request
@@ -48,7 +47,9 @@ class ComponentReleases
                                             ->orderBy('updated_at', 'ASC')
                                             ->first();
         } else {
-            $this->competition = Competition::where('voting_enabled', true)->orderBy('updated_at', 'ASC')->first();
+            $this->competition = Competition::where('voting_enabled', true)
+                                            ->orderBy('updated_at', 'ASC')
+                                            ->first();
         }
 
         if (! is_null($this->competition)) {
@@ -58,15 +59,11 @@ class ComponentReleases
         return $this->render();
     }
 
-
     /**
      * @return Factory|View
      */
     public function render()
     {
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'competition' => $this->competition ]
-        );
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), ['competition' => $this->competition]);
     }
 }

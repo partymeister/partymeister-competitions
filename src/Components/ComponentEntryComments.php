@@ -18,6 +18,7 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class ComponentEntryComments
+ *
  * @package Partymeister\Competitions\Components
  */
 class ComponentEntryComments
@@ -54,16 +55,15 @@ class ComponentEntryComments
      */
     protected $visitor;
 
-
     /**
      * ComponentEntryComments constructor.
+     *
      * @param PageVersionComponent $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
         $this->pageVersionComponent = $pageVersionComponent;
     }
-
 
     /**
      * @param Request $request
@@ -72,7 +72,8 @@ class ComponentEntryComments
      */
     public function index(Request $request)
     {
-        $this->visitor = Auth::guard('visitor')->user();
+        $this->visitor = Auth::guard('visitor')
+                             ->user();
 
         if (is_null($this->visitor)) {
             return redirect()->back();
@@ -93,9 +94,9 @@ class ComponentEntryComments
         $this->entryCommentForm = $this->form(EntryCommentForm::class, [
             'name'    => 'entry-comment',
             'method'  => 'POST',
-            'url'     => $this->request->url() . '?entry_id=' . $this->record->id,
+            'url'     => $this->request->url().'?entry_id='.$this->record->id,
             'enctype' => 'multipart/form-data',
-            'model'   => $this->record
+            'model'   => $this->record,
         ]);
 
         $this->comments = $this->record->comments;
@@ -112,59 +113,60 @@ class ComponentEntryComments
         return $this->render();
     }
 
-
     /**
      * @return RedirectResponse|Redirector
      * @throws GuzzleException
      */
     protected function post()
     {
-        if ($this->request->input($this->entryCommentForm->getName() . '.mark_as_read') == 1) {
-            foreach ($this->record->comments()->get() as $comment) {
+        if ($this->request->input($this->entryCommentForm->getName().'.mark_as_read') == 1) {
+            foreach ($this->record->comments()
+                                  ->get() as $comment) {
                 $comment->read_by_visitor = true;
                 $comment->save();
             }
 
-            return redirect($this->request->url() . '?entry_id=' . $this->record->id);
+            return redirect($this->request->url().'?entry_id='.$this->record->id);
         } else {
-            $this->entryCommentForm->getField('message')->setOption('rules', [ 'required' ]);
+            $this->entryCommentForm->getField('message')
+                                   ->setOption('rules', ['required']);
         }
 
         if (! $this->entryCommentForm->isValid()) {
-            return redirect()->back()->withErrors($this->entryCommentForm->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($this->entryCommentForm->getErrors())
+                ->withInput();
         }
 
-        foreach ($this->record->comments()->get() as $comment) {
+        foreach ($this->record->comments()
+                              ->get() as $comment) {
             $comment->read_by_visitor = true;
             $comment->save();
         }
 
-        $c                  = new Comment();
-        $c->visitor_id      = $this->visitor->id;
+        $c = new Comment();
+        $c->visitor_id = $this->visitor->id;
         $c->read_by_visitor = true;
-        $c->model_type      = get_class($this->record);
-        $c->model_id        = $this->record->id;
-        $c->message         = $this->request->input($this->entryCommentForm->getName() . '.message');
+        $c->model_type = get_class($this->record);
+        $c->model_id = $this->record->id;
+        $c->message = $this->request->input($this->entryCommentForm->getName().'.message');
         $c->save();
 
-        StuhlService::send($this->visitor->name . ' just wrote a comment for the entry ' . $this->record->name . ' in the ' . $this->record->competition->name . ' competition!');
+        StuhlService::send($this->visitor->name.' just wrote a comment for the entry '.$this->record->name.' in the '.$this->record->competition->name.' competition!');
 
-        return redirect($this->request->url() . '?entry_id=' . $this->record->id);
+        return redirect($this->request->url().'?entry_id='.$this->record->id);
     }
-
 
     /**
      * @return Factory|View
      */
     public function render()
     {
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
                 'comments'         => $this->comments,
                 'entryCommentForm' => $this->entryCommentForm,
-                'record'           => $this->record
-            ]
-        );
+                'record'           => $this->record,
+            ]);
     }
 }

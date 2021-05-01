@@ -51,7 +51,7 @@ class SyncCompetition implements ShouldQueue
             return;
         }
 
-        $data = (new CompetitionResource($this->competition->load('qualified_entries')))->toArrayRecursive();;
+        $data = (new CompetitionResource($this->competition->load('qualified_entries')))->toArrayRecursive();
 
         $client = new Client([
             'verify' => false,

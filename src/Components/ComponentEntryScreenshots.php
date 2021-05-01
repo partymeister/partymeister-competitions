@@ -19,6 +19,7 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class ComponentEntryScreenshots
+ *
  * @package Partymeister\Competitions\Components
  */
 class ComponentEntryScreenshots
@@ -50,10 +51,10 @@ class ComponentEntryScreenshots
      */
     protected $request;
 
-
     /**
      * ComponentEntryScreenshots constructor.
-     * @param PageVersionComponent                                                 $pageVersionComponent
+     *
+     * @param PageVersionComponent $pageVersionComponent
      * @param ComponentEntryScreenshot $component
      */
     public function __construct(
@@ -61,9 +62,8 @@ class ComponentEntryScreenshots
         ComponentEntryScreenshot $component
     ) {
         $this->pageVersionComponent = $pageVersionComponent;
-        $this->component            = $component;
+        $this->component = $component;
     }
-
 
     /**
      * @param Request $request
@@ -72,7 +72,8 @@ class ComponentEntryScreenshots
      */
     public function index(Request $request)
     {
-        $visitor = Auth::guard('visitor')->user();
+        $visitor = Auth::guard('visitor')
+                       ->user();
 
         if (is_null($visitor)) {
             return redirect()->back();
@@ -95,10 +96,10 @@ class ComponentEntryScreenshots
 
         $this->entryScreenshotForm = $this->form(EntryScreenshotForm::class, [
             'name'    => 'entry-screenshot',
-            'url'     => $this->request->url() . '?entry_id=' . $this->record->id,
+            'url'     => $this->request->url().'?entry_id='.$this->record->id,
             'method'  => 'PATCH',
             'enctype' => 'multipart/form-data',
-            'model'   => $this->record
+            'model'   => $this->record,
         ]);
 
         switch ($request->method()) {
@@ -113,7 +114,6 @@ class ComponentEntryScreenshots
         return $this->render();
     }
 
-
     /**
      * @return RedirectResponse|Redirector
      * @throws GuzzleException
@@ -122,29 +122,29 @@ class ComponentEntryScreenshots
     {
         // It will automatically use current request, get the rules, and do the validation
         if (! $this->entryScreenshotForm->isValid()) {
-            return redirect()->back()->withErrors($this->entryScreenshotForm->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($this->entryScreenshotForm->getErrors())
+                ->withInput();
         }
 
-        $record = EntryService::updateWithForm($this->record, $this->request, $this->entryScreenshotForm)->getResult();
+        $record = EntryService::updateWithForm($this->record, $this->request, $this->entryScreenshotForm)
+                              ->getResult();
 
-        StuhlService::send($record->visitor->name . ' just updated the screenshot for the entry ' . $record->title . ' in the ' . $record->competition->name . ' competition!');
+        StuhlService::send($record->visitor->name.' just updated the screenshot for the entry '.$record->title.' in the '.$record->competition->name.' competition!');
 
-        return redirect(route('frontend.pages.index', [ 'slug' => $this->component->entries_page->full_slug ]));
+        return redirect(route('frontend.pages.index', ['slug' => $this->component->entries_page->full_slug]));
     }
-
 
     /**
      * @return Factory|View
      */
     public function render()
     {
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
                 'entryScreenshotForm' => $this->entryScreenshotForm,
                 'record'              => $this->record,
-                'component'           => $this->component
-            ]
-        );
+                'component'           => $this->component,
+            ]);
     }
 }

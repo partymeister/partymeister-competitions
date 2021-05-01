@@ -9,11 +9,11 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class EntryScreenshotForm
+ *
  * @package Partymeister\Competitions\Forms\Component
  */
 class EntryScreenshotForm extends Form
 {
-
     /**
      * @return mixed|void
      */
@@ -32,19 +32,19 @@ class EntryScreenshotForm extends Form
 
         $this->add('competition_id', 'static', [
             'label'       => trans('partymeister-competitions::backend/competitions.competition'),
-            'empty_value' => trans('motor-backend::backend/global.please_choose')
+            'empty_value' => trans('motor-backend::backend/global.please_choose'),
         ]);
 
         $this->add('submit', 'submit', [
-            'attr'  => [ 'class' => 'button success expanded' ],
-            'label' => trans('partymeister-competitions::backend/entries.save')
+            'attr'  => ['class' => 'button success expanded'],
+            'label' => trans('partymeister-competitions::backend/entries.save'),
         ]);
 
         if (isset($data['competition'])) {
             if ($data['competition']->competition_type->has_screenshot) {
                 $this->add('screenshot', 'file_image', [
                     'label' => trans('partymeister-competitions::backend/entries.screenshot'),
-                    'model' => Entry::class
+                    'model' => Entry::class,
                 ]);
             }
         }

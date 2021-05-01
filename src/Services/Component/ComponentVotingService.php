@@ -7,11 +7,11 @@ use Partymeister\Competitions\Models\Component\ComponentVoting;
 
 /**
  * Class ComponentVotingService
+ *
  * @package Partymeister\Competitions\Services\Component
  */
 class ComponentVotingService extends ComponentBaseService
 {
-
     /**
      * @var string
      */

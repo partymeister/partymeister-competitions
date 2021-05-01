@@ -3,20 +3,21 @@
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competitions\Models\CompetitionPrize;
 use Partymeister\Competitions\Http\Requests\Backend\CompetitionPrizeRequest;
-use Partymeister\Competitions\Services\CompetitionPrizeService;
-use Partymeister\Competitions\Http\Resources\CompetitionPrizeResource;
 use Partymeister\Competitions\Http\Resources\CompetitionPrizeCollection;
+use Partymeister\Competitions\Http\Resources\CompetitionPrizeResource;
+use Partymeister\Competitions\Models\CompetitionPrize;
+use Partymeister\Competitions\Services\CompetitionPrizeService;
 
 /**
  * Class CompetitionPrizesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class CompetitionPrizesController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\CompetitionPrize';
+
     protected string $modelResource = 'competition_prize';
 
     /**
@@ -69,7 +70,9 @@ class CompetitionPrizesController extends ApiController
      */
     public function index()
     {
-        $paginator = CompetitionPrizeService::collection()->getPaginator();
+        $paginator = CompetitionPrizeService::collection()
+                                            ->getPaginator();
+
         return (new CompetitionPrizeCollection($paginator))->additional(['message' => 'CompetitionPrize collection read']);
     }
 
@@ -124,10 +127,13 @@ class CompetitionPrizesController extends ApiController
      */
     public function store(CompetitionPrizeRequest $request)
     {
-        $result = CompetitionPrizeService::create($request)->getResult();
-        return (new CompetitionPrizeResource($result))->additional(['message' => 'CompetitionPrize created'])->response()->setStatusCode(201);
-    }
+        $result = CompetitionPrizeService::create($request)
+                                         ->getResult();
 
+        return (new CompetitionPrizeResource($result))->additional(['message' => 'CompetitionPrize created'])
+                                                      ->response()
+                                                      ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +190,11 @@ class CompetitionPrizesController extends ApiController
      */
     public function show(CompetitionPrize $record)
     {
-        $result = CompetitionPrizeService::show($record)->getResult();
+        $result = CompetitionPrizeService::show($record)
+                                         ->getResult();
+
         return (new CompetitionPrizeResource($result))->additional(['message' => 'CompetitionPrize read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +250,16 @@ class CompetitionPrizesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param CompetitionPrizeRequest $request
-     * @param CompetitionPrize        $record
+     * @param CompetitionPrize $record
      * @return CompetitionPrizeResource
      */
     public function update(CompetitionPrizeRequest $request, CompetitionPrize $record)
     {
-        $result = CompetitionPrizeService::update($record, $request)->getResult();
+        $result = CompetitionPrizeService::update($record, $request)
+                                         ->getResult();
+
         return (new CompetitionPrizeResource($result))->additional(['message' => 'CompetitionPrize updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +322,13 @@ class CompetitionPrizesController extends ApiController
      */
     public function destroy(CompetitionPrize $record)
     {
-        $result = CompetitionPrizeService::delete($record)->getResult();
+        $result = CompetitionPrizeService::delete($record)
+                                         ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'CompetitionPrize deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting CompetitionPrize'], 404);
     }
 }

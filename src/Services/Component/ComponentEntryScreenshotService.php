@@ -7,11 +7,11 @@ use Partymeister\Competitions\Models\Component\ComponentEntryScreenshot;
 
 /**
  * Class ComponentEntryScreenshotService
+ *
  * @package Partymeister\Competitions\Services\Component
  */
 class ComponentEntryScreenshotService extends ComponentBaseService
 {
-
     /**
      * @var string
      */

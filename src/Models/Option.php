@@ -19,34 +19,34 @@ use Motor\Core\Traits\Searchable;
 /**
  * Partymeister\Competitions\Models\Option
  *
- * @property int                                                $id
- * @property int                                                $option_group_id
- * @property int                                                $sort_position
- * @property string                          $name
- * @property int                             $created_by
- * @property int                             $updated_by
- * @property int|null                        $deleted_by
+ * @property int $id
+ * @property int $option_group_id
+ * @property int $sort_position
+ * @property string $name
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read User                       $creator
- * @property-read User|null                  $eraser
- * @property-read OptionGroup                $group
- * @property-read User                       $updater
- * @method static Builder|Option filteredBy( Filter $filter, $column )
- * @method static Builder|Option filteredByMultiple( Filter $filter )
+ * @property-read User $creator
+ * @property-read User|null $eraser
+ * @property-read OptionGroup $group
+ * @property-read User $updater
+ * @method static Builder|Option filteredBy(Filter $filter, $column)
+ * @method static Builder|Option filteredByMultiple(Filter $filter)
  * @method static Builder|Option newModelQuery()
  * @method static Builder|Option newQuery()
  * @method static Builder|Option query()
- * @method static Builder|Option search( $q, $full_text = false )
- * @method static Builder|Option whereCreatedAt( $value )
- * @method static Builder|Option whereCreatedBy( $value )
- * @method static Builder|Option whereDeletedBy( $value )
- * @method static Builder|Option whereId( $value )
- * @method static Builder|Option whereName( $value )
- * @method static Builder|Option whereOptionGroupId( $value )
- * @method static Builder|Option whereSortPosition( $value )
- * @method static Builder|Option whereUpdatedAt( $value )
- * @method static Builder|Option whereUpdatedBy( $value )
+ * @method static Builder|Option search($q, $full_text = false)
+ * @method static Builder|Option whereCreatedAt($value)
+ * @method static Builder|Option whereCreatedBy($value)
+ * @method static Builder|Option whereDeletedBy($value)
+ * @method static Builder|Option whereId($value)
+ * @method static Builder|Option whereName($value)
+ * @method static Builder|Option whereOptionGroupId($value)
+ * @method static Builder|Option whereSortPosition($value)
+ * @method static Builder|Option whereUpdatedAt($value)
+ * @method static Builder|Option whereUpdatedBy($value)
  * @mixin Eloquent
  */
 class Option extends Model
@@ -60,7 +60,7 @@ class Option extends Model
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -79,7 +79,6 @@ class Option extends Model
         'name',
         'sort_position',
     ];
-
 
     /**
      * @return BelongsTo

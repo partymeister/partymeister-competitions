@@ -56,9 +56,9 @@ class CompetitionPrizeRequest extends Request
     public function rules()
     {
         return [
-            'amount'         => 'array',
-            'additional'     => 'array',
-            'rank'           => 'array',
+            'amount'     => 'array',
+            'additional' => 'array',
+            'rank'       => 'array',
         ];
     }
 }

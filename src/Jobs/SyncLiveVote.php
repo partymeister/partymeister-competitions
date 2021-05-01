@@ -15,6 +15,7 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class SyncLiveVote
+ *
  * @package Partymeister\Competitions\Jobs
  */
 class SyncLiveVote implements ShouldQueue
@@ -26,18 +27,17 @@ class SyncLiveVote implements ShouldQueue
      */
     public $liveVote;
 
-
     /**
      * Create a new job instance.
      *
      * SyncLiveVote constructor.
+     *
      * @param LiveVote $liveVote
      */
     public function __construct(LiveVote $liveVote)
     {
         $this->liveVote = $liveVote;
     }
-
 
     /**
      * Execute the job.
@@ -46,7 +46,7 @@ class SyncLiveVote implements ShouldQueue
      */
     public function handle()
     {
-        if (!config('partymeister-competitions-sync.active')) {
+        if (! config('partymeister-competitions-sync.active')) {
             return;
         }
 
@@ -54,21 +54,17 @@ class SyncLiveVote implements ShouldQueue
             'data' => [
                 'entry_id'       => $this->liveVote->entry_id,
                 'competition_id' => $this->liveVote->competition_id,
-                'sort_position'  => $this->liveVote->sort_position
-            ]
+                'sort_position'  => $this->liveVote->sort_position,
+            ],
         ];
-        Log::channel('debug')->info(serialize($data));
+        Log::channel('debug')
+           ->info(serialize($data));
 
         $client = new Client([
-            'verify' => false
+            'verify' => false,
         ]);
 
-        $request = new Request(
-            'POST',
-            config('partymeister-competitions-sync.server') . config('partymeister-competitions-sync.api.livevote'),
-            [ 'content-type' => 'application/json' ],
-            json_encode($data)
-        );
+        $request = new Request('POST', config('partymeister-competitions-sync.server').config('partymeister-competitions-sync.api.livevote'), ['content-type' => 'application/json'], json_encode($data));
 
         try {
             $client->send($request);

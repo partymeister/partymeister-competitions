@@ -59,7 +59,7 @@ class AccessKeyRequest extends Request
             'visitor_id'    => 'nullable|integer',
             'access_key'    => 'required',
             'ip_address'    => 'nullable',
-            'registered_at' => 'nullable|datetime',
+            'registered_at' => 'nullable|date_format:Y-m-d H:i:s',
         ];
     }
 }

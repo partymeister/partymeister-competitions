@@ -8,11 +8,11 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class PartymeisterCompetitionsSyncLiveVotingCommand
+ *
  * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsSyncLiveVotingCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -26,7 +26,6 @@ class PartymeisterCompetitionsSyncLiveVotingCommand extends Command
      * @var string
      */
     protected $description = 'Sync all entries';
-
 
     /**
      * Execute the console command.

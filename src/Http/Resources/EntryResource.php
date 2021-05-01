@@ -244,7 +244,7 @@ class EntryResource extends BaseResource
             'visitor'                                     => new VisitorResource($this->visitor),
             'ip_address'                                  => $this->ip_address,
             'sort_position'                               => (int) $this->sort_position,
-            'sort_position_prefixed'                      => (strlen($this->sort_position) == 1 ? '0' . $this->sort_position : $this->sort_position),
+            'sort_position_prefixed'                      => (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
             'title'                                       => $this->title,
             'author'                                      => $this->author,
             'filesize'                                    => (int) $this->filesize,

@@ -10,26 +10,25 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class ComponentCompetitionLists
+ *
  * @package Partymeister\Competitions\Components
  */
 class ComponentCompetitionLists
 {
-
     /**
      * @var PageVersionComponent
      */
     protected $pageVersionComponent;
 
-
     /**
      * ComponentCompetitionLists constructor.
+     *
      * @param PageVersionComponent $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
         $this->pageVersionComponent = $pageVersionComponent;
     }
-
 
     /**
      * @param Request $request
@@ -40,17 +39,15 @@ class ComponentCompetitionLists
         return $this->render();
     }
 
-
     /**
      * @return Factory|View
      */
     public function render()
     {
-        $competitions = Competition::where('voting_enabled', true)->orderBy('updated_at', 'ASC')->get();
+        $competitions = Competition::where('voting_enabled', true)
+                                   ->orderBy('updated_at', 'ASC')
+                                   ->get();
 
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            [ 'competitions' => $competitions ]
-        );
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), ['competitions' => $competitions]);
     }
 }

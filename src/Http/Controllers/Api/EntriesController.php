@@ -3,20 +3,21 @@
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Http\Requests\Backend\EntryRequest;
-use Partymeister\Competitions\Services\EntryService;
-use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Http\Resources\EntryCollection;
+use Partymeister\Competitions\Http\Resources\EntryResource;
+use Partymeister\Competitions\Models\Entry;
+use Partymeister\Competitions\Services\EntryService;
 
 /**
  * Class EntriesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class EntriesController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\Entry';
+
     protected string $modelResource = 'entry';
 
     /**
@@ -69,7 +70,9 @@ class EntriesController extends ApiController
      */
     public function index()
     {
-        $paginator = EntryService::collection()->getPaginator();
+        $paginator = EntryService::collection()
+                                 ->getPaginator();
+
         return (new EntryCollection($paginator))->additional(['message' => 'Entry collection read']);
     }
 
@@ -124,10 +127,13 @@ class EntriesController extends ApiController
      */
     public function store(EntryRequest $request)
     {
-        $result = EntryService::create($request)->getResult();
-        return (new EntryResource($result))->additional(['message' => 'Entry created'])->response()->setStatusCode(201);
-    }
+        $result = EntryService::create($request)
+                              ->getResult();
 
+        return (new EntryResource($result))->additional(['message' => 'Entry created'])
+                                           ->response()
+                                           ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +190,11 @@ class EntriesController extends ApiController
      */
     public function show(Entry $record)
     {
-        $result = EntryService::show($record)->getResult();
-        return (new EntryResource($result))->additional(['message' => 'Entry read']);
-    }
+        $result = EntryService::show($record)
+                              ->getResult();
 
+        return (new EntryResource($result->load('competition')))->additional(['message' => 'Entry read']);
+    }
 
     /**
      * @OA\Put (
@@ -243,15 +250,16 @@ class EntriesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param EntryRequest $request
-     * @param Entry        $record
+     * @param Entry $record
      * @return EntryResource
      */
     public function update(EntryRequest $request, Entry $record)
     {
-        $result = EntryService::update($record, $request)->getResult();
+        $result = EntryService::update($record, $request)
+                              ->getResult();
+
         return (new EntryResource($result))->additional(['message' => 'Entry updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +322,13 @@ class EntriesController extends ApiController
      */
     public function destroy(Entry $record)
     {
-        $result = EntryService::delete($record)->getResult();
+        $result = EntryService::delete($record)
+                              ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Entry deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting Entry'], 404);
     }
 }

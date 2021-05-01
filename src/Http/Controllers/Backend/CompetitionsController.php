@@ -2,7 +2,6 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Http\Controllers\Controller;
@@ -14,12 +13,12 @@ use Partymeister\Competitions\Services\CompetitionService;
 
 /**
  * Class CompetitionsController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class CompetitionsController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -38,7 +37,6 @@ class CompetitionsController extends Controller
         return view('partymeister-competitions::backend.competitions.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,14 +47,13 @@ class CompetitionsController extends Controller
         $form = $this->form(CompetitionForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.competitions.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         $motorShowRightSidebar = true;
 
         return view('partymeister-competitions::backend.competitions.create', compact('form', 'motorShowRightSidebar'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -70,7 +67,10 @@ class CompetitionsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         CompetitionService::createWithForm($request, $form);
@@ -79,7 +79,6 @@ class CompetitionsController extends Controller
 
         return redirect('backend/competitions');
     }
-
 
     /**
      * Display the specified resource.
@@ -91,7 +90,6 @@ class CompetitionsController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -102,9 +100,9 @@ class CompetitionsController extends Controller
     {
         $form = $this->form(CompetitionForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.competitions.update', [ $record->id ]),
+            'url'     => route('backend.competitions.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         $motorShowRightSidebar = true;
@@ -112,12 +110,11 @@ class CompetitionsController extends Controller
         return view('partymeister-competitions::backend.competitions.edit', compact('form', 'motorShowRightSidebar'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param CompetitionRequest $request
-     * @param Competition        $record
+     * @param Competition $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CompetitionRequest $request, Competition $record)
@@ -126,7 +123,10 @@ class CompetitionsController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         CompetitionService::updateWithForm($record, $request, $form);
@@ -135,7 +135,6 @@ class CompetitionsController extends Controller
 
         return redirect('backend/competitions');
     }
-
 
     /**
      * Remove the specified resource from storage.

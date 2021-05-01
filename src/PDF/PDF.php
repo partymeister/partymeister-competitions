@@ -11,11 +11,11 @@ use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class PDF
+ *
  * @package Partymeister\Competitions\PDF
  */
 class PDF extends Fpdi
 {
-
     /**
      * @var array
      */
@@ -36,7 +36,6 @@ class PDF extends Fpdi
      */
     protected $FontStyles = [];
 
-
     /**
      * @param        $family
      * @param string $style
@@ -47,9 +46,9 @@ class PDF extends Fpdi
     public function AddFont($family, $style = '', $fontfile = '', $subset = 'default')
     {
         if ($fontfile !== '') {
-            $file = base_path() . '/vendor/tcpdf/fonts/' . $fontfile . '.php';
+            $file = base_path().'/vendor/tcpdf/fonts/'.$fontfile.'.php';
             if (! is_file($file)) {
-                $file = public_path() . '/pdf/fonts/' . $fontfile . '.php';
+                $file = public_path().'/pdf/fonts/'.$fontfile.'.php';
             }
             if ($file) {
                 $fontfile = $file;
@@ -81,13 +80,12 @@ class PDF extends Fpdi
         $this->FontSpacing = $spacing;
     }
 
-
     /**
      * @param       $name
      * @param       $family
      * @param       $style
      * @param       $size
-     * @param int   $spacing
+     * @param int $spacing
      * @param array $color
      */
     public function AddStyle($name, $family, $style, $size, $spacing = 0, $color = [])
@@ -97,10 +95,9 @@ class PDF extends Fpdi
             'style'   => $style,
             'size'    => $size,
             'spacing' => $spacing,
-            'color'   => $color
+            'color'   => $color,
         ];
     }
-
 
     /**
      * @param $style
@@ -117,7 +114,6 @@ class PDF extends Fpdi
         $this->FontSpacing = $style['spacing'];
     }
 
-
     /**
      * @param     $alias
      * @param     $path
@@ -130,18 +126,17 @@ class PDF extends Fpdi
      */
     public function SetTemplate($alias, $path, $page = 1)
     {
-        $this->setSourceFile($path . '.pdf');
+        $this->setSourceFile($path.'.pdf');
         $this->fpdi_templates[$alias] = $this->importPage($page);
     }
 
-
     /**
      * @param mixed $alias
-     * @param int   $x
-     * @param int   $y
-     * @param null  $width
-     * @param null  $height
-     * @param bool  $adjustPageSize
+     * @param int $x
+     * @param int $y
+     * @param null $width
+     * @param null $height
+     * @param bool $adjustPageSize
      * @return array|void
      */
     public function UseTemplate($alias, $x = 0, $y = 0, $width = null, $height = null, $adjustPageSize = false)
@@ -149,21 +144,18 @@ class PDF extends Fpdi
         parent::UseTemplate($this->fpdi_templates[$alias], $x, $y, $width, $height, $adjustPageSize);
     }
 
-
     public function Header()
     {
     }
-
 
     public function Footer()
     {
     }
 
-
     /**
      * @param       $render_method
      * @param array $arguments
-     * @param bool  $page_break_method
+     * @param bool $page_break_method
      */
     public function RenderParagraph($render_method, $arguments = [], $page_break_method = false)
     {
@@ -191,18 +183,17 @@ class PDF extends Fpdi
         }
     }
 
-
     /**
      * @param        $w
-     * @param int    $h
+     * @param int $h
      * @param string $txt
-     * @param int    $border
-     * @param int    $ln
+     * @param int $border
+     * @param int $ln
      * @param string $align
-     * @param int    $fill
+     * @param int $fill
      * @param string $link
-     * @param int    $stretch
-     * @param bool   $ignore_min_height
+     * @param int $stretch
+     * @param bool $ignore_min_height
      * @param string $calign
      * @param string $valign
      * @return string
@@ -226,19 +217,6 @@ class PDF extends Fpdi
             $rs .= sprintf('BT %.2F Tc ET ', $this->FontSpacing);
         }
 
-        return $rs . parent::getCellCode(
-            $w,
-            $h,
-            $txt,
-            $border,
-            $ln,
-            $align,
-            $fill,
-            $link,
-            $stretch,
-            $ignore_min_height,
-            $calign,
-            $valign
-        );
+        return $rs.parent::getCellCode($w, $h, $txt, $border, $ln, $align, $fill, $link, $stretch, $ignore_min_height, $calign, $valign);
     }
 }

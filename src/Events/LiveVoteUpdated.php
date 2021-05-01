@@ -11,6 +11,7 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class LiveVoteUpdated
+ *
  * @package Partymeister\Competitions\Events
  */
 class LiveVoteUpdated
@@ -22,18 +23,17 @@ class LiveVoteUpdated
      */
     public $liveVote;
 
-
     /**
      * Create a new event instance.
      *
      * LiveVoteUpdated constructor.
+     *
      * @param LiveVote $liveVote
      */
     public function __construct(LiveVote $liveVote)
     {
         $this->liveVote = $liveVote;
     }
-
 
     /**
      * Get the channels the event should broadcast on.

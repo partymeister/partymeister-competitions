@@ -11,11 +11,13 @@ use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
  * Class AccessKeysController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class AccessKeysController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\AccessKey';
+
     protected string $modelResource = 'access_key';
 
     /**
@@ -68,7 +70,9 @@ class AccessKeysController extends ApiController
      */
     public function index()
     {
-        $paginator = AccessKeyService::collection()->getPaginator();
+        $paginator = AccessKeyService::collection()
+                                     ->getPaginator();
+
         return (new AccessKeyCollection($paginator))->additional(['message' => 'AccessKey collection read']);
     }
 
@@ -123,10 +127,13 @@ class AccessKeysController extends ApiController
      */
     public function store(AccessKeyRequest $request)
     {
-        $result = AccessKeyService::create($request)->getResult();
-        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey created'])->response()->setStatusCode(201);
-    }
+        $result = AccessKeyService::create($request)
+                                  ->getResult();
 
+        return (new AccessKeyResource($result))->additional(['message' => 'AccessKey created'])
+                                               ->response()
+                                               ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -183,10 +190,11 @@ class AccessKeysController extends ApiController
      */
     public function show(AccessKey $record)
     {
-        $result = AccessKeyService::show($record)->getResult();
+        $result = AccessKeyService::show($record)
+                                  ->getResult();
+
         return (new AccessKeyResource($result))->additional(['message' => 'AccessKey read']);
     }
-
 
     /**
      * @OA\Put (
@@ -242,15 +250,16 @@ class AccessKeysController extends ApiController
      * Update the specified resource in storage.
      *
      * @param AccessKeyRequest $request
-     * @param AccessKey        $record
+     * @param AccessKey $record
      * @return AccessKeyResource
      */
     public function update(AccessKeyRequest $request, AccessKey $record)
     {
-        $result = AccessKeyService::update($record, $request)->getResult();
+        $result = AccessKeyService::update($record, $request)
+                                  ->getResult();
+
         return (new AccessKeyResource($result))->additional(['message' => 'AccessKey updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -313,11 +322,13 @@ class AccessKeysController extends ApiController
      */
     public function destroy(AccessKey $record)
     {
-        $result = AccessKeyService::delete($record)->getResult();
+        $result = AccessKeyService::delete($record)
+                                  ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'AccessKey deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting AccessKey'], 404);
     }
 }

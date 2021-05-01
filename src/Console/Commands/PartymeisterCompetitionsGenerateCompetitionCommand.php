@@ -13,11 +13,11 @@ use Partymeister\Competitions\Models\VoteCategory;
 
 /**
  * Class PartymeisterCompetitionsGenerateCompetitionCommand
+ *
  * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsGenerateCompetitionCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -32,7 +32,6 @@ class PartymeisterCompetitionsGenerateCompetitionCommand extends Command
      */
     protected $description = 'Generate a competition with an optional name';
 
-
     /**
      * Execute the console command.
      *
@@ -44,19 +43,23 @@ class PartymeisterCompetitionsGenerateCompetitionCommand extends Command
 
         $faker = Factory::create($this->argument('locale'));
 
-        $competition                            = new Competition();
-        $competition->name                      = $this->argument('name') === 'faker' ? $faker->catchPhrase : $this->argument('name');
-        $competition->sort_position             = $faker->numberBetween(0, 99);
+        $competition = new Competition();
+        $competition->name = $this->argument('name') === 'faker' ? $faker->catchPhrase : $this->argument('name');
+        $competition->sort_position = $faker->numberBetween(0, 99);
         $competition->prizegiving_sort_position = $faker->numberBetween(0, 99);
-        $competition->competition_type_id       = CompetitionType::inRandomOrder()->first()->id;
-        $competition->has_prizegiving           = true;
-        $competition->upload_enabled            = true;
-        $competition->voting_enabled            = false;
+        $competition->competition_type_id = CompetitionType::inRandomOrder()
+                                                           ->first()->id;
+        $competition->has_prizegiving = true;
+        $competition->upload_enabled = true;
+        $competition->voting_enabled = false;
 
         $competition->save();
-        $competition->option_groups()->attach(OptionGroup::inRandomOrder()->first()->id);
-        $competition->vote_categories()->attach(VoteCategory::first()->id);
+        $competition->option_groups()
+                    ->attach(OptionGroup::inRandomOrder()
+                                        ->first()->id);
+        $competition->vote_categories()
+                    ->attach(VoteCategory::first()->id);
 
-        $this->info('Generated competition ' . $competition->name);
+        $this->info('Generated competition '.$competition->name);
     }
 }

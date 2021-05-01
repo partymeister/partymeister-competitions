@@ -7,6 +7,7 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class Prize
+ *
  * @package Partymeister\Competitions\PDF
  */
 class Prize extends PDF
@@ -18,7 +19,7 @@ class Prize extends PDF
         $this->AddStyle('Prizesheet Headline', 'Helvetica', 'B', 30, false, [
             64,
             64,
-            64
+            64,
         ]);
         $this->AddStyle('Prizesheet Name', 'Helvetica', 'B', 12);
         $this->AddStyle('Prizesheet Text', 'Helvetica', 'R', 12);
@@ -29,7 +30,6 @@ class Prize extends PDF
         $this->AddStyle('Receipt Text', 'Helvetica', 'R', 14);
     }
 
-
     /**
      * @param $name
      */
@@ -39,7 +39,6 @@ class Prize extends PDF
         $this->MultiCell(0, 30, $name, 0, 'C');
     }
 
-
     /**
      * @param $entry
      * @param $prize
@@ -47,12 +46,12 @@ class Prize extends PDF
     public function renderCompetitionRankings($entry, $prize)
     {
         $this->SetStyle('Prizesheet Name');
-        $text = '#' . $prize->rank . ' - ' . $entry->title . ' by ' . $entry->author;
+        $text = '#'.$prize->rank.' - '.$entry->title.' by '.$entry->author;
         $this->MultiCell(0, 5, $text, 0, 'L');
 
         $this->SetStyle('Prizesheet Text');
         if ($prize->amount > 0) {
-            $text = PDFHelper::format_currency($prize->amount) . ' ' . config('partymeister-competitions-receipt.currency') . "\n" . $prize->additional;
+            $text = PDFHelper::format_currency($prize->amount).' '.config('partymeister-competitions-receipt.currency')."\n".$prize->additional;
         } else {
             $text = $prize->additional;
         }
@@ -62,7 +61,6 @@ class Prize extends PDF
 
         $this->setY($this->getY() + 10);
     }
-
 
     /**
      * @param bool $entry
@@ -122,7 +120,7 @@ class Prize extends PDF
         // Receiver
         if ($entry && $entry_info) {
             $this->setXY(15, 68);
-            $text = $entry_info->author_name . ', ' . $entry_info->author_address . ', ' . $entry_info->author_zip . ' ' . $entry_info->author_city . ', ' . $entry_info->author_country_iso_3166_1;
+            $text = $entry_info->author_name.', '.$entry_info->author_address.', '.$entry_info->author_zip.' '.$entry_info->author_city.', '.$entry_info->author_country_iso_3166_1;
             $this->MultiCell(0, 5, $text, 0, 'L');
         }
 
@@ -134,13 +132,13 @@ class Prize extends PDF
         // For
         if ($entry && $entry_info) {
             $this->setXY(15, 111);
-            $text = $prize->rank . '. ' . config('partymeister-competitions-receipt.localization.rank') . ' ' . $entry_info->competition->name . ' Competition';
+            $text = $prize->rank.'. '.config('partymeister-competitions-receipt.localization.rank').' '.$entry_info->competition->name.' Competition';
             $this->MultiCell(0, 5, $text, 0, 'L');
         }
 
         // Place, date
         $this->setXY(15, 140);
-        $text = config('partymeister-competitions-receipt.issued_in') . ', ' . date("d.m.Y");
+        $text = config('partymeister-competitions-receipt.issued_in').', '.date("d.m.Y");
         $this->MultiCell(0, 5, $text, 0, 'L');
 
         // Amount
@@ -148,7 +146,7 @@ class Prize extends PDF
 
         if ($prize) {
             $this->setXY(0, 18);
-            $text = PDFHelper::format_currency($prize->amount, 0) . ',-';
+            $text = PDFHelper::format_currency($prize->amount, 0).',-';
             $this->MultiCell(0, 5, $text, 0, 'R');
         }
     }

@@ -17,11 +17,11 @@ use Partymeister\Competitions\Models\Vote;
 
 /**
  * Class ComponentVotings
+ *
  * @package Partymeister\Competitions\Components
  */
 class ComponentVotings
 {
-
     /**
      * @var ComponentVoting
      */
@@ -47,20 +47,19 @@ class ComponentVotings
      */
     protected $viewData = [];
 
-
     /**
      * ComponentVotings constructor.
-     * @param PageVersionComponent                                        $pageVersionComponent
+     *
+     * @param PageVersionComponent $pageVersionComponent
      * @param ComponentVoting $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
         ComponentVoting $component
     ) {
-        $this->component            = $component;
+        $this->component = $component;
         $this->pageVersionComponent = $pageVersionComponent;
     }
-
 
     /**
      * @param Request $request
@@ -68,9 +67,10 @@ class ComponentVotings
      */
     public function index(Request $request)
     {
-        $this->visitor = Auth::guard('visitor')->user();
+        $this->visitor = Auth::guard('visitor')
+                             ->user();
         if (is_null($this->visitor)) {
-            return redirect(route('frontend.pages.index', [ 'slug' => 'start' ]));
+            return redirect(route('frontend.pages.index', ['slug' => 'start']));
         }
 
         $this->request = $request;
@@ -95,7 +95,9 @@ class ComponentVotings
                                       ->orderBy('updated_at', 'ASC')
                                       ->first();
         } else {
-            $competition = Competition::where('voting_enabled', true)->orderBy('updated_at', 'ASC')->first();
+            $competition = Competition::where('voting_enabled', true)
+                                      ->orderBy('updated_at', 'ASC')
+                                      ->first();
         }
 
         $votes = [];
@@ -105,22 +107,24 @@ class ComponentVotings
                     $votes[$voteCategory->id] = [];
                 }
             }
-            foreach ($this->visitor->votes()->where('competition_id', $competition->id)->get() as $vote) {
+            foreach ($this->visitor->votes()
+                                   ->where('competition_id', $competition->id)
+                                   ->get() as $vote) {
                 $votes[$vote->vote_category_id][$vote->entry_id] = [
                     'points'       => $vote->points,
                     'comment'      => $vote->comment,
-                    'special_vote' => $vote->special_vote
+                    'special_vote' => $vote->special_vote,
                 ];
             }
         }
 
         // Check if livevoting is active
-        $liveVoting            = false;
+        $liveVoting = false;
         $liveVotingCompetition = '';
-        $live                  = LiveVote::first();
+        $live = LiveVote::first();
         if (! is_null($live)) {
             if (! $live->competition->voting_enabled) {
-                $liveVoting            = true;
+                $liveVoting = true;
                 $liveVotingCompetition = $live->competition->name;
             }
         }
@@ -139,7 +143,6 @@ class ComponentVotings
 
         return $this->render();
     }
-
 
     /**
      * @return RedirectResponse
@@ -165,15 +168,13 @@ class ComponentVotings
                     }
 
                     $vote->vote_category_id = $voteCategoryId;
-                    $vote->competition_id   = $competitionId;
-                    $vote->entry_id         = $entryId;
-                    $vote->comment          = Arr::get(
-                        $this->request->all(),
-                        'entry_comment.' . $competitionId . '.' . $entryId
-                    );
-                    $vote->points           = $points;
-                    $vote->visitor_id       = Auth::guard('visitor')->user()->id;
-                    $vote->ip_address       = $this->request->ip();
+                    $vote->competition_id = $competitionId;
+                    $vote->entry_id = $entryId;
+                    $vote->comment = Arr::get($this->request->all(), 'entry_comment.'.$competitionId.'.'.$entryId);
+                    $vote->points = $points;
+                    $vote->visitor_id = Auth::guard('visitor')
+                                            ->user()->id;
+                    $vote->ip_address = $this->request->ip();
                     $vote->save();
                 }
             }
@@ -183,12 +184,11 @@ class ComponentVotings
 
         if ($this->request->get('competition_id', false)) {
             return redirect()->back();
-        //return redirect('votes?competition_id=' . $this->request->get('competition_id'));
+            //return redirect('votes?competition_id=' . $this->request->get('competition_id'));
         } else {
             return redirect()->back();
         }
     }
-
 
     /**
      * @return Factory|View
@@ -197,9 +197,6 @@ class ComponentVotings
     {
         $this->viewData['component'] = $this->component;
 
-        return view(
-            config('motor-cms-page-components.components.' . $this->pageVersionComponent->component_name . '.view'),
-            $this->viewData
-        );
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), $this->viewData);
     }
 }

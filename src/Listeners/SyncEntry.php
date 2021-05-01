@@ -3,15 +3,14 @@
 namespace Partymeister\Competitions\Listeners;
 
 use Partymeister\Competitions\Events\EntrySaved;
-use Partymeister\Slides\Events\SlideSaved;
 
 /**
  * Class SyncEntry
+ *
  * @package Partymeister\Competitions\Listeners
  */
 class SyncEntry
 {
-
     /**
      * Create the event listener.
      *
@@ -21,7 +20,6 @@ class SyncEntry
     {
         //
     }
-
 
     /**
      * Handle the event.

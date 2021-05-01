@@ -3,20 +3,21 @@
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competitions\Models\CompetitionType;
 use Partymeister\Competitions\Http\Requests\Backend\CompetitionTypeRequest;
-use Partymeister\Competitions\Services\CompetitionTypeService;
-use Partymeister\Competitions\Http\Resources\CompetitionTypeResource;
 use Partymeister\Competitions\Http\Resources\CompetitionTypeCollection;
+use Partymeister\Competitions\Http\Resources\CompetitionTypeResource;
+use Partymeister\Competitions\Models\CompetitionType;
+use Partymeister\Competitions\Services\CompetitionTypeService;
 
 /**
  * Class CompetitionTypesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class CompetitionTypesController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\CompetitionType';
+
     protected string $modelResource = 'competition_type';
 
     /**
@@ -69,7 +70,9 @@ class CompetitionTypesController extends ApiController
      */
     public function index()
     {
-        $paginator = CompetitionTypeService::collection()->getPaginator();
+        $paginator = CompetitionTypeService::collection()
+                                           ->getPaginator();
+
         return (new CompetitionTypeCollection($paginator))->additional(['message' => 'CompetitionType collection read']);
     }
 
@@ -124,10 +127,13 @@ class CompetitionTypesController extends ApiController
      */
     public function store(CompetitionTypeRequest $request)
     {
-        $result = CompetitionTypeService::create($request)->getResult();
-        return (new CompetitionTypeResource($result))->additional(['message' => 'CompetitionType created'])->response()->setStatusCode(201);
-    }
+        $result = CompetitionTypeService::create($request)
+                                        ->getResult();
 
+        return (new CompetitionTypeResource($result))->additional(['message' => 'CompetitionType created'])
+                                                     ->response()
+                                                     ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +190,11 @@ class CompetitionTypesController extends ApiController
      */
     public function show(CompetitionType $record)
     {
-        $result = CompetitionTypeService::show($record)->getResult();
+        $result = CompetitionTypeService::show($record)
+                                        ->getResult();
+
         return (new CompetitionTypeResource($result))->additional(['message' => 'CompetitionType read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +250,16 @@ class CompetitionTypesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param CompetitionTypeRequest $request
-     * @param CompetitionType        $record
+     * @param CompetitionType $record
      * @return CompetitionTypeResource
      */
     public function update(CompetitionTypeRequest $request, CompetitionType $record)
     {
-        $result = CompetitionTypeService::update($record, $request)->getResult();
+        $result = CompetitionTypeService::update($record, $request)
+                                        ->getResult();
+
         return (new CompetitionTypeResource($result))->additional(['message' => 'CompetitionType updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +322,13 @@ class CompetitionTypesController extends ApiController
      */
     public function destroy(CompetitionType $record)
     {
-        $result = CompetitionTypeService::delete($record)->getResult();
+        $result = CompetitionTypeService::delete($record)
+                                        ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'CompetitionType deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting CompetitionType'], 404);
     }
 }

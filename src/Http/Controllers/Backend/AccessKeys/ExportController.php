@@ -9,11 +9,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Class ExportController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend\AccessKeys
  */
 class ExportController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +32,6 @@ class ExportController extends Controller
             echo $csv;
         }, 'access-keys.csv');
     }
-
 
     /**
      * @return StreamedResponse

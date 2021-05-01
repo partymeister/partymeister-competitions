@@ -54,7 +54,7 @@ class OptionGroupRequest extends Request
     {
         return [
             'name'    => 'required',
-            'type'    => 'required|in:'.implode(',', array_flip(trans('partymeister-core::backend/option_groups.types'))),
+            'type'    => 'required|in:'.implode(',', array_flip(trans('partymeister-competitions::backend/option_groups.types'))),
             'options' => 'nullable|array',
         ];
     }

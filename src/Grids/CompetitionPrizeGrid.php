@@ -6,6 +6,7 @@ use Motor\Backend\Grid\Grid;
 
 /**
  * Class CompetitionPrizeGrid
+ *
  * @package Partymeister\Competitions\Grids
  */
 class CompetitionPrizeGrid extends Grid

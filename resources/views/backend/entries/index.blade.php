@@ -173,12 +173,24 @@
         });
 
 
+        $('#entry-modal').on('hide.bs.modal', function() {
+            let audioPlayers = document.getElementsByTagName('audio');
+            for (let i = 0; i < audioPlayers.length; i++) {
+                audioPlayers[i].pause();
+            }
+
+            let videoPlayers = document.getElementsByTagName('video');
+            for (let i = 0; i < videoPlayers.length; i++) {
+                videoPlayers[i].pause();
+            }
+        });
+
         $('.show-entry-description').click(function (e) {
             e.preventDefault();
             $.ajax('{{action('\Partymeister\Competitions\Http\Controllers\Api\EntriesController@index')}}/' + $(this).data('id') + '?api_token=' + apiToken)
                 .done(function (results) {
                     Vue.prototype.$eventHub.$emit('partymeister-competitions:show-entry-modal', results.data);
-                    $('#entry-modal').modal('show')
+                    $('#entry-modal').modal('show');
                 });
         });
     </script>

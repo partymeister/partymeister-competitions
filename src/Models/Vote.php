@@ -14,35 +14,35 @@ use Motor\Core\Traits\Searchable;
 /**
  * Partymeister\Competitions\Models\Vote
  *
- * @property int                                                 $id
- * @property int                                                 $competition_id
- * @property int                                                 $vote_category_id
- * @property int                                                 $entry_id
- * @property int                             $special_vote
- * @property int                             $visitor_id
- * @property string                          $points
- * @property string                          $comment
- * @property string                          $ip_address
+ * @property int $id
+ * @property int $competition_id
+ * @property int $vote_category_id
+ * @property int $entry_id
+ * @property int $special_vote
+ * @property int $visitor_id
+ * @property string $points
+ * @property string $comment
+ * @property string $ip_address
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read VoteCategory               $vote_category
- * @method static Builder|Vote filteredBy( Filter $filter, $column )
- * @method static Builder|Vote filteredByMultiple( Filter $filter )
+ * @property-read VoteCategory $vote_category
+ * @method static Builder|Vote filteredBy(Filter $filter, $column)
+ * @method static Builder|Vote filteredByMultiple(Filter $filter)
  * @method static Builder|Vote newModelQuery()
  * @method static Builder|Vote newQuery()
  * @method static Builder|Vote query()
- * @method static Builder|Vote search( $q, $full_text = false )
- * @method static Builder|Vote whereComment( $value )
- * @method static Builder|Vote whereCompetitionId( $value )
- * @method static Builder|Vote whereCreatedAt( $value )
- * @method static Builder|Vote whereEntryId( $value )
- * @method static Builder|Vote whereId( $value )
- * @method static Builder|Vote whereIpAddress( $value )
- * @method static Builder|Vote wherePoints( $value )
- * @method static Builder|Vote whereSpecialVote( $value )
- * @method static Builder|Vote whereUpdatedAt( $value )
- * @method static Builder|Vote whereVisitorId( $value )
- * @method static Builder|Vote whereVoteCategoryId( $value )
+ * @method static Builder|Vote search($q, $full_text = false)
+ * @method static Builder|Vote whereComment($value)
+ * @method static Builder|Vote whereCompetitionId($value)
+ * @method static Builder|Vote whereCreatedAt($value)
+ * @method static Builder|Vote whereEntryId($value)
+ * @method static Builder|Vote whereId($value)
+ * @method static Builder|Vote whereIpAddress($value)
+ * @method static Builder|Vote wherePoints($value)
+ * @method static Builder|Vote whereSpecialVote($value)
+ * @method static Builder|Vote whereUpdatedAt($value)
+ * @method static Builder|Vote whereVisitorId($value)
+ * @method static Builder|Vote whereVoteCategoryId($value)
  * @mixin Eloquent
  */
 class Vote extends Model
@@ -72,7 +72,6 @@ class Vote extends Model
         'points',
         'ip_address',
     ];
-
 
     /**
      * @return BelongsTo

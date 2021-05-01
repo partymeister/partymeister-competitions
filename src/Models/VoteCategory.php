@@ -20,38 +20,38 @@ use Motor\Core\Traits\Searchable;
 /**
  * Partymeister\Competitions\Models\VoteCategory
  *
- * @property int                                                                                           $id
- * @property string                                                                                        $name
- * @property int                                                                                           $points
- * @property int                                                                                           $has_negative
- * @property int                                                                                           $has_comment
- * @property int                                                                                           $has_special_vote
- * @property int                                                                                           $created_by
- * @property int                                                         $updated_by
- * @property int|null                                                    $deleted_by
- * @property Carbon|null                             $created_at
- * @property Carbon|null                             $updated_at
+ * @property int $id
+ * @property string $name
+ * @property int $points
+ * @property int $has_negative
+ * @property int $has_comment
+ * @property int $has_special_vote
+ * @property int $created_by
+ * @property int $updated_by
+ * @property int|null $deleted_by
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read Collection|Competition[] $competitions
- * @property-read User                                                   $creator
- * @property-read User|null                                              $eraser
- * @property-read User                                                   $updater
- * @method static Builder|VoteCategory filteredBy( Filter $filter, $column )
- * @method static Builder|VoteCategory filteredByMultiple( Filter $filter )
+ * @property-read User $creator
+ * @property-read User|null $eraser
+ * @property-read User $updater
+ * @method static Builder|VoteCategory filteredBy(Filter $filter, $column)
+ * @method static Builder|VoteCategory filteredByMultiple(Filter $filter)
  * @method static Builder|VoteCategory newModelQuery()
  * @method static Builder|VoteCategory newQuery()
  * @method static Builder|VoteCategory query()
- * @method static Builder|VoteCategory search( $q, $full_text = false )
- * @method static Builder|VoteCategory whereCreatedAt( $value )
- * @method static Builder|VoteCategory whereCreatedBy( $value )
- * @method static Builder|VoteCategory whereDeletedBy( $value )
- * @method static Builder|VoteCategory whereHasComment( $value )
- * @method static Builder|VoteCategory whereHasNegative( $value )
- * @method static Builder|VoteCategory whereHasSpecialVote( $value )
- * @method static Builder|VoteCategory whereId( $value )
- * @method static Builder|VoteCategory whereName( $value )
- * @method static Builder|VoteCategory wherePoints( $value )
- * @method static Builder|VoteCategory whereUpdatedAt( $value )
- * @method static Builder|VoteCategory whereUpdatedBy( $value )
+ * @method static Builder|VoteCategory search($q, $full_text = false)
+ * @method static Builder|VoteCategory whereCreatedAt($value)
+ * @method static Builder|VoteCategory whereCreatedBy($value)
+ * @method static Builder|VoteCategory whereDeletedBy($value)
+ * @method static Builder|VoteCategory whereHasComment($value)
+ * @method static Builder|VoteCategory whereHasNegative($value)
+ * @method static Builder|VoteCategory whereHasSpecialVote($value)
+ * @method static Builder|VoteCategory whereId($value)
+ * @method static Builder|VoteCategory whereName($value)
+ * @method static Builder|VoteCategory wherePoints($value)
+ * @method static Builder|VoteCategory whereUpdatedAt($value)
+ * @method static Builder|VoteCategory whereUpdatedBy($value)
  * @mixin Eloquent
  */
 class VoteCategory extends Model
@@ -65,7 +65,7 @@ class VoteCategory extends Model
      *
      * @var array
      */
-    protected $blameable = [ 'created', 'updated', 'deleted' ];
+    protected $blameable = ['created', 'updated', 'deleted'];
 
     /**
      * Searchable columns for the searchable trait
@@ -73,7 +73,7 @@ class VoteCategory extends Model
      * @var array
      */
     protected $searchableColumns = [
-        'name'
+        'name',
     ];
 
     /**
@@ -88,7 +88,6 @@ class VoteCategory extends Model
         'has_comment',
         'has_special_vote',
     ];
-
 
     /**
      * @return BelongsToMany

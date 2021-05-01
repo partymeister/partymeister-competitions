@@ -7,11 +7,11 @@ use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class VoteForm
+ *
  * @package Partymeister\Competitions\Forms\Backend
  */
 class VoteForm extends Form
 {
-
     /**
      * @return mixed|void
      */
@@ -21,12 +21,12 @@ class VoteForm extends Form
 
         foreach ($results as $competition) {
             foreach ($competition['entries'] as $entry) {
-                $this->add('entry[' . $competition['id'] . '][' . $entry['id'] . ']', 'text', [ 'label' => false ]);
+                $this->add('entry['.$competition['id'].']['.$entry['id'].']', 'text', ['label' => false]);
             }
         }
         $this->add('submit', 'submit', [
-            'attr'  => [ 'class' => 'btn btn-primary' ],
-            'label' => trans('partymeister-competitions::backend/votes.save')
+            'attr'  => ['class' => 'btn btn-primary'],
+            'label' => trans('partymeister-competitions::backend/votes.save'),
         ]);
     }
 }

@@ -14,24 +14,23 @@ use Motor\CMS\Models\PageVersionComponent;
 /**
  * Partymeister\Competitions\Models\Component\ComponentEntryScreenshot
  *
- * @property int                                                                  $id
- * @property int|null                                                             $entries_page_id
- * @property Carbon|null                                      $created_at
- * @property Carbon|null                                      $updated_at
+ * @property int $id
+ * @property int|null $entries_page_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
- * @property-read Navigation|null                                                 $entries_page
+ * @property-read Navigation|null $entries_page
  * @method static Builder|ComponentEntryScreenshot newModelQuery()
  * @method static Builder|ComponentEntryScreenshot newQuery()
  * @method static Builder|ComponentEntryScreenshot query()
- * @method static Builder|ComponentEntryScreenshot whereCreatedAt( $value )
- * @method static Builder|ComponentEntryScreenshot whereEntriesPageId( $value )
- * @method static Builder|ComponentEntryScreenshot whereId( $value )
- * @method static Builder|ComponentEntryScreenshot whereUpdatedAt( $value )
+ * @method static Builder|ComponentEntryScreenshot whereCreatedAt($value)
+ * @method static Builder|ComponentEntryScreenshot whereEntriesPageId($value)
+ * @method static Builder|ComponentEntryScreenshot whereId($value)
+ * @method static Builder|ComponentEntryScreenshot whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class ComponentEntryScreenshot extends ComponentBaseModel
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -40,7 +39,6 @@ class ComponentEntryScreenshot extends ComponentBaseModel
     protected $fillable = [
         'entries_page_id',
     ];
-
 
     /**
      * Preview function for the page editor
@@ -51,10 +49,9 @@ class ComponentEntryScreenshot extends ComponentBaseModel
     {
         return [
             'name'    => trans('partymeister-competitions::component/entry-screenshots.component'),
-            'preview' => 'Preview for ComponentEntryScreenshot component'
+            'preview' => 'Preview for ComponentEntryScreenshot component',
         ];
     }
-
 
     /**
      * @return BelongsTo

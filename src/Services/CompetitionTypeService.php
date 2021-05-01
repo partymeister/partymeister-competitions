@@ -7,11 +7,11 @@ use Partymeister\Competitions\Models\CompetitionType;
 
 /**
  * Class CompetitionTypeService
+ *
  * @package Partymeister\Competitions\Services
  */
 class CompetitionTypeService extends BaseService
 {
-
     /**
      * @var string
      */

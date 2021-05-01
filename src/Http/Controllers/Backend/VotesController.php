@@ -2,7 +2,6 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Http\Controllers\Controller;
@@ -14,12 +13,12 @@ use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class VotesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class VotesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -38,7 +37,6 @@ class VotesController extends Controller
         return view('partymeister-competitions::backend.votes.index', compact('results', 'special', 'deadlineOver'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,14 +47,13 @@ class VotesController extends Controller
         $form = $this->form(VoteForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.votes.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         $results = VoteService::getAllVotesByRank();
 
         return view('partymeister-competitions::backend.votes.create', compact('form', 'results'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -70,7 +67,10 @@ class VotesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         VoteService::addVotes($request);
@@ -79,7 +79,6 @@ class VotesController extends Controller
 
         return redirect('backend/votes');
     }
-
 
     /**
      * Display the specified resource.
@@ -91,7 +90,6 @@ class VotesController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -102,20 +100,19 @@ class VotesController extends Controller
     {
         $form = $this->form(VoteForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.votes.update', [ $record->id ]),
+            'url'     => route('backend.votes.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-competitions::backend.votes.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param VoteRequest $request
-     * @param Vote        $record
+     * @param Vote $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(VoteRequest $request, Vote $record)
@@ -124,7 +121,10 @@ class VotesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         VoteService::updateWithForm($record, $request, $form);
@@ -133,7 +133,6 @@ class VotesController extends Controller
 
         return redirect('backend/votes');
     }
-
 
     /**
      * Remove the specified resource from storage.

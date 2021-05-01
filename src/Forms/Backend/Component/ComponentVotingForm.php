@@ -7,17 +7,20 @@ use Motor\CMS\Models\Navigation;
 
 /**
  * Class ComponentVotingForm
+ *
  * @package Partymeister\Competitions\Forms\Backend\Component
  */
 class ComponentVotingForm extends Form
 {
-
     /**
      * @return mixed|void
      */
     public function buildForm()
     {
-        $nodes = Navigation::where('scope', 'main')->where('parent_id', '!=', null)->defaultOrder()->get();
+        $nodes = Navigation::where('scope', 'main')
+                           ->where('parent_id', '!=', null)
+                           ->defaultOrder()
+                           ->get();
 
         $navigationItemOptions = [];
 
@@ -26,7 +29,7 @@ class ComponentVotingForm extends Form
             foreach ($node->ancestors as $ancestor) {
                 $prefixes[] = $ancestor->name;
             }
-            $navigationItemOptions[$node->id] = implode(' > ', $prefixes) . ' > ' . $node->name;
+            $navigationItemOptions[$node->id] = implode(' > ', $prefixes).' > '.$node->name;
         }
 
         $this->add('live_voting_page_id', 'select', [

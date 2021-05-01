@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\PDF;
 
 /**
  * Class AccessKey
+ *
  * @package Partymeister\Competitions\PDF
  */
 class AccessKey extends PDF
@@ -17,7 +18,6 @@ class AccessKey extends PDF
         $this->setAutoPageBreak(false);
         $this->setTemplate('logo', resource_path('assets/pdf/partymeister-competitions-accesskey'));
     }
-
 
     public function generate()
     {

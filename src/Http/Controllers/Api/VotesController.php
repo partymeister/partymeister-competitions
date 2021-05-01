@@ -3,20 +3,21 @@
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competitions\Models\Vote;
 use Partymeister\Competitions\Http\Requests\Backend\VoteRequest;
-use Partymeister\Competitions\Services\VoteService;
-use Partymeister\Competitions\Http\Resources\VoteResource;
 use Partymeister\Competitions\Http\Resources\VoteCollection;
+use Partymeister\Competitions\Http\Resources\VoteResource;
+use Partymeister\Competitions\Models\Vote;
+use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class VotesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class VotesController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\Vote';
+
     protected string $modelResource = 'vote';
 
     /**
@@ -69,7 +70,9 @@ class VotesController extends ApiController
      */
     public function index()
     {
-        $paginator = VoteService::collection()->getPaginator();
+        $paginator = VoteService::collection()
+                                ->getPaginator();
+
         return (new VoteCollection($paginator))->additional(['message' => 'Vote collection read']);
     }
 
@@ -124,10 +127,13 @@ class VotesController extends ApiController
      */
     public function store(VoteRequest $request)
     {
-        $result = VoteService::create($request)->getResult();
-        return (new VoteResource($result))->additional(['message' => 'Vote created'])->response()->setStatusCode(201);
-    }
+        $result = VoteService::create($request)
+                             ->getResult();
 
+        return (new VoteResource($result))->additional(['message' => 'Vote created'])
+                                          ->response()
+                                          ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +190,11 @@ class VotesController extends ApiController
      */
     public function show(Vote $record)
     {
-        $result = VoteService::show($record)->getResult();
+        $result = VoteService::show($record)
+                             ->getResult();
+
         return (new VoteResource($result))->additional(['message' => 'Vote read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +250,16 @@ class VotesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param VoteRequest $request
-     * @param Vote        $record
+     * @param Vote $record
      * @return VoteResource
      */
     public function update(VoteRequest $request, Vote $record)
     {
-        $result = VoteService::update($record, $request)->getResult();
+        $result = VoteService::update($record, $request)
+                             ->getResult();
+
         return (new VoteResource($result))->additional(['message' => 'Vote updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +322,13 @@ class VotesController extends ApiController
      */
     public function destroy(Vote $record)
     {
-        $result = VoteService::delete($record)->getResult();
+        $result = VoteService::delete($record)
+                             ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'Vote deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting Vote'], 404);
     }
 }

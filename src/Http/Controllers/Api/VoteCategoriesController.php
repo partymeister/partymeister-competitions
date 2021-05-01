@@ -3,20 +3,21 @@
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Motor\Backend\Http\Controllers\ApiController;
-
-use Partymeister\Competitions\Models\VoteCategory;
 use Partymeister\Competitions\Http\Requests\Backend\VoteCategoryRequest;
-use Partymeister\Competitions\Services\VoteCategoryService;
-use Partymeister\Competitions\Http\Resources\VoteCategoryResource;
 use Partymeister\Competitions\Http\Resources\VoteCategoryCollection;
+use Partymeister\Competitions\Http\Resources\VoteCategoryResource;
+use Partymeister\Competitions\Models\VoteCategory;
+use Partymeister\Competitions\Services\VoteCategoryService;
 
 /**
  * Class VoteCategoriesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class VoteCategoriesController extends ApiController
 {
     protected string $model = 'Partymeister\Competitions\Models\VoteCategory';
+
     protected string $modelResource = 'vote_category';
 
     /**
@@ -69,7 +70,9 @@ class VoteCategoriesController extends ApiController
      */
     public function index()
     {
-        $paginator = VoteCategoryService::collection()->getPaginator();
+        $paginator = VoteCategoryService::collection()
+                                        ->getPaginator();
+
         return (new VoteCategoryCollection($paginator))->additional(['message' => 'VoteCategory collection read']);
     }
 
@@ -124,10 +127,13 @@ class VoteCategoriesController extends ApiController
      */
     public function store(VoteCategoryRequest $request)
     {
-        $result = VoteCategoryService::create($request)->getResult();
-        return (new VoteCategoryResource($result))->additional(['message' => 'VoteCategory created'])->response()->setStatusCode(201);
-    }
+        $result = VoteCategoryService::create($request)
+                                     ->getResult();
 
+        return (new VoteCategoryResource($result))->additional(['message' => 'VoteCategory created'])
+                                                  ->response()
+                                                  ->setStatusCode(201);
+    }
 
     /**
      * @OA\Get (
@@ -184,10 +190,11 @@ class VoteCategoriesController extends ApiController
      */
     public function show(VoteCategory $record)
     {
-        $result = VoteCategoryService::show($record)->getResult();
+        $result = VoteCategoryService::show($record)
+                                     ->getResult();
+
         return (new VoteCategoryResource($result))->additional(['message' => 'VoteCategory read']);
     }
-
 
     /**
      * @OA\Put (
@@ -243,15 +250,16 @@ class VoteCategoriesController extends ApiController
      * Update the specified resource in storage.
      *
      * @param VoteCategoryRequest $request
-     * @param VoteCategory        $record
+     * @param VoteCategory $record
      * @return VoteCategoryResource
      */
     public function update(VoteCategoryRequest $request, VoteCategory $record)
     {
-        $result = VoteCategoryService::update($record, $request)->getResult();
+        $result = VoteCategoryService::update($record, $request)
+                                     ->getResult();
+
         return (new VoteCategoryResource($result))->additional(['message' => 'VoteCategory updated']);
     }
-
 
     /**
      * @OA\Delete (
@@ -314,11 +322,13 @@ class VoteCategoriesController extends ApiController
      */
     public function destroy(VoteCategory $record)
     {
-        $result = VoteCategoryService::delete($record)->getResult();
+        $result = VoteCategoryService::delete($record)
+                                     ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'VoteCategory deleted']);
         }
+
         return response()->json(['message' => 'Problem deleting VoteCategory'], 404);
     }
 }

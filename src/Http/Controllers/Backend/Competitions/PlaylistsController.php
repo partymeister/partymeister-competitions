@@ -141,9 +141,9 @@ class PlaylistsController extends Controller
                     $videos[] = [
                         'file_id' => $fileAssociation->file->id,
                         'data'    => MediaHelper::getFileInformation($fileAssociation->file, 'file', false, [
-                                'preview',
-                                'thumb',
-                            ]),
+                            'preview',
+                            'thumb',
+                        ]),
                     ];
                 }
 

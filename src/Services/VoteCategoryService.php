@@ -7,11 +7,11 @@ use Partymeister\Competitions\Models\VoteCategory;
 
 /**
  * Class VoteCategoryService
+ *
  * @package Partymeister\Competitions\Services
  */
 class VoteCategoryService extends BaseService
 {
-
     /**
      * @var string
      */

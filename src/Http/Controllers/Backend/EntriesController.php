@@ -2,8 +2,6 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Backend\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\EntryForm;
@@ -14,12 +12,12 @@ use Partymeister\Competitions\Services\EntryService;
 
 /**
  * Class EntriesController
+ *
  * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class EntriesController extends Controller
 {
     use FormBuilderTrait;
-
 
     /**
      * Display a listing of the resource.
@@ -38,7 +36,6 @@ class EntriesController extends Controller
         return view('partymeister-competitions::backend.entries.index', compact('paginator', 'grid'));
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
@@ -50,12 +47,11 @@ class EntriesController extends Controller
         $form = $this->form(EntryForm::class, [
             'method'  => 'POST',
             'route'   => 'backend.entries.store',
-            'enctype' => 'multipart/form-data'
+            'enctype' => 'multipart/form-data',
         ]);
 
         return view('partymeister-competitions::backend.entries.create', compact('form'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -69,10 +65,15 @@ class EntriesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if ((int) $request->get('reload_on_change') == 1) {
-            return redirect()->back()->withInput();
+            return redirect()
+                ->back()
+                ->withInput();
         }
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         EntryService::createWithForm($request, $form);
@@ -81,7 +82,6 @@ class EntriesController extends Controller
 
         return redirect('backend/entries');
     }
-
 
     /**
      * Display the specified resource.
@@ -93,7 +93,6 @@ class EntriesController extends Controller
         //
     }
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -104,20 +103,19 @@ class EntriesController extends Controller
     {
         $form = $this->form(EntryForm::class, [
             'method'  => 'PATCH',
-            'url'     => route('backend.entries.update', [ $record->id ]),
+            'url'     => route('backend.entries.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record
+            'model'   => $record,
         ]);
 
         return view('partymeister-competitions::backend.entries.edit', compact('form'));
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @param EntryRequest $request
-     * @param Entry        $record
+     * @param Entry $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(EntryRequest $request, Entry $record)
@@ -126,12 +124,17 @@ class EntriesController extends Controller
 
         // It will automatically use current request, get the rules, and do the validation
         if ((int) $request->get('reload_on_change') == 1) {
-            return redirect()->back()->withInput();
+            return redirect()
+                ->back()
+                ->withInput();
         }
 
         // It will automatically use current request, get the rules, and do the validation
         if (! $form->isValid()) {
-            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
         }
 
         EntryService::updateWithForm($record, $request, $form);
@@ -140,7 +143,6 @@ class EntriesController extends Controller
 
         return redirect('backend/entries');
     }
-
 
     /**
      * Remove the specified resource from storage.
