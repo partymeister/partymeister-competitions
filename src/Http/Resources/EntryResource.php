@@ -241,6 +241,7 @@ class EntryResource extends BaseResource
         return [
             'id'                                          => (int) $this->id,
             'competition'                                 => new CompetitionResource($this->whenLoaded('competition')),
+            'competition_name'                            => $this->competition->name,
             'visitor'                                     => new VisitorResource($this->visitor),
             'ip_address'                                  => $this->ip_address,
             'sort_position'                               => (int) $this->sort_position,
