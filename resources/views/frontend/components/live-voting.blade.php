@@ -54,7 +54,7 @@
                         if (response.status == 204) {
                             return;
                         }
-                        let entries = response.data.data;
+                        let entries = response.data;
                         if (entries.length > 0) {
                             this.competition = entries[0].competition;
                         }
