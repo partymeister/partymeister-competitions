@@ -45,7 +45,7 @@ class LiveVoteResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'competition_ud' => (int) $this->competition_id,
+            'competition_id' => (int) $this->competition_id,
             'entry_id'       => (int) $this->entry_id,
             'sort_position'  => (int) $this->sort_position,
             'author'         => $this->author,

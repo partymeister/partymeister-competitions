@@ -2,9 +2,11 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
+use Illuminate\Support\Facades\Session;
 use Motor\Backend\Helpers\Filesize;
 use Motor\Backend\Http\Resources\BaseResource;
 use Motor\Backend\Http\Resources\MediaResource;
+use Partymeister\Competitions\Models\Vote;
 use Partymeister\Core\Http\Resources\VisitorResource;
 
 /**
@@ -238,6 +240,18 @@ class EntryResource extends BaseResource
                            ->where('collection_name', 'LIKE', 'work_stage%')
                            ->orderBy('collection_name');
 
+        if ($this->competition && $this->competition->vote_categories && $this->competition->vote_categories[0]) {
+
+            $vote = Vote::where('entry_id', $this->id)
+                        ->where('vote_category_id', $this->competition->vote_categories[0]->id)
+                        ->where('visitor_id', Session::get('visitor')) //$params->get('visitor_id'))
+                        ->first();
+
+            if (is_null($vote)) {
+                $vote = new Vote();
+            }
+        }
+
         return [
             'id'                                          => (int) $this->id,
             'competition'                                 => new CompetitionResource($this->whenLoaded('competition')),
@@ -284,6 +298,12 @@ class EntryResource extends BaseResource
             'audio'                                       => new MediaResource($this->getFirstMedia('audio')),
             'config_file'                                 => new MediaResource($this->getFirstMedia('config_file')),
             'work_stages'                                 => MediaResource::collection($workStages->get()),
+            'vote_category_has_comment'                   => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
+            'vote_category_has_special_vote'              => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_special_vote : false),
+            'vote_category_has_negative'                  => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
+            'vote_category_points'                        => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->points : 0),
+            'vote_category_id'                            => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->id : 1),
+            'vote'                                        => isset($vote) ? new VoteResource($vote) : null,
         ];
     }
 }
