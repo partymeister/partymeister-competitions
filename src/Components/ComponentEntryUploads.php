@@ -97,6 +97,11 @@ class ComponentEntryUploads
 
         if (! is_null($request->get('entry_id'))) {
 
+            $this->record = Entry::find($request->get('entry_id'));
+            if (is_null($this->record) || $visitor->id != $this->record->visitor_id) {
+                return redirect()->back();
+            }
+
             $url = $this->request->url().'?entry_id='.$this->record->id;
 
             // Check if we have ssl enabled and rewrite the url
@@ -104,10 +109,6 @@ class ComponentEntryUploads
                 $url = str_replace('http:', 'https:', $url);
             }
 
-            $this->record = Entry::find($request->get('entry_id'));
-            if (is_null($this->record) || $visitor->id != $this->record->visitor_id) {
-                return redirect()->back();
-            }
             $formOptions['url'] = $url;
             $formOptions['model'] = $this->record;
             $formOptions['method'] = 'PATCH';
