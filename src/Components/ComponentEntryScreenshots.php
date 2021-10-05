@@ -94,9 +94,16 @@ class ComponentEntryScreenshots
 
         $this->request = $request;
 
+        $url = $this->request->url().'?entry_id='.$this->record->id;
+
+        // Check if we have ssl enabled and rewrite the url
+        if (app()->environment('production')) {
+            $url = str_replace('http:', 'https:', $url);
+        }
+
         $this->entryScreenshotForm = $this->form(EntryScreenshotForm::class, [
             'name'    => 'entry-screenshot',
-            'url'     => $this->request->url().'?entry_id='.$this->record->id,
+            'url'     => $url,
             'method'  => 'PATCH',
             'enctype' => 'multipart/form-data',
             'model'   => $this->record,
@@ -142,9 +149,9 @@ class ComponentEntryScreenshots
     public function render()
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-                'entryScreenshotForm' => $this->entryScreenshotForm,
-                'record'              => $this->record,
-                'component'           => $this->component,
-            ]);
+            'entryScreenshotForm' => $this->entryScreenshotForm,
+            'record'              => $this->record,
+            'component'           => $this->component,
+        ]);
     }
 }

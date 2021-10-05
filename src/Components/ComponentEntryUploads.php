@@ -81,19 +81,34 @@ class ComponentEntryUploads
 
         $this->request = $request;
 
+        $url = $this->request->url();
+
+        // Check if we have ssl enabled and rewrite the url
+        if (app()->environment('production')) {
+            $url = str_replace('http:', 'https:', $url);
+        }
+
         $formOptions = [
             'name'    => 'entry-upload',
-            'url'     => $this->request->url(),
+            'url'     => $url,
             'method'  => 'POST',
             'enctype' => 'multipart/form-data',
         ];
 
         if (! is_null($request->get('entry_id'))) {
+
+            $url = $this->request->url().'?entry_id='.$this->record->id;
+
+            // Check if we have ssl enabled and rewrite the url
+            if (app()->environment('production')) {
+                $url = str_replace('http:', 'https:', $url);
+            }
+
             $this->record = Entry::find($request->get('entry_id'));
             if (is_null($this->record) || $visitor->id != $this->record->visitor_id) {
                 return redirect()->back();
             }
-            $formOptions['url'] = $this->request->url().'?entry_id='.$this->record->id;
+            $formOptions['url'] = $url;
             $formOptions['model'] = $this->record;
             $formOptions['method'] = 'PATCH';
         }
@@ -186,9 +201,9 @@ class ComponentEntryUploads
     public function render()
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-                'entryUploadForm' => $this->entryUploadForm,
-                'record'          => $this->record,
-                'component'       => $this->component,
-            ]);
+            'entryUploadForm' => $this->entryUploadForm,
+            'record'          => $this->record,
+            'component'       => $this->component,
+        ]);
     }
 }
