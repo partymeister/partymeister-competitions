@@ -268,6 +268,7 @@ class EntryResource extends BaseResource
             'description'                                 => $this->description,
             'organizer_description'                       => $this->organizer_description,
             'running_time'                                => $this->running_time,
+            'options'                                     => OptionResource::collection($this->options),
             'custom_option'                               => $this->custom_option,
             'allow_release'                               => (boolean) $this->allow_release,
             'is_remote'                                   => (boolean) $this->is_remote,
