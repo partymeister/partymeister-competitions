@@ -96,6 +96,8 @@ class PlaylistsController extends Controller
                     if ($entries[$key]['description'] == '') {
                         $entries[$key]['description'] = ' ';
                     }
+                    $entries[$key]['description'] = nl2br($entries[$key]['description']);
+
                     if ($key > 0) {
                         $entries[$key]['previous_sort_position'] = (strlen($key) == 1 ? '0'.$key : $key);
                         $entries[$key]['previous_author'] = $entries[$key - 1]['author'];
@@ -106,10 +108,13 @@ class PlaylistsController extends Controller
                         $entries[$key]['previous_title'] = ' ';
                     }
 
+                    $entries[$key]['options_string'] = '';
                     foreach (Arr::get($entry, 'options', []) as $i => $option) {
+                        $entries[$key]['options_string'] .= " ". $option['name'];
                         $entries[$key]['option_'.($i + 1)] = $option['name'];
                     }
                     $entries[$key]['custom_option'] = Arr::get($entry, 'custom_option');
+                    $entries[$key]['options_string'] .= " ".Arr::get($entry, 'custom_option');
                 }
 
                 $participants = [];
