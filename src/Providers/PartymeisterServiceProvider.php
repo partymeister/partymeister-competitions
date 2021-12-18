@@ -5,6 +5,7 @@ namespace Partymeister\Competitions\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsExportVotesToCSVCommand;
+use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsExportWinnersForDHLCommand;
 use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsGenerateCompetitionCommand;
 use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsGenerateEntryCommand;
 use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsLinkEntryFilesCommand;
@@ -54,6 +55,7 @@ class PartymeisterServiceProvider extends ServiceProvider
 
     public function config()
     {
+        $this->mergeConfigFrom(__DIR__.'/../../config/partymeister-competitions-dhl-export.php', 'partymeister-competitions-dhl-export');
     }
 
     public function routes()
@@ -154,6 +156,7 @@ class PartymeisterServiceProvider extends ServiceProvider
                 PartymeisterCompetitionsExportVotesToCSVCommand::class,
                 PartymeisterCompetitionsGenerateCompetitionCommand::class,
                 PartymeisterCompetitionsGenerateEntryCommand::class,
+                PartymeisterCompetitionsExportWinnersForDHLCommand::class,
             ]);
         }
     }

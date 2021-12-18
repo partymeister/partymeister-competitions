@@ -3,6 +3,7 @@
 namespace Partymeister\Competitions\Console\Commands;
 
 use Illuminate\Console\Command;
+use League\Csv\Writer;
 use Partymeister\Competitions\Services\VoteService;
 
 /**
@@ -35,13 +36,42 @@ class PartymeisterCompetitionsExportVotesToCSVCommand extends Command
     {
         $results = VoteService::getAllVotesByRank();
 
-        $csv = '';
+        $header = [
+            'COMPETITION',
+            'RANK',
+            'POINTS',
+            'TITLE',
+            'AUTHOR',
+        ];
+
+        $records = [];
 
         foreach ($results as $competition) {
             foreach ($competition['entries'] as $entry) {
-                $csv .= "\"".$competition['name'].'";"'.$entry['rank'].'";"'.$entry['title'].' - '.$entry['author'].'";"'.$entry['points'].'";"'.$entry['author_name'].'";"'.$entry['author_address'].'";"'.$entry['author_zip'].'";"'.$entry['author_city'].'";"'.$entry['author_country'].'";"'.$entry['author_email'].'";"'.$entry['author_phone'].'";"'.$entry['points']."\"\n";
+
+                $record = [
+                    $competition['name'],
+                    $entry['rank'],
+                    $entry['points'],
+                    $entry['title'],
+                    $entry['author'],
+                ];
+
+                $records[] = $record;
             }
         }
-        file_put_contents('votes.csv', $csv);
+
+        //load the CSV document from a string
+        $csv = Writer::createFromString();
+        $csv->setEnclosure("\"");
+        $csv->setDelimiter(';');
+
+        //insert the header
+        $csv->insertOne($header);
+
+        //insert all the records
+        $csv->insertAll($records);
+
+        file_put_contents('votes.csv', $csv->toString());
     }
 }

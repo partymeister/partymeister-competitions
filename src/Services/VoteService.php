@@ -62,16 +62,16 @@ class VoteService extends BaseService
                                  ->get() as $entry) {
                 $maxPoints[$competition->id] = max($entry->votes, $maxPoints[$competition->id]);
                 $results[$competition->id]['entries'][$entry->id] = [
-                    'id'             => $entry->id,
-                    'title'          => $entry->title,
-                    'author'         => $entry->author,
-                    'author_name'    => $entry->author_name,
-                    'author_address' => $entry->author_address,
-                    'author_city'    => $entry->author_city,
-                    'author_zip'     => $entry->author_zip,
-                    'author_country' => $entry->author_country,
-                    'author_email'   => $entry->author_email,
-                    'author_phone'   => $entry->author_phone,
+                    'id'                        => $entry->id,
+                    'title'                     => $entry->title,
+                    'author'                    => $entry->author,
+                    'author_name'               => $entry->author_name,
+                    'author_address'            => $entry->author_address,
+                    'author_city'               => $entry->author_city,
+                    'author_zip'                => $entry->author_zip,
+                    'author_country_iso_3166_1' => $entry->author_country_iso_3166_1,
+                    'author_email'              => $entry->author_email,
+                    'author_phone'              => $entry->author_phone,
 
                     'points'   => $entry->votes,
                     'comments' => $entry->vote_comments,
