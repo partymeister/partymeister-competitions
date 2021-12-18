@@ -64,10 +64,10 @@ class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
         ];
 
         $records = [
-            'DE'   => [],
-            'EU'   => [],
-            'MISC' => [],
-            'ALL'  => [],
+            'DE'    => [],
+            'EU'    => [],
+            'WORLD' => [],
+            'ALL'   => [],
         ];
 
         foreach ($results as $competition) {
