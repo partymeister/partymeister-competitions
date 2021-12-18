@@ -67,6 +67,7 @@ class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
             'DE'   => [],
             'EU'   => [],
             'MISC' => [],
+            'ALL'  => [],
         ];
 
         foreach ($results as $competition) {
@@ -147,10 +148,12 @@ class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
                         $record[$key] = mb_convert_encoding($value, "Windows-1252", "UTF-8");
                     }
                     $records[$productCountry][] = $record;
+                    $records['ALL'][] = $record;
                 }
             }
         }
 
+        // Export by region
         foreach ($records as $destination => $data) {
             //load the CSV document from a string
             $csv = Writer::createFromString();
