@@ -101,6 +101,12 @@
                 <div class="col-md-3">
                     {!! form_row($form->is_prepared) !!}
                 </div>
+                <div class="col-md-3">
+                    {!! form_row($form->has_explicit_content) !!}
+                </div>
+                <div class="col-md-3">
+                    {!! form_row($form->needs_content_check) !!}
+                </div>
                 @if ($form->has('is_remote'))
                     <div class="col-md-3">
                         {!! form_row($form->is_remote) !!}

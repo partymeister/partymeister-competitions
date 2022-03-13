@@ -59,6 +59,14 @@ class EntryForm extends Form
                  'default_value' => true,
              ])
              ->add('is_prepared', 'checkbox', ['label' => trans('partymeister-competitions::backend/entries.is_prepared')])
+            ->add('has_explicit_content', 'checkbox', [
+                'label'         => trans('partymeister-competitions::backend/entries.has_explicit_content'),
+                'default_value' => false,
+            ])
+            ->add('needs_content_check', 'checkbox', [
+                'label'         => trans('partymeister-competitions::backend/entries.needs_content_check'),
+                'default_value' => false,
+            ])
              ->add('status', 'select', [
                  'label'   => trans('partymeister-competitions::backend/entries.status'),
                  'choices' => trans('partymeister-competitions::backend/entries.stati'),

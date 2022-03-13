@@ -275,6 +275,8 @@ class EntryResource extends BaseResource
             'is_recorded'                                 => (boolean) $this->is_recorded,
             'is_prepared'                                 => (boolean) $this->is_prepared,
             'upload_enabled'                              => (boolean) $this->upload_enabled,
+            'has_explicit_content'                        => (boolean) $this->has_explicit_content,
+            'needs_content_check'                         => (boolean) $this->needs_content_check,
             'composer_not_member_of_copyright_collective' => (boolean) $this->composer_not_member_of_copyright_collective,
             'author_name'                                 => $this->author_name,
             'author_email'                                => $this->author_email,

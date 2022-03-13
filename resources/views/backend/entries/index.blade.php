@@ -140,6 +140,40 @@
             });
         });
 
+        $('.change-entry-explicit').click(function (e) {
+            e.preventDefault();
+
+            updateEntry(this, $(this).data('entry'), {has_explicit_content: $(this).data('has-explicit-content')}, function (that, results) {
+                switchCssClass(that, results.data.has_explicit_content, $(that).data('class'), $(that).data('class-alternate'));
+
+                toastr.options = {progressBar: true};
+                if (results.data.has_explicit_content === true) {
+                    toastr.success('{{trans('partymeister-competitions::backend/entries.explicit_content_checked')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                } else {
+                    toastr.success('{{trans('partymeister-competitions::backend/entries.explicit_content_not_checked')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                }
+
+                $(that).data('has-explicit-content', results.data.has_explicit_content ? 0 : 1);
+            });
+        });
+
+        $('.change-entry-content-check').click(function (e) {
+            e.preventDefault();
+
+            updateEntry(this, $(this).data('entry'), {needs_content_check: $(this).data('needs-content-check')}, function (that, results) {
+                switchCssClass(that, results.data.needs_content_check, $(that).data('class'), $(that).data('class-alternate'));
+
+                toastr.options = {progressBar: true};
+                if (results.data.needs_content_check === true) {
+                    toastr.success('{{trans('partymeister-competitions::backend/entries.content_check_checked')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                } else {
+                    toastr.success('{{trans('partymeister-competitions::backend/entries.content_check_not_checked')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                }
+
+                $(that).data('needs-content-check', results.data.needs_content_check ? 0 : 1);
+            });
+        });
+
         $('.change-entry-status').click(function (e) {
             e.preventDefault();
 

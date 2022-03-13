@@ -14,6 +14,9 @@
     <button type="button" data-toggle="tooltip" data-placement="top" data-entry="{{$record->id}}" data-class="btn-success" data-class-alternate="btn-danger" data-composer-gema="{{(int)!$record->composer_not_member_of_copyright_collective}}" class="change-entry-gema btn @defaultButtonSize @if ($record->composer_not_member_of_copyright_collective == 1)btn-success @else btn-danger @endif" title="{{trans('partymeister-competitions::backend/entries.composer_not_member_of_copyright_collective')}}">GEMA</button>
 @endif
 
+<button type="button" data-toggle="tooltip" data-placement="top" data-entry="{{$record->id}}" data-class="btn-danger" data-class-alternate="btn-outline-secondary" data-has-explicit-content="{{(int)!$record->has_explicit_content}}" class="change-entry-explicit btn @defaultButtonSize @if ($record->has_explicit_content == 1)btn-danger @else btn-outline-secondary @endif" title="{{trans('partymeister-competitions::backend/entries.has_explicit_content')}}">EXPLICIT</button>
+<button type="button" data-toggle="tooltip" data-placement="top" data-entry="{{$record->id}}" data-class="btn-danger" data-class-alternate="btn-outline-secondary" data-needs-content-check="{{(int)!$record->needs_content_check}}" class="change-entry-content-check btn @defaultButtonSize @if ($record->needs_content_check == 1)btn-danger @else btn-outline-secondary @endif" title="{{trans('partymeister-competitions::backend/entries.needs_content_check')}}">CONTENT</button>
+
 <a href="{{route('backend.entries.comments.index', [$record->id])}}" class="ml-4 btn btn-sm @if ($record->comments()->where('read_by_organizer', false)->count() > 0) btn-danger @else btn-outline-secondary @endif">
     {{$record->comments()->count()}} Messages
 </a>

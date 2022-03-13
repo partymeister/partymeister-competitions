@@ -178,6 +178,8 @@ class Entry extends Model implements HasMedia
         'final_file_media_id',
         'status',
         'discord_name',
+        'has_explicit_content',
+        'needs_content_check',
     ];
 
     /**
