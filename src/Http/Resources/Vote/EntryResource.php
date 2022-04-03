@@ -7,6 +7,7 @@ use Motor\Backend\Helpers\Filesize;
 use Motor\Backend\Http\Resources\BaseResource;
 use Motor\Backend\Http\Resources\MediaResource;
 use Partymeister\Competitions\Http\Resources\OptionResource;
+use Partymeister\Competitions\Http\Resources\VoteResource;
 use Partymeister\Competitions\Models\Vote;
 use Partymeister\Core\Http\Resources\VisitorResource;
 
@@ -161,15 +162,35 @@ class EntryResource extends BaseResource
     public function toArray($request)
     {
 
+        if ($this->competition && $this->competition->vote_categories && $this->competition->vote_categories[0]) {
+
+            $vote = Vote::where('entry_id', $this->id)
+                        ->where('vote_category_id', $this->competition->vote_categories[0]->id)
+                        ->where('visitor_id', Session::get('visitor')) //$params->get('visitor_id'))
+                        ->first();
+
+            if (is_null($vote)) {
+                $vote = new Vote();
+            }
+        }
+
         // AUDIO, COMPETITION GEFILTERT, CURRENT VOTE
         return [
-            'id'                          => (int) $this->id,
-            'competition_name'            => $this->competition->name,
-            'title'                       => $this->title,
-            'author'                      => $this->author,
-            'description'                 => $this->description,
-            'screenshot'                  => new MediaResource($this->getFirstMedia('screenshot')),
-            'has_screenshot'              => (bool) $this->competition->competition_type->has_screenshot,
+            'id'                             => (int) $this->id,
+            'sort_position_prefixed'         => (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
+            'competition_id'                 => $this->competition_id,
+            'competition_name'               => $this->competition->name,
+            'title'                          => $this->title,
+            'author'                         => $this->author,
+            'description'                    => $this->description,
+            'screenshot'                     => new MediaResource($this->getFirstMedia('screenshot')),
+            'has_screenshot'                 => (bool) $this->competition->competition_type->has_screenshot,
+            'vote_category_has_comment'      => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
+            'vote_category_has_special_vote' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_special_vote : false),
+            'vote_category_has_negative'     => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
+            'vote_category_points'           => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->points : 0),
+            'vote_category_id'               => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->id : 1),
+            'vote'                           => isset($vote) ? new VoteResource($vote) : null,
         ];
     }
 }

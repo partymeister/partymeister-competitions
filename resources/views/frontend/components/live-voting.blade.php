@@ -1,10 +1,10 @@
 <div id="live-voting">
     <h2>Live voting</h2>
-    <h3>@{{ competition.name }}</h3>
+    <h3>@{{ competition }}</h3>
 
     <div class="card" v-for="entry in entries">
         <div class="section" v-bind:class="{ special: (entry.vote && entry.vote.special_vote && entry.vote_category_has_special_vote)}">
-            <h4><strong># @{{ entry.entry_number }}</strong> @{{ entry.title }} by @{{ entry.author }}</h4>
+            <h4><strong># @{{ entry.sort_position_prefixed }}</strong> @{{ entry.title }} by @{{ entry.author }}</h4>
             <div style="text-align: center;">
                 <div data-value="0" @click="updateVote(entry, 0)"
                      v-bind:class="{ 'partymeister-rating-wrapper': true, 'partymeister-rating-cancel-on': (entry.vote && entry.vote.points) == 0, 'partymeister-rating-cancel-off': (entry.vote && entry.vote.points) != 0}"></div>
@@ -56,10 +56,9 @@
                         }
                         let entries = response.data.data;
                         if (entries.length > 0) {
-                            this.competition = entries[0].competition;
+                            this.competition = entries[0].competition_name;
                         }
                         // Save state
-                        console.log(entries);
                         for (let [index, ne] of entries.entries()) {
                             if (entries[index].vote.length == 0) {
                                 entries[index].vote.push({
@@ -102,7 +101,7 @@
                 saveVote(entry, special) {
                     let data = {
                         entry_id: entry.id,
-                        competition_id: entry.competition.id,
+                        competition_id: entry.competition_id,
                         vote_category_id: entry.vote_category_id,
                         points: entry.vote.points,
                         comment: entry.comment === null ? '' : entry.comment,

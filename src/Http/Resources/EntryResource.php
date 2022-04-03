@@ -68,7 +68,7 @@ use Partymeister\Core\Http\Resources\VisitorResource;
  *     example="Credits, tools used, etc."
  *   ),
  *   @OA\Property(
- *     property="organizer_description",
+ *     property="organ77izer_description",
  *     type="string",
  *     example="Please run this on an actual Amiga!"
  *   ),
