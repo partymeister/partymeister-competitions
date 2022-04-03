@@ -174,23 +174,31 @@ class EntryResource extends BaseResource
             }
         }
 
+        $votingDeadlineOver = false;
+        if (strtotime(config('partymeister-competitions-voting.deadline')) < time()) {
+            $votingDeadlineOver = true;
+        }
+
         // AUDIO, COMPETITION GEFILTERT, CURRENT VOTE
         return [
             'id'                             => (int) $this->id,
-            'sort_position_prefixed'         => (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
+            'sort_position_prefixed'         => (string) (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
             'competition_id'                 => $this->competition_id,
             'competition_name'               => $this->competition->name,
             'title'                          => $this->title,
             'author'                         => $this->author,
             'description'                    => $this->description,
-            'screenshot'                     => new MediaResource($this->getFirstMedia('screenshot')),
             'has_screenshot'                 => (bool) $this->competition->competition_type->has_screenshot,
+            'screenshot'                     => new MediaResource($this->getFirstMedia('screenshot')),
+            'has_audio'                      => (bool) $this->competition->competition_type->has_audio,
+            'audio'                          => new MediaResource($this->getFirstMedia('audio')),
             'vote_category_has_comment'      => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
             'vote_category_has_special_vote' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_special_vote : false),
             'vote_category_has_negative'     => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
             'vote_category_points'           => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->points : 0),
             'vote_category_id'               => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->id : 1),
             'vote'                           => isset($vote) ? new VoteResource($vote) : null,
+            'deadline_reached'               => $votingDeadlineOver,
         ];
     }
 }
