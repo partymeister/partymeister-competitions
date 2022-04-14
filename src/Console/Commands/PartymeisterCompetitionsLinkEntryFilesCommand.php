@@ -52,8 +52,8 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
                 if ($entry->getMedia('file')
                           ->count() > 0) {
                     $this->mkdir($directory.'/'.$entryDir.'/files');
-                    $numFiles = count($entry->getMedia('file'));
-                    foreach ($entry->getMedia('file') as $index => $media) {
+                    $numFiles = count($entry->ordeded_files);
+                    foreach ($entry->ordeded_files as $index => $media) {
                         if (file_exists($media->getPath()) && ! file_exists($directory.'/'.$entryDir.'/files/'.$media->file_name)) {
                             link($media->getPath(), $directory.'/'.$entryDir.'/files/V'.($numFiles - $index).'_'.$media->file_name);
                         }
