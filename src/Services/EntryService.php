@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Services;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Motor\Backend\Services\BaseService;
 use Motor\Core\Filter\Renderers\SelectRenderer;
@@ -86,7 +87,13 @@ class EntryService extends BaseService
         $this->uploadFile($this->request->file($prefix.'screenshot'), 'screenshot');
         $this->uploadFile($this->request->file($prefix.'video'), 'video');
         $this->uploadFile($this->request->file($prefix.'audio'), 'audio');
-        $this->uploadFile($this->request->file($prefix.'file'), 'file', 'file', null, true);
+
+        $file = $this->request->file($prefix.'file');
+        if ($file instanceof UploadedFile && $file->isValid()) {
+            $this->uploadFile($this->request->file($prefix.'file'), 'file', 'file', null, true);
+            $this->record->is_recorded = false;
+        }
+
         $this->uploadFile($this->request->file($prefix.'config_file'), 'config_file', 'config_file');
     }
 

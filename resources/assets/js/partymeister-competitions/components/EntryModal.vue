@@ -90,8 +90,11 @@
                                     <dt class="col-sm-4">
                                         {{$t('partymeister-competitions.backend.entries.filesize')}}
                                     </dt>
-                                    <dd class="col-sm-8">
-                                        {{ entry.filesize_human }} ({{ entry.filesize_bytes }} bytes)
+                                    <dd class="col-sm-8" v-if="entry.filesize > 0">
+                                        {{ entry.filesize_human }} ({{ entry.filesize }} bytes)
+                                    </dd>
+                                    <dd class="col-sm-8" v-else>
+                                      -
                                     </dd>
                                 </template>
 
