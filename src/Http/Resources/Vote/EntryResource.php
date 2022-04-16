@@ -179,6 +179,11 @@ class EntryResource extends BaseResource
             $votingDeadlineOver = true;
         }
 
+        $screenshot = new MediaResource($this->getFirstMedia('screenshot'));
+        if (is_null($screenshot)) {
+            $screenshot = ['url' => false];
+        }
+
         // AUDIO, COMPETITION GEFILTERT, CURRENT VOTE
         return [
             'id'                             => (int) $this->id,
@@ -189,7 +194,7 @@ class EntryResource extends BaseResource
             'author'                         => $this->author,
             'description'                    => $this->description,
             'has_screenshot'                 => (bool) $this->competition->competition_type->has_screenshot,
-            'screenshot'                     => new MediaResource($this->getFirstMedia('screenshot')),
+            'screenshot'                     => $screenshot,
             'has_audio'                      => (bool) $this->competition->competition_type->has_audio,
             'audio'                          => new MediaResource($this->getFirstMedia('audio')),
             'vote_category_has_comment'      => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
