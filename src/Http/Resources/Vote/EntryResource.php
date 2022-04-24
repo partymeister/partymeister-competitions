@@ -180,8 +180,15 @@ class EntryResource extends BaseResource
         }
 
         $screenshot = new MediaResource($this->getFirstMedia('screenshot'));
-        if (is_null($screenshot)) {
+
+        if (! $this->competition->competition_type->has_screenshot) {
             $screenshot = ['url' => false];
+        }
+
+        $audio = new MediaResource($this->getFirstMedia('audio'));
+
+        if (! $audio) {
+            $audio = ['url' => false];
         }
 
         // AUDIO, COMPETITION GEFILTERT, CURRENT VOTE
@@ -196,7 +203,7 @@ class EntryResource extends BaseResource
             'has_screenshot'                 => (bool) $this->competition->competition_type->has_screenshot,
             'screenshot'                     => $screenshot,
             'has_audio'                      => (bool) $this->competition->competition_type->has_audio,
-            'audio'                          => new MediaResource($this->getFirstMedia('audio')),
+            'audio'                          => $audio,
             'vote_category_has_comment'      => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
             'vote_category_has_special_vote' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_special_vote : false),
             'vote_category_has_negative'     => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
