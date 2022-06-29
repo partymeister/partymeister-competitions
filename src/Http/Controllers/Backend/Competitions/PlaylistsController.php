@@ -20,16 +20,14 @@ use Partymeister\Slides\Services\PlaylistService;
 
 /**
  * Class PlaylistsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\Competitions
  */
 class PlaylistsController extends Controller
 {
     use FormBuilderTrait;
 
     /**
-     * @param Competition $competition
-     * @param Request $request
+     * @param  Competition  $competition
+     * @param  Request  $request
      * @return RedirectResponse|Redirector
      */
     public function store(Competition $competition, Request $request)
@@ -42,8 +40,8 @@ class PlaylistsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Competition $competition
-     * @param Request $request
+     * @param  Competition  $competition
+     * @param  Request  $request
      * @return bool|Factory|\Illuminate\Http\JsonResponse|View|string
      */
     public function index(Competition $competition, Request $request)
@@ -110,11 +108,11 @@ class PlaylistsController extends Controller
 
                     $entries[$key]['options_string'] = '';
                     foreach (Arr::get($entry, 'options', []) as $i => $option) {
-                        $entries[$key]['options_string'] .= " ". $option['name'];
+                        $entries[$key]['options_string'] .= ' '.$option['name'];
                         $entries[$key]['option_'.($i + 1)] = $option['name'];
                     }
                     $entries[$key]['custom_option'] = Arr::get($entry, 'custom_option');
-                    $entries[$key]['options_string'] .= " ".Arr::get($entry, 'custom_option');
+                    $entries[$key]['options_string'] .= ' '.Arr::get($entry, 'custom_option');
                 }
 
                 $participants = [];
@@ -182,9 +180,9 @@ class PlaylistsController extends Controller
 
         foreach ($entries as $entry) {
             if ($entry->competition->competition_type->is_anonymous) {
-                $output .= "#EXTINF:-1,".str_replace(' - ', '-', $entry->title)."\r\n";
+                $output .= '#EXTINF:-1,'.str_replace(' - ', '-', $entry->title)."\r\n";
             } else {
-                $output .= "#EXTINF:-1,".str_replace(' - ', '-', $entry->author)." - ".str_replace(' - ', '-', $entry->title)."\r\n";
+                $output .= '#EXTINF:-1,'.str_replace(' - ', '-', $entry->author).' - '.str_replace(' - ', '-', $entry->title)."\r\n";
             }
         }
 

@@ -18,8 +18,6 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class ComponentEntryComments
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentEntryComments
 {
@@ -58,7 +56,7 @@ class ComponentEntryComments
     /**
      * ComponentEntryComments constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
+     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -66,8 +64,9 @@ class ComponentEntryComments
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
+     *
      * @throws GuzzleException
      */
     public function index(Request $request)
@@ -115,6 +114,7 @@ class ComponentEntryComments
 
     /**
      * @return RedirectResponse|Redirector
+     *
      * @throws GuzzleException
      */
     protected function post()
@@ -164,9 +164,9 @@ class ComponentEntryComments
     public function render()
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-                'comments'         => $this->comments,
-                'entryCommentForm' => $this->entryCommentForm,
-                'record'           => $this->record,
-            ]);
+            'comments'         => $this->comments,
+            'entryCommentForm' => $this->entryCommentForm,
+            'record'           => $this->record,
+        ]);
     }
 }

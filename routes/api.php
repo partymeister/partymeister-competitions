@@ -1,4 +1,5 @@
 <?php
+
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
     'namespace'  => 'Partymeister\Competitions\Http\Controllers\Api',
@@ -55,4 +56,3 @@ Route::group([
     Route::post('access_keys/generate', 'AccessKeys\GenerateController@store')
          ->name('access_keys.generate');
 });
-

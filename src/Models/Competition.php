@@ -53,6 +53,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read Collection|CompetitionPrize[] $prizes
  * @property-read User $updater
  * @property-read Collection|VoteCategory[] $vote_categories
+ *
  * @method static Builder|Competition filteredBy(Filter $filter, $column)
  * @method static Builder|Competition filteredByMultiple(Filter $filter)
  * @method static Builder|Competition newModelQuery()
@@ -114,7 +115,8 @@ class Competition extends Model implements HasMedia
     ];
 
     /**
-     * @param Media|null $media
+     * @param  Media|null  $media
+     *
      * @throws InvalidManipulation
      */
     public function registerMediaConversions(Media $media = null): void

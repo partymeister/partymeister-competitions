@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class VotesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class VotesController extends ApiController
 {
@@ -122,7 +120,7 @@ class VotesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param VoteRequest $request
+     * @param  VoteRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(VoteRequest $request)
@@ -185,7 +183,7 @@ class VotesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Vote $record
+     * @param  Vote  $record
      * @return VoteResource
      */
     public function show(Vote $record)
@@ -249,8 +247,8 @@ class VotesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param VoteRequest $request
-     * @param Vote $record
+     * @param  VoteRequest  $request
+     * @param  Vote  $record
      * @return VoteResource
      */
     public function update(VoteRequest $request, Vote $record)
@@ -317,7 +315,7 @@ class VotesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Vote $record
+     * @param  Vote  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Vote $record)

@@ -14,8 +14,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class CompetitionService
- *
- * @package Partymeister\Competitions\Services
  */
 class CompetitionService extends BaseService
 {

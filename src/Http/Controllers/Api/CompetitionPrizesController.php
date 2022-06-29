@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\CompetitionPrizeService;
 
 /**
  * Class CompetitionPrizesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class CompetitionPrizesController extends ApiController
 {
@@ -122,7 +120,7 @@ class CompetitionPrizesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param CompetitionPrizeRequest $request
+     * @param  CompetitionPrizeRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CompetitionPrizeRequest $request)
@@ -185,7 +183,7 @@ class CompetitionPrizesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param CompetitionPrize $record
+     * @param  CompetitionPrize  $record
      * @return CompetitionPrizeResource
      */
     public function show(CompetitionPrize $record)
@@ -249,8 +247,8 @@ class CompetitionPrizesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param CompetitionPrizeRequest $request
-     * @param CompetitionPrize $record
+     * @param  CompetitionPrizeRequest  $request
+     * @param  CompetitionPrize  $record
      * @return CompetitionPrizeResource
      */
     public function update(CompetitionPrizeRequest $request, CompetitionPrize $record)
@@ -317,7 +315,7 @@ class CompetitionPrizesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param CompetitionPrize $record
+     * @param  CompetitionPrize  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(CompetitionPrize $record)

@@ -13,8 +13,6 @@ use Partymeister\Competitions\Models\Component\ComponentEntry;
 
 /**
  * Class ComponentEntries
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentEntries
 {
@@ -36,8 +34,8 @@ class ComponentEntries
     /**
      * ComponentEntries constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentEntry $component
+     * @param  PageVersionComponent  $pageVersionComponent
+     * @param  ComponentEntry  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -48,7 +46,7 @@ class ComponentEntries
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      */
     public function index(Request $request)
@@ -66,9 +64,9 @@ class ComponentEntries
     {
         if (! is_null($this->visitor)) {
             return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-                    'component' => $this->component,
-                    'entries'   => $this->visitor->entries,
-                ]);
+                'component' => $this->component,
+                'entries'   => $this->visitor->entries,
+            ]);
         } else {
             return redirect('/start');
         }

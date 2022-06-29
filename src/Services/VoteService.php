@@ -10,8 +10,6 @@ use Request;
 
 /**
  * Class VoteService
- *
- * @package Partymeister\Competitions\Services
  */
 class VoteService extends BaseService
 {
@@ -40,7 +38,7 @@ class VoteService extends BaseService
     }
 
     /**
-     * @param string $direction
+     * @param  string  $direction
      * @return array
      */
     public static function getAllVotesByRank($direction = 'DESC')
@@ -87,7 +85,6 @@ class VoteService extends BaseService
             $uniquePoints = [];
 
             foreach ($results[$competition->id]['entries'] as $key => $entry) {
-
                 if (! array_key_exists((string) $entry['points'], $uniquePoints)) {
                     $uniquePoints[$entry['points']] = 1;
                     $rank = array_sum($uniquePoints);

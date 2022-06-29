@@ -8,8 +8,6 @@ use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class PartymeisterCompetitionsExportVotesToCSVCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsExportVotesToCSVCommand extends Command
 {
@@ -48,7 +46,6 @@ class PartymeisterCompetitionsExportVotesToCSVCommand extends Command
 
         foreach ($results as $competition) {
             foreach ($competition['entries'] as $entry) {
-
                 $record = [
                     $competition['name'],
                     $entry['rank'],
@@ -63,7 +60,7 @@ class PartymeisterCompetitionsExportVotesToCSVCommand extends Command
 
         //load the CSV document from a string
         $csv = Writer::createFromString();
-        $csv->setEnclosure("\"");
+        $csv->setEnclosure('"');
         $csv->setDelimiter(';');
 
         //insert the header

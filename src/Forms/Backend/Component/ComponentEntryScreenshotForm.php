@@ -7,8 +7,6 @@ use Motor\CMS\Models\Navigation;
 
 /**
  * Class ComponentEntryScreenshotForm
- *
- * @package Partymeister\Competitions\Forms\Backend\Component
  */
 class ComponentEntryScreenshotForm extends Form
 {

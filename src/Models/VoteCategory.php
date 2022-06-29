@@ -35,6 +35,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read User $creator
  * @property-read User|null $eraser
  * @property-read User $updater
+ *
  * @method static Builder|VoteCategory filteredBy(Filter $filter, $column)
  * @method static Builder|VoteCategory filteredByMultiple(Filter $filter)
  * @method static Builder|VoteCategory newModelQuery()

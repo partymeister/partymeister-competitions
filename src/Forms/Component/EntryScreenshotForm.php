@@ -9,8 +9,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class EntryScreenshotForm
- *
- * @package Partymeister\Competitions\Forms\Component
  */
 class EntryScreenshotForm extends Form
 {

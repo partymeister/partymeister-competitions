@@ -3,17 +3,14 @@
 namespace Partymeister\Competitions\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Partymeister\Competitions\Models\OptionGroup;
-use Partymeister\Core\Models\User;
 use Illuminate\Support\Facades\DB;
+use Partymeister\Core\Models\User;
 
 /**
  * Class AccountsTableSeeder
- * @package Partymeister\Accounting\Database\Seeds
  */
 class VoteCategoriesTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

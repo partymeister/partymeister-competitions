@@ -13,8 +13,8 @@ class CompetitionPrizePolicy
     /**
      * Perform pre-authorization checks.
      *
-     * @param \Motor\Backend\Models\User $user
-     * @param string $ability
+     * @param  \Motor\Backend\Models\User  $user
+     * @param  string  $ability
      * @return void|bool
      */
     public function before(User $user, $ability)
@@ -27,7 +27,7 @@ class CompetitionPrizePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param \Motor\Backend\Models\User $user
+     * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
     public function viewAny(User $user)
@@ -38,8 +38,8 @@ class CompetitionPrizePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param \Motor\Backend\Models\User $user
-     * @param \Partymeister\Competitions\Models\CompetitionPrize $competitionPrize
+     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Partymeister\Competitions\Models\CompetitionPrize  $competitionPrize
      * @return mixed
      */
     public function view(User $user, CompetitionPrize $competitionPrize)
@@ -50,7 +50,7 @@ class CompetitionPrizePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param \Motor\Backend\Models\User $user
+     * @param  \Motor\Backend\Models\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -61,8 +61,8 @@ class CompetitionPrizePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param \Motor\Backend\Models\User $user
-     * @param \Partymeister\Competitions\Models\CompetitionPrize $competitionPrize
+     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Partymeister\Competitions\Models\CompetitionPrize  $competitionPrize
      * @return mixed
      */
     public function update(User $user, CompetitionPrize $competitionPrize)
@@ -73,8 +73,8 @@ class CompetitionPrizePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param \Motor\Backend\Models\User $user
-     * @param \Partymeister\Competitions\Models\CompetitionPrize $competitionPrize
+     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Partymeister\Competitions\Models\CompetitionPrize  $competitionPrize
      * @return mixed
      */
     public function delete(User $user, CompetitionPrize $competitionPrize)
@@ -85,8 +85,8 @@ class CompetitionPrizePolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param \Motor\Backend\Models\User $user
-     * @param \Partymeister\Competitions\Models\CompetitionPrize $competitionPrize
+     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Partymeister\Competitions\Models\CompetitionPrize  $competitionPrize
      * @return mixed
      */
     public function restore(User $user, CompetitionPrize $competitionPrize)
@@ -97,8 +97,8 @@ class CompetitionPrizePolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param \Motor\Backend\Models\User $user
-     * @param \Partymeister\Competitions\Models\CompetitionPrize $competitionPrize
+     * @param  \Motor\Backend\Models\User  $user
+     * @param  \Partymeister\Competitions\Models\CompetitionPrize  $competitionPrize
      * @return mixed
      */
     public function forceDelete(User $user, CompetitionPrize $competitionPrize)

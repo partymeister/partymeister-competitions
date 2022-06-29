@@ -26,6 +26,7 @@ use Motor\Core\Traits\Searchable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read VoteCategory $vote_category
+ *
  * @method static Builder|Vote filteredBy(Filter $filter, $column)
  * @method static Builder|Vote filteredByMultiple(Filter $filter)
  * @method static Builder|Vote newModelQuery()

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class AddConfigFileToCompetitionTypes
@@ -20,7 +20,6 @@ class AddConfigFileToCompetitionTypes extends Migration
             $table->boolean('has_config_file')->after('file_is_optional')->default(false);
         });
     }
-
 
     /**
      * Reverse the migrations.

@@ -231,7 +231,7 @@ class EntryResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -241,7 +241,6 @@ class EntryResource extends BaseResource
                            ->orderBy('collection_name');
 
         if ($this->competition && $this->competition->vote_categories && $this->competition->vote_categories[0]) {
-
             $vote = Vote::where('entry_id', $this->id)
                         ->where('vote_category_id', $this->competition->vote_categories[0]->id)
                         ->where('visitor_id', Session::get('visitor')) //$params->get('visitor_id'))
@@ -270,14 +269,14 @@ class EntryResource extends BaseResource
             'running_time'                                => $this->running_time,
             'options'                                     => OptionResource::collection($this->options),
             'custom_option'                               => $this->custom_option,
-            'allow_release'                               => (boolean) $this->allow_release,
-            'is_remote'                                   => (boolean) $this->is_remote,
-            'is_recorded'                                 => (boolean) $this->is_recorded,
-            'is_prepared'                                 => (boolean) $this->is_prepared,
-            'upload_enabled'                              => (boolean) $this->upload_enabled,
-            'has_explicit_content'                        => (boolean) $this->has_explicit_content,
-            'needs_content_check'                         => (boolean) $this->needs_content_check,
-            'composer_not_member_of_copyright_collective' => (boolean) $this->composer_not_member_of_copyright_collective,
+            'allow_release'                               => (bool) $this->allow_release,
+            'is_remote'                                   => (bool) $this->is_remote,
+            'is_recorded'                                 => (bool) $this->is_recorded,
+            'is_prepared'                                 => (bool) $this->is_prepared,
+            'upload_enabled'                              => (bool) $this->upload_enabled,
+            'has_explicit_content'                        => (bool) $this->has_explicit_content,
+            'needs_content_check'                         => (bool) $this->needs_content_check,
+            'composer_not_member_of_copyright_collective' => (bool) $this->composer_not_member_of_copyright_collective,
             'author_name'                                 => $this->author_name,
             'author_email'                                => $this->author_email,
             'author_phone'                                => $this->author_phone,

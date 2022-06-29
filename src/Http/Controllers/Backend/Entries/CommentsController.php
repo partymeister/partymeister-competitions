@@ -11,8 +11,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class CommentsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\Entries
  */
 class CommentsController extends Controller
 {
@@ -21,7 +19,7 @@ class CommentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Entry $record
+     * @param  Entry  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Entry $record)
@@ -41,8 +39,8 @@ class CommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @param Entry $record
+     * @param  Request  $request
+     * @param  Entry  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request, Entry $record)

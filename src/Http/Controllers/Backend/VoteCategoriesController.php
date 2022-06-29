@@ -13,8 +13,6 @@ use Partymeister\Competitions\Services\VoteCategoryService;
 
 /**
  * Class VoteCategoriesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class VoteCategoriesController extends Controller
 {
@@ -24,6 +22,7 @@ class VoteCategoriesController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -56,7 +55,7 @@ class VoteCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param VoteCategoryRequest $request
+     * @param  VoteCategoryRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(VoteCategoryRequest $request)
@@ -91,7 +90,7 @@ class VoteCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param VoteCategory $record
+     * @param  VoteCategory  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(VoteCategory $record)
@@ -109,8 +108,8 @@ class VoteCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param VoteCategoryRequest $request
-     * @param VoteCategory $record
+     * @param  VoteCategoryRequest  $request
+     * @param  VoteCategory  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(VoteCategoryRequest $request, VoteCategory $record)
@@ -135,7 +134,7 @@ class VoteCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param VoteCategory $record
+     * @param  VoteCategory  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(VoteCategory $record)

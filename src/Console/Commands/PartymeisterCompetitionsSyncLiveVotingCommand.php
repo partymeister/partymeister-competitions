@@ -8,8 +8,6 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class PartymeisterCompetitionsSyncLiveVotingCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsSyncLiveVotingCommand extends Command
 {

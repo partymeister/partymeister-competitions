@@ -9,8 +9,6 @@ use Partymeister\Competitions\Models\CompetitionPrize;
 
 /**
  * Class CompetitionPrizeService
- *
- * @package Partymeister\Competitions\Services
  */
 class CompetitionPrizeService extends BaseService
 {
@@ -21,6 +19,7 @@ class CompetitionPrizeService extends BaseService
 
     /**
      * @param $request
+     *
      * @throws \Exception
      */
     public static function createOrUpdatePrizes($request)

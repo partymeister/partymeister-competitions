@@ -12,8 +12,6 @@ use Partymeister\Competitions\Services\Component\ComponentEntryService;
 
 /**
  * Class ComponentEntriesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\Component
  */
 class ComponentEntriesController extends ComponentController
 {
@@ -34,7 +32,7 @@ class ComponentEntriesController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -53,7 +51,7 @@ class ComponentEntriesController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ComponentEntry $record
+     * @param  ComponentEntry  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function edit(ComponentEntry $record)
@@ -68,8 +66,8 @@ class ComponentEntriesController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ComponentEntry $record
+     * @param  Request  $request
+     * @param  ComponentEntry  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, ComponentEntry $record)

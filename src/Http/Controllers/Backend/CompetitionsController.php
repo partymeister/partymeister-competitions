@@ -13,8 +13,6 @@ use Partymeister\Competitions\Services\CompetitionService;
 
 /**
  * Class CompetitionsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class CompetitionsController extends Controller
 {
@@ -24,6 +22,7 @@ class CompetitionsController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -58,7 +57,7 @@ class CompetitionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CompetitionRequest $request
+     * @param  CompetitionRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CompetitionRequest $request)
@@ -93,7 +92,7 @@ class CompetitionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Competition $record
+     * @param  Competition  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Competition $record)
@@ -113,8 +112,8 @@ class CompetitionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param CompetitionRequest $request
-     * @param Competition $record
+     * @param  CompetitionRequest  $request
+     * @param  Competition  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CompetitionRequest $request, Competition $record)
@@ -139,7 +138,7 @@ class CompetitionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Competition $record
+     * @param  Competition  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Competition $record)

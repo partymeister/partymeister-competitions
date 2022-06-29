@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\ManualVoteService;
 
 /**
  * Class ManualVotesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class ManualVotesController extends ApiController
 {
@@ -122,7 +120,7 @@ class ManualVotesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param ManualVoteRequest $request
+     * @param  ManualVoteRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ManualVoteRequest $request)
@@ -185,7 +183,7 @@ class ManualVotesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param ManualVote $record
+     * @param  ManualVote  $record
      * @return ManualVoteResource
      */
     public function show(ManualVote $record)
@@ -249,8 +247,8 @@ class ManualVotesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param ManualVoteRequest $request
-     * @param ManualVote $record
+     * @param  ManualVoteRequest  $request
+     * @param  ManualVote  $record
      * @return ManualVoteResource
      */
     public function update(ManualVoteRequest $request, ManualVote $record)
@@ -317,7 +315,7 @@ class ManualVotesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param ManualVote $record
+     * @param  ManualVote  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(ManualVote $record)

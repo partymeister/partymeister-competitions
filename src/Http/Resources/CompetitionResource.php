@@ -98,7 +98,7 @@ class CompetitionResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -107,9 +107,9 @@ class CompetitionResource extends BaseResource
             'id'                        => (int) $this->id,
             'name'                      => $this->name,
             'competition_type'          => new CompetitionTypeResource($this->competition_type),
-            'has_prizegiving'           => (boolean) $this->has_prizegiving,
-            'upload_enabled'            => (boolean) $this->upload_enabled,
-            'voting_enabled'            => (boolean) $this->voting_enabled,
+            'has_prizegiving'           => (bool) $this->has_prizegiving,
+            'upload_enabled'            => (bool) $this->upload_enabled,
+            'voting_enabled'            => (bool) $this->voting_enabled,
             'sort_position'             => (int) $this->sort_position,
             'prizegiving_sort_position' => (int) $this->prizegiving_sort_position,
             'vote_categories'           => VoteCategoryResource::collection($this->vote_categories),

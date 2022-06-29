@@ -19,8 +19,6 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class ComponentEntryUploads
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentEntryUploads
 {
@@ -54,8 +52,8 @@ class ComponentEntryUploads
     /**
      * ComponentEntryUploads constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentEntryUpload $component
+     * @param  PageVersionComponent  $pageVersionComponent
+     * @param  ComponentEntryUpload  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -66,8 +64,9 @@ class ComponentEntryUploads
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
+     *
      * @throws GuzzleException
      */
     public function index(Request $request)
@@ -96,7 +95,6 @@ class ComponentEntryUploads
         ];
 
         if (! is_null($request->get('entry_id'))) {
-
             $this->record = Entry::find($request->get('entry_id'));
             if (is_null($this->record) || $visitor->id != $this->record->visitor_id) {
                 return redirect()->back();
@@ -162,6 +160,7 @@ class ComponentEntryUploads
 
     /**
      * @return RedirectResponse|Redirector
+     *
      * @throws GuzzleException
      */
     protected function patch()

@@ -9,8 +9,6 @@ use Motor\Backend\Grid\Renderers\DecorationRenderer;
 
 /**
  * Class EntryGrid
- *
- * @package Partymeister\Competitions\Grids
  */
 class EntryGrid extends Grid
 {
@@ -24,9 +22,9 @@ class EntryGrid extends Grid
              ->renderer(BladeRenderer::class, ['template' => 'partymeister-competitions::grid.entry_name']);
         $this->addColumn('sort_position', trans('partymeister-competitions::backend/entries.sort_position_short'), true)
              ->renderer(BladeRenderer::class, [
-                     'template' => 'partymeister-competitions::grid.input_callback',
-                     'field'    => 'sort_position',
-                 ]);
+                 'template' => 'partymeister-competitions::grid.input_callback',
+                 'field'    => 'sort_position',
+             ]);
         $this->addColumn('last_file_upload', trans('partymeister-competitions::backend/entries.last_file_uploaded_at'))
              ->renderer(DateRenderer::class)
              ->style('min-width: 100px;');

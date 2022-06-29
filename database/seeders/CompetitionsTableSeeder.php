@@ -7,11 +7,9 @@ use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class AccountsTableSeeder
- * @package Partymeister\Accounting\Database\Seeds
  */
 class CompetitionsTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

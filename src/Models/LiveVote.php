@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Competition $competition
  * @property-read Entry $entry
+ *
  * @method static Builder|LiveVote newModelQuery()
  * @method static Builder|LiveVote newQuery()
  * @method static Builder|LiveVote query()

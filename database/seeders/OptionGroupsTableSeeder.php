@@ -3,17 +3,15 @@
 namespace Partymeister\Competitions\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Partymeister\Competitions\Models\OptionGroup;
 use Partymeister\Core\Models\User;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class AccountsTableSeeder
- * @package Partymeister\Accounting\Database\Seeds
  */
 class OptionGroupsTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -28,8 +26,8 @@ class OptionGroupsTableSeeder extends Seeder
                 'options' => [
                     'Test 1',
                     'Test 2',
-                    'Test 3'
-                ]
+                    'Test 3',
+                ],
             ],
             [
                 'name'    => 'Amiga',
@@ -37,8 +35,8 @@ class OptionGroupsTableSeeder extends Seeder
                 'options' => [
                     'A500 ECS',
                     'A1200 AGA',
-                    '16:9'
-                ]
+                    '16:9',
+                ],
             ],
             [
                 'name'    => 'PC',
@@ -47,8 +45,8 @@ class OptionGroupsTableSeeder extends Seeder
                     'Windows',
                     'Linux',
                     'Mac OS',
-                    'Web'
-                ]
+                    'Web',
+                ],
             ],
             [
                 'name'    => 'Oldskool',
@@ -65,7 +63,7 @@ class OptionGroupsTableSeeder extends Seeder
                     'Sega Master System',
                     'Sega Megadrive',
                     'Atari 8bit',
-                ]
+                ],
             ],
             [
                 'name'    => 'ASCII / ANSI',
@@ -75,8 +73,8 @@ class OptionGroupsTableSeeder extends Seeder
                     'PC ASCII',
                     'Amiga ANSI',
                     'Amiga ASCII',
-                    'PETSCII'
-                ]
+                    'PETSCII',
+                ],
             ],
             [
                 'name'    => 'Photo',
@@ -85,7 +83,7 @@ class OptionGroupsTableSeeder extends Seeder
                     'Pure Photo',
                     'Retouched',
                     'Collage',
-                ]
+                ],
             ],
             [
                 'name'    => '256 Byte Intro',
@@ -94,7 +92,7 @@ class OptionGroupsTableSeeder extends Seeder
                     'Dosbox X',
                     'Dosbox',
                     'Freedos',
-                ]
+                ],
             ],
             [
                 'name'    => 'Oldskool Graphics',
@@ -113,20 +111,20 @@ class OptionGroupsTableSeeder extends Seeder
                     'Gameboy Advanced',
                     'Gameboy Color',
                     'ZX Spectrum',
-                ]
+                ],
             ],
         ];
 
         foreach ($optionGroups as $group) {
             DB::table('option_groups')->insert([
-                'name'       => $group[ 'name' ],
-                'type'       => $group[ 'type' ],
+                'name'       => $group['name'],
+                'type'       => $group['type'],
                 'created_by' => User::get()->first()->id,
                 'updated_by' => User::get()->first()->id,
             ]);
 
-            $optionGroup = OptionGroup::where('name', $group[ 'name' ])->first();
-            foreach ($group[ 'options' ] as $key => $option) {
+            $optionGroup = OptionGroup::where('name', $group['name'])->first();
+            foreach ($group['options'] as $key => $option) {
                 DB::table('options')->insert([
                     'name'            => $option,
                     'sort_position'   => $key,

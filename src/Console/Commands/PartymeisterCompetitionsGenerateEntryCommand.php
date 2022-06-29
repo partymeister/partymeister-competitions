@@ -11,8 +11,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class PartymeisterCompetitionsGenerateEntryCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsGenerateEntryCommand extends Command
 {

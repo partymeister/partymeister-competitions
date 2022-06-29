@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class EntryRequest
- *
- * @package Partymeister\Competitions\Http\Requests\Backend
  */
 class EntryRequest extends Request
 {
@@ -261,40 +259,40 @@ class EntryRequest extends Request
                 }
 
                 return [
-                        'competition_id'                              => 'required|integer',
-                        'visitor_id'                                  => 'nullable|integer',
-                        'ip_address'                                  => 'nullable',
-                        'sort_position'                               => 'nullable|integer',
-                        'title'                                       => 'required',
-                        'author'                                      => 'required',
-                        'filesize'                                    => 'nullable',
-                        'platform'                                    => 'nullable',
-                        'description'                                 => 'nullable',
-                        'organizer_description'                       => 'nullable',
-                        'running_time'                                => 'nullable',
-                        'custom_option'                               => 'nullable',
-                        'allow_release'                               => 'nullable|boolean',
-                        'is_remote'                                   => 'nullable|boolean',
-                        'is_recorded'                                 => 'nullable|boolean',
-                        'is_prepared'                                 => 'nullable|boolean',
-                        'upload_enabled'                              => 'nullable|boolean',
-                        'composer_not_member_of_copyright_collective' => 'nullable|boolean',
-                        'composer_name'                               => 'nullable',
-                        'composer_email'                              => 'nullable|email',
-                        'composer_phone'                              => 'nullable',
-                        'composer_address'                            => 'nullable',
-                        'composer_zip'                                => 'nullable',
-                        'composer_city'                               => 'nullable',
-                        'composer_country_iso_3166_1'                 => 'nullable',
-                        'final_file_media_id'                         => 'nullable|integer',
-                        'status'                                      => 'nullable|integer',
-                        'discord_name'                                => 'nullable',
-                        'file'                                        => 'nullable|file',
-                        'screenshot'                                  => 'nullable|image',
-                        'video'                                       => 'nullable|file',
-                        'audio'                                       => 'nullable|file',
-                        'config_file'                                 => 'nullable|file',
-                    ] + $author;
+                    'competition_id'                              => 'required|integer',
+                    'visitor_id'                                  => 'nullable|integer',
+                    'ip_address'                                  => 'nullable',
+                    'sort_position'                               => 'nullable|integer',
+                    'title'                                       => 'required',
+                    'author'                                      => 'required',
+                    'filesize'                                    => 'nullable',
+                    'platform'                                    => 'nullable',
+                    'description'                                 => 'nullable',
+                    'organizer_description'                       => 'nullable',
+                    'running_time'                                => 'nullable',
+                    'custom_option'                               => 'nullable',
+                    'allow_release'                               => 'nullable|boolean',
+                    'is_remote'                                   => 'nullable|boolean',
+                    'is_recorded'                                 => 'nullable|boolean',
+                    'is_prepared'                                 => 'nullable|boolean',
+                    'upload_enabled'                              => 'nullable|boolean',
+                    'composer_not_member_of_copyright_collective' => 'nullable|boolean',
+                    'composer_name'                               => 'nullable',
+                    'composer_email'                              => 'nullable|email',
+                    'composer_phone'                              => 'nullable',
+                    'composer_address'                            => 'nullable',
+                    'composer_zip'                                => 'nullable',
+                    'composer_city'                               => 'nullable',
+                    'composer_country_iso_3166_1'                 => 'nullable',
+                    'final_file_media_id'                         => 'nullable|integer',
+                    'status'                                      => 'nullable|integer',
+                    'discord_name'                                => 'nullable',
+                    'file'                                        => 'nullable|file',
+                    'screenshot'                                  => 'nullable|image',
+                    'video'                                       => 'nullable|file',
+                    'audio'                                       => 'nullable|file',
+                    'config_file'                                 => 'nullable|file',
+                ] + $author;
             case 'PUT':
             case 'PATCH':
                 return [];

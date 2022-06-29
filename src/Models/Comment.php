@@ -24,6 +24,7 @@ use Partymeister\Core\Models\Visitor;
  * @property Carbon|null $updated_at
  * @property-read Model|Eloquent $model
  * @property-read Visitor|null $visitor
+ *
  * @method static Builder|Comment newModelQuery()
  * @method static Builder|Comment newQuery()
  * @method static Builder|Comment query()

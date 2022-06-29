@@ -7,8 +7,6 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class CompetitionPrizeForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class CompetitionPrizeForm extends Form
 {

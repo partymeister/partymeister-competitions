@@ -10,14 +10,12 @@ use Partymeister\Core\Models\Callback;
 
 /**
  * Class CallbackHelper
- *
- * @package Partymeister\Competitions\Helpers
  */
 class CallbackHelper
 {
     /**
-     * @param Competition $competition
-     * @return Builder|Model|object|Callback|null
+     * @param  Competition  $competition
+     * @return Builder|Model|object|callable|null
      */
     public static function competitionStarts(Competition $competition)
     {
@@ -42,7 +40,7 @@ class CallbackHelper
     }
 
     /**
-     * @return Builder|Model|object|Callback|null
+     * @return Builder|Model|object|callable|null
      */
     public static function prizegivingStarts()
     {
@@ -67,8 +65,8 @@ class CallbackHelper
     }
 
     /**
-     * @param Competition $competition
-     * @return Builder|Model|object|Callback|null
+     * @param  Competition  $competition
+     * @return Builder|Model|object|callable|null
      */
     public static function competitionEnds(Competition $competition)
     {
@@ -94,8 +92,8 @@ class CallbackHelper
     }
 
     /**
-     * @param Entry $entry
-     * @return Builder|Model|object|Callback|null
+     * @param  Entry  $entry
+     * @return Builder|Model|object|callable|null
      */
     public static function livevoting(Entry $entry)
     {

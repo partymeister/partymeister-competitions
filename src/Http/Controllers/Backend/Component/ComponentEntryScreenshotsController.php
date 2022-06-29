@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\Component\ComponentEntryScreenshotService
 
 /**
  * Class ComponentEntryScreenshotsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\Component
  */
 class ComponentEntryScreenshotsController extends ComponentController
 {
@@ -33,7 +31,7 @@ class ComponentEntryScreenshotsController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -52,7 +50,7 @@ class ComponentEntryScreenshotsController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ComponentEntryScreenshot $record
+     * @param  ComponentEntryScreenshot  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function edit(ComponentEntryScreenshot $record)
@@ -67,8 +65,8 @@ class ComponentEntryScreenshotsController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ComponentEntryScreenshot $record
+     * @param  Request  $request
+     * @param  ComponentEntryScreenshot  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, ComponentEntryScreenshot $record)

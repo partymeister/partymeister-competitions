@@ -14,7 +14,7 @@ return [
     'type'       => 'Type',
     'types'      => [
         'multiple' => 'Multiple choice',
-        'single'   => 'Single choice'
+        'single'   => 'Single choice',
     ],
     'options'    => 'Options',
     'add_option' => 'Add option',

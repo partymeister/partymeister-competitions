@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class VoteRequest
- *
- * @package Partymeister\Competitions\Http\Requests\Backend
  */
 class VoteRequest extends Request
 {

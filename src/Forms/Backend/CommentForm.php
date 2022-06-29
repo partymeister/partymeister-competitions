@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class CommentForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class CommentForm extends Form
 {

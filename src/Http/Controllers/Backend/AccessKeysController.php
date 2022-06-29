@@ -13,8 +13,6 @@ use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
  * Class AccessKeysController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class AccessKeysController extends Controller
 {
@@ -24,6 +22,7 @@ class AccessKeysController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -56,7 +55,7 @@ class AccessKeysController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param AccessKeyRequest $request
+     * @param  AccessKeyRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(AccessKeyRequest $request)
@@ -91,7 +90,7 @@ class AccessKeysController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param AccessKey $record
+     * @param  AccessKey  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(AccessKey $record)
@@ -109,8 +108,8 @@ class AccessKeysController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param AccessKeyRequest $request
-     * @param AccessKey $record
+     * @param  AccessKeyRequest  $request
+     * @param  AccessKey  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(AccessKeyRequest $request, AccessKey $record)
@@ -135,7 +134,7 @@ class AccessKeysController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param AccessKey $record
+     * @param  AccessKey  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(AccessKey $record)

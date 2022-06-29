@@ -12,8 +12,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class EntryService
- *
- * @package Partymeister\Competitions\Services
  */
 class EntryService extends BaseService
 {

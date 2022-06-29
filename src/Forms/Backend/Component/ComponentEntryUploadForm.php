@@ -7,8 +7,6 @@ use Motor\CMS\Models\Navigation;
 
 /**
  * Class ComponentEntryUploadForm
- *
- * @package Partymeister\Competitions\Forms\Backend\Component
  */
 class ComponentEntryUploadForm extends Form
 {

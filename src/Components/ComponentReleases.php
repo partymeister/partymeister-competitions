@@ -10,8 +10,6 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class ComponentReleases
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentReleases
 {
@@ -28,7 +26,7 @@ class ComponentReleases
     /**
      * ComponentReleases constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
+     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -36,7 +34,7 @@ class ComponentReleases
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)

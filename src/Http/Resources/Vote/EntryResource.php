@@ -6,10 +6,8 @@ use Illuminate\Support\Facades\Session;
 use Motor\Backend\Helpers\Filesize;
 use Motor\Backend\Http\Resources\BaseResource;
 use Motor\Backend\Http\Resources\MediaResource;
-use Partymeister\Competitions\Http\Resources\OptionResource;
 use Partymeister\Competitions\Http\Resources\VoteResource;
 use Partymeister\Competitions\Models\Vote;
-use Partymeister\Core\Http\Resources\VisitorResource;
 
 /**
  * @OA\Schema(
@@ -156,14 +154,12 @@ class EntryResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
     {
-
         if ($this->competition && $this->competition->vote_categories && $this->competition->vote_categories[0]) {
-
             $vote = Vote::where('entry_id', $this->id)
                         ->where('vote_category_id', $this->competition->vote_categories[0]->id)
                         ->where('visitor_id', Session::get('visitor')) //$params->get('visitor_id'))

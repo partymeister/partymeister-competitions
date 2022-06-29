@@ -11,8 +11,6 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class LiveVoteUpdated
- *
- * @package Partymeister\Competitions\Events
  */
 class LiveVoteUpdated
 {
@@ -28,7 +26,7 @@ class LiveVoteUpdated
      *
      * LiveVoteUpdated constructor.
      *
-     * @param LiveVote $liveVote
+     * @param  LiveVote  $liveVote
      */
     public function __construct(LiveVote $liveVote)
     {

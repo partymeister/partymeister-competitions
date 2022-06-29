@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class OptionForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class OptionForm extends Form
 {

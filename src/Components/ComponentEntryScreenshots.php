@@ -19,8 +19,6 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class ComponentEntryScreenshots
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentEntryScreenshots
 {
@@ -54,8 +52,8 @@ class ComponentEntryScreenshots
     /**
      * ComponentEntryScreenshots constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentEntryScreenshot $component
+     * @param  PageVersionComponent  $pageVersionComponent
+     * @param  ComponentEntryScreenshot  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -66,8 +64,9 @@ class ComponentEntryScreenshots
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
+     *
      * @throws GuzzleException
      */
     public function index(Request $request)
@@ -123,6 +122,7 @@ class ComponentEntryScreenshots
 
     /**
      * @return RedirectResponse|Redirector
+     *
      * @throws GuzzleException
      */
     protected function patch()

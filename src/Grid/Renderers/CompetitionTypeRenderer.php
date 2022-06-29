@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Class CompetitionTypeRenderer
- *
- * @package Partymeister\Competitions\Grid\Renderers
  */
 class CompetitionTypeRenderer
 {

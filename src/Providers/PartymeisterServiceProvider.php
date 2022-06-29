@@ -27,8 +27,6 @@ use Partymeister\Competitions\Models\VoteCategory;
 
 /**
  * Class PartymeisterServiceProvider
- *
- * @package Partymeister\Competitions\Providers
  */
 class PartymeisterServiceProvider extends ServiceProvider
 {

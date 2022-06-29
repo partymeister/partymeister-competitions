@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class VoteCategoryForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class VoteCategoryForm extends Form
 {

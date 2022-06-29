@@ -74,6 +74,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read \Illuminate\Database\Eloquent\Collection|Media[] $media
  * @property-read \Illuminate\Database\Eloquent\Collection|Option[] $options
  * @property-read Visitor|null $visitor
+ *
  * @method static Builder|Entry filteredBy(Filter $filter, $column)
  * @method static Builder|Entry filteredByMultiple(Filter $filter)
  * @method static Builder|Entry newModelQuery()
@@ -183,7 +184,8 @@ class Entry extends Model implements HasMedia
     ];
 
     /**
-     * @param Media|null $media
+     * @param  Media|null  $media
+     *
      * @throws InvalidManipulation
      */
     public function registerMediaConversions(Media $media = null): void

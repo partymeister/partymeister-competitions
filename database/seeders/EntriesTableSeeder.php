@@ -8,11 +8,9 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class AccountsTableSeeder
- * @package Partymeister\Accounting\Database\Seeds
  */
 class EntriesTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

@@ -7,8 +7,6 @@ use Motor\Backend\Grid\Renderers\DateRenderer;
 
 /**
  * Class AccessKeyGrid
- *
- * @package Partymeister\Competitions\Grids
  */
 class AccessKeyGrid extends Grid
 {

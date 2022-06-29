@@ -12,13 +12,12 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Class ExportController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\CompetitionPrizes
  */
 class ExportController extends Controller
 {
     /**
      * @return StreamedResponse
+     *
      * @throws \setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException
      * @throws \setasign\Fpdi\PdfParser\Filter\FilterException
      * @throws \setasign\Fpdi\PdfParser\PdfParserException
@@ -46,8 +45,9 @@ class ExportController extends Controller
     }
 
     /**
-     * @param CompetitionPrizeRequest $request
+     * @param  CompetitionPrizeRequest  $request
      * @return StreamedResponse
+     *
      * @throws \setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException
      * @throws \setasign\Fpdi\PdfParser\Filter\FilterException
      * @throws \setasign\Fpdi\PdfParser\PdfParserException
@@ -68,7 +68,7 @@ class ExportController extends Controller
 
         if ($competitions->count() == 0) {
             // FIXME
-            die("no competitions");
+            exit('no competitions');
         }
 
         $results = VoteService::getAllVotesByRank('DESC');

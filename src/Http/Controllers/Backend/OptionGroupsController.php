@@ -13,8 +13,6 @@ use Partymeister\Competitions\Services\OptionGroupService;
 
 /**
  * Class OptionGroupsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class OptionGroupsController extends Controller
 {
@@ -24,6 +22,7 @@ class OptionGroupsController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -56,7 +55,7 @@ class OptionGroupsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param OptionGroupRequest $request
+     * @param  OptionGroupRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(OptionGroupRequest $request)
@@ -91,7 +90,7 @@ class OptionGroupsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param OptionGroup $record
+     * @param  OptionGroup  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(OptionGroup $record)
@@ -109,8 +108,8 @@ class OptionGroupsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param OptionGroupRequest $request
-     * @param OptionGroup $record
+     * @param  OptionGroupRequest  $request
+     * @param  OptionGroup  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(OptionGroupRequest $request, OptionGroup $record)
@@ -135,7 +134,7 @@ class OptionGroupsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param OptionGroup $record
+     * @param  OptionGroup  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(OptionGroup $record)

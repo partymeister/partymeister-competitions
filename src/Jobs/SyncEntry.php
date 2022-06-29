@@ -16,8 +16,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class SyncEntry
- *
- * @package Partymeister\Competitions\Jobs
  */
 class SyncEntry implements ShouldQueue
 {
@@ -33,7 +31,7 @@ class SyncEntry implements ShouldQueue
      *
      * SyncEntry constructor.
      *
-     * @param Entry $entry
+     * @param  Entry  $entry
      */
     public function __construct(Entry $entry)
     {

@@ -7,8 +7,6 @@ use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class VoteForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class VoteForm extends Form
 {

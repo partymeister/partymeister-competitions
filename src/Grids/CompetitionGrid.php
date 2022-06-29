@@ -8,8 +8,6 @@ use Motor\Backend\Grid\Renderers\BooleanRenderer;
 
 /**
  * Class CompetitionGrid
- *
- * @package Partymeister\Competitions\Grids
  */
 class CompetitionGrid extends Grid
 {
@@ -24,9 +22,9 @@ class CompetitionGrid extends Grid
 
         $this->addColumn('sort_position', trans('partymeister-competitions::backend/competitions.sort_position_short'), true)
              ->renderer(BladeRenderer::class, [
-                     'template' => 'partymeister-competitions::grid.input_callback',
-                     'field'    => 'sort_position',
-                 ]);
+                 'template' => 'partymeister-competitions::grid.input_callback',
+                 'field'    => 'sort_position',
+             ]);
 
         $this->addColumn('has_prizegiving', trans('partymeister-competitions::backend/competitions.has_prizegiving_short'), true)
              ->renderer(BooleanRenderer::class);

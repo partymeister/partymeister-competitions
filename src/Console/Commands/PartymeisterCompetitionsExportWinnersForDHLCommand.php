@@ -10,8 +10,6 @@ use Symfony\Component\Intl\Countries;
 
 /**
  * Class PartymeisterCompetitionsExportVotesToCSVCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
 {
@@ -147,7 +145,7 @@ class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
                     ];
 
                     foreach ($record as $key => $value) {
-                        $record[$key] = mb_convert_encoding($value, "Windows-1252", "UTF-8");
+                        $record[$key] = mb_convert_encoding($value, 'Windows-1252', 'UTF-8');
                     }
                     $records[$productCountry][] = $record;
                     $records['ALL'][] = $record;
@@ -159,7 +157,7 @@ class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
         foreach ($records as $destination => $data) {
             //load the CSV document from a string
             $csv = Writer::createFromString();
-            $csv->setEnclosure("\"");
+            $csv->setEnclosure('"');
             $csv->setDelimiter(';');
 
             //insert the header

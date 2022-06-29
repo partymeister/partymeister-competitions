@@ -15,14 +15,12 @@ use Partymeister\Competitions\Models\VoteCategory;
 
 /**
  * Class VotesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api\Frontend
  */
 class VotesController extends ApiController
 {
     /**
-     * @param Request $request
-     * @param         $api_token
+     * @param  Request  $request
+     * @param    $api_token
      * @return JsonResponse
      */
     public function store(Request $request, $api_token)

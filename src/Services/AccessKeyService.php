@@ -7,8 +7,6 @@ use Partymeister\Competitions\Models\AccessKey;
 
 /**
  * Class AccessKeyService
- *
- * @package Partymeister\Competitions\Services
  */
 class AccessKeyService extends BaseService
 {
@@ -19,6 +17,7 @@ class AccessKeyService extends BaseService
 
     /**
      * @param $request
+     *
      * @throws \Exception
      */
     public static function generate($request)

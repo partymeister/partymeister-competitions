@@ -13,5 +13,5 @@ return [
         'DE' => 'PAECKS.DEU',
         'EU' => 'PAK02.EU',
         'WORLD' => '',
-    ]
+    ],
 ];

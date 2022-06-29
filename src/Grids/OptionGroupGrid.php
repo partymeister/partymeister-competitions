@@ -8,8 +8,6 @@ use Motor\Backend\Grid\Renderers\TranslateRenderer;
 
 /**
  * Class OptionGroupGrid
- *
- * @package Partymeister\Competitions\Grids
  */
 class OptionGroupGrid extends Grid
 {

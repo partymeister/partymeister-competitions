@@ -10,8 +10,6 @@ use Symfony\Component\Intl\Countries;
 
 /**
  * Class EntryUploadForm
- *
- * @package Partymeister\Competitions\Forms\Component
  */
 class EntryUploadForm extends Form
 {
@@ -54,40 +52,40 @@ class EntryUploadForm extends Form
 
         $this->add('reload_on_change', 'hidden', ['attr' => ['id' => 'reload_on_change']])
              ->add('title', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.title'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.title'),
+                 'rules' => 'required',
+             ])
              ->add('author', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.author'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.author'),
+                 'rules' => 'required',
+             ])
              ->add('description', 'textarea', ['label' => trans('partymeister-competitions::backend/entries.description')])
              ->add('organizer_description', 'textarea', ['label' => trans('partymeister-competitions::backend/entries.organizer_description')])
              ->add('custom_option', 'text', ['label' => trans('partymeister-competitions::backend/entries.custom_option')])
              ->add('author_name', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.name'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.name'),
+                 'rules' => 'required',
+             ])
              ->add('author_email', 'email', [
-                     'label' => trans('partymeister-competitions::backend/entries.email'),
-                     'rules' => ['required'],
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.email'),
+                 'rules' => ['required'],
+             ])
              ->add('author_phone', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.phone'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.phone'),
+                 'rules' => 'required',
+             ])
              ->add('author_address', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.address'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.address'),
+                 'rules' => 'required',
+             ])
              ->add('author_zip', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.zip'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.zip'),
+                 'rules' => 'required',
+             ])
              ->add('author_city', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.city'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.city'),
+                 'rules' => 'required',
+             ])
              ->add('author_country_iso_3166_1', 'select', [
                  'label'         => trans('partymeister-competitions::backend/entries.country'),
                  'default_value' => 'DE',
@@ -133,9 +131,9 @@ class EntryUploadForm extends Form
             }
             if ($data['competition']->competition_type->has_video) {
                 $this->add('video', 'file_video', [
-                        'label' => trans('partymeister-competitions::backend/entries.video'),
-                        'model' => Entry::class,
-                    ]);
+                    'label' => trans('partymeister-competitions::backend/entries.video'),
+                    'model' => Entry::class,
+                ]);
             }
 
             if ($data['competition']->competition_type->has_config_file) {
@@ -154,9 +152,9 @@ class EntryUploadForm extends Form
 
             if ($data['competition']->competition_type->has_composer) {
                 $this->add('composer_name', 'text', [
-                        'label' => trans('partymeister-competitions::backend/entries.name'),
-                        'rules' => 'required',
-                    ])
+                    'label' => trans('partymeister-competitions::backend/entries.name'),
+                    'rules' => 'required',
+                ])
                      ->add('composer_email', 'email', [
                          'label' => trans('partymeister-competitions::backend/entries.email'),
                          'rules' => ['required'],
@@ -170,13 +168,13 @@ class EntryUploadForm extends Form
                          'rules' => 'required',
                      ])
                      ->add('composer_zip', 'text', [
-                             'label' => trans('partymeister-competitions::backend/entries.zip'),
-                             'rules' => 'required',
-                         ])
+                         'label' => trans('partymeister-competitions::backend/entries.zip'),
+                         'rules' => 'required',
+                     ])
                      ->add('composer_city', 'text', [
-                             'label' => trans('partymeister-competitions::backend/entries.city'),
-                             'rules' => 'required',
-                         ])
+                         'label' => trans('partymeister-competitions::backend/entries.city'),
+                         'rules' => 'required',
+                     ])
                      ->add('composer_country_iso_3166_1', 'select', [
                          'label'         => trans('partymeister-competitions::backend/entries.country'),
                          'default_value' => 'DE',

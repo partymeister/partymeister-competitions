@@ -8,7 +8,6 @@ use Illuminate\Database\Migrations\Migration;
  */
 class CreateCompetitionsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -35,7 +34,6 @@ class CreateCompetitionsTable extends Migration
             $table->foreign('competition_type_id')->references('id')->on('competition_types')->onDelete('set null');
         });
     }
-
 
     /**
      * Reverse the migrations.
