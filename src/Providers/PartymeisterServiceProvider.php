@@ -117,10 +117,10 @@ class PartymeisterServiceProvider extends ServiceProvider
 
     public function translations()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'partymeister-competitions');
+        $this->loadTranslationsFrom(__DIR__.'/../../lang', 'partymeister-competitions');
 
         $this->publishes([
-            __DIR__.'/../../resources/lang' => resource_path('lang/vendor/partymeister-competitions'),
+            __DIR__.'/../../lang' => resource_path('lang/vendor/partymeister-competitions'),
         ], 'motor-backend-translations');
     }
 
