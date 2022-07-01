@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Motor\Backend\Models\User;
+use Motor\Admin\Models\User;
 use Partymeister\Competitions\Models\CompetitionType;
 
 class CompetitionTypePolicy
