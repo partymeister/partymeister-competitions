@@ -11,8 +11,6 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class CompetitionSaved
- *
- * @package Partymeister\Competitions\Events
  */
 class CompetitionSaved
 {
@@ -28,7 +26,7 @@ class CompetitionSaved
      *
      * CompetitionSaved constructor.
      *
-     * @param Competition $competition
+     * @param  Competition  $competition
      */
     public function __construct(Competition $competition)
     {

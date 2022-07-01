@@ -33,6 +33,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read User $creator
  * @property-read User|null $eraser
  * @property-read User $updater
+ *
  * @method static Builder|CompetitionPrize filteredBy(Filter $filter, $column)
  * @method static Builder|CompetitionPrize filteredByMultiple(Filter $filter)
  * @method static Builder|CompetitionPrize newModelQuery()

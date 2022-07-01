@@ -229,7 +229,7 @@ class EntryResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -254,12 +254,12 @@ class EntryResource extends BaseResource
             'organizer_description'                       => $this->organizer_description,
             'running_time'                                => $this->running_time,
             'custom_option'                               => $this->custom_option,
-            'allow_release'                               => (boolean) $this->allow_release,
-            'is_remote'                                   => (boolean) $this->is_remote,
-            'is_recorded'                                 => (boolean) $this->is_recorded,
-            'is_prepared'                                 => (boolean) $this->is_prepared,
-            'upload_enabled'                              => (boolean) $this->upload_enabled,
-            'composer_not_member_of_copyright_collective' => (boolean) $this->composer_not_member_of_copyright_collective,
+            'allow_release'                               => (bool) $this->allow_release,
+            'is_remote'                                   => (bool) $this->is_remote,
+            'is_recorded'                                 => (bool) $this->is_recorded,
+            'is_prepared'                                 => (bool) $this->is_prepared,
+            'upload_enabled'                              => (bool) $this->upload_enabled,
+            'composer_not_member_of_copyright_collective' => (bool) $this->composer_not_member_of_copyright_collective,
             'author_name'                                 => $this->author_name,
             'author_email'                                => $this->author_email,
             'author_phone'                                => $this->author_phone,

@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
  * Class AccessKeysController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class AccessKeysController extends ApiController
 {
@@ -122,7 +120,7 @@ class AccessKeysController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param AccessKeyRequest $request
+     * @param  AccessKeyRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(AccessKeyRequest $request)
@@ -185,7 +183,7 @@ class AccessKeysController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param AccessKey $record
+     * @param  AccessKey  $record
      * @return AccessKeyResource
      */
     public function show(AccessKey $record)
@@ -249,8 +247,8 @@ class AccessKeysController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param AccessKeyRequest $request
-     * @param AccessKey $record
+     * @param  AccessKeyRequest  $request
+     * @param  AccessKey  $record
      * @return AccessKeyResource
      */
     public function update(AccessKeyRequest $request, AccessKey $record)
@@ -317,7 +315,7 @@ class AccessKeysController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param AccessKey $record
+     * @param  AccessKey  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(AccessKey $record)

@@ -8,8 +8,6 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class PartymeisterCompetitionsSyncEntriesCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsSyncEntriesCommand extends Command
 {

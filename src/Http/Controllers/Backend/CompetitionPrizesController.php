@@ -14,8 +14,6 @@ use Partymeister\Competitions\Services\CompetitionPrizeService;
 
 /**
  * Class CompetitionPrizesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class CompetitionPrizesController extends Controller
 {
@@ -25,6 +23,7 @@ class CompetitionPrizesController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -61,7 +60,7 @@ class CompetitionPrizesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CompetitionPrizeRequest $request
+     * @param  CompetitionPrizeRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CompetitionPrizeRequest $request)
@@ -96,7 +95,7 @@ class CompetitionPrizesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param CompetitionPrize $record
+     * @param  CompetitionPrize  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(CompetitionPrize $record)
@@ -114,8 +113,8 @@ class CompetitionPrizesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param CompetitionPrizeRequest $request
-     * @param CompetitionPrize $record
+     * @param  CompetitionPrizeRequest  $request
+     * @param  CompetitionPrize  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CompetitionPrizeRequest $request, CompetitionPrize $record)
@@ -140,7 +139,7 @@ class CompetitionPrizesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param CompetitionPrize $record
+     * @param  CompetitionPrize  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(CompetitionPrize $record)

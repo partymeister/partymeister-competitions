@@ -19,8 +19,6 @@ use Partymeister\Core\Services\StuhlService;
 
 /**
  * Class ComponentEntryUploads
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentEntryUploads
 {
@@ -54,8 +52,8 @@ class ComponentEntryUploads
     /**
      * ComponentEntryUploads constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentEntryUpload $component
+     * @param  PageVersionComponent  $pageVersionComponent
+     * @param  ComponentEntryUpload  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -66,8 +64,9 @@ class ComponentEntryUploads
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
+     *
      * @throws GuzzleException
      */
     public function index(Request $request)
@@ -146,6 +145,7 @@ class ComponentEntryUploads
 
     /**
      * @return RedirectResponse|Redirector
+     *
      * @throws GuzzleException
      */
     protected function patch()
@@ -186,9 +186,9 @@ class ComponentEntryUploads
     public function render()
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-                'entryUploadForm' => $this->entryUploadForm,
-                'record'          => $this->record,
-                'component'       => $this->component,
-            ]);
+            'entryUploadForm' => $this->entryUploadForm,
+            'record'          => $this->record,
+            'component'       => $this->component,
+        ]);
     }
 }

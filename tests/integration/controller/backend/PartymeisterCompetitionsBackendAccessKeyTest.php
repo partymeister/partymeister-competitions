@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Competitions\Models\AccessKey;
 
@@ -45,9 +43,8 @@ class PartymeisterCompetitionsBackendAccessKeyTest extends TestCase
         'model_has_permissions',
         'model_has_roles',
         'role_has_permissions',
-        'media'
+        'media',
     ];
-
 
     public function setUp()
     {
@@ -58,18 +55,16 @@ class PartymeisterCompetitionsBackendAccessKeyTest extends TestCase
         $this->addDefaults();
     }
 
-
     protected function addDefaults()
     {
-        $this->user   = create_test_superadmin();
+        $this->user = create_test_superadmin();
 
-        $this->readPermission   = create_test_permission_with_name('access_keys.read');
-        $this->writePermission  = create_test_permission_with_name('access_keys.write');
+        $this->readPermission = create_test_permission_with_name('access_keys.read');
+        $this->writePermission = create_test_permission_with_name('access_keys.write');
         $this->deletePermission = create_test_permission_with_name('access_keys.delete');
 
         $this->actingAs($this->user);
     }
-
 
     /** @test */
     public function can_see_grid_without_access_key()

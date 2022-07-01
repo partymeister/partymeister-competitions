@@ -78,6 +78,6 @@ return [
     'status_needs_feedback'  => 'Entry marked as needs feedback',
     'status_disqualified'    => 'Entry marked as disqualified',
     'status_not_preselected' => 'Entry marked as not preselected',
-    'comment_created'        => 'Entry comment created'
+    'comment_created'        => 'Entry comment created',
 
 ];

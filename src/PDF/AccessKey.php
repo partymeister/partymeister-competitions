@@ -4,8 +4,6 @@ namespace Partymeister\Competitions\PDF;
 
 /**
  * Class AccessKey
- *
- * @package Partymeister\Competitions\PDF
  */
 class AccessKey extends PDF
 {

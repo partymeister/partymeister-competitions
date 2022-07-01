@@ -26,6 +26,7 @@ use Motor\CMS\Models\PageVersionComponent;
  * @property-read Navigation|null $entry_detail_page
  * @property-read Navigation|null $entry_edit_page
  * @property-read Navigation|null $entry_screenshots_page
+ *
  * @method static Builder|ComponentEntry newModelQuery()
  * @method static Builder|ComponentEntry newQuery()
  * @method static Builder|ComponentEntry query()

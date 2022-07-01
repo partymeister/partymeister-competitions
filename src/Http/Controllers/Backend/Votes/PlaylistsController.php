@@ -12,13 +12,11 @@ use Partymeister\Slides\Services\PlaylistService;
 
 /**
  * Class PlaylistsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\Votes
  */
 class PlaylistsController extends Controller
 {
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse|Redirector
      */
     public function store(Request $request)
@@ -31,7 +29,7 @@ class PlaylistsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
@@ -40,7 +38,7 @@ class PlaylistsController extends Controller
         $specialVotes = VoteService::getAllSpecialVotesByRank();
 
         if (isset($specialVotes['entries'])) {
-            unset ($specialVotes['entries']);
+            unset($specialVotes['entries']);
         }
 
         foreach ($specialVotes as $entryKey => $entry) {

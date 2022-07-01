@@ -7,8 +7,6 @@ use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class ResultsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api\Votes
  */
 class ResultsController extends ApiController
 {

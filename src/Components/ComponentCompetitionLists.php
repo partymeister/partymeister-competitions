@@ -10,8 +10,6 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class ComponentCompetitionLists
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentCompetitionLists
 {
@@ -23,7 +21,7 @@ class ComponentCompetitionLists
     /**
      * ComponentCompetitionLists constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
+     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -31,7 +29,7 @@ class ComponentCompetitionLists
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)

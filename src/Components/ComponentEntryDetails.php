@@ -11,13 +11,10 @@ use Illuminate\View\View;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Entry;
-use Partymeister\Slides\Http\Resources\SlideResource;
 use Partymeister\Slides\Models\SlideTemplate;
 
 /**
  * Class ComponentEntryDetails
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentEntryDetails
 {
@@ -34,7 +31,7 @@ class ComponentEntryDetails
     /**
      * ComponentEntryDetails constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
+     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -42,7 +39,7 @@ class ComponentEntryDetails
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|View
      */
     public function index(Request $request)

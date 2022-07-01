@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\EntryService;
 
 /**
  * Class EntriesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class EntriesController extends ApiController
 {
@@ -122,7 +120,7 @@ class EntriesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param EntryRequest $request
+     * @param  EntryRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(EntryRequest $request)
@@ -185,7 +183,7 @@ class EntriesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param Entry $record
+     * @param  Entry  $record
      * @return EntryResource
      */
     public function show(Entry $record)
@@ -249,8 +247,8 @@ class EntriesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param EntryRequest $request
-     * @param Entry $record
+     * @param  EntryRequest  $request
+     * @param  Entry  $record
      * @return EntryResource
      */
     public function update(EntryRequest $request, Entry $record)
@@ -317,7 +315,7 @@ class EntriesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param Entry $record
+     * @param  Entry  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Entry $record)

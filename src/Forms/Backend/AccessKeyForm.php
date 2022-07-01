@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class AccessKeyForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class AccessKeyForm extends Form
 {

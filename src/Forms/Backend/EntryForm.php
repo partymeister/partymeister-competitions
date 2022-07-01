@@ -9,8 +9,6 @@ use Symfony\Component\Intl\Countries;
 
 /**
  * Class EntryForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class EntryForm extends Form
 {
@@ -44,13 +42,13 @@ class EntryForm extends Form
              ->add('reload_on_change', 'hidden', ['attr' => ['id' => 'reload_on_change']])
              ->add('sort_position', 'text', ['label' => trans('partymeister-competitions::backend/entries.sort_position')])
              ->add('title', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.title'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.title'),
+                 'rules' => 'required',
+             ])
              ->add('author', 'text', [
-                     'label' => trans('partymeister-competitions::backend/entries.author'),
-                     'rules' => 'required',
-                 ])
+                 'label' => trans('partymeister-competitions::backend/entries.author'),
+                 'rules' => 'required',
+             ])
              ->add('description', 'textarea', ['label' => trans('partymeister-competitions::backend/entries.description')])
              ->add('organizer_description', 'textarea', ['label' => trans('partymeister-competitions::backend/entries.organizer_description')])
              ->add('custom_option', 'text', ['label' => trans('partymeister-competitions::backend/entries.custom_option')])
@@ -91,9 +89,9 @@ class EntryForm extends Form
                  'label' => trans('partymeister-competitions::backend/entries.save'),
              ])
              ->add('file', 'file_file', [
-                     'label' => trans('partymeister-competitions::backend/entries.file'),
-                     'model' => Entry::class,
-                 ]);
+                 'label' => trans('partymeister-competitions::backend/entries.file'),
+                 'model' => Entry::class,
+             ]);
 
         if (isset($data['competition'])) {
             if ($data['competition']->competition_type->has_screenshot) {
@@ -118,15 +116,15 @@ class EntryForm extends Form
             }
             if ($data['competition']->competition_type->has_video) {
                 $this->add('video', 'file_video', [
-                        'label' => trans('partymeister-competitions::backend/entries.video'),
-                        'model' => Entry::class,
-                    ]);
+                    'label' => trans('partymeister-competitions::backend/entries.video'),
+                    'model' => Entry::class,
+                ]);
             }
             if ($data['competition']->competition_type->has_audio) {
                 $this->add('audio', 'file_audio', [
-                        'label' => trans('partymeister-competitions::backend/entries.audio'),
-                        'model' => Entry::class,
-                    ]);
+                    'label' => trans('partymeister-competitions::backend/entries.audio'),
+                    'model' => Entry::class,
+                ]);
             }
             if ($data['competition']->competition_type->has_filesize) {
                 $this->add('filesize', 'text', ['label' => trans('partymeister-competitions::backend/entries.filesize')]);

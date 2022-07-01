@@ -6,8 +6,6 @@ use Partymeister\Competitions\Events\LiveVoteUpdated;
 
 /**
  * Class SyncLiveVote
- *
- * @package Partymeister\Competitions\Listeners
  */
 class SyncLiveVote
 {
@@ -24,7 +22,7 @@ class SyncLiveVote
     /**
      * Handle the event.
      *
-     * @param LiveVoteUpdated $event
+     * @param  LiveVoteUpdated  $event
      */
     public function handle(LiveVoteUpdated $event)
     {

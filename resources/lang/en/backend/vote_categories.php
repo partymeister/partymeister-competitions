@@ -14,5 +14,5 @@ return [
     'points'           => 'Points',
     'has_negative'     => 'Allow -1 vote',
     'has_comment'      => 'Allow comment',
-    'has_special_vote' => 'Allow special vote'
+    'has_special_vote' => 'Allow special vote',
 ];

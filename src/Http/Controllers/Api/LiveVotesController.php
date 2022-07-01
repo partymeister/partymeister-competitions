@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\LiveVoteService;
 
 /**
  * Class LiveVotesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class LiveVotesController extends ApiController
 {
@@ -122,7 +120,7 @@ class LiveVotesController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param LiveVoteRequest $request
+     * @param  LiveVoteRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(LiveVoteRequest $request)
@@ -185,7 +183,7 @@ class LiveVotesController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param LiveVote $record
+     * @param  LiveVote  $record
      * @return LiveVoteResource
      */
     public function show(LiveVote $record)
@@ -249,8 +247,8 @@ class LiveVotesController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param LiveVoteRequest $request
-     * @param LiveVote $record
+     * @param  LiveVoteRequest  $request
+     * @param  LiveVote  $record
      * @return LiveVoteResource
      */
     public function update(LiveVoteRequest $request, LiveVote $record)
@@ -317,7 +315,7 @@ class LiveVotesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param LiveVote $record
+     * @param  LiveVote  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(LiveVote $record)

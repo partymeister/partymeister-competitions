@@ -6,8 +6,6 @@ use Partymeister\Competitions\Events\EntrySaved;
 
 /**
  * Class SyncEntry
- *
- * @package Partymeister\Competitions\Listeners
  */
 class SyncEntry
 {
@@ -24,7 +22,7 @@ class SyncEntry
     /**
      * Handle the event.
      *
-     * @param EntrySaved $event
+     * @param  EntrySaved  $event
      */
     public function handle(EntrySaved $event)
     {

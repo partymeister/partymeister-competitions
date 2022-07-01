@@ -13,8 +13,6 @@ use Partymeister\Competitions\Services\CompetitionTypeService;
 
 /**
  * Class CompetitionTypesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class CompetitionTypesController extends Controller
 {
@@ -24,6 +22,7 @@ class CompetitionTypesController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      * @throws \ReflectionException
      */
     public function index()
@@ -56,7 +55,7 @@ class CompetitionTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CompetitionTypeRequest $request
+     * @param  CompetitionTypeRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CompetitionTypeRequest $request)
@@ -91,7 +90,7 @@ class CompetitionTypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param CompetitionType $record
+     * @param  CompetitionType  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(CompetitionType $record)
@@ -109,8 +108,8 @@ class CompetitionTypesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param CompetitionTypeRequest $request
-     * @param CompetitionType $record
+     * @param  CompetitionTypeRequest  $request
+     * @param  CompetitionType  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CompetitionTypeRequest $request, CompetitionType $record)
@@ -135,7 +134,7 @@ class CompetitionTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param CompetitionType $record
+     * @param  CompetitionType  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(CompetitionType $record)

@@ -15,8 +15,6 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class SyncLiveVote
- *
- * @package Partymeister\Competitions\Jobs
  */
 class SyncLiveVote implements ShouldQueue
 {
@@ -32,7 +30,7 @@ class SyncLiveVote implements ShouldQueue
      *
      * SyncLiveVote constructor.
      *
-     * @param LiveVote $liveVote
+     * @param  LiveVote  $liveVote
      */
     public function __construct(LiveVote $liveVote)
     {

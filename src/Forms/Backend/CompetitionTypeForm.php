@@ -6,8 +6,6 @@ use Kris\LaravelFormBuilder\Form;
 
 /**
  * Class CompetitionTypeForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class CompetitionTypeForm extends Form
 {

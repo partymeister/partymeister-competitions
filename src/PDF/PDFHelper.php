@@ -4,8 +4,6 @@ namespace Partymeister\Competitions\PDF;
 
 /**
  * Class PDFHelper
- *
- * @package Partymeister\Competitions\PDF
  */
 class PDFHelper
 {
@@ -19,8 +17,8 @@ class PDFHelper
     }
 
     /**
-     * @param     $value
-     * @param int $dpi
+     * @param    $value
+     * @param  int  $dpi
      * @return float|int
      */
     public static function pixel2mm($value, $dpi = 300)
@@ -29,8 +27,8 @@ class PDFHelper
     }
 
     /**
-     * @param     $value
-     * @param int $dpi
+     * @param    $value
+     * @param  int  $dpi
      * @return float
      */
     public static function mm2pixel($value, $dpi = 300)
@@ -49,10 +47,10 @@ class PDFHelper
     }
 
     /**
-     * @param        $value
-     * @param int $decimals
-     * @param string $dec_point
-     * @param string $thousands_sep
+     * @param    $value
+     * @param  int  $decimals
+     * @param  string  $dec_point
+     * @param  string  $thousands_sep
      * @return string
      */
     public static function format_currency($value, $decimals = 2, $dec_point = ',', $thousands_sep = '.')
@@ -61,11 +59,11 @@ class PDFHelper
     }
 
     /**
-     * @param        $value
-     * @param int $decimals
-     * @param string $suffix
-     * @param string $dec_point
-     * @param string $thousands_sep
+     * @param    $value
+     * @param  int  $decimals
+     * @param  string  $suffix
+     * @param  string  $dec_point
+     * @param  string  $thousands_sep
      * @return string
      */
     public static function format_tax($value, $decimals = 2, $suffix = '%', $dec_point = ',', $thousands_sep = '.')
@@ -74,21 +72,21 @@ class PDFHelper
     }
 
     /**
-     * @param        $date
-     * @param string $format
+     * @param    $date
+     * @param  string  $format
      * @return string
      */
     public static function format_date($date, $format = '%d.%m.%Y')
     {
         if (! is_numeric($date)) {
-            if (count(explode("-", $date)) >= 3) {
+            if (count(explode('-', $date)) >= 3) {
                 $date = strtotime($date);
-            } elseif (count(explode(".", $date)) >= 3) {
+            } elseif (count(explode('.', $date)) >= 3) {
                 $day = substr($date, 0, 2);
                 $month = substr($date, 3, 2);
                 $year = substr($date, 6, 4);
                 $hours = substr($date, 11);
-                $date = strtotime($year."-".$month."-".$day." ".$hours);
+                $date = strtotime($year.'-'.$month.'-'.$day.' '.$hours);
             }
         }
 

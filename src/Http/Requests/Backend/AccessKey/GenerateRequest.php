@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class GenerateRequest
- *
- * @package Partymeister\Competitions\Http\Requests\Backend\AccessKey
  */
 class GenerateRequest extends Request
 {

@@ -8,8 +8,6 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class PartymeisterCompetitionsLinkEntryFilesCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
 {

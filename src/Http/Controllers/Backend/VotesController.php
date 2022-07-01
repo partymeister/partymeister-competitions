@@ -13,8 +13,6 @@ use Partymeister\Competitions\Services\VoteService;
 
 /**
  * Class VotesController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend
  */
 class VotesController extends Controller
 {
@@ -58,7 +56,7 @@ class VotesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param VoteRequest $request
+     * @param  VoteRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ManualVoteRequest $request)
@@ -93,7 +91,7 @@ class VotesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Vote $record
+     * @param  Vote  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Vote $record)
@@ -111,8 +109,8 @@ class VotesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param VoteRequest $request
-     * @param Vote $record
+     * @param  VoteRequest  $request
+     * @param  Vote  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(VoteRequest $request, Vote $record)
@@ -137,7 +135,7 @@ class VotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Vote $record
+     * @param  Vote  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Vote $record)

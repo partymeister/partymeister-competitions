@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\Component\ComponentEntryUploadService;
 
 /**
  * Class ComponentEntryUploadsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\Component
  */
 class ComponentEntryUploadsController extends ComponentController
 {
@@ -33,7 +31,7 @@ class ComponentEntryUploadsController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -52,7 +50,7 @@ class ComponentEntryUploadsController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ComponentEntryUpload $record
+     * @param  ComponentEntryUpload  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function edit(ComponentEntryUpload $record)
@@ -67,8 +65,8 @@ class ComponentEntryUploadsController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ComponentEntryUpload $record
+     * @param  Request  $request
+     * @param  ComponentEntryUpload  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, ComponentEntryUpload $record)

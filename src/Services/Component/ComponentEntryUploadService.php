@@ -7,8 +7,6 @@ use Partymeister\Competitions\Models\Component\ComponentEntryUpload;
 
 /**
  * Class ComponentEntryUploadService
- *
- * @package Partymeister\Competitions\Services\Component
  */
 class ComponentEntryUploadService extends ComponentBaseService
 {

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class AddVoteCategoryIdToVotes
@@ -25,7 +25,6 @@ class AddVoteCategoryIdToVotes extends Migration
         });
     }
 
-
     /**
      * Reverse the migrations.
      *
@@ -34,7 +33,7 @@ class AddVoteCategoryIdToVotes extends Migration
     public function down()
     {
         Schema::table('votes', function (Blueprint $table) {
-            $table->dropForeign([ 'vote_category_id' ]);
+            $table->dropForeign(['vote_category_id']);
             $table->dropColumn('vote_category_id');
             $table->dropColumn('special_vote');
             $table->dropColumn('comment');

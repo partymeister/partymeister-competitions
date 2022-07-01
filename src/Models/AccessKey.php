@@ -32,6 +32,7 @@ use Partymeister\Core\Models\Visitor;
  * @property-read User $creator
  * @property-read User|null $eraser
  * @property-read User $updater
+ *
  * @method static Builder|AccessKey filteredBy(Filter $filter, $column)
  * @method static Builder|AccessKey filteredByMultiple(Filter $filter)
  * @method static Builder|AccessKey newModelQuery()

@@ -3,17 +3,14 @@
 namespace Partymeister\Competitions\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Partymeister\Competitions\Models\OptionGroup;
-use Partymeister\Core\Models\User;
 use Illuminate\Support\Facades\DB;
+use Partymeister\Core\Models\User;
 
 /**
  * Class AccountsTableSeeder
- * @package Partymeister\Accounting\Database\Seeds
  */
 class CompetitionTypesTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -170,20 +167,20 @@ class CompetitionTypesTableSeeder extends Seeder
 
         foreach ($competitionTypes as $competitionType) {
             DB::table('competition_types')->insert([
-                'name'                  => $competitionType[ 'name' ],
-                'has_platform'          => $competitionType[ 'has_platform' ],
-                'has_filesize'          => $competitionType[ 'has_filesize' ],
-                'has_screenshot'        => $competitionType[ 'has_screenshot' ],
-                'has_audio'             => $competitionType[ 'has_audio' ],
-                'has_video'             => $competitionType[ 'has_video' ],
-                'has_recordings'        => $competitionType[ 'has_recordings' ],
-                'has_composer'          => $competitionType[ 'has_composer' ],
-                'has_running_time'      => $competitionType[ 'has_running_time' ],
-                'is_anonymous'          => $competitionType[ 'is_anonymous' ],
-                'number_of_work_stages' => $competitionType[ 'number_of_work_stages' ],
-                'has_remote_entries'    => $competitionType[ 'has_remote_entries' ],
-                'file_is_optional'      => $competitionType[ 'file_is_optional' ],
-                'has_config_file'       => $competitionType[ 'has_config_file' ],
+                'name'                  => $competitionType['name'],
+                'has_platform'          => $competitionType['has_platform'],
+                'has_filesize'          => $competitionType['has_filesize'],
+                'has_screenshot'        => $competitionType['has_screenshot'],
+                'has_audio'             => $competitionType['has_audio'],
+                'has_video'             => $competitionType['has_video'],
+                'has_recordings'        => $competitionType['has_recordings'],
+                'has_composer'          => $competitionType['has_composer'],
+                'has_running_time'      => $competitionType['has_running_time'],
+                'is_anonymous'          => $competitionType['is_anonymous'],
+                'number_of_work_stages' => $competitionType['number_of_work_stages'],
+                'has_remote_entries'    => $competitionType['has_remote_entries'],
+                'file_is_optional'      => $competitionType['file_is_optional'],
+                'has_config_file'       => $competitionType['has_config_file'],
                 'created_by'            => User::get()->first()->id,
                 'updated_by'            => User::get()->first()->id,
             ]);

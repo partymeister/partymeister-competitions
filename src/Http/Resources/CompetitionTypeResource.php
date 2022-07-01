@@ -89,7 +89,7 @@ class CompetitionTypeResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -97,19 +97,19 @@ class CompetitionTypeResource extends BaseResource
         return [
             'id'                    => (int) $this->id,
             'name'                  => $this->name,
-            'has_platform'          => (boolean) $this->has_platform,
-            'has_filesize'          => (boolean) $this->has_platform,
-            'has_screenshot'        => (boolean) $this->has_platform,
-            'has_video'             => (boolean) $this->has_platform,
-            'has_audio'             => (boolean) $this->has_platform,
-            'has_recordings'        => (boolean) $this->has_platform,
-            'has_composer'          => (boolean) $this->has_platform,
-            'has_running_time'      => (boolean) $this->has_platform,
-            'is_anonymous'          => (boolean) $this->has_platform,
+            'has_platform'          => (bool) $this->has_platform,
+            'has_filesize'          => (bool) $this->has_platform,
+            'has_screenshot'        => (bool) $this->has_platform,
+            'has_video'             => (bool) $this->has_platform,
+            'has_audio'             => (bool) $this->has_platform,
+            'has_recordings'        => (bool) $this->has_platform,
+            'has_composer'          => (bool) $this->has_platform,
+            'has_running_time'      => (bool) $this->has_platform,
+            'is_anonymous'          => (bool) $this->has_platform,
             'number_of_work_stages' => (int) $this->number_of_work_stages,
-            'has_remote_entries'    => (boolean) $this->has_platform,
-            'file_is_optional'      => (boolean) $this->has_platform,
-            'has_config_file'       => (boolean) $this->has_platform,
+            'has_remote_entries'    => (bool) $this->has_platform,
+            'file_is_optional'      => (bool) $this->has_platform,
+            'has_config_file'       => (bool) $this->has_platform,
         ];
     }
 }

@@ -6,8 +6,6 @@ use Motor\Backend\Http\Requests\Request;
 
 /**
  * Class CompetitionTypeRequest
- *
- * @package Partymeister\Competitions\Http\Requests\Backend
  */
 class CompetitionTypeRequest extends Request
 {

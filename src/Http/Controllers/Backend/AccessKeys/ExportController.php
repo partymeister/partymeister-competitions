@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Class ExportController
- *
- * @package Partymeister\Competitions\Http\Controllers\Backend\AccessKeys
  */
 class ExportController extends Controller
 {

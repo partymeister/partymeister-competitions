@@ -7,8 +7,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class Prize
- *
- * @package Partymeister\Competitions\PDF
  */
 class Prize extends PDF
 {
@@ -63,8 +61,8 @@ class Prize extends PDF
     }
 
     /**
-     * @param bool $entry
-     * @param bool $prize
+     * @param  bool  $entry
+     * @param  bool  $prize
      */
     public function renderReceipt($entry = false, $prize = false)
     {
@@ -138,7 +136,7 @@ class Prize extends PDF
 
         // Place, date
         $this->setXY(15, 140);
-        $text = config('partymeister-competitions-receipt.issued_in').', '.date("d.m.Y");
+        $text = config('partymeister-competitions-receipt.issued_in').', '.date('d.m.Y');
         $this->MultiCell(0, 5, $text, 0, 'L');
 
         // Amount

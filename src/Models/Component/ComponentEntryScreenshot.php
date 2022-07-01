@@ -20,6 +20,7 @@ use Motor\CMS\Models\PageVersionComponent;
  * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
  * @property-read Navigation|null $entries_page
+ *
  * @method static Builder|ComponentEntryScreenshot newModelQuery()
  * @method static Builder|ComponentEntryScreenshot newQuery()
  * @method static Builder|ComponentEntryScreenshot query()

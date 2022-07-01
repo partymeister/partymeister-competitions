@@ -20,6 +20,7 @@ use Motor\CMS\Models\PageVersionComponent;
  * @property Carbon|null $updated_at
  * @property-read Collection|PageVersionComponent[] $component
  * @property-read Navigation|null $live_voting_page
+ *
  * @method static Builder|ComponentVoting newModelQuery()
  * @method static Builder|ComponentVoting newQuery()
  * @method static Builder|ComponentVoting query()

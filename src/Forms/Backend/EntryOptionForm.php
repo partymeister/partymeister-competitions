@@ -9,8 +9,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class EntryOptionForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class EntryOptionForm extends Form
 {

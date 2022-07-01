@@ -32,6 +32,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read User|null $eraser
  * @property-read OptionGroup $group
  * @property-read User $updater
+ *
  * @method static Builder|Option filteredBy(Filter $filter, $column)
  * @method static Builder|Option filteredByMultiple(Filter $filter)
  * @method static Builder|Option newModelQuery()

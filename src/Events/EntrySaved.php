@@ -11,8 +11,6 @@ use Partymeister\Competitions\Models\Entry;
 
 /**
  * Class EntrySaved
- *
- * @package Partymeister\Competitions\Events
  */
 class EntrySaved
 {
@@ -28,7 +26,7 @@ class EntrySaved
      *
      * EntrySaved constructor.
      *
-     * @param Entry $entry
+     * @param  Entry  $entry
      */
     public function __construct(Entry $entry)
     {

@@ -20,6 +20,7 @@ use Motor\Core\Traits\Searchable;
  * @property string $ip_address
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static Builder|ManualVote filteredBy(Filter $filter, $column)
  * @method static Builder|ManualVote filteredByMultiple(Filter $filter)
  * @method static Builder|ManualVote newModelQuery()

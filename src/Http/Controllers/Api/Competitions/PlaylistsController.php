@@ -10,15 +10,13 @@ use Partymeister\Competitions\Models\Competition;
 
 /**
  * Class PlaylistsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api\Competitions
  */
 class PlaylistsController extends ApiController
 {
     /**
      * Display a listing of the resource.
      *
-     * @param Competition $competition
+     * @param  Competition  $competition
      * @return bool|JsonResponse
      */
     public function index(Competition $competition)

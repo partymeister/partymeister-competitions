@@ -11,8 +11,6 @@ use setasign\Fpdi\Tcpdf\Fpdi;
 
 /**
  * Class PDF
- *
- * @package Partymeister\Competitions\PDF
  */
 class PDF extends Fpdi
 {
@@ -37,10 +35,10 @@ class PDF extends Fpdi
     protected $FontStyles = [];
 
     /**
-     * @param        $family
-     * @param string $style
-     * @param string $fontfile
-     * @param string $subset
+     * @param    $family
+     * @param  string  $style
+     * @param  string  $fontfile
+     * @param  string  $subset
      * @return array
      */
     public function AddFont($family, $style = '', $fontfile = '', $subset = 'default')
@@ -58,7 +56,6 @@ class PDF extends Fpdi
         return parent::AddFont($family, $style, $fontfile, $subset);
     }
 
-
     /*
     public function SetFont($family, $style='', $size=0, $fontfile='', $spacing=FALSE)
     {
@@ -73,7 +70,7 @@ class PDF extends Fpdi
     */
 
     /**
-     * @param int $spacing
+     * @param  int  $spacing
      */
     public function SetFontSpacing($spacing = 0)
     {
@@ -81,12 +78,12 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param       $name
-     * @param       $family
-     * @param       $style
-     * @param       $size
-     * @param int $spacing
-     * @param array $color
+     * @param    $name
+     * @param    $family
+     * @param    $style
+     * @param    $size
+     * @param  int  $spacing
+     * @param  array  $color
      */
     public function AddStyle($name, $family, $style, $size, $spacing = 0, $color = [])
     {
@@ -115,9 +112,10 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param     $alias
-     * @param     $path
-     * @param int $page
+     * @param    $alias
+     * @param    $path
+     * @param  int  $page
+     *
      * @throws CrossReferenceException
      * @throws FilterException
      * @throws PdfParserException
@@ -131,12 +129,12 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param mixed $alias
-     * @param int $x
-     * @param int $y
-     * @param null $width
-     * @param null $height
-     * @param bool $adjustPageSize
+     * @param  mixed  $alias
+     * @param  int  $x
+     * @param  int  $y
+     * @param  null  $width
+     * @param  null  $height
+     * @param  bool  $adjustPageSize
      * @return array|void
      */
     public function UseTemplate($alias, $x = 0, $y = 0, $width = null, $height = null, $adjustPageSize = false)
@@ -153,9 +151,9 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param       $render_method
-     * @param array $arguments
-     * @param bool $page_break_method
+     * @param    $render_method
+     * @param  array  $arguments
+     * @param  bool  $page_break_method
      */
     public function RenderParagraph($render_method, $arguments = [], $page_break_method = false)
     {
@@ -184,18 +182,18 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param        $w
-     * @param int $h
-     * @param string $txt
-     * @param int $border
-     * @param int $ln
-     * @param string $align
-     * @param int $fill
-     * @param string $link
-     * @param int $stretch
-     * @param bool $ignore_min_height
-     * @param string $calign
-     * @param string $valign
+     * @param    $w
+     * @param  int  $h
+     * @param  string  $txt
+     * @param  int  $border
+     * @param  int  $ln
+     * @param  string  $align
+     * @param  int  $fill
+     * @param  string  $link
+     * @param  int  $stretch
+     * @param  bool  $ignore_min_height
+     * @param  string  $calign
+     * @param  string  $valign
      * @return string
      */
     protected function getCellCode(

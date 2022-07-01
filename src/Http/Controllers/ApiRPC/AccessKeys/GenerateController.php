@@ -8,8 +8,6 @@ use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
  * Class GenerateController
- *
- * @package Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys
  */
 class GenerateController extends ApiController
 {
@@ -49,8 +47,9 @@ class GenerateController extends ApiController
      *
      * Display a listing of the resource.
      *
-     * @param \Partymeister\Competitions\Http\Requests\Backend\AccessKey\GenerateRequest $request
+     * @param  \Partymeister\Competitions\Http\Requests\Backend\AccessKey\GenerateRequest  $request
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \Exception
      */
     public function store(GenerateRequest $request)

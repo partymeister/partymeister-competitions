@@ -17,8 +17,6 @@ use Partymeister\Competitions\Models\Vote;
 
 /**
  * Class ComponentVotings
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentVotings
 {
@@ -50,8 +48,8 @@ class ComponentVotings
     /**
      * ComponentVotings constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
-     * @param ComponentVoting $component
+     * @param  PageVersionComponent  $pageVersionComponent
+     * @param  ComponentVoting  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -62,7 +60,7 @@ class ComponentVotings
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      */
     public function index(Request $request)
@@ -184,7 +182,7 @@ class ComponentVotings
 
         if ($this->request->get('competition_id', false)) {
             return redirect()->back();
-            //return redirect('votes?competition_id=' . $this->request->get('competition_id'));
+        //return redirect('votes?competition_id=' . $this->request->get('competition_id'));
         } else {
             return redirect()->back();
         }

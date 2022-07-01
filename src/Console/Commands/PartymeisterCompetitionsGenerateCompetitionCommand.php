@@ -13,8 +13,6 @@ use Partymeister\Competitions\Models\VoteCategory;
 
 /**
  * Class PartymeisterCompetitionsGenerateCompetitionCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsGenerateCompetitionCommand extends Command
 {

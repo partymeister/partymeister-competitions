@@ -8,8 +8,6 @@ use Partymeister\Competitions\Services\CompetitionService;
 
 /**
  * Class PartymeisterCompetitionsPublishReleaseFilesCommand
- *
- * @package Partymeister\Competitions\Console\Commands
  */
 class PartymeisterCompetitionsPublishReleaseFilesCommand extends Command
 {

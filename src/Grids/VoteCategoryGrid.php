@@ -7,8 +7,6 @@ use Motor\Backend\Grid\Renderers\BooleanRenderer;
 
 /**
  * Class VoteCategoryGrid
- *
- * @package Partymeister\Competitions\Grids
  */
 class VoteCategoryGrid extends Grid
 {

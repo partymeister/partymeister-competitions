@@ -1,15 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateManualVotesTable
  */
 class CreateManualVotesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -29,7 +28,6 @@ class CreateManualVotesTable extends Migration
             $table->foreign('entry_id')->references('id')->on('entries')->onDelete('cascade');
         });
     }
-
 
     /**
      * Reverse the migrations.

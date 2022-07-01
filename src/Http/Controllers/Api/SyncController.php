@@ -12,13 +12,11 @@ use Partymeister\Competitions\Models\LiveVote;
 
 /**
  * Class SyncController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class SyncController extends Controller
 {
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function competition(Request $request)
@@ -49,7 +47,7 @@ class SyncController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function livevote(Request $request)
@@ -72,8 +70,9 @@ class SyncController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
+     *
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileDoesNotExist
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileIsTooBig

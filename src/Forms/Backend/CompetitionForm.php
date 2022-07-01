@@ -9,8 +9,6 @@ use Partymeister\Competitions\Models\VoteCategory;
 
 /**
  * Class CompetitionForm
- *
- * @package Partymeister\Competitions\Forms\Backend
  */
 class CompetitionForm extends Form
 {

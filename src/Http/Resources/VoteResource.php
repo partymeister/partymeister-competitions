@@ -59,7 +59,7 @@ class VoteResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -70,7 +70,7 @@ class VoteResource extends BaseResource
             'entry_id'         => (int) $this->entry_id,
             'visitor_id'       => (int) $this->visitor_id,
             'vote_category_id' => (int) $this->vote_category_id,
-            'special_vote'     => (boolean) $this->special_vote,
+            'special_vote'     => (bool) $this->special_vote,
             'comment'          => $this->comment,
             'points'           => (int) $this->points,
             'ip_address'       => $this->ip_address,

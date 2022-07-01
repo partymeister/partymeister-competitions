@@ -7,8 +7,6 @@ use Partymeister\Competitions\Models\OptionGroup;
 
 /**
  * Class OptionGroupService
- *
- * @package Partymeister\Competitions\Services
  */
 class OptionGroupService extends BaseService
 {

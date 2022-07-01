@@ -7,8 +7,6 @@ use Partymeister\Competitions\Grid\Renderers\CompetitionTypeRenderer;
 
 /**
  * Class CompetitionTypeGrid
- *
- * @package Partymeister\Competitions\Grids
  */
 class CompetitionTypeGrid extends Grid
 {

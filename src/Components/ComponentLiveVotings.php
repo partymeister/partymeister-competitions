@@ -12,8 +12,6 @@ use Motor\CMS\Models\PageVersionComponent;
 
 /**
  * Class ComponentLiveVotings
- *
- * @package Partymeister\Competitions\Components
  */
 class ComponentLiveVotings
 {
@@ -30,7 +28,7 @@ class ComponentLiveVotings
     /**
      * ComponentLiveVotings constructor.
      *
-     * @param PageVersionComponent $pageVersionComponent
+     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -38,7 +36,7 @@ class ComponentLiveVotings
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      */
     public function index(Request $request)

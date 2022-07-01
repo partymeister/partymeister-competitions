@@ -46,6 +46,7 @@ use Motor\Core\Traits\Searchable;
  * @property-read mixed $properties
  * @property-read mixed $translated_properties
  * @property-read User $updater
+ *
  * @method static Builder|CompetitionType filteredBy(Filter $filter, $column)
  * @method static Builder|CompetitionType filteredByMultiple(Filter $filter)
  * @method static Builder|CompetitionType newModelQuery()

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class AddFinalFileToEntries
@@ -22,7 +22,6 @@ class AddFinalFileToEntries extends Migration
         });
     }
 
-
     /**
      * Reverse the migrations.
      *
@@ -31,7 +30,7 @@ class AddFinalFileToEntries extends Migration
     public function down()
     {
         Schema::table('entries', function (Blueprint $table) {
-            $table->dropForeign([ 'final_file_media_id' ]);
+            $table->dropForeign(['final_file_media_id']);
             $table->dropColumn('final_file_media_id');
         });
     }

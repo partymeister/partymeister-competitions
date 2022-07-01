@@ -44,7 +44,7 @@ class VoteCategoryResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -53,9 +53,9 @@ class VoteCategoryResource extends BaseResource
             'id'               => (int) $this->id,
             'name'             => $this->name,
             'points'           => (int) $this->points,
-            'has_negative'     => (boolean) $this->has_negative,
-            'has_comment'      => (boolean) $this->has_comment,
-            'has_special_vote' => (boolean) $this->has_special_vote,
+            'has_negative'     => (bool) $this->has_negative,
+            'has_comment'      => (bool) $this->has_comment,
+            'has_special_vote' => (bool) $this->has_special_vote,
         ];
     }
 }

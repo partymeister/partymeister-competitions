@@ -6,8 +6,6 @@ use Motor\Backend\Grid\Grid;
 
 /**
  * Class VoteGrid
- *
- * @package Partymeister\Competitions\Grids
  */
 class VoteGrid extends Grid
 {

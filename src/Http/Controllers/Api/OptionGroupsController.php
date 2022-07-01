@@ -11,8 +11,6 @@ use Partymeister\Competitions\Services\OptionGroupService;
 
 /**
  * Class OptionGroupsController
- *
- * @package Partymeister\Competitions\Http\Controllers\Api
  */
 class OptionGroupsController extends ApiController
 {
@@ -122,7 +120,7 @@ class OptionGroupsController extends ApiController
      *
      * Store a newly created resource in storage.
      *
-     * @param OptionGroupRequest $request
+     * @param  OptionGroupRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(OptionGroupRequest $request)
@@ -185,7 +183,7 @@ class OptionGroupsController extends ApiController
      *
      * Display the specified resource.
      *
-     * @param OptionGroup $record
+     * @param  OptionGroup  $record
      * @return OptionGroupResource
      */
     public function show(OptionGroup $record)
@@ -249,8 +247,8 @@ class OptionGroupsController extends ApiController
      *
      * Update the specified resource in storage.
      *
-     * @param OptionGroupRequest $request
-     * @param OptionGroup $record
+     * @param  OptionGroupRequest  $request
+     * @param  OptionGroup  $record
      * @return OptionGroupResource
      */
     public function update(OptionGroupRequest $request, OptionGroup $record)
@@ -317,7 +315,7 @@ class OptionGroupsController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param OptionGroup $record
+     * @param  OptionGroup  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(OptionGroup $record)

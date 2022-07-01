@@ -7,8 +7,6 @@ use Motor\CMS\Models\Navigation;
 
 /**
  * Class ComponentVotingForm
- *
- * @package Partymeister\Competitions\Forms\Backend\Component
  */
 class ComponentVotingForm extends Form
 {
