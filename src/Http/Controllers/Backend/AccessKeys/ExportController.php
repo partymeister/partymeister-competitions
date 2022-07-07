@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Http\Controllers\Backend\AccessKeys;
 
 use Illuminate\Http\Response;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Models\AccessKey;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

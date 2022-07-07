@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Http\Controllers\Backend;
 
 use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\CompetitionForm;
 use Partymeister\Competitions\Grids\CompetitionGrid;
 use Partymeister\Competitions\Http\Requests\Backend\CompetitionRequest;

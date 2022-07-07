@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Services;
 
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\ManualVote;
 use Partymeister\Competitions\Models\Vote;

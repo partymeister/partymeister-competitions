@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend\CompetitionPrizes;
 
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Http\Requests\Backend\CompetitionPrizeRequest;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;

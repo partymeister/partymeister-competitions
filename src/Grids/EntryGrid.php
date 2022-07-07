@@ -2,10 +2,10 @@
 
 namespace Partymeister\Competitions\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BladeRenderer;
-use Motor\Backend\Grid\Renderers\DateRenderer;
-use Motor\Backend\Grid\Renderers\DecorationRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BladeRenderer;
+use Motor\Admin\Grid\Renderers\DateRenderer;
+use Motor\Admin\Grid\Renderers\DecorationRenderer;
 
 /**
  * Class EntryGrid

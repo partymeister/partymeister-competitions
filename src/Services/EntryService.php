@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Services;
 
 use Illuminate\Support\Facades\Auth;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Motor\Core\Filter\Renderers\SelectRenderer;
 use Partymeister\Competitions\Events\EntrySaved;
 use Partymeister\Competitions\Models\Competition;
