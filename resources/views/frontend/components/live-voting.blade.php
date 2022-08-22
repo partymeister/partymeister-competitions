@@ -130,9 +130,12 @@
             },
             mounted: function () {
 
+                const configRefreshInterval = '{{config('partymeister-competitions-voting.live-refresh-interval')}}';
+                const refreshInterval = Number(configRefreshInterval || 20000);
+
                 this.refresh();
 
-                window.setInterval(this.refresh, 20000);
+                window.setInterval(this.refresh, refreshInterval);
 
             }
         });
