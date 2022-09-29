@@ -70,7 +70,7 @@ class ComponentEntryDetails
             $entry['option_'.($i + 1)] = $option['name'];
         }
 
-        $entry['competition_name'] = strtoupper($entry['competition']['name']);
+        $entry['competition_name'] = $entry['competition']['name'];
         $entry['filesize_bytes'] = $entry['filesize'];
         if ($entry['filesize_bytes'] == 0) {
             $entry['filesize_human'] = ' ';

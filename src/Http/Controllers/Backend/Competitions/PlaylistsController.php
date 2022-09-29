@@ -87,7 +87,6 @@ class PlaylistsController extends Controller
                 $entries = $entryCollection->toArrayRecursive();
 
                 foreach ($entries as $key => $entry) {
-                    $entries[$key]['competition']['name'] = strtoupper($entries[$key]['competition']['name']);
                     if ($entries[$key]['filesize'] == 0) {
                         $entries[$key]['filesize_human'] = ' ';
                     }

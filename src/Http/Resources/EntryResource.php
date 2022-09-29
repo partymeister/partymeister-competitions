@@ -282,7 +282,7 @@ class EntryResource extends BaseResource
             'author_phone'                                => $this->author_phone,
             'author_address'                              => $this->author_address,
             'author_zip'                                  => $this->author_zip,
-            'author_city'                                 => $this->author_zip,
+            'author_city'                                 => $this->author_city,
             'author_country_iso_3166_1'                   => $this->author_country_iso_3166_1,
             'composer_name'                               => $this->composer_name,
             'composer_email'                              => $this->composer_email,
