@@ -1,7 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateCompetitionTypesTable
@@ -32,9 +32,9 @@ class CreateCompetitionTypesTable extends Migration
             $table->boolean('has_remote_entries')->default(false);
             $table->boolean('file_is_optional')->default(false);
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
 
             $table->timestamps();
         });

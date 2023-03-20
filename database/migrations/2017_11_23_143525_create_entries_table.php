@@ -1,7 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateEntriesTable
@@ -50,9 +50,9 @@ class CreateEntriesTable extends Migration
             $table->string('composer_country_iso_3166_1');
             $table->boolean('composer_not_member_of_copyright_collective')->default(false);
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
 
             $table->timestamps();
 

@@ -1,7 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateOptionGroupsTable
@@ -20,9 +20,9 @@ class CreateOptionGroupsTable extends Migration
             $table->string('name');
             $table->enum('type', ['multiple', 'single']);
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
 
             $table->timestamps();
         });

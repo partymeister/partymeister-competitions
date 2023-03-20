@@ -1,7 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateVoteCategoriesTable
@@ -23,9 +23,9 @@ class CreateVoteCategoriesTable extends Migration
             $table->boolean('has_comment')->default(false);
             $table->boolean('has_special_vote')->default(false);
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
 
             $table->timestamps();
         });

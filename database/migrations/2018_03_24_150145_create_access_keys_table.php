@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateAccessKeysTable
@@ -25,9 +24,9 @@ class CreateAccessKeysTable extends Migration
 
             $table->timestamps();
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
 
             $table->foreign('visitor_id')->references('id')->on('visitors')->onDelete('set null');
         });

@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -50,6 +51,7 @@ class Vote extends Model
 {
     use Searchable;
     use Filterable;
+    use HasUuids;
 
     /**
      * Searchable columns for the searchable trait

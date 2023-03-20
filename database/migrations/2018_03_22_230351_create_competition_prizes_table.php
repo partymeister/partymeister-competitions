@@ -1,8 +1,7 @@
 <?php
 
-use Culpa\Database\Schema\Blueprint;
-use Culpa\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class CreateCompetitionPrizesTable
@@ -24,9 +23,9 @@ class CreateCompetitionPrizesTable extends Migration
             $table->string('rank');
             $table->timestamps();
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
 
             $table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade');
         });

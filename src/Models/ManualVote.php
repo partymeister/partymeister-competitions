@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Motor\Core\Filter\Filter;
@@ -40,6 +41,7 @@ class ManualVote extends Model
 {
     use Searchable;
     use Filterable;
+    use HasUuids;
 
     /**
      * Searchable columns for the searchable trait
