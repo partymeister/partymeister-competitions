@@ -2,7 +2,6 @@
 
 namespace Partymeister\Competitions\Console\Commands;
 
-use Faker\Factory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Motor\Backend\Models\User;
@@ -39,7 +38,7 @@ class PartymeisterCompetitionsGenerateCompetitionCommand extends Command
     {
         Auth::login(User::find(1));
 
-        $faker = Factory::create($this->argument('locale'));
+        $faker = \Faker\Factory::create($this->argument('locale'));
 
         $competition = new Competition();
         $competition->name = $this->argument('name') === 'faker' ? $faker->catchPhrase : $this->argument('name');
