@@ -5,7 +5,7 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasSnowflakePrimary;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -79,7 +79,7 @@ class Competition extends Model implements HasMedia
     use Searchable;
     use Filterable;
     use BlameableTrait;
-    use HasSnowflakePrimary;
+    use HasShortflakePrimary;
 
     /**
      * Searchable columns for the searchable trait

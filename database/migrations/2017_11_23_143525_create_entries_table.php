@@ -17,7 +17,7 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->integer('competition_id')->nullable()->unsigned()->index();
+            $table->bigInteger('competition_id')->nullable()->unsigned()->index();
             $table->string('title');
             $table->string('author');
             $table->string('filesize');
@@ -50,9 +50,9 @@ class CreateEntriesTable extends Migration
             $table->string('composer_country_iso_3166_1');
             $table->boolean('composer_not_member_of_copyright_collective')->default(false);
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->timestamps();
 

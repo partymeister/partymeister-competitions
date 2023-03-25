@@ -32,9 +32,9 @@ class CreateCompetitionTypesTable extends Migration
             $table->boolean('has_remote_entries')->default(false);
             $table->boolean('file_is_optional')->default(false);
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->timestamps();
         });

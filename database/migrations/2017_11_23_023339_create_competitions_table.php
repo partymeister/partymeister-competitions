@@ -17,7 +17,7 @@ class CreateCompetitionsTable extends Migration
     {
         Schema::create('competitions', function (Blueprint $table) {
             $table->id();
-            $table->integer('competition_type_id')->nullable()->unsigned()->index();
+            $table->bigInteger('competition_type_id')->nullable()->unsigned()->index();
             $table->integer('sort_position')->unsigned()->index();
             $table->integer('prizegiving_sort_position')->unsigned()->index();
             $table->string('name');
@@ -25,9 +25,9 @@ class CreateCompetitionsTable extends Migration
             $table->boolean('upload_enabled')->default(true);
             $table->boolean('voting_enabled')->default(false);
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->timestamps();
 

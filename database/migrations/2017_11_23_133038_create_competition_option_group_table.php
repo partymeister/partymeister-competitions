@@ -17,8 +17,8 @@ class CreateCompetitionOptionGroupTable extends Migration
     public function up()
     {
         Schema::create('competition_option_group', function (Blueprint $table) {
-            $table->integer('competition_id')->unsigned()->index();
-            $table->integer('option_group_id')->unsigned()->index();
+            $table->bigInteger('competition_id')->unsigned()->index();
+            $table->bigInteger('option_group_id')->unsigned()->index();
 
             $table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade');
             $table->foreign('option_group_id')->references('id')->on('option_groups')->onDelete('cascade');

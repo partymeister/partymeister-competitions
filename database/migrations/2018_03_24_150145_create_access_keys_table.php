@@ -17,16 +17,16 @@ class CreateAccessKeysTable extends Migration
     {
         Schema::create('access_keys', function (Blueprint $table) {
             $table->id();
-            $table->integer('visitor_id')->unsigned()->index()->nullable();
+            $table->bigInteger('visitor_id')->unsigned()->index()->nullable();
             $table->string('access_key');
             $table->string('ip_address');
             $table->datetime('registered_at')->nullable();
 
             $table->timestamps();
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->foreign('visitor_id')->references('id')->on('visitors')->onDelete('set null');
         });

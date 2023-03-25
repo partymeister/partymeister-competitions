@@ -17,7 +17,7 @@ class CreateComponentVotingsTable extends Migration
     {
         Schema::create('component_votings', function (Blueprint $table) {
             $table->id();
-            $table->integer('live_voting_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('live_voting_page_id')->unsigned()->nullable()->index();
             $table->timestamps();
         });
     }

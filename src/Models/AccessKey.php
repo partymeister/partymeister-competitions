@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasSnowflakePrimary;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Motor\Backend\Models\User;
@@ -54,7 +54,7 @@ class AccessKey extends Model
     use Searchable;
     use Filterable;
     use BlameableTrait;
-    use HasSnowflakePrimary;
+    use HasShortflakePrimary;
 
     /**
      * Searchable columns for the searchable trait

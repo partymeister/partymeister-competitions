@@ -23,16 +23,16 @@ class CreateVoteCategoriesTable extends Migration
             $table->boolean('has_comment')->default(false);
             $table->boolean('has_special_vote')->default(false);
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->timestamps();
         });
 
         Schema::create('competition_vote_category', function (Blueprint $table) {
-            $table->integer('competition_id')->unsigned()->index();
-            $table->integer('vote_category_id')->unsigned()->index();
+            $table->bigInteger('competition_id')->unsigned()->index();
+            $table->bigInteger('vote_category_id')->unsigned()->index();
 
             $table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade');
             $table->foreign('vote_category_id')->references('id')->on('vote_categories')->onDelete('cascade');

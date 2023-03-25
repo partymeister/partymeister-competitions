@@ -17,7 +17,7 @@ class CreateComponentEntryScreenshotsTable extends Migration
     {
         Schema::create('component_entry_screenshots', function (Blueprint $table) {
             $table->id();
-            $table->integer('entries_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('entries_page_id')->unsigned()->nullable()->index();
             $table->timestamps();
         });
     }

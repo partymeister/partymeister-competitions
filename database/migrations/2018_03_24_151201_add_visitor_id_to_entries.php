@@ -17,12 +17,8 @@ class AddVisitorIdToEntries extends Migration
     public function up()
     {
         Schema::table('entries', function (Blueprint $table) {
-            $table->integer('visitor_id')->after('competition_id')->nullable()->unsigned()->index();
+            $table->bigInteger('visitor_id')->after('competition_id')->nullable()->unsigned()->index();
             $table->foreign('visitor_id')->references('id')->on('visitors')->onDelete('set null');
-
-            $table->dropForeign(['created_by']);
-            $table->dropForeign(['updated_by']);
-            $table->dropForeign(['deleted_by']);
 
             $table->dropColumn('created_by');
             $table->dropColumn('updated_by');

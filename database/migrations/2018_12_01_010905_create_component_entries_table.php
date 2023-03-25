@@ -17,10 +17,10 @@ class CreateComponentEntriesTable extends Migration
     {
         Schema::create('component_entries', function (Blueprint $table) {
             $table->id();
-            $table->integer('entry_comments_page_id')->unsigned()->nullable()->index();
-            $table->integer('entry_screenshots_page_id')->unsigned()->nullable()->index();
-            $table->integer('entry_edit_page_id')->unsigned()->nullable()->index();
-            $table->integer('entry_detail_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('entry_comments_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('entry_screenshots_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('entry_edit_page_id')->unsigned()->nullable()->index();
+            $table->bigInteger('entry_detail_page_id')->unsigned()->nullable()->index();
             $table->timestamps();
         });
     }

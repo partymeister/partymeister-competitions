@@ -20,22 +20,22 @@ class CreateOptionGroupsTable extends Migration
             $table->string('name');
             $table->enum('type', ['multiple', 'single']);
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->timestamps();
         });
 
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->integer('option_group_id')->unsigned()->index();
+            $table->bigInteger('option_group_id')->unsigned()->index();
             $table->integer('sort_position')->unsigned()->index();
             $table->string('name');
 
-            $table->createdBy();
-            $table->updatedBy();
-            $table->deletedBy(true);
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->timestamps();
 

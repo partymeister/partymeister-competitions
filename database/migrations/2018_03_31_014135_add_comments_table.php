@@ -18,11 +18,11 @@ class AddCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->integer('visitor_id')->unsigned()->nullable()->index();
+            $table->bigInteger('visitor_id')->unsigned()->nullable()->index();
             $table->boolean('read_by_visitor');
             $table->boolean('read_by_organizer');
             $table->string('model_type');
-            $table->integer('model_id')->unsigned()->index();
+            $table->bigInteger('model_id')->unsigned()->index();
             $table->text('message');
             $table->string('author');
             $table->timestamps();

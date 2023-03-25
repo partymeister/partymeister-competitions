@@ -17,15 +17,15 @@ class CreateCompetitionPrizesTable extends Migration
     {
         Schema::create('competition_prizes', function (Blueprint $table) {
             $table->id();
-            $table->integer('competition_id')->unsigned()->index();
+            $table->bigInteger('competition_id')->unsigned()->index();
             $table->string('amount');
             $table->string('additional');
             $table->string('rank');
             $table->timestamps();
 
-            $table->integer('created_by')->nullable();
-            $table->integer('updated_by')->nullable();
-            $table->integer('deleted_by')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
+            $table->bigInteger('deleted_by')->nullable();
 
             $table->foreign('competition_id')->references('id')->on('competitions')->onDelete('cascade');
         });

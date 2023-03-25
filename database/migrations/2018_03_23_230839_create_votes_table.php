@@ -17,9 +17,9 @@ class CreateVotesTable extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->integer('competition_id')->unsigned()->index();
-            $table->integer('entry_id')->unsigned()->index();
-            $table->integer('visitor_id')->unsigned()->index();
+            $table->bigInteger('competition_id')->unsigned()->index();
+            $table->bigInteger('entry_id')->unsigned()->index();
+            $table->bigInteger('visitor_id')->unsigned()->index();
             $table->string('points');
             $table->string('ip_address');
             $table->timestamps();
