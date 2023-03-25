@@ -17,7 +17,7 @@ class CreateLiveVotesTable extends Migration
     public function up()
     {
         Schema::create('live_votes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('competition_id')->unsigned()->index();
             $table->integer('entry_id')->unsigned()->index();
             $table->integer('sort_position')->unsigned();

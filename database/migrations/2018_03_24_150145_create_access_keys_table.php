@@ -16,7 +16,7 @@ class CreateAccessKeysTable extends Migration
     public function up()
     {
         Schema::create('access_keys', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('visitor_id')->unsigned()->index()->nullable();
             $table->string('access_key');
             $table->string('ip_address');

@@ -16,7 +16,7 @@ class CreateEntriesTable extends Migration
     public function up()
     {
         Schema::create('entries', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('competition_id')->nullable()->unsigned()->index();
             $table->string('title');
             $table->string('author');

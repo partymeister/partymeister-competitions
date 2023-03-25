@@ -16,7 +16,7 @@ class CreateOptionGroupsTable extends Migration
     public function up()
     {
         Schema::create('option_groups', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->enum('type', ['multiple', 'single']);
 
@@ -28,7 +28,7 @@ class CreateOptionGroupsTable extends Migration
         });
 
         Schema::create('options', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('option_group_id')->unsigned()->index();
             $table->integer('sort_position')->unsigned()->index();
             $table->string('name');

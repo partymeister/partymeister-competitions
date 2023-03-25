@@ -17,7 +17,7 @@ class CreateManualVotesTable extends Migration
     public function up()
     {
         Schema::create('manual_votes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('competition_id')->unsigned()->index();
             $table->integer('entry_id')->unsigned()->index();
             $table->string('points');

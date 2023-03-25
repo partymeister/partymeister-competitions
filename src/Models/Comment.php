@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Kra8\Snowflake\HasSnowflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
@@ -44,7 +44,7 @@ use Partymeister\Core\Models\Visitor;
 class Comment extends Model
 {
 
-    use HasUuids;
+    use HasSnowflakePrimary;
 
     /**
      * Get all of the owning commentable models.

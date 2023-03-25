@@ -16,7 +16,7 @@ class CreateVoteCategoriesTable extends Migration
     public function up()
     {
         Schema::create('vote_categories', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->integer('points')->unsigned();
             $table->boolean('has_negative')->default(false);

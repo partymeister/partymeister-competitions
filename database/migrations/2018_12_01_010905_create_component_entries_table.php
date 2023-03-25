@@ -16,7 +16,7 @@ class CreateComponentEntriesTable extends Migration
     public function up()
     {
         Schema::create('component_entries', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('entry_comments_page_id')->unsigned()->nullable()->index();
             $table->integer('entry_screenshots_page_id')->unsigned()->nullable()->index();
             $table->integer('entry_edit_page_id')->unsigned()->nullable()->index();

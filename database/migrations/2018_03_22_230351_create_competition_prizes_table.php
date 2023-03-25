@@ -16,7 +16,7 @@ class CreateCompetitionPrizesTable extends Migration
     public function up()
     {
         Schema::create('competition_prizes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('competition_id')->unsigned()->index();
             $table->string('amount');
             $table->string('additional');

@@ -17,7 +17,7 @@ class AddCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('visitor_id')->unsigned()->nullable()->index();
             $table->boolean('read_by_visitor');
             $table->boolean('read_by_organizer');
