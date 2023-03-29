@@ -35,11 +35,11 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
         foreach (Competition::all() as $competition) {
             $directory = storage_path('entries/'.Str::slug($competition->name));
             if (! is_dir($directory)) {
-                mkdir($directory);
+                $this->mkdir($directory);
             }
             foreach ($competition->entries()
                                  ->get() as $entry) {
-                $entryDir = $entry->id;
+                $entryDir = $entry->identifier;
                 while (strlen($entryDir) < 4) {
                     $entryDir = '0'.$entryDir;
                 }
@@ -126,7 +126,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
     protected function mkdir($directory)
     {
         if (! is_dir($directory)) {
-            mkdir($directory);
+            mkdir($directory, 0777, true);
         }
     }
 }

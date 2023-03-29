@@ -18,6 +18,11 @@ use Partymeister\Core\Http\Resources\VisitorResource;
  *     example="1"
  *   ),
  *   @OA\Property(
+ *     property="identifier",
+ *     type="integer",
+ *     example="101"
+ *   ),
+ *   @OA\Property(
  *     property="competition",
  *     type="object",
  *     ref="#/components/schemas/CompetitionResource"
@@ -231,7 +236,7 @@ class EntryResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -253,6 +258,7 @@ class EntryResource extends BaseResource
 
         return [
             'id'                                          => (int) $this->id,
+            'identifier'                                  => (int) $this->identifier,
             'competition'                                 => new CompetitionResource($this->whenLoaded('competition')),
             'competition_name'                            => $this->competition->name,
             'visitor'                                     => new VisitorResource($this->visitor),

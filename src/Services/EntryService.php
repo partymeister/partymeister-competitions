@@ -37,10 +37,16 @@ class EntryService extends BaseService
 
     public function beforeCreate()
     {
-        if (Auth::guard('visitor')
-                ->user() != null) {
-            $this->data['visitor_id'] = Auth::guard('visitor')
-                                            ->user()->id;
+        $visitor = Auth::guard('visitor')
+                       ->user();
+        if ($visitor != null) {
+            $this->data['visitor_id'] = $visitor->id;
+
+            // Set remote entry status, if the visitor is remote (d'uh)
+            if ($visitor->is_remote) {
+                $this->data['is_remote'] = true;
+            }
+
         }
     }
 

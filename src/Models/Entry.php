@@ -183,7 +183,26 @@ class Entry extends Model implements HasMedia
         'discord_name',
         'has_explicit_content',
         'needs_content_check',
+        'notify_about_status',
+        'identifier',
+        'representative'
     ];
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        /*
+         * Add incremeting identifier to the entry to recreate the incrementing id functionality
+         */
+        static::creating(function (Entry $entry) {
+            $e = Entry::orderBy('identifier', 'DESC')->first();
+            $nextIdentifier = !is_null($e) ? $e->identifier+1 : 1;
+            $entry->identifier = $nextIdentifier;
+        });
+    }
+
 
     /**
      * @param  Media|null  $media

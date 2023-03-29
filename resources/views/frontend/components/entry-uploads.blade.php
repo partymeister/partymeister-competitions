@@ -133,6 +133,37 @@
                 <!-- /.box-body -->
             </div>
         @endif
+        <div class="@boxWrapper box-primary">
+            <div class="@boxHeader with-border">
+                <h3 class="box-title">{{ trans('partymeister-competitions::backend/entries.notify_about_status') }}</h3>
+            </div>
+            <div class="@boxBody">
+                <p>
+                    Be aware that we have competitions which involve jury preselection, mostly - but not limited to - individual competitions such as music or graphics.
+                </p>
+                <p>
+                    In case that your entry misses preselection, you can opt-in to receive an email with that information directly before the competition is shown.
+                </p>
+
+                {!! form_row($entryUploadForm->notify_about_status) !!}
+            </div>
+            @if ($visitor->is_remote)
+            <div class="@boxHeader with-border">
+                <h3 class="box-title">{{ trans('partymeister-competitions::backend/entries.remote_participation') }}</h3>
+            </div>
+            <div class="@boxBody">
+                <p>
+                    In order to avoid having an empty stage in case your entry ranks among the top three of this competition, we ask you kindly to name a
+                    representative at the party location. This can be a group member, a friend or a kind soul that accepts the prize in your stead.
+                </p>
+                <p>
+                    If you have no way of having somebody represent you, please enter "organizer". That way, we know that we don't have to wait for somebody
+                    to show up on stage <3
+                </p>
+                {!! form_row($entryUploadForm->representative) !!}
+            </div>
+            @endif
+        </div>
         <div class="@boxWrapper">
             <div class="@boxFooter">
                 {!! form_row($entryUploadForm->submit) !!}

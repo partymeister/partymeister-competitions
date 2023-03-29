@@ -22,6 +22,12 @@
                                     {{ entry.id }}
                                 </dd>
                                 <dt class="col-sm-4">
+                                  Identifier
+                                </dt>
+                                <dd class="col-sm-8">
+                                  {{ entry.identifier }}
+                                </dd>
+                                <dt class="col-sm-4">
                                     {{$t('partymeister-competitions.backend.competitions.competition')}}
                                 </dt>
                                 <dd class="col-sm-8">

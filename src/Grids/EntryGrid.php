@@ -14,7 +14,7 @@ class EntryGrid extends Grid
 {
     protected function setup()
     {
-        $this->addColumn('id', 'ID', true)
+        $this->addColumn('identifier', 'Identifier', true)
              ->style('min-width: 75px;')
              ->renderer(DecorationRenderer::class, ['style' => 'color: red; font-weight: bold;']);
         $this->addColumn('competition.name', trans('partymeister-competitions::backend/competitions.competition'));

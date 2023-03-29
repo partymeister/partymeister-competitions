@@ -3,6 +3,7 @@
 namespace Partymeister\Competitions\Forms\Component;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Kris\LaravelFormBuilder\Form;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
@@ -180,6 +181,20 @@ class EntryUploadForm extends Form
                          'default_value' => 'DE',
                          'choices'       => Countries::getNames(),
                      ]);
+            }
+
+            $this->add('notify_about_status', 'checkbox', [
+                'label' => trans('partymeister-competitions::backend/entries.notify_about_status'),
+            ]);
+
+            $visitor = Auth::guard('visitor')
+                           ->user();
+
+            if ($visitor->is_remote) {
+                $this->add('representative', 'text', [
+                    'label' => trans('partymeister-competitions::backend/entries.representative'),
+                    'rules' => ['required'],
+                ]);
             }
         }
     }

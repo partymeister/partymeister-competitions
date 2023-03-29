@@ -86,4 +86,7 @@ return [
     'status_not_preselected'       => 'Entry marked as not preselected',
     'comment_created'              => 'Entry comment created',
 
+    'notify_about_status'  => 'Notify me about my entry status',
+    'remote_participation' => 'You are participating remotely',
+    'representative'       => 'Representative on location',
 ];

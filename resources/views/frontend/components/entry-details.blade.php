@@ -47,10 +47,10 @@
     <div class="medium-6">
         <dl class="row">
             <dt class="small-4">
-                ID
+                Identifier
             </dt>
             <dd class="small-8">
-                {{ $record->id }}
+                {{ $record->identifier }}
             </dd>
 
             <dt class="small-4">
@@ -82,6 +82,13 @@
             <dd class="small-8">
                 <p>{{nl2br($record->organizer_description)}}</p>
             </dd>
+            <dt class="small-4">
+                {{trans('partymeister-competitions::backend/entries.notify_about_status')}}
+            </dt>
+            <dd class="small-8">
+                <p>{{$record->notify_about_status ? 'Yes' : 'No'}}</p>
+            </dd>
+
             @if ($record->discord_name !== '')
             <dt class="small-4">
                 {{trans('partymeister-competitions::backend/entries.discord_name_short')}}
@@ -89,6 +96,14 @@
             <dd class="small-8">
                 <p>{{nl2br($record->discord_name)}}</p>
             </dd>
+            @endif
+            @if ($record->representative !== '')
+                <dt class="small-4">
+                    {{trans('partymeister-competitions::backend/entries.representative')}}
+                </dt>
+                <dd class="small-8">
+                    <p>{{nl2br($record->representative)}}</p>
+                </dd>
             @endif
         </dl>
     </div>
