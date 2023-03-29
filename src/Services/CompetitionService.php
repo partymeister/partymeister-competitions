@@ -91,11 +91,11 @@ class CompetitionService extends BaseService
             return;
         }
 
-        if (! is_dir(base_path('releases'))) {
-            mkdir(base_path('releases'));
+        if (! is_dir(storage_path('releases'))) {
+            mkdir(storage_path('releases'));
         }
 
-        $directory = base_path('releases/'.Str::slug($competition->name));
+        $directory = storage_path('releases/'.Str::slug($competition->name));
 
         if (! is_dir($directory)) {
             mkdir($directory);

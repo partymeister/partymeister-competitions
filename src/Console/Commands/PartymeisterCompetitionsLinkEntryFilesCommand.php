@@ -33,7 +33,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
     public function handle()
     {
         foreach (Competition::all() as $competition) {
-            $directory = base_path('entries/'.Str::slug($competition->name));
+            $directory = storage_path('entries/'.Str::slug($competition->name));
             if (! is_dir($directory)) {
                 mkdir($directory);
             }
