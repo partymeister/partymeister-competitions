@@ -98,6 +98,11 @@ use Partymeister\Core\Http\Resources\VisitorResource;
  *     example="true"
  *   ),
  *   @OA\Property(
+ *     property="remote_type",
+ *     type="string",
+ *     example="Satellite"
+ *   ),
+ *   @OA\Property(
  *     property="is_recorded",
  *     type="boolean",
  *     example="true"
@@ -277,6 +282,7 @@ class EntryResource extends BaseResource
             'custom_option'                               => $this->custom_option,
             'allow_release'                               => (bool) $this->allow_release,
             'is_remote'                                   => (bool) $this->is_remote,
+            'remote_type'                                 => $this->remote_type,
             'is_recorded'                                 => (bool) $this->is_recorded,
             'is_prepared'                                 => (bool) $this->is_prepared,
             'upload_enabled'                              => (bool) $this->upload_enabled,

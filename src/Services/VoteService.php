@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Services;
 
+use League\Csv\Writer;
 use Motor\Backend\Services\BaseService;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\ManualVote;
@@ -38,7 +39,57 @@ class VoteService extends BaseService
     }
 
     /**
-     * @param  string  $direction
+     * @return \League\Csv\Writer
+     * @throws \League\Csv\CannotInsertRecord
+     * @throws \League\Csv\Exception
+     * @throws \League\Csv\InvalidArgument
+     */
+    public static function exportCSV()
+    {
+        $results = VoteService::getAllVotesByRank();
+
+        $header = [
+            'COMPETITION',
+            'RANK',
+            'POINTS',
+            'TITLE',
+            'AUTHOR',
+            'REMOTE',
+        ];
+
+        $records = [];
+
+        foreach ($results as $competition) {
+            foreach ($competition['entries'] as $entry) {
+                $record = [
+                    $competition['name'],
+                    $entry['rank'],
+                    $entry['points'],
+                    $entry['title'],
+                    $entry['author'],
+                    $entry['is_remote'],
+                ];
+
+                $records[] = $record;
+            }
+        }
+
+        //load the CSV document from a string
+        $csv = Writer::createFromString();
+        $csv->setEnclosure('"');
+        $csv->setDelimiter(';');
+
+        //insert the header
+        $csv->insertOne($header);
+
+        //insert all the records
+        $csv->insertAll($records);
+
+        return $csv;
+    }
+
+    /**
+     * @param string $direction
      * @return array
      */
     public static function getAllVotesByRank($direction = 'DESC')
@@ -70,6 +121,7 @@ class VoteService extends BaseService
                     'author_country_iso_3166_1' => $entry->author_country_iso_3166_1,
                     'author_email'              => $entry->author_email,
                     'author_phone'              => $entry->author_phone,
+                    'remote_type'               => $entry->remote_type,
 
                     'points'   => $entry->votes,
                     'comments' => $entry->vote_comments,
@@ -132,6 +184,7 @@ class VoteService extends BaseService
                             'competition'   => $competition->name,
                             'special_votes' => (int) $specialVotes,
                             'points'        => (int) $specialVotes,
+                            'remote_type'   => $entry->remote_type,
                             'tie'           => false,
                         ];
                     }

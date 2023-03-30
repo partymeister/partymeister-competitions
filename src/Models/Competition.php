@@ -107,7 +107,7 @@ class Competition extends Model implements HasMedia
     ];
 
     /**
-     * @param  Media|null  $media
+     * @param Media|null $media
      *
      * @throws InvalidManipulation
      */
@@ -143,6 +143,18 @@ class Competition extends Model implements HasMedia
     {
         return $this->hasMany(Entry::class)
                     ->where('status', 1)
+                    ->orderBy('sort_position', 'ASC');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function unqualified_entries_with_opt_in()
+    {
+        return $this->hasMany(Entry::class)
+                    ->where('status', '>=', 3) // not preselected or disqualified
+                    ->where('visitor_id', '>', 0)
+                    ->where('notify_about_status', true)
                     ->orderBy('sort_position', 'ASC');
     }
 

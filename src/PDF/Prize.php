@@ -44,12 +44,12 @@ class Prize extends PDF
     public function renderCompetitionRankings($entry, $prize)
     {
         $this->SetStyle('Prizesheet Name');
-        $text = '#'.$prize->rank.' - '.$entry->title.' by '.$entry->author;
+        $text = '#'.$prize->rank.' - '.$entry->title.' by '.$entry->author. ' '.($entry->remote_type ? '(' . $entry->remote_type . ')' : '');
         $this->MultiCell(0, 5, $text, 0, 'L');
 
         $this->SetStyle('Prizesheet Text');
         if ($prize->amount > 0) {
-            $text = PDFHelper::format_currency($prize->amount).' '.config('partymeister-competitions-receipt.currency')."\n".$prize->additional;
+            $text = PDFHelper::format_currency(str_replace(',', '.', $prize->amount)).' '.config('partymeister-competitions-receipt.currency')."\n".$prize->additional;
         } else {
             $text = $prize->additional;
         }

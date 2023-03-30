@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        <span class="badge badge-danger" v-if="entry.is_remote">REMOTE</span>
+                        <span class="badge badge-danger" v-if="entry.is_remote">{{ entry.remote_type }}</span>
                         {{entry.title}} by {{entry.author}}
                     </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

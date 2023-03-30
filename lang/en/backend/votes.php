@@ -15,4 +15,7 @@ return [
     'no_entries_for_this_competition' => 'There are currently no checked entries for this competition',
     'deadline'                        => 'Deadline',
     'deadline_over'                   => 'Deadline is over',
+
+    'results_csv' => 'Results (CSV)',
+
 ];

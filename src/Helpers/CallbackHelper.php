@@ -29,11 +29,12 @@ class CallbackHelper
         }
 
         $callback->name = 'Competition: '.$competition->name.' starts';
-        $callback->action = 'notification';
+        $callback->action = 'competition_starts';
         $callback->title = 'Competition';
         $callback->body = $competition->name.' competition is starting';
         $callback->hash = $hash;
         $callback->destination = 'competitions';
+        $callback->payload = json_encode(['competition_id' => $competition->id]);
         $callback->save();
 
         return $callback;

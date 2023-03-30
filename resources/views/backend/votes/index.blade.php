@@ -20,6 +20,7 @@
                 {!! link_to_route('backend.competition_prizes.export.prizesheet', trans('partymeister-competitions::backend/competition_prizes.prizesheet'), ['prizesheet' => true, 'receipt' => true], ['class' => 'dropdown-item']) !!}
                 {!! link_to_route('backend.competition_prizes.export.prizesheet', trans('partymeister-competitions::backend/competition_prizes.prizesheet_only'), ['prizesheet' => true], ['class' => 'dropdown-item']) !!}
                 {!! link_to_route('backend.competition_prizes.export.prizesheet', trans('partymeister-competitions::backend/competition_prizes.receipts_only'), ['receipt' => true], ['class' => 'dropdown-item']) !!}
+                {!! link_to_route('backend.votes.export.csv', trans('partymeister-competitions::backend/votes.results_csv'), [], ['class' => 'dropdown-item']) !!}
             </div>
         </div>
     @endif
@@ -51,6 +52,9 @@
                     <div class="col-md-4">
                         {{$entry['author']}}
                     </div>
+                    <div class="col-md-4">
+                        {{$entry['remote_type']}}
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -74,8 +78,11 @@
                             <div class="col-md-5">
                                 {{$entry['title']}}
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 {{$entry['author']}}
+                            </div>
+                            <div class="col-md-1">
+                                {{$entry['remote_type']}}
                             </div>
                         </div>
                     @endforeach

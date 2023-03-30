@@ -261,6 +261,20 @@ class Entry extends Model implements HasMedia
         return $this->belongsToMany(Option::class);
     }
 
+    public function getRemoteTypeAttribute() {
+        if ($this->visitor) {
+            if ($this->visitor->is_satellite) {
+                return 'Satellite';
+            } else if ($this->visitor->is_remote) {
+                return 'Remote';
+            }
+        }
+        if ($this->is_remote) {
+            return 'Remote';
+        }
+        return '';
+    }
+
     /**
      * @return int|mixed
      */
