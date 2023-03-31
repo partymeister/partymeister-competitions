@@ -19,14 +19,6 @@ class AccessKeyService extends BaseService
 
     public function filters()
     {
-        $this->filter->add(new SelectRenderer('visitor_id'))
-                     ->setOptionPrefix(trans('partymeister-core::backend/visitors.visitor'))
-                     ->setEmptyOption('-- '.trans('partymeister-core::backend/visitors.visitor').' --')
-                     ->setOptions([
-                         1 => trans('motor-backend::backend/global.yes'),
-                         0 => trans('motor-backend::backend/global.no'),
-                     ]);
-
         $this->filter->add(new SelectRenderer('is_remote'))
                      ->setOptionPrefix(trans('partymeister-competitions::backend/access_keys.is_remote'))
                      ->setEmptyOption('-- '.trans('partymeister-competitions::backend/access_keys.is_remote').' --')
