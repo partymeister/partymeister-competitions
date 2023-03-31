@@ -7,9 +7,14 @@ namespace Partymeister\Competitions\PDF;
  */
 class AccessKey extends PDF
 {
-    public function __construct()
+
+    protected $paginator;
+
+    public function __construct($paginator)
     {
         parent::__construct();
+
+        $this->paginator = $paginator;
 
         $this->setMargins(5, 5, 5);
         $this->AddStyle('Accesskey', 'Courier', 'B', 14);
@@ -21,7 +26,7 @@ class AccessKey extends PDF
     {
         $this->SetStyle('Accesskey');
         $this->addPage();
-        foreach (\Partymeister\Competitions\Models\AccessKey::all() as $key => $row) {
+        foreach ($this->paginator as $key => $row) {
             if ($key % 2 == 0) {
                 $x_offset = 0;
             } else {

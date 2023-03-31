@@ -10,8 +10,19 @@
         {!! link_to_route('backend.access_keys.create', trans('partymeister-competitions::backend/access_keys.new'), [], ['class' => 'float-right btn btn-sm btn-success']) !!}
         <button type="button"
                 class="btn btn-sm btn-danger float-right access-keys-generate">{{trans('partymeister-competitions::backend/access_keys.generate')}}</button>
-        {!! link_to_route('backend.access_keys.export.pdf', trans('partymeister-competitions::backend/access_keys.export_pdf'), [], ['class' => 'float-right btn btn-sm btn-danger']) !!}
-        {!! link_to_route('backend.access_keys.export.csv', trans('partymeister-competitions::backend/access_keys.export_csv'), [], ['class' => 'float-right btn btn-sm btn-danger']) !!}
+
+        <div class="dropdown float-right">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{trans('partymeister-competitions::backend/competition_prizes.downloads')}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {!! link_to_route('backend.access_keys.export.pdf', trans('partymeister-competitions::backend/access_keys.export_pdf'), ['per_page' => 5000], ['class' => 'dropdown-item']) !!}
+                {!! link_to_route('backend.access_keys.export.csv', trans('partymeister-competitions::backend/access_keys.export_csv'), ['per_page' => 5000], ['class' => 'dropdown-item']) !!}
+            </div>
+        </div>
+
+
         <div class="loader loader-default" data-text="&hearts; {{trans('partymeister-competitions::backend/access_keys.generating')}} &hearts;"></div>
     @endif
 @endsection

@@ -76,6 +76,9 @@ class AccessKey extends Model
         'access_key',
         'ip_address',
         'registered_at',
+        'is_remote',
+        'is_satellite',
+        'is_prepaid',
     ];
 
     /**
