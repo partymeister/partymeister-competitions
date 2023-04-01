@@ -53,7 +53,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
                     $numFiles = count($entry->getMedia('file'));
                     foreach ($entry->getMedia('file') as $index => $media) {
                         if (file_exists($media->getPath()) && ! file_exists($directory.'/'.$entryDir.'/files/'.$media->file_name)) {
-                            link($media->getPath(), $directory.'/'.$entryDir.'/files/V'.($index + 1).'_'.$media->file_name);
+                            @link($media->getPath(), $directory.'/'.$entryDir.'/files/V'.($index + 1).'_'.$media->file_name);
                         }
                     }
                 }

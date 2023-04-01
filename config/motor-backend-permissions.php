@@ -33,6 +33,14 @@ return [
             'delete',
         ],
     ],
+    'entries.comments' => [
+        'name'   => 'partymeister-competitions::backend/entries.comments',
+        'values' => [
+            'read',
+            'write',
+            'delete',
+        ],
+    ],
     'entries'            => [
         'name'   => 'partymeister-competitions::backend/entries.entries',
         'values' => [
