@@ -20,6 +20,7 @@ class Prize extends PDF
             64,
         ]);
         $this->AddStyle('Prizesheet Name', 'Helvetica', 'B', 12);
+        $this->AddStyle('Prizesheet Name Remote', 'Helvetica', 'B', 12, 0, [255,0,0]);
         $this->AddStyle('Prizesheet Text', 'Helvetica', 'R', 12);
 
         $this->AddStyle('Receipt Amount', 'Helvetica', 'B', 30);
@@ -44,8 +45,13 @@ class Prize extends PDF
     public function renderCompetitionRankings($entry, $prize)
     {
         $this->SetStyle('Prizesheet Name');
-        $text = '#'.$prize->rank.' - '.$entry->title.' by '.$entry->author. ' '.($entry->remote_type ? '(' . $entry->remote_type . ')' : '');
+        $text = '#'.$prize->rank.' - '.$entry->title.' by '.$entry->author;
         $this->MultiCell(0, 5, $text, 0, 'L');
+        if ($entry->remote_type !== '') {
+            $this->SetStyle('Prizesheet Name Remote');
+            $text = '(' . $entry->remote_type . ' - Representatitve: '.$entry->representative.')';
+            $this->MultiCell(0, 5, $text, 0, 'L');
+        }
 
         $this->SetStyle('Prizesheet Text');
         if ($prize->amount > 0) {
