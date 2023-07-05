@@ -9,6 +9,9 @@
         @if (!is_null($form->registered_at->getValue()))
             {!! form_row($form->registered_at) !!}
         @endif
+        {!! form_row($form->is_remote) !!}
+        {!! form_row($form->is_satellite) !!}
+        {!! form_row($form->is_prepaid) !!}
     </div>
     <!-- /.box-body -->
 

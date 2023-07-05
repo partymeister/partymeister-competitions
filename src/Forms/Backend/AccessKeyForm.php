@@ -20,7 +20,15 @@ class AccessKeyForm extends Form
         ])
              ->add('ip_address', 'text', [
                  'label' => trans('partymeister-competitions::backend/access_keys.ip_address'),
-                 'rules' => 'required',
+             ])
+             ->add('is_remote', 'checkbox', [
+                 'label' => trans('partymeister-competitions::backend/access_keys.is_remote'),
+             ])
+             ->add('is_satellite', 'checkbox', [
+                 'label' => trans('partymeister-competitions::backend/access_keys.is_satellite'),
+             ])
+             ->add('is_prepaid', 'checkbox', [
+                 'label' => trans('partymeister-competitions::backend/access_keys.is_prepaid'),
              ])
              ->add('registered_at', 'static', ['label' => trans('partymeister-competitions::backend/access_keys.registered_at')])
              ->add('submit', 'submit', [
