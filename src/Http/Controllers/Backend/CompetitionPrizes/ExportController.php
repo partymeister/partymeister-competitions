@@ -87,7 +87,7 @@ class ExportController extends Controller
                     if ($num >= 4) {
                         continue;
                     }
-                    $pdf->renderCompetitionRankings($e, $c->prizes()
+                    $pdf->renderCompetitionRankings($e, $num, $c->prizes()
                                                           ->where('rank', $num)
                                                           ->first());
                     $num++;
