@@ -67,7 +67,7 @@ class VoteService extends BaseService
                     $entry['points'],
                     $entry['title'],
                     $entry['author'],
-                    $entry['is_remote'],
+                    $entry['remote_type'],
                 ];
 
                 $records[] = $record;
