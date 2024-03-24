@@ -90,10 +90,16 @@ class ComponentEntryComments
             return redirect()->back();
         }
 
+
+        $url = $this->request->url().'?entry_id='.$this->record->id;
+        if (app()->environment('production')) {
+            $url = str_replace('http:', 'https:', $url);
+        }
+
         $this->entryCommentForm = $this->form(EntryCommentForm::class, [
             'name'    => 'entry-comment',
             'method'  => 'POST',
-            'url'     => $this->request->url().'?entry_id='.$this->record->id,
+            'url'     => $url,
             'enctype' => 'multipart/form-data',
             'model'   => $this->record,
         ]);

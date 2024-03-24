@@ -27,10 +27,6 @@ class CommentsController extends Controller
         // Check if we have ssl enabled and rewrite the url
         $url = route('backend.entries.comments.store', [$record->id]);
 
-        if (app()->environment('production')) {
-            $url = str_replace('http:', 'https:', $url);
-        }
-
         $form = $this->form(CommentForm::class, [
             'method'  => 'POST',
             'url'     => $url,
