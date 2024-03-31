@@ -51,7 +51,7 @@ class PlaylistsController extends Controller
         switch ($request->get('format', 'json')) {
             case 'timecode':
                 $data = Callback::where('payload->competition_id', $competition->id)->get();
-                return response()->json($data);
+                return response()->download(json_encode($data));
 
                 break;
             case 'json':
