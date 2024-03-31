@@ -50,7 +50,7 @@ class PlaylistsController extends Controller
         $filename = Str::slug($competition->name.'_'.date('Y-m-d_H-i-s'));
         switch ($request->get('format', 'json')) {
             case 'timecode':
-                $data = Callback::where('payload', 'LIKE', $competition->id)->get();
+                $data = Callback::where('payload->competition_id', $competition->id)->get();
                 return response()->json($data);
 
                 break;
