@@ -37,5 +37,6 @@ return [
     'video_3'                           => 'Video 1 (plays after video 2)',
     'sort_position_updated'             => 'Competition position updated',
     'prizegiving_sort_position_updated' => 'Prizegiving position updated',
+    'download_callback_timecodes' => 'Download callback timecodes'
 
 ];

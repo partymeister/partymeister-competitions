@@ -15,6 +15,7 @@ use Motor\Backend\Http\Controllers\Controller;
 use Partymeister\Competitions\Http\Resources\CompetitionResource;
 use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Competition;
+use Partymeister\Core\Models\Callback;
 use Partymeister\Slides\Models\SlideTemplate;
 use Partymeister\Slides\Services\PlaylistService;
 
@@ -48,6 +49,11 @@ class PlaylistsController extends Controller
     {
         $filename = Str::slug($competition->name.'_'.date('Y-m-d_H-i-s'));
         switch ($request->get('format', 'json')) {
+            case 'timecode':
+                $data = Callback::where('payload', 'LIKE', $competition->id);
+                return response()->json($data);
+
+                break;
             case 'json':
 
                 $entryCollection = new CompetitionResource($competition->load('qualified_entries'));
