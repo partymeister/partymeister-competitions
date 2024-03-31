@@ -47,11 +47,14 @@ class PlaylistsController extends Controller
      */
     public function index(Competition $competition, Request $request)
     {
-        $filename = Str::slug($competition->name.'_'.date('Y-m-d_H-i-s'));
-        switch ($request->get('format', 'json')) {
+        $format = $request->get('format', 'json');
+        $filename = Str::slug($competition->name.'_'.$format.'_'.date('Y-m-d_H-i-s'));
+        switch ($format) {
             case 'timecode':
                 $data = Callback::where('payload->competition_id', $competition->id)->get();
-                return response()->download(json_encode($data));
+                return response()->streamDownload(function () use ($data) {
+                    echo json_encode($data);
+                }, $filename.'.json', ['Content-Type' => 'application/json']);
 
                 break;
             case 'json':
