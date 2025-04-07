@@ -89,4 +89,27 @@ return [
     'notify_about_status'  => 'Notify me about my entry status',
     'remote_participation' => 'You are participating remotely',
     'representative'       => 'Representative on location',
+
+    'ai_information'       => 'AI information',
+    'ai_usage'             => 'AI usage',
+    'ai_usage_description' => 'AI usage',
+    'ai_usage_options'     => [
+        'no_ai_usage' => 'No AI used',
+        'ai_1' => 'AI 1',
+        'ai_2' => 'AI 2',
+        'ai_3' => 'AI 3',
+        'ai_4' => 'AI 4',
+        'ai_5' => 'AI 5',
+    ],
+
+    'engine_information'        => 'Engine information',
+    'engine_option'             => 'Engine used',
+    'engine_option_description' => 'Engine option description',
+    'engine_options'            => [
+        'engine_1' => 'Engine 1',
+        'engine_2' => 'Engine 2',
+        'engine_3' => 'Engine 3',
+        'engine_4' => 'Engine 4',
+        'engine_5' => 'Engine 5',
+    ],
 ];

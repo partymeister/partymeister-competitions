@@ -121,12 +121,39 @@
                     </ul>
                 </dd>
             @endif
+            @if ($record->custom_option != '')
             <dt class="small-4">
                 {{trans('partymeister-competitions::backend/entries.custom_option_short')}}
             </dt>
             <dd class="small-8">
                 {{ $record->custom_option }}
             </dd>
+            @endif
+
+            @if ($record->ai_usage != '')
+            <dt class="small-4">
+                {{trans('partymeister-competitions::backend/entries.ai_information')}}
+            </dt>
+            <dd class="small-8">
+                <b>{{ trans('partymeister-competitions::backend/entries.ai_usage') }}: {{ trans('partymeister-competitions::backend/entries.ai_usage_options.' . $record->ai_usage) }}</b>
+                <p>
+                    {{ $record->ai_usage_description }}
+                </p>
+            </dd>
+            @endif
+
+            @if ($record->engine_option != '')
+            <dt class="small-4">
+                {{trans('partymeister-competitions::backend/entries.engine_information')}}
+            </dt>
+            <dd class="small-8">
+                <b>{{ trans('partymeister-competitions::backend/entries.engine_option') }}: {{ trans('partymeister-competitions::backend/entries.engine_options.' . $record->engine_option) }}</b>
+                <p>
+                    {{ $record->ai_usage_description }}
+                </p>
+            </dd>
+            @endif
+
         </dl>
     </div>
 </div>

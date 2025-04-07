@@ -57,6 +57,12 @@
             <div class="col-md-3">
                 {!! form_row($form->has_config_file) !!}
             </div>
+            <div class="col-md-3">
+                {!! form_row($form->has_ai_options) !!}
+            </div>
+            <div class="col-md-3">
+                {!! form_row($form->has_engine_options) !!}
+            </div>
         </div>
     </div>
     <!-- /.box-body -->

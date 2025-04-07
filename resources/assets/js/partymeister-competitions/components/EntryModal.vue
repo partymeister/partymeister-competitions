@@ -136,9 +136,34 @@
                                         <a :href="entry.config_file.url">{{ entry.config_file.file_name }}</a>
                                     </div>
                                 </template>
+
                             </dl>
                         </div>
                     </div>
+
+                  <div class="row clearfix" v-if="entry.ai_usage || entry.engine_option">
+                    <template v-if="entry.ai_usage">
+                      <div class="col-md-6">
+                        <h4 style="margin-top: 0.5rem;">
+                          {{$t('partymeister-competitions.backend.entries.ai_information')}}</h4>
+                        <b>{{$t('partymeister-competitions.backend.entries.ai_usage_options.'+entry.ai_usage)}}</b>
+                        <p>
+                          {{ entry.ai_usage_description }}
+                        </p>
+                      </div>
+                  </template>
+
+                  <template v-if="entry.engine_option">
+                      <div class="col-md-6">
+                        <h4 style="margin-top: 0.5rem;">
+                          {{$t('partymeister-competitions.backend.entries.engine_information')}}</h4>
+                        <b>{{$t('partymeister-competitions.backend.entries.engine_options.'+entry.engine_option)}}</b>
+                        <p>
+                          {{ entry.engine_option_description }}
+                        </p>
+                      </div>
+                  </template>
+                  </div>
 
                     <div class="row clearfix">
                         <template v-if="entry.screenshot">
@@ -150,7 +175,7 @@
                                                                                                   :src="entry.screenshot.url"/></a>
                             </div>
                         </template>
-                        <template v-if="entry.work_stages">
+                        <template v-if="entry.work_stages && entry.work_stages.length > 0">
                             <div class="col-md-6">
                                 <h4 style="margin-top: 0.5rem;">
                                     {{$t('partymeister-competitions.backend.entries.work_stages')}}</h4>

@@ -28,6 +28,8 @@ class CompetitionTypeForm extends Form
              ->add('file_is_optional', 'checkbox', ['label' => trans('partymeister-competitions::backend/competition_types.file_is_optional')])
              ->add('number_of_work_stages', 'text', ['label' => trans('partymeister-competitions::backend/competition_types.number_of_work_stages')])
              ->add('has_config_file', 'checkbox', ['label' => trans('partymeister-competitions::backend/competition_types.has_config_file')])
+            ->add('has_ai_options', 'checkbox', ['label' => trans('partymeister-competitions::backend/competition_types.has_ai_options')])
+            ->add('has_engine_options', 'checkbox', ['label' => trans('partymeister-competitions::backend/competition_types.has_engine_options')])
              ->add('submit', 'submit', [
                  'attr'  => ['class' => 'btn btn-primary'],
                  'label' => trans('partymeister-competitions::backend/competition_types.save'),

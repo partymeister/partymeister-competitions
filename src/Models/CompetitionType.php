@@ -109,6 +109,8 @@ class CompetitionType extends Model
         'has_remote_entries',
         'file_is_optional',
         'has_config_file',
+        'has_ai_options',
+        'has_engine_options',
     ];
 
     /**
@@ -180,6 +182,12 @@ class CompetitionType extends Model
         }
         if ($this->has_config_file) {
             $properties[] = 'has_config_file';
+        }
+        if ($this->has_ai_options) {
+            $properties[] = 'has_ai_options';
+        }
+        if ($this->has_engine_options) {
+            $properties[] = 'has_engine_options';
         }
 
         return $properties;

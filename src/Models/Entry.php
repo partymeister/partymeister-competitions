@@ -185,7 +185,11 @@ class Entry extends Model implements HasMedia
         'needs_content_check',
         'notify_about_status',
         'identifier',
-        'representative'
+        'representative',
+        'ai_usage',
+        'ai_usage_description',
+        'engine_option',
+        'engine_option_description',
     ];
 
     /**

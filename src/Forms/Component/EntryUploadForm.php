@@ -144,7 +144,26 @@ class EntryUploadForm extends Form
                 ]);
             }
 
-//            if ($data['competition']->competition_type->has_audio) {
+            if ($data['competition']->competition_type->has_ai_options) {
+                $this->add('ai_usage', 'select2', [
+                    'label'   => trans('partymeister-competitions::backend/entries.ai_usage'),
+                    'choices' => trans('partymeister-competitions::backend/entries.ai_usage_options'),
+                    'empty_value' => trans('motor-backend::backend/global.please_choose'),
+                    'rules' => 'required',
+                ]);
+                $this->add('ai_usage_description', 'textarea', ['label' => trans('partymeister-competitions::backend/entries.ai_usage_description')]);
+            }
+            if ($data['competition']->competition_type->has_engine_options) {
+                $this->add('engine_option', 'select2', [
+                    'label'   => trans('partymeister-competitions::backend/entries.engine_option'),
+                    'choices' => trans('partymeister-competitions::backend/entries.engine_options'),
+                    'empty_value' => trans('motor-backend::backend/global.please_choose'),
+                    'rules' => 'required',
+                ]);
+                $this->add('engine_option_description', 'textarea', ['label' => trans('partymeister-competitions::backend/entries.engine_option_description')]);
+            }
+
+            //            if ($data['competition']->competition_type->has_audio) {
 //                $this->add('audio', 'file_audio', ['label' =>  trans('partymeister-competitions::backend/entries.audio'), 'model' => Entry::class]);
 //            }
 //            if ($data['competition']->competition_type->has_running_time) {

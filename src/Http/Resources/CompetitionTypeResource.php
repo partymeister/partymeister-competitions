@@ -89,7 +89,7 @@ class CompetitionTypeResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -110,6 +110,8 @@ class CompetitionTypeResource extends BaseResource
             'has_remote_entries'    => (bool) $this->has_remote_entries,
             'file_is_optional'      => (bool) $this->file_is_optional,
             'has_config_file'       => (bool) $this->has_config_file,
+            'has_ai_options'        => (bool) $this->has_ai_options,
+            'has_engine_options'    => (bool) $this->has_engine_options,
         ];
     }
 }

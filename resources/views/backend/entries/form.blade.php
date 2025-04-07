@@ -89,6 +89,35 @@
         </div>
         <!-- /.box-body -->
     </div>
+
+
+    @if ($form->has('ai_usage'))
+    <div class="@boxWrapper box-primary">
+        <div class="@boxHeader with-border">
+            <h3 class="box-title">{{ trans('partymeister-competitions::backend/entries.ai_information') }}</h3>
+        </div>
+        <div class="@boxBody">
+            {!! form_row($form->ai_usage) !!}
+            {!! form_row($form->ai_usage_description) !!}
+        </div>
+        <!-- /.box-body -->
+    </div>
+    @endif
+
+
+    @if ($form->has('engine_option'))
+        <div class="@boxWrapper box-primary">
+            <div class="@boxHeader with-border">
+                <h3 class="box-title">{{ trans('partymeister-competitions::backend/entries.engine_information') }}</h3>
+            </div>
+            <div class="@boxBody">
+                {!! form_row($form->engine_option) !!}
+                {!! form_row($form->engine_option_description) !!}
+            </div>
+            <!-- /.box-body -->
+        </div>
+    @endif
+
     <div class="@boxWrapper box-primary">
         <div class="@boxHeader with-border">
             <h3 class="box-title">{{ trans('partymeister-competitions::backend/entries.additional_info') }}</h3>

@@ -27,4 +27,6 @@ return [
     'file_is_optional'        => 'File upload optional',
     'has_remote_entries'      => 'Remote entries allowed',
     'has_config_file'         => 'Has config file as separate upload',
+    'has_ai_options'          => 'Has AI options',
+    'has_engine_options'      => 'Has engine options',
 ];
