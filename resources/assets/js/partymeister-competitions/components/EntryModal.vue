@@ -159,7 +159,8 @@
                           {{$t('partymeister-competitions.backend.entries.engine_information')}}</h4>
                         <b>{{$t('partymeister-competitions.backend.entries.engine_options.'+entry.engine_option)}}</b>
                         <p>
-                          {{ entry.engine_option_description }}
+                          <b>Engine:</b> {{ entry.engine_option_description }}<br>
+                          <b>Creator involvement:</b> {{$t('partymeister-competitions.backend.entries.engine_creator_involvement_options.'+entry.engine_creator_involvement) }}
                         </p>
                       </div>
                   </template>

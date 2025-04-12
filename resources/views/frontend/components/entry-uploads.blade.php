@@ -121,6 +121,7 @@
                 <div class="@boxBody">
                     {!! form_row($entryUploadForm->engine_option) !!}
                     {!! form_row($entryUploadForm->engine_option_description) !!}
+                    {!! form_row($entryUploadForm->engine_creator_involvement) !!}
                 </div>
                 <!-- /.box-body -->
             </div>

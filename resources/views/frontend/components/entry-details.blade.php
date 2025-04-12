@@ -149,7 +149,10 @@
             <dd class="small-8">
                 <b>{{ trans('partymeister-competitions::backend/entries.engine_option') }}: {{ trans('partymeister-competitions::backend/entries.engine_options.' . $record->engine_option) }}</b>
                 <p>
-                    {{ $record->ai_usage_description }}
+                    <b>Engine:</b> {{ $record->engine_option_description }}
+                </p>
+                <p>
+                    <b>Creator involvement:</b> {{ trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.' . $record->engine_creator_involvement) }}
                 </p>
             </dd>
             @endif

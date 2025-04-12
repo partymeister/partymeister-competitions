@@ -190,6 +190,7 @@ class Entry extends Model implements HasMedia
         'ai_usage_description',
         'engine_option',
         'engine_option_description',
+        'engine_creator_involvement'
     ];
 
     /**

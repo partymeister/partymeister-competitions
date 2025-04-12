@@ -113,6 +113,7 @@
             <div class="@boxBody">
                 {!! form_row($form->engine_option) !!}
                 {!! form_row($form->engine_option_description) !!}
+                {!! form_row($form->engine_creator_involvement) !!}
             </div>
             <!-- /.box-body -->
         </div>
