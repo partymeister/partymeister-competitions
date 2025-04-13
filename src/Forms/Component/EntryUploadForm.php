@@ -109,7 +109,7 @@ class EntryUploadForm extends Form
             $rules = '';
         }
         $this->add('file', 'file_file', [
-            'label' => trans('partymeister-competitions::backend/entries.file'),
+            'label' => trans('partymeister-competitions::backend/entries.file') . ' (RAR/ZIP)',
             'model' => Entry::class,
             'rules' => $rules,
         ]);
