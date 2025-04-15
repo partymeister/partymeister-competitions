@@ -108,15 +108,15 @@ return [
     'engine_option_description'          => 'Engine name',
     'engine_options'                     => [
         'custom'                  => 'Custom engine',
-        'open_source_demotool'    => 'Open-source demotool',
-        'commercial_demotool'     => 'Commercial demotool',
-        'open_source_game_engine' => 'Open-source game engine',
-        'commercial_game_engine'  => 'Commercial game engine',
+        'open_source_demotool'    => 'OSS demotool',
+        'commercial_demotool'     => 'Com. demotool',
+        'open_source_game_engine' => 'OSS game engine',
+        'commercial_game_engine'  => 'Com. game engine',
     ],
     'engine_creator_involvement'         => 'Engine creator involvement',
     'engine_creator_involvement_options' => [
-        'active'    => 'Active collaboration',
-        'demogroup' => 'Within demogroup',
-        'none'      => 'Not involved',
+        'active'    => 'Active collaboration with creator',
+        'demogroup' => 'Creator in group',
+        'none'      => 'Creator not involved',
     ],
 ];

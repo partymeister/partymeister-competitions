@@ -291,6 +291,8 @@ class EntryResource extends BaseResource
             'composer_not_member_of_copyright_collective' => (bool) $this->composer_not_member_of_copyright_collective,
             'ai_usage'                                    => $this->ai_usage,
             'ai_usage_description'                        => $this->ai_usage_description,
+            'engine_data'                                 => $this->engine_data,
+            'ai_data'                                     => $this->ai_data,
             'engine_option'                               => $this->engine_option,
             'engine_option_description'                   => $this->engine_option_description,
             'engine_creator_involvement'                  => $this->engine_creator_involvement,

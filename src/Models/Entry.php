@@ -250,6 +250,23 @@ class Entry extends Model implements HasMedia
         return $this->belongsTo(Competition::class);
     }
 
+    public function getEngineDataAttribute()
+    {
+        if ($this->engine_option !== '') {
+            return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option). '<br>'.$this->engine_option_description. '<br>'.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement)."<br>";
+            //return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option). ': '.$this->engine_option_description. '<br>Creator: '.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement)."<br><br>";
+        }
+        return '';
+    }
+
+    public function getAiDataAttribute()
+    {
+        if (!in_array($this->ai_usage, [0, null, 'no_ai_usage', ''])) {
+            return trans('partymeister-competitions::backend/entries.ai_usage_options.'.$this->ai_usage). '<br>'.$this->ai_usage_description. '<br><br>';
+        }
+        return '';
+    }
+
     /**
      * @return string
      */
