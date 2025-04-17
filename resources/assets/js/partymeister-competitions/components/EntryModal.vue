@@ -141,8 +141,8 @@
                         </div>
                     </div>
 
-                  <div class="row clearfix" v-if="entry.ai_usage || entry.engine_option">
-                    <template v-if="entry.ai_usage">
+                  <div class="row clearfix" v-if="entry.ai_data || entry.engine_data">
+                    <template v-if="entry.ai_data">
                       <div class="col-md-6">
                         <h4 style="margin-top: 0.5rem;">
                           {{$t('partymeister-competitions.backend.entries.ai_information')}}</h4>
@@ -153,7 +153,7 @@
                       </div>
                   </template>
 
-                  <template v-if="entry.engine_option">
+                  <template v-if="entry.engine_data">
                       <div class="col-md-6">
                         <h4 style="margin-top: 0.5rem;">
                           {{$t('partymeister-competitions.backend.entries.engine_information')}}</h4>

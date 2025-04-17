@@ -130,7 +130,7 @@
             </dd>
             @endif
 
-            @if ($record->ai_usage != '')
+            @if ($record->ai_data && $record->ai_usage != '')
             <dt class="small-4">
                 {{trans('partymeister-competitions::backend/entries.ai_information')}}
             </dt>
@@ -142,7 +142,7 @@
             </dd>
             @endif
 
-            @if ($record->engine_option != '')
+            @if ($record->engine_data && $record->engine_option != '')
             <dt class="small-4">
                 {{trans('partymeister-competitions::backend/entries.engine_information')}}
             </dt>
