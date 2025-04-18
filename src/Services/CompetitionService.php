@@ -10,6 +10,7 @@ use Motor\Core\Filter\Renderers\SelectRenderer;
 use Motor\Media\Models\FileAssociation;
 use Partymeister\Competitions\Events\CompetitionSaved;
 use Partymeister\Competitions\Models\Competition;
+use Partymeister\Competitions\Models\LiveVote;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -60,6 +61,26 @@ class CompetitionService extends BaseService
 
     public function afterUpdate()
     {
+        if (! is_null($this->request->get('switch_live_voting'))) {
+            if ($this->record->live_voting_enabled) {
+                $lv = LiveVote::first();
+                if (! is_null($lv)) {
+                    $lv->delete();
+                }
+            } else {
+                LiveVote::create([
+                    'competition_id' => $this->record->id,
+                    'entry_id'       => $this->record->entries()
+                                                     ->orderBy('sort_position', 'DESC')
+                                                     ->first()->id,
+                    'sort_position'  => $this->record->entries->count(),
+                    'title'          => $this->record->name,
+                    'author'         => $this->record->name,
+                    'is_current'     => true,
+                ]);
+            }
+        }
+
         if (count($this->request->get('option_groups', [])) > 0) {
             $this->record->option_groups()
                          ->detach();

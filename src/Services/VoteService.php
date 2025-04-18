@@ -96,9 +96,24 @@ class VoteService extends BaseService
     {
         $results = [];
         $maxPoints = [];
-        foreach (Competition::where('has_prizegiving', true)
-                            ->orderBy('prizegiving_sort_position', $direction)
-                            ->get() as $competition) {
+
+        $competitionsWithPG = Competition::where('has_prizegiving', true)
+                                         ->orderBy('prizegiving_sort_position', $direction)
+                                         ->get();
+
+        // FIXME: SUPER HACK REVISION 2025
+        $competitionsWithOOCVoting = [];
+
+        foreach (Competition::where('has_prizegiving', false)
+                                         ->get() as $competition) {
+            if ($competition->competition_type->has_out_of_competition_voting) {
+                $competitionsWithOOCVoting[] = $competition;
+            }
+        }
+
+        $competitions = $competitionsWithPG->merge($competitionsWithOOCVoting);
+
+        foreach ($competitions as $competition) {
             $results[$competition->id] = [
                 'id'          => $competition->id,
                 'name'        => $competition->name,

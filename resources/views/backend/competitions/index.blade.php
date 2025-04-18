@@ -48,6 +48,23 @@
             }
         };
 
+        $('.change-competition-live-voting').click(function (e) {
+            e.preventDefault();
+
+            updateRecord(this, $(this).data('record'), {switch_live_voting: $(this).data('live-voting-enabled')}, function (that, results) {
+                switchCssClass(that, results.data.live_voting_enabled, $(that).data('class'), $(that).data('class-alternate'));
+                $(that).data('live-voting-enabled', results.data.live_voting_enabled ? 0 : 1);
+                if (results.data.live_voting_enabled) {
+                    toastr.options = {progressBar: true};
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.live_voting_enabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                } else {
+                    toastr.options = {progressBar: true};
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.live_voting_disabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                }
+            });
+        });
+
+
         $('.change-competition-upload').click(function (e) {
             e.preventDefault();
 
@@ -65,7 +82,6 @@
                 }
             });
         });
-
 
         $('.change-competition-voting').click(function (e) {
             e.preventDefault();

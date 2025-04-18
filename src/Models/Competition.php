@@ -124,6 +124,17 @@ class Competition extends Model implements HasMedia
              ->nonQueued();
     }
 
+    public function getLiveVotingEnabledAttribute()
+    {
+        if ($this->competition_type->has_out_of_competition_voting) {
+            $lv = LiveVote::first();
+            if (!is_null($lv) && $lv->competition_id == $this->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     ///**
     // * @return Collection
     // */

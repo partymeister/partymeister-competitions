@@ -111,6 +111,7 @@ class CompetitionType extends Model
         'has_config_file',
         'has_ai_options',
         'has_engine_options',
+        'has_out_of_competition_voting',
     ];
 
     /**
@@ -188,6 +189,9 @@ class CompetitionType extends Model
         }
         if ($this->has_engine_options) {
             $properties[] = 'has_engine_options';
+        }
+        if ($this->has_out_of_competition_voting) {
+            $properties[] = 'has_out_of_competition_voting';
         }
 
         return $properties;

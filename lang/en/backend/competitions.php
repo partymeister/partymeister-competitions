@@ -21,6 +21,9 @@ return [
     'voting_enabled'                  => 'Voting enabled',
     'upload_disabled'                 => 'Upload disabled',
     'voting_disabled'                 => 'Voting disabled',
+    'live_voting_button'              => 'Enable / disable Live Voting for this competition',
+    'live_voting_enabled'              => 'Live voting enabled',
+    'live_voting_disabled'             => 'Live voting disabled',
 
     'actions'                           => 'Actions',
     'status'                            => 'Status',
