@@ -63,7 +63,7 @@
                         <input type="hidden" name="type[{{$key}}_now]" value="now">
                         <input type="hidden" name="name[{{$key}}_now]" value="Competition: {{$key}} Now">
 
-                        @if ($competition['has_comment'])
+                        @if ($competition['has_comment'] && $comments[$key] != '')
                             <partymeister-slides-elements :readonly="true" :name="'slidemeister-prizegiving-{{$key}}-comments'"
                                                           id="slidemeister-prizegiving-{{$key}}-comments"
                                                           class="slidemeister-instance"></partymeister-slides-elements>
@@ -183,7 +183,7 @@
                     type: 'prizegiving-support',
                     replacements: {headline: 'Now', body: '{{$competition['name']}}' },
                 });
-                @if ($competition['has_comment'])
+                @if ($competition['has_comment'] && $comments[$key] != '')
                     Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
                         name: 'slidemeister-prizegiving-{{$key}}-comments',
                         elements: JSON.parse('{!! addslashes($commentsTemplate->definitions) !!}'),

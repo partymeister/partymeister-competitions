@@ -141,8 +141,8 @@
                         </div>
                     </div>
 
-                  <div class="row clearfix" v-if="entry.ai_data || entry.engine_data">
-                    <template v-if="entry.ai_data">
+                  <div class="row clearfix" v-if="entry.ai_usage !== '' || entry.engine_data">
+                    <template v-if="entry.usage !== ''">
                       <div class="col-md-6">
                         <h4 style="margin-top: 0.5rem;">
                           {{$t('partymeister-competitions.backend.entries.ai_information')}}</h4>
