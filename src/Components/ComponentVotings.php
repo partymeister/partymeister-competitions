@@ -30,14 +30,8 @@ class ComponentVotings
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $request;
 
-    /**
-     * @var
-     */
     protected $visitor;
 
     /**
@@ -47,9 +41,6 @@ class ComponentVotings
 
     /**
      * ComponentVotings constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
-     * @param  ComponentVoting  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -60,13 +51,12 @@ class ComponentVotings
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      */
     public function index(Request $request)
     {
         $this->visitor = Auth::guard('visitor')
-                             ->user();
+            ->user();
         if (is_null($this->visitor)) {
             return redirect(route('frontend.pages.index', ['slug' => 'start']));
         }
@@ -89,13 +79,13 @@ class ComponentVotings
 
         if ($request->get('competition_id') > 0) {
             $competition = Competition::where('voting_enabled', true)
-                                      ->where('id', $request->get('competition_id'))
-                                      ->orderBy('updated_at', 'ASC')
-                                      ->first();
+                ->where('id', $request->get('competition_id'))
+                ->orderBy('updated_at', 'ASC')
+                ->first();
         } else {
             $competition = Competition::where('voting_enabled', true)
-                                      ->orderBy('updated_at', 'ASC')
-                                      ->first();
+                ->orderBy('updated_at', 'ASC')
+                ->first();
         }
 
         $votes = [];
@@ -106,11 +96,11 @@ class ComponentVotings
                 }
             }
             foreach ($this->visitor->votes()
-                                   ->where('competition_id', $competition->id)
-                                   ->get() as $vote) {
+                ->where('competition_id', $competition->id)
+                ->get() as $vote) {
                 $votes[$vote->vote_category_id][$vote->entry_id] = [
-                    'points'       => $vote->points,
-                    'comment'      => $vote->comment,
+                    'points' => $vote->points,
+                    'comment' => $vote->comment,
                     'special_vote' => $vote->special_vote,
                 ];
             }
@@ -132,10 +122,10 @@ class ComponentVotings
         }
 
         $this->viewData = [
-            'competition'           => $competition,
-            'votes'                 => $votes,
-            'votingDeadlineOver'    => $votingDeadlineOver,
-            'liveVoting'            => $liveVoting,
+            'competition' => $competition,
+            'votes' => $votes,
+            'votingDeadlineOver' => $votingDeadlineOver,
+            'liveVoting' => $liveVoting,
             'liveVotingCompetition' => $liveVotingCompetition,
         ];
 
@@ -152,13 +142,13 @@ class ComponentVotings
             foreach ($voteCategories as $voteCategoryId => $entries) {
                 foreach ($entries as $entryId => $points) {
                     $vote = $this->visitor->votes()
-                                          ->where('competition_id', $competitionId)
-                                          ->where('entry_id', $entryId)
-                                          ->where('vote_category_id', $voteCategoryId)
-                                          ->first();
+                        ->where('competition_id', $competitionId)
+                        ->where('entry_id', $entryId)
+                        ->where('vote_category_id', $voteCategoryId)
+                        ->first();
 
                     if (is_null($vote)) {
-                        $vote = new Vote();
+                        $vote = new Vote;
                     }
 
                     if ($points > 5) {
@@ -171,7 +161,7 @@ class ComponentVotings
                     $vote->comment = Arr::get($this->request->all(), 'entry_comment.'.$competitionId.'.'.$entryId);
                     $vote->points = $points;
                     $vote->visitor_id = Auth::guard('visitor')
-                                            ->user()->id;
+                        ->user()->id;
                     $vote->ip_address = $this->request->ip();
                     $vote->save();
                 }
@@ -182,7 +172,7 @@ class ComponentVotings
 
         if ($this->request->get('competition_id', false)) {
             return redirect()->back();
-        //return redirect('votes?competition_id=' . $this->request->get('competition_id'));
+            // return redirect('votes?competition_id=' . $this->request->get('competition_id'));
         } else {
             return redirect()->back();
         }

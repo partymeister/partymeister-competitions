@@ -16,7 +16,6 @@ class PlaylistsController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param  Competition  $competition
      * @return bool|JsonResponse
      */
     public function index(Competition $competition)
@@ -32,12 +31,12 @@ class PlaylistsController extends ApiController
 
         $data = [
             'message' => 'Competition playlist read',
-            'data'    => [
+            'data' => [
                 'competition' => [
-                    'name'         => $competition->name,
+                    'name' => $competition->name,
                     'is_anonymous' => (bool) $competition->competition_type->is_anonymous,
                 ],
-                'entries'     => ['data' => $data],
+                'entries' => ['data' => $data],
             ],
         ];
 
@@ -45,43 +44,42 @@ class PlaylistsController extends ApiController
     }
 
     /**
-     * @param $competition
      * @return bool|JsonResponse
      */
     protected function checkIfCompetitionIsValid($competition)
     {
         // Check for entries with status 0 or 2 (unchecked and needs feedback)
         if ($competition->entries()
-                        ->whereIn('status', [0, 2])
-                        ->count() > 0) {
+            ->whereIn('status', [0, 2])
+            ->count() > 0) {
             return response()->json([
                 'competition' => $competition->name,
-                'message'     => 'Not all entries are checked and/or disqualified!',
+                'message' => 'Not all entries are checked and/or disqualified!',
             ], 422);
         }
 
         $sort_position = 1;
         foreach ($competition->entries()
-                             ->where('status', 1)
-                             ->orderBy('sort_position', 'ASC')
-                             ->get() as $entry) {
+            ->where('status', 1)
+            ->orderBy('sort_position', 'ASC')
+            ->get() as $entry) {
             if ($entry->sort_position != $sort_position) {
                 return response()->json([
                     'competition' => $competition->name,
-                    'message'     => 'Not all entries are correctly numbered! Check the sort positions!',
+                    'message' => 'Not all entries are correctly numbered! Check the sort positions!',
                 ], 422);
             }
             $sort_position++;
         }
 
         if ($competition->competition_type->has_composer && $competition->entries()
-                                                                        ->where('status', 1)
-                                                                        ->where('composer_not_member_of_copyright_collective', false)
-                                                                        ->count() > 0) {
+            ->where('status', 1)
+            ->where('composer_not_member_of_copyright_collective', false)
+            ->count() > 0) {
             if ($entry->sort_position != $sort_position) {
                 return response()->json([
                     'competition' => $competition->name,
-                    'message'     => 'Some entries have composers registered with a copyright collective!',
+                    'message' => 'Some entries have composers registered with a copyright collective!',
                 ], 422);
             }
         }

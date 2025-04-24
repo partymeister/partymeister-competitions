@@ -8,6 +8,7 @@ use Motor\Media\Http\Resources\FileResource;
 /**
  * @OA\Schema(
  *   schema="CompetitionResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -51,17 +52,21 @@ use Motor\Media\Http\Resources\FileResource;
  *   @OA\Property(
  *     property="option_groups",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/OptionGroupResource"
  *     )
  *   ),
+ *
  *   @OA\Property(
  *     property="vote_categories",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/VoteCategoryResource"
  *     ),
  *   ),
+ *
  *   @OA\Property(
  *     property="video_1",
  *     type="object",
@@ -80,13 +85,16 @@ use Motor\Media\Http\Resources\FileResource;
  *   @OA\Property(
  *     property="prizes",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/CompetitionPrizeResource"
  *     ),
  *   ),
+ *
  *   @OA\Property(
  *     property="entries",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/EntryResource"
  *     ),
@@ -98,35 +106,35 @@ class CompetitionResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'                        => (int) $this->id,
-            'name'                      => $this->name,
-            'competition_type'          => new CompetitionTypeResource($this->competition_type),
-            'has_prizegiving'           => (bool) $this->has_prizegiving,
-            'upload_enabled'            => (bool) $this->upload_enabled,
-            'voting_enabled'            => (bool) $this->voting_enabled,
-            'live_voting_enabled'       => $this->live_voting_enabled,
-            'sort_position'             => (int) $this->sort_position,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'competition_type' => new CompetitionTypeResource($this->competition_type),
+            'has_prizegiving' => (bool) $this->has_prizegiving,
+            'upload_enabled' => (bool) $this->upload_enabled,
+            'voting_enabled' => (bool) $this->voting_enabled,
+            'live_voting_enabled' => $this->live_voting_enabled,
+            'sort_position' => (int) $this->sort_position,
             'prizegiving_sort_position' => (int) $this->prizegiving_sort_position,
-            'vote_categories'           => VoteCategoryResource::collection($this->vote_categories),
-            'option_groups'             => OptionGroupResource::collection($this->option_groups),
-            'video_1'                   => new FileResource($this->file_associations()
-                                                                 ->where('identifier', 'video_1')
-                                                                 ->first()),
-            'video_2'                   => new FileResource($this->file_associations()
-                                                                 ->where('identifier', 'video_2')
-                                                                 ->first()),
-            'video_3'                   => new FileResource($this->file_associations()
-                                                                 ->where('identifier', 'video_3')
-                                                                 ->first()),
-            'prizes'                    => CompetitionPrizeResource::collection($this->whenloaded('prizes')),
-            'entries'                   => EntryResource::collection($this->whenLoaded('entries')),
-            'qualified_entries'         => EntryResource::collection($this->whenLoaded('qualified_entries')),
+            'vote_categories' => VoteCategoryResource::collection($this->vote_categories),
+            'option_groups' => OptionGroupResource::collection($this->option_groups),
+            'video_1' => new FileResource($this->file_associations()
+                ->where('identifier', 'video_1')
+                ->first()),
+            'video_2' => new FileResource($this->file_associations()
+                ->where('identifier', 'video_2')
+                ->first()),
+            'video_3' => new FileResource($this->file_associations()
+                ->where('identifier', 'video_3')
+                ->first()),
+            'prizes' => CompetitionPrizeResource::collection($this->whenloaded('prizes')),
+            'entries' => EntryResource::collection($this->whenLoaded('entries')),
+            'qualified_entries' => EntryResource::collection($this->whenLoaded('qualified_entries')),
         ];
     }
 }

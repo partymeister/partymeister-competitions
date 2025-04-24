@@ -45,14 +45,14 @@ class CompetitionPrizesController extends Controller
     public function create()
     {
         $form = $this->form(CompetitionPrizeForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.competition_prizes.store',
+            'method' => 'POST',
+            'route' => 'backend.competition_prizes.store',
             'enctype' => 'multipart/form-data',
         ]);
 
         $competitions = Competition::where('has_prizegiving', true)
-                                   ->orderBy('prizegiving_sort_position', 'ASC')
-                                   ->get();
+            ->orderBy('prizegiving_sort_position', 'ASC')
+            ->get();
 
         return view('partymeister-competitions::backend.competition_prizes.create', compact('form', 'competitions'));
     }
@@ -60,7 +60,6 @@ class CompetitionPrizesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CompetitionPrizeRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CompetitionPrizeRequest $request)
@@ -84,8 +83,6 @@ class CompetitionPrizesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -95,16 +92,15 @@ class CompetitionPrizesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  CompetitionPrize  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(CompetitionPrize $record)
     {
         $form = $this->form(CompetitionPrizeForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.competition_prizes.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.competition_prizes.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-competitions::backend.competition_prizes.edit', compact('form'));
@@ -113,8 +109,6 @@ class CompetitionPrizesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CompetitionPrizeRequest  $request
-     * @param  CompetitionPrize  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CompetitionPrizeRequest $request, CompetitionPrize $record)
@@ -139,7 +133,6 @@ class CompetitionPrizesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  CompetitionPrize  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(CompetitionPrize $record)

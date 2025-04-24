@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="OptionResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -40,10 +41,10 @@ class OptionResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'            => (int) $this->id,
-            'option_group'  => new OptionGroupResource($this->whenLoaded('option_group')),
+            'id' => (int) $this->id,
+            'option_group' => new OptionGroupResource($this->whenLoaded('option_group')),
             'sort_position' => (int) $this->sort_position,
-            'name'          => $this->name,
+            'name' => $this->name,
         ];
     }
 }

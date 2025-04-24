@@ -23,7 +23,7 @@ class VoteForm extends Form
             }
         }
         $this->add('submit', 'submit', [
-            'attr'  => ['class' => 'btn btn-primary'],
+            'attr' => ['class' => 'btn btn-primary'],
             'label' => trans('partymeister-competitions::backend/votes.save'),
         ]);
     }

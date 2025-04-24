@@ -19,15 +19,12 @@ class VoteService extends BaseService
      */
     protected $model = Vote::class;
 
-    /**
-     * @param $request
-     */
     public static function addVotes($request)
     {
         foreach ($request->get('entry') as $competitionId => $entries) {
             foreach ($entries as $entryId => $points) {
                 if ((int) $points !== 0) {
-                    $mv = new ManualVote();
+                    $mv = new ManualVote;
                     $mv->competition_id = $competitionId;
                     $mv->entry_id = $entryId;
                     $mv->points = $points;
@@ -40,6 +37,7 @@ class VoteService extends BaseService
 
     /**
      * @return \League\Csv\Writer
+     *
      * @throws \League\Csv\CannotInsertRecord
      * @throws \League\Csv\Exception
      * @throws \League\Csv\InvalidArgument
@@ -74,22 +72,22 @@ class VoteService extends BaseService
             }
         }
 
-        //load the CSV document from a string
+        // load the CSV document from a string
         $csv = Writer::createFromString();
         $csv->setEnclosure('"');
         $csv->setDelimiter(';');
 
-        //insert the header
+        // insert the header
         $csv->insertOne($header);
 
-        //insert all the records
+        // insert all the records
         $csv->insertAll($records);
 
         return $csv;
     }
 
     /**
-     * @param string $direction
+     * @param  string  $direction
      * @return array
      */
     public static function getAllVotesByRank($direction = 'DESC')
@@ -98,14 +96,14 @@ class VoteService extends BaseService
         $maxPoints = [];
 
         $competitionsWithPG = Competition::where('has_prizegiving', true)
-                                         ->orderBy('prizegiving_sort_position', $direction)
-                                         ->get();
+            ->orderBy('prizegiving_sort_position', $direction)
+            ->get();
 
         // FIXME: SUPER HACK REVISION 2025
         $competitionsWithOOCVoting = [];
 
         foreach (Competition::where('has_prizegiving', false)
-                                         ->get() as $competition) {
+            ->get() as $competition) {
             if ($competition->competition_type->has_out_of_competition_voting) {
                 $competitionsWithOOCVoting[] = $competition;
             }
@@ -115,32 +113,32 @@ class VoteService extends BaseService
 
         foreach ($competitions as $competition) {
             $results[$competition->id] = [
-                'id'          => $competition->id,
-                'name'        => $competition->name,
+                'id' => $competition->id,
+                'name' => $competition->name,
                 'has_comment' => isset($competition->vote_categories[0]) ? (bool) $competition->vote_categories[0]->has_comment : false,
-                'entries'     => [],
+                'entries' => [],
             ];
             $maxPoints[$competition->id] = 0;
             foreach ($competition->entries()
-                                 ->where('status', 1)
-                                 ->get() as $entry) {
+                ->where('status', 1)
+                ->get() as $entry) {
                 $maxPoints[$competition->id] = max($entry->votes, $maxPoints[$competition->id]);
                 $results[$competition->id]['entries'][$entry->id] = [
-                    'id'                        => $entry->id,
-                    'title'                     => $entry->title,
-                    'author'                    => $entry->author,
-                    'author_name'               => $entry->author_name,
-                    'author_address'            => $entry->author_address,
-                    'author_city'               => $entry->author_city,
-                    'author_zip'                => $entry->author_zip,
+                    'id' => $entry->id,
+                    'title' => $entry->title,
+                    'author' => $entry->author,
+                    'author_name' => $entry->author_name,
+                    'author_address' => $entry->author_address,
+                    'author_city' => $entry->author_city,
+                    'author_zip' => $entry->author_zip,
                     'author_country_iso_3166_1' => $entry->author_country_iso_3166_1,
-                    'author_email'              => $entry->author_email,
-                    'author_phone'              => $entry->author_phone,
-                    'remote_type'               => $entry->remote_type,
+                    'author_email' => $entry->author_email,
+                    'author_phone' => $entry->author_phone,
+                    'remote_type' => $entry->remote_type,
 
-                    'points'   => $entry->votes,
+                    'points' => $entry->votes,
                     'comments' => $entry->vote_comments,
-                    'tie'      => false,
+                    'tie' => false,
                 ];
             }
 
@@ -183,24 +181,24 @@ class VoteService extends BaseService
         $results = [];
         $maxPoints = 0;
         foreach (Competition::where('has_prizegiving', true)
-                            ->orderBy('prizegiving_sort_position', 'DESC')
-                            ->get() as $competition) {
+            ->orderBy('prizegiving_sort_position', 'DESC')
+            ->get() as $competition) {
             if (isset($competition->vote_categories[0]) && $competition->vote_categories[0]->has_special_vote) {
                 foreach ($competition->entries()
-                                     ->where('status', 1)
-                                     ->get() as $entry) {
+                    ->where('status', 1)
+                    ->get() as $entry) {
                     $specialVotes = (int) $entry->special_votes;
                     $maxPoints = max($specialVotes, $maxPoints);
                     if ($specialVotes > 0) {
                         $results[$entry->id] = [
-                            'id'            => $entry->id,
-                            'title'         => $entry->title,
-                            'author'        => $entry->author,
-                            'competition'   => $competition->name,
+                            'id' => $entry->id,
+                            'title' => $entry->title,
+                            'author' => $entry->author,
+                            'competition' => $competition->name,
                             'special_votes' => (int) $specialVotes,
-                            'points'        => (int) $specialVotes,
-                            'remote_type'   => $entry->remote_type,
-                            'tie'           => false,
+                            'points' => (int) $specialVotes,
+                            'remote_type' => $entry->remote_type,
+                            'tie' => false,
                         ];
                     }
                 }

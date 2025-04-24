@@ -18,10 +18,10 @@ class EventServiceProvider extends ServiceProvider
         'Partymeister\Competitions\Events\CompetitionSaved' => [
             'Partymeister\Competitions\Listeners\SyncCompetition',
         ],
-        'Partymeister\Competitions\Events\EntrySaved'       => [
+        'Partymeister\Competitions\Events\EntrySaved' => [
             'Partymeister\Competitions\Listeners\SyncEntry',
         ],
-        'Partymeister\Competitions\Events\LiveVoteUpdated'  => [
+        'Partymeister\Competitions\Events\LiveVoteUpdated' => [
             'Partymeister\Competitions\Listeners\SyncLiveVote',
         ],
     ];

@@ -30,8 +30,6 @@ class SyncEntry implements ShouldQueue
      * Create a new job instance.
      *
      * SyncEntry constructor.
-     *
-     * @param  Entry  $entry
      */
     public function __construct(Entry $entry)
     {

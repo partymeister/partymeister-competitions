@@ -12,6 +12,7 @@ class ManualVoteRequest extends Request
     /**
      * @OA\Schema(
      *   schema="ManualVoteRequest",
+     *
      *   @OA\Property(
      *     property="competition_id",
      *     type="integer",

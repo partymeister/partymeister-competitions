@@ -23,7 +23,9 @@ class CompetitionTypesController extends ApiController
      *   tags={"CompetitionTypesController"},
      *   path="/api/competition_types",
      *   summary="Get competition_type collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class CompetitionTypesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/CompetitionTypeResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class CompetitionTypesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class CompetitionTypesController extends ApiController
     public function index()
     {
         $paginator = CompetitionTypeService::collection()
-                                           ->getPaginator();
+            ->getPaginator();
 
         return (new CompetitionTypeCollection($paginator))->additional(['message' => 'CompetitionType collection read']);
     }
@@ -79,10 +88,14 @@ class CompetitionTypesController extends ApiController
      *   tags={"CompetitionTypesController"},
      *   path="/api/competition_types",
      *   summary="Create new competition_type",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CompetitionTypeRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class CompetitionTypesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class CompetitionTypesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  CompetitionTypeRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CompetitionTypeRequest $request)
     {
         $result = CompetitionTypeService::create($request)
-                                        ->getResult();
+            ->getResult();
 
         return (new CompetitionTypeResource($result))->additional(['message' => 'CompetitionType created'])
-                                                     ->response()
-                                                     ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class CompetitionTypesController extends ApiController
      *   tags={"CompetitionTypesController"},
      *   path="/api/competition_types/{competition_type}",
      *   summary="Get single competition_type",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class CompetitionTypesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="competition_type",
      *     parameter="competition_type",
      *     description="CompetitionType id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +195,30 @@ class CompetitionTypesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  CompetitionType  $record
      * @return CompetitionTypeResource
      */
     public function show(CompetitionType $record)
     {
         $result = CompetitionTypeService::show($record)
-                                        ->getResult();
+            ->getResult();
 
         return (new CompetitionTypeResource($result))->additional(['message' => 'CompetitionType read']);
     }
@@ -199,10 +228,14 @@ class CompetitionTypesController extends ApiController
      *   tags={"CompetitionTypesController"},
      *   path="/api/competition_types/{competition_type}",
      *   summary="Update an existing competition_type",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CompetitionTypeRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +243,22 @@ class CompetitionTypesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="competition_type",
      *     parameter="competition_type",
      *     description="CompetitionType id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +271,30 @@ class CompetitionTypesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  CompetitionTypeRequest  $request
-     * @param  CompetitionType  $record
      * @return CompetitionTypeResource
      */
     public function update(CompetitionTypeRequest $request, CompetitionType $record)
     {
         $result = CompetitionTypeService::update($record, $request)
-                                        ->getResult();
+            ->getResult();
 
         return (new CompetitionTypeResource($result))->additional(['message' => 'CompetitionType updated']);
     }
@@ -264,7 +304,9 @@ class CompetitionTypesController extends ApiController
      *   tags={"CompetitionTypesController"},
      *   path="/api/competition_types/{competition_type}",
      *   summary="Delete a competition_type",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +314,22 @@ class CompetitionTypesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="competition_type",
      *     parameter="competition_type",
      *     description="CompetitionType id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +337,27 @@ class CompetitionTypesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +369,12 @@ class CompetitionTypesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  CompetitionType  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(CompetitionType $record)
     {
         $result = CompetitionTypeService::delete($record)
-                                        ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'CompetitionType deleted']);

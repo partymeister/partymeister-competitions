@@ -4,10 +4,10 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Backend\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -46,14 +46,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|Option whereSortPosition($value)
  * @method static Builder|Option whereUpdatedAt($value)
  * @method static Builder|Option whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class Option extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

@@ -4,9 +4,9 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -35,13 +35,14 @@ use Motor\Core\Traits\Searchable;
  * @method static Builder|ManualVote whereIpAddress($value)
  * @method static Builder|ManualVote wherePoints($value)
  * @method static Builder|ManualVote whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class ManualVote extends Model
 {
-    use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

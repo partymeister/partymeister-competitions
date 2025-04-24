@@ -15,7 +15,9 @@ class ResultsController extends ApiController
      *   tags={"VoteResultsController"},
      *   path="/api/votes/results",
      *   summary="Generate results",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -23,10 +25,13 @@ class ResultsController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -35,22 +40,27 @@ class ResultsController extends ApiController
      *       @OA\Property(
      *         property="results",
      *         type="array",
+     *
      *         @OA\Items(
      *           ref="#/components/schemas/ResultResource"
      *         ),
      *       ),
+     *
      *       @OA\Property(
      *         property="special",
      *         type="array",
+     *
      *         @OA\Items(
      *           ref="#/components/schemas/ResultResource"
      *         ),
      *       ),
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )

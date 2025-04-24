@@ -12,6 +12,7 @@ use Partymeister\Competitions\Models\Vote;
 /**
  * @OA\Schema(
  *   schema="VoteEntryResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -161,12 +162,12 @@ class EntryResource extends BaseResource
     {
         if ($this->competition && $this->competition->vote_categories && $this->competition->vote_categories[0]) {
             $vote = Vote::where('entry_id', $this->id)
-                        ->where('vote_category_id', $this->competition->vote_categories[0]->id)
-                        ->where('visitor_id', Session::get('visitor')) //$params->get('visitor_id'))
-                        ->first();
+                ->where('vote_category_id', $this->competition->vote_categories[0]->id)
+                ->where('visitor_id', Session::get('visitor')) // $params->get('visitor_id'))
+                ->first();
 
             if (is_null($vote)) {
-                $vote = new Vote();
+                $vote = new Vote;
             }
         }
 
@@ -189,24 +190,24 @@ class EntryResource extends BaseResource
 
         // AUDIO, COMPETITION GEFILTERT, CURRENT VOTE
         return [
-            'id'                             => (int) $this->id,
-            'sort_position_prefixed'         => (string) (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
-            'competition_id'                 => $this->competition_id,
-            'competition_name'               => $this->competition->name,
-            'title'                          => $this->title,
-            'author'                         => $this->author,
-            'description'                    => $this->description,
-            'has_screenshot'                 => (bool) $this->competition->competition_type->has_screenshot,
-            'screenshot'                     => $screenshot,
-            'has_audio'                      => (bool) $this->competition->competition_type->has_audio,
-            'audio'                          => $audio,
-            'vote_category_has_comment'      => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
+            'id' => (int) $this->id,
+            'sort_position_prefixed' => (string) (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
+            'competition_id' => $this->competition_id,
+            'competition_name' => $this->competition->name,
+            'title' => $this->title,
+            'author' => $this->author,
+            'description' => $this->description,
+            'has_screenshot' => (bool) $this->competition->competition_type->has_screenshot,
+            'screenshot' => $screenshot,
+            'has_audio' => (bool) $this->competition->competition_type->has_audio,
+            'audio' => $audio,
+            'vote_category_has_comment' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
             'vote_category_has_special_vote' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_special_vote : false),
-            'vote_category_has_negative'     => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
-            'vote_category_points'           => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->points : 0),
-            'vote_category_id'               => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->id : 1),
-            'vote'                           => isset($vote) ? new VoteResource($vote) : null,
-            'deadline_reached'               => $votingDeadlineOver,
+            'vote_category_has_negative' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
+            'vote_category_points' => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->points : 0),
+            'vote_category_id' => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->id : 1),
+            'vote' => isset($vote) ? new VoteResource($vote) : null,
+            'deadline_reached' => $votingDeadlineOver,
         ];
     }
 }

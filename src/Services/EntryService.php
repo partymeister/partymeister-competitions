@@ -22,23 +22,23 @@ class EntryService extends BaseService
 
     public function filters()
     {
-        //$this->filter->addClientFilter();
+        // $this->filter->addClientFilter();
         $this->filter->add(new SelectRenderer('competition_id'))
-                     ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.competition'))
-                     ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.competition').' --')
-                     ->setOptions(Competition::orderBy('sort_position', 'ASC')
-                                             ->pluck('name', 'id'));
+            ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.competition'))
+            ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.competition').' --')
+            ->setOptions(Competition::orderBy('sort_position', 'ASC')
+                ->pluck('name', 'id'));
 
         $this->filter->add(new SelectRenderer('status'))
-                     ->setOptionPrefix(trans('partymeister-competitions::backend/entries.status'))
-                     ->setEmptyOption('-- '.trans('partymeister-competitions::backend/entries.status').' --')
-                     ->setOptions(trans('partymeister-competitions::backend/entries.stati'));
+            ->setOptionPrefix(trans('partymeister-competitions::backend/entries.status'))
+            ->setEmptyOption('-- '.trans('partymeister-competitions::backend/entries.status').' --')
+            ->setOptions(trans('partymeister-competitions::backend/entries.stati'));
     }
 
     public function beforeCreate()
     {
         $visitor = Auth::guard('visitor')
-                       ->user();
+            ->user();
         if ($visitor != null) {
             $this->data['visitor_id'] = $visitor->id;
 
@@ -64,11 +64,11 @@ class EntryService extends BaseService
             if (is_array($group)) {
                 foreach ($group as $id) {
                     $this->record->options()
-                                 ->attach($id);
+                        ->attach($id);
                 }
             } else {
                 $this->record->options()
-                             ->attach($group);
+                    ->attach($group);
             }
         }
     }
@@ -108,14 +108,14 @@ class EntryService extends BaseService
         if (! is_null($this->form)) {
             $prefix = $this->form->getName() ? $this->form->getName().'.' : '';
         }
-        //dd($this->request->input($prefix . 'options', []));
+        // dd($this->request->input($prefix . 'options', []));
 
         if (count($this->request->input($prefix.'options', [])) > 0) {
             $this->record->options()
-                         ->detach();
+                ->detach();
             $this->addOptions();
         } else {
-            //$this->record->options()->detach();
+            // $this->record->options()->detach();
         }
         $this->addImages();
         event(new EntrySaved($this->record));

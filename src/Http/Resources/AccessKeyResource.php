@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="AccessKeyResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -40,9 +41,9 @@ class AccessKeyResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'            => (int) $this->id,
-            'access_key'    => $this->access_key,
-            'ip_address'    => $this->ip_address,
+            'id' => (int) $this->id,
+            'access_key' => $this->access_key,
+            'ip_address' => $this->ip_address,
             'registered_at' => $this->registered_at,
         ];
     }

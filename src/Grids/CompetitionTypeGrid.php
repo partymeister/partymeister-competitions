@@ -14,7 +14,7 @@ class CompetitionTypeGrid extends Grid
     {
         $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
         $this->addColumn('translated_properties', trans('partymeister-competitions::backend/competition_types.properties'))
-             ->renderer(CompetitionTypeRenderer::class);
+            ->renderer(CompetitionTypeRenderer::class);
         $this->setDefaultSorting('name', 'ASC');
         $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.competition_types.edit');
         $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.competition_types.destroy');

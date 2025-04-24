@@ -12,6 +12,7 @@ use Partymeister\Core\Http\Resources\VisitorResource;
 /**
  * @OA\Schema(
  *   schema="EntryResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -210,10 +211,12 @@ use Partymeister\Core\Http\Resources\VisitorResource;
  *   @OA\Property(
  *     property="file",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/MediaResource"
  *     ),
  *   ),
+ *
  *   @OA\Property(
  *     property="screenshot",
  *     type="object",
@@ -241,90 +244,90 @@ class EntryResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
     {
         $workStages = $this->media()
-                           ->where('collection_name', 'LIKE', 'work_stage%')
-                           ->orderBy('collection_name');
+            ->where('collection_name', 'LIKE', 'work_stage%')
+            ->orderBy('collection_name');
 
         if ($this->competition && $this->competition->vote_categories && $this->competition->vote_categories[0]) {
             $vote = Vote::where('entry_id', $this->id)
-                        ->where('vote_category_id', $this->competition->vote_categories[0]->id)
-                        ->where('visitor_id', Session::get('visitor')) //$params->get('visitor_id'))
-                        ->first();
+                ->where('vote_category_id', $this->competition->vote_categories[0]->id)
+                ->where('visitor_id', Session::get('visitor')) // $params->get('visitor_id'))
+                ->first();
 
             if (is_null($vote)) {
-                $vote = new Vote();
+                $vote = new Vote;
             }
         }
 
         return [
-            'id'                                          => (int) $this->id,
-            'identifier'                                  => (int) $this->identifier,
-            'competition'                                 => new CompetitionResource($this->whenLoaded('competition')),
-            'competition_name'                            => $this->competition->name,
-            'visitor'                                     => new VisitorResource($this->visitor),
-            'ip_address'                                  => $this->ip_address,
-            'sort_position'                               => (int) $this->sort_position,
-            'sort_position_prefixed'                      => (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
-            'title'                                       => $this->title,
-            'author'                                      => $this->author,
-            'filesize'                                    => (int) $this->filesize,
-            'filesize_human'                              => Filesize::bytesToHuman((int) $this->filesize),
-            'platform'                                    => $this->platform,
-            'description'                                 => $this->description,
-            'organizer_description'                       => $this->organizer_description,
-            'running_time'                                => $this->running_time,
-            'options'                                     => OptionResource::collection($this->options),
-            'custom_option'                               => $this->custom_option,
-            'allow_release'                               => (bool) $this->allow_release,
-            'is_remote'                                   => (bool) $this->is_remote,
-            'remote_type'                                 => $this->remote_type,
-            'is_recorded'                                 => (bool) $this->is_recorded,
-            'is_prepared'                                 => (bool) $this->is_prepared,
-            'upload_enabled'                              => (bool) $this->upload_enabled,
-            'has_explicit_content'                        => (bool) $this->has_explicit_content,
-            'needs_content_check'                         => (bool) $this->needs_content_check,
+            'id' => (int) $this->id,
+            'identifier' => (int) $this->identifier,
+            'competition' => new CompetitionResource($this->whenLoaded('competition')),
+            'competition_name' => $this->competition->name,
+            'visitor' => new VisitorResource($this->visitor),
+            'ip_address' => $this->ip_address,
+            'sort_position' => (int) $this->sort_position,
+            'sort_position_prefixed' => (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
+            'title' => $this->title,
+            'author' => $this->author,
+            'filesize' => (int) $this->filesize,
+            'filesize_human' => Filesize::bytesToHuman((int) $this->filesize),
+            'platform' => $this->platform,
+            'description' => $this->description,
+            'organizer_description' => $this->organizer_description,
+            'running_time' => $this->running_time,
+            'options' => OptionResource::collection($this->options),
+            'custom_option' => $this->custom_option,
+            'allow_release' => (bool) $this->allow_release,
+            'is_remote' => (bool) $this->is_remote,
+            'remote_type' => $this->remote_type,
+            'is_recorded' => (bool) $this->is_recorded,
+            'is_prepared' => (bool) $this->is_prepared,
+            'upload_enabled' => (bool) $this->upload_enabled,
+            'has_explicit_content' => (bool) $this->has_explicit_content,
+            'needs_content_check' => (bool) $this->needs_content_check,
             'composer_not_member_of_copyright_collective' => (bool) $this->composer_not_member_of_copyright_collective,
-            'ai_usage'                                    => $this->ai_usage,
-            'ai_usage_description'                        => $this->ai_usage_description,
-            'engine_data'                                 => $this->engine_data,
-            'ai_data'                                     => $this->ai_data,
-            'engine_option'                               => $this->engine_option,
-            'engine_option_description'                   => $this->engine_option_description,
-            'engine_creator_involvement'                  => $this->engine_creator_involvement,
-            'author_name'                                 => $this->author_name,
-            'author_email'                                => $this->author_email,
-            'author_phone'                                => $this->author_phone,
-            'author_address'                              => $this->author_address,
-            'author_zip'                                  => $this->author_zip,
-            'author_city'                                 => $this->author_city,
-            'author_country_iso_3166_1'                   => $this->author_country_iso_3166_1,
-            'composer_name'                               => $this->composer_name,
-            'composer_email'                              => $this->composer_email,
-            'composer_phone'                              => $this->composer_phone,
-            'composer_address'                            => $this->composer_address,
-            'composer_zip'                                => $this->composer_zip,
-            'composer_city'                               => $this->composer_city,
-            'composer_country_iso_3166_1'                 => $this->composer_country_iso_3166_1,
-            'final_file_media_id'                         => 'nullable|integer',
-            'status'                                      => (int) $this->status,
-            'discord_name'                                => $this->discord_name,
-            'file'                                        => MediaResource::collection($this->getMedia('files')),
-            'screenshot'                                  => new MediaResource($this->getFirstMedia('screenshot')),
-            'video'                                       => new MediaResource($this->getFirstMedia('video')),
-            'audio'                                       => new MediaResource($this->getFirstMedia('audio')),
-            'config_file'                                 => new MediaResource($this->getFirstMedia('config_file')),
-            'work_stages'                                 => MediaResource::collection($workStages->get()),
-            'vote_category_has_comment'                   => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
-            'vote_category_has_special_vote'              => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_special_vote : false),
-            'vote_category_has_negative'                  => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
-            'vote_category_points'                        => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->points : 0),
-            'vote_category_id'                            => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->id : 1),
-            'vote'                                        => isset($vote) ? new VoteResource($vote) : null,
+            'ai_usage' => $this->ai_usage,
+            'ai_usage_description' => $this->ai_usage_description,
+            'engine_data' => $this->engine_data,
+            'ai_data' => $this->ai_data,
+            'engine_option' => $this->engine_option,
+            'engine_option_description' => $this->engine_option_description,
+            'engine_creator_involvement' => $this->engine_creator_involvement,
+            'author_name' => $this->author_name,
+            'author_email' => $this->author_email,
+            'author_phone' => $this->author_phone,
+            'author_address' => $this->author_address,
+            'author_zip' => $this->author_zip,
+            'author_city' => $this->author_city,
+            'author_country_iso_3166_1' => $this->author_country_iso_3166_1,
+            'composer_name' => $this->composer_name,
+            'composer_email' => $this->composer_email,
+            'composer_phone' => $this->composer_phone,
+            'composer_address' => $this->composer_address,
+            'composer_zip' => $this->composer_zip,
+            'composer_city' => $this->composer_city,
+            'composer_country_iso_3166_1' => $this->composer_country_iso_3166_1,
+            'final_file_media_id' => 'nullable|integer',
+            'status' => (int) $this->status,
+            'discord_name' => $this->discord_name,
+            'file' => MediaResource::collection($this->getMedia('files')),
+            'screenshot' => new MediaResource($this->getFirstMedia('screenshot')),
+            'video' => new MediaResource($this->getFirstMedia('video')),
+            'audio' => new MediaResource($this->getFirstMedia('audio')),
+            'config_file' => new MediaResource($this->getFirstMedia('config_file')),
+            'work_stages' => MediaResource::collection($workStages->get()),
+            'vote_category_has_comment' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_comment : false),
+            'vote_category_has_special_vote' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_special_vote : false),
+            'vote_category_has_negative' => (bool) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->has_negative : false),
+            'vote_category_points' => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->points : 0),
+            'vote_category_id' => (int) (! is_null($this->competition->vote_categories) ? $this->competition->vote_categories[0]->id : 1),
+            'vote' => isset($vote) ? new VoteResource($vote) : null,
         ];
     }
 }

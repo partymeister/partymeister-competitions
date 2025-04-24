@@ -12,6 +12,7 @@
     }
   ],
   "require": {
+    "php": "^8.4",
     "league/csv": "^9.8",
     "kwn/number-to-words": "^2.6",
     "setasign/fpdi": "^2.3",

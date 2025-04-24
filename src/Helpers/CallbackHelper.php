@@ -14,7 +14,6 @@ use Partymeister\Core\Models\Callback;
 class CallbackHelper
 {
     /**
-     * @param  Competition  $competition
      * @return Builder|Model|object|callable|null
      */
     public static function competitionStarts(Competition $competition)
@@ -22,10 +21,10 @@ class CallbackHelper
         $hash = hash_hmac('sha256', $competition->id.'competition_starts', 20);
 
         $callback = Callback::where('hash', '=', $hash)
-                            ->first();
+            ->first();
 
         if (is_null($callback)) {
-            $callback = new Callback();
+            $callback = new Callback;
         }
 
         $callback->name = 'Competition: '.$competition->name.' starts';
@@ -48,10 +47,10 @@ class CallbackHelper
         $hash = hash_hmac('sha256', 'Prizegiving starts', 20);
 
         $callback = Callback::where('hash', '=', $hash)
-                            ->first();
+            ->first();
 
         if (is_null($callback)) {
-            $callback = new Callback();
+            $callback = new Callback;
         }
 
         $callback->name = 'Prizegiving starts';
@@ -66,7 +65,6 @@ class CallbackHelper
     }
 
     /**
-     * @param  Competition  $competition
      * @return Builder|Model|object|callable|null
      */
     public static function competitionEnds(Competition $competition)
@@ -74,10 +72,10 @@ class CallbackHelper
         $hash = hash_hmac('sha256', $competition->id.'competition_ends', 20);
 
         $callback = Callback::where('hash', '=', $hash)
-                            ->first();
+            ->first();
 
         if (is_null($callback)) {
-            $callback = new Callback();
+            $callback = new Callback;
         }
 
         $callback->name = 'Competition: '.$competition->name.' ends';
@@ -93,7 +91,6 @@ class CallbackHelper
     }
 
     /**
-     * @param  Entry  $entry
      * @return Builder|Model|object|callable|null
      */
     public static function livevoting(Entry $entry)
@@ -101,10 +98,10 @@ class CallbackHelper
         $hash = hash_hmac('sha256', $entry->id.'livevoting_advance', 20);
 
         $callback = Callback::where('hash', '=', $hash)
-                            ->first();
+            ->first();
 
         if (is_null($callback)) {
-            $callback = new Callback();
+            $callback = new Callback;
         }
 
         if ($entry->competition->competition_type->is_anonymous) {

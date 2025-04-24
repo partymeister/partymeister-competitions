@@ -16,7 +16,6 @@ use Partymeister\Competitions\Models\LiveVote;
 class SyncController extends Controller
 {
     /**
-     * @param  Request  $request
      * @return JsonResponse
      */
     public function competition(Request $request)
@@ -29,7 +28,7 @@ class SyncController extends Controller
 
         $competition = Competition::find(Arr::get($data, 'id'));
         if (is_null($competition)) {
-            $competition = new Competition();
+            $competition = new Competition;
         }
         $competition->competition_type_id = Arr::get($data, 'competition_type_id');
         $competition->name = Arr::get($data, 'name');
@@ -47,7 +46,6 @@ class SyncController extends Controller
     }
 
     /**
-     * @param  Request  $request
      * @return JsonResponse
      */
     public function livevote(Request $request)
@@ -61,7 +59,7 @@ class SyncController extends Controller
         $liveVote = LiveVote::first();
 
         if (is_null($liveVote)) {
-            $liveVote = new LiveVote();
+            $liveVote = new LiveVote;
         }
         $liveVote->competition_id = Arr::get($data, 'competition_id');
         $liveVote->entry_id = Arr::get($data, 'entry_id');
@@ -70,7 +68,6 @@ class SyncController extends Controller
     }
 
     /**
-     * @param  Request  $request
      * @return JsonResponse
      *
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\DiskDoesNotExist
@@ -87,7 +84,7 @@ class SyncController extends Controller
 
         $entry = Entry::find(Arr::get($data, 'id'));
         if (is_null($entry)) {
-            $entry = new Entry();
+            $entry = new Entry;
         }
         $entry->competition_id = Arr::get($data, 'competition_id');
         $entry->title = Arr::get($data, 'title');
@@ -102,14 +99,14 @@ class SyncController extends Controller
         if (! is_null($screenshot)) {
             file_put_contents(storage_path().'/'.Arr::get($data, 'screenshot.file_name'), base64_decode($screenshot));
             $entry->addMedia(storage_path().'/'.Arr::get($data, 'screenshot.file_name'))
-                  ->toMediaCollection('screenshot', 'media');
+                ->toMediaCollection('screenshot', 'media');
         }
 
         $audio = Arr::get($data, 'audio.file_base64', null);
         if (! is_null($audio)) {
             file_put_contents(storage_path().'/'.Arr::get($data, 'audio.file_name'), base64_decode($audio));
             $entry->addMedia(storage_path().'/'.Arr::get($data, 'audio.file_name'))
-                  ->toMediaCollection('audio', 'media');
+                ->toMediaCollection('audio', 'media');
         }
 
         if ($entry->id != Arr::get($data, 'id')) {

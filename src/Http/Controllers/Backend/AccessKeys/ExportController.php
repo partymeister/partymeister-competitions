@@ -28,8 +28,8 @@ class ExportController extends Controller
         $filter = $service->getFilter();
 
         $filter->add(new WhereRenderer('visitor_id'))
-               ->setAllowNull(true)
-               ->setValue(null);
+            ->setAllowNull(true)
+            ->setValue(null);
 
         $grid->setFilter($filter);
         $paginator = $service->getPaginator();
@@ -57,8 +57,8 @@ class ExportController extends Controller
         $filter = $service->getFilter();
 
         $filter->add(new WhereRenderer('visitor_id'))
-               ->setAllowNull(true)
-               ->setValue(null);
+            ->setAllowNull(true)
+            ->setValue(null);
 
         $grid->setFilter($filter);
         $paginator = $service->getPaginator();
@@ -66,7 +66,7 @@ class ExportController extends Controller
         $pdf = new \Partymeister\Competitions\PDF\AccessKey($paginator);
         $pdf->generate();
 
-        //Send the file content as the response
+        // Send the file content as the response
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output('accesskey.pdf', 'S');
         }, 'access-keys.pdf');

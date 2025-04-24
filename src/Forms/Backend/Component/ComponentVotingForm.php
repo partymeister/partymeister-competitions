@@ -16,9 +16,9 @@ class ComponentVotingForm extends Form
     public function buildForm()
     {
         $nodes = Navigation::where('scope', 'main')
-                           ->where('parent_id', '!=', null)
-                           ->defaultOrder()
-                           ->get();
+            ->where('parent_id', '!=', null)
+            ->defaultOrder()
+            ->get();
 
         $navigationItemOptions = [];
 
@@ -31,9 +31,9 @@ class ComponentVotingForm extends Form
         }
 
         $this->add('live_voting_page_id', 'select', [
-            'label'       => trans('partymeister-competitions::component/votings.live_voting_page'),
+            'label' => trans('partymeister-competitions::component/votings.live_voting_page'),
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
-            'choices'     => $navigationItemOptions,
+            'choices' => $navigationItemOptions,
         ]);
     }
 }

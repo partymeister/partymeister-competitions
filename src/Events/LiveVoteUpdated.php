@@ -25,8 +25,6 @@ class LiveVoteUpdated
      * Create a new event instance.
      *
      * LiveVoteUpdated constructor.
-     *
-     * @param  LiveVote  $liveVote
      */
     public function __construct(LiveVote $liveVote)
     {

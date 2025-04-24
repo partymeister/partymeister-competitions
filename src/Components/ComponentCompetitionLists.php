@@ -20,8 +20,6 @@ class ComponentCompetitionLists
 
     /**
      * ComponentCompetitionLists constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -29,7 +27,6 @@ class ComponentCompetitionLists
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)
@@ -43,8 +40,8 @@ class ComponentCompetitionLists
     public function render()
     {
         $competitions = Competition::where('voting_enabled', true)
-                                   ->orderBy('updated_at', 'ASC')
-                                   ->get();
+            ->orderBy('updated_at', 'ASC')
+            ->get();
 
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), ['competitions' => $competitions]);
     }

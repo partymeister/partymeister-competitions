@@ -19,8 +19,8 @@ class VoteCategoriesTableSeeder extends Seeder
     public function run()
     {
         DB::table('vote_categories')->insert([
-            'name'       => 'Default',
-            'points'     => 5,
+            'name' => 'Default',
+            'points' => 5,
             'created_by' => User::get()->first()->id,
             'updated_by' => User::get()->first()->id,
         ]);

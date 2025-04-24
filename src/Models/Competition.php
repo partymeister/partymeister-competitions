@@ -5,13 +5,13 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Backend\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -71,15 +71,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Competition whereUpdatedBy($value)
  * @method static Builder|Competition whereUploadEnabled($value)
  * @method static Builder|Competition whereVotingEnabled($value)
+ *
  * @mixin Eloquent
  */
 class Competition extends Model implements HasMedia
 {
+    use BlameableTrait;
+    use Filterable;
+    use HasShortflakePrimary;
     use InteractsWithMedia;
     use Searchable;
-    use Filterable;
-    use BlameableTrait;
-    use HasShortflakePrimary;
 
     /**
      * Searchable columns for the searchable trait
@@ -107,45 +108,44 @@ class Competition extends Model implements HasMedia
     ];
 
     /**
-     * @param Media|null $media
-     *
      * @throws InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-             ->width(320)
-             ->height(240)
-             ->nonQueued();
+            ->width(320)
+            ->height(240)
+            ->nonQueued();
 
         $this->addMediaConversion('preview')
-             ->width(1280)
-             ->height(1024)
-             ->nonQueued();
+            ->width(1280)
+            ->height(1024)
+            ->nonQueued();
     }
 
     public function getLiveVotingEnabledAttribute()
     {
         if ($this->competition_type->has_out_of_competition_voting) {
             $lv = LiveVote::first();
-            if (!is_null($lv) && $lv->competition_id == $this->id) {
+            if (! is_null($lv) && $lv->competition_id == $this->id) {
                 return true;
             }
         }
+
         return false;
     }
 
-    ///**
+    // /**
     // * @return Collection
     // */
-    //public function getSortedEntriesAttribute()
-    //{
+    // public function getSortedEntriesAttribute()
+    // {
     //    return $this->entries()
     //                ->where('status', 1)
     //                ->orderBy('sort_position', 'ASC')
     //                ->with('competition')
     //                ->get();
-    //}
+    // }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -153,8 +153,8 @@ class Competition extends Model implements HasMedia
     public function qualified_entries()
     {
         return $this->hasMany(Entry::class)
-                    ->where('status', 1)
-                    ->orderBy('sort_position', 'ASC');
+            ->where('status', 1)
+            ->orderBy('sort_position', 'ASC');
     }
 
     /**
@@ -163,10 +163,10 @@ class Competition extends Model implements HasMedia
     public function unqualified_entries_with_opt_in()
     {
         return $this->hasMany(Entry::class)
-                    ->where('status', '>=', 3) // not preselected or disqualified
-                    ->where('visitor_id', '>', 0)
-                    ->where('notify_about_status', true)
-                    ->orderBy('sort_position', 'ASC');
+            ->where('status', '>=', 3) // not preselected or disqualified
+            ->where('visitor_id', '>', 0)
+            ->where('notify_about_status', true)
+            ->orderBy('sort_position', 'ASC');
     }
 
     /**
@@ -183,7 +183,7 @@ class Competition extends Model implements HasMedia
     public function getEntryCountAttribute()
     {
         return $this->entries()
-                    ->count();
+            ->count();
     }
 
     /**

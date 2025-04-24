@@ -25,8 +25,6 @@ class EntrySaved
      * Create a new event instance.
      *
      * EntrySaved constructor.
-     *
-     * @param  Entry  $entry
      */
     public function __construct(Entry $entry)
     {

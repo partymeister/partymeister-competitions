@@ -12,6 +12,7 @@ class GenerateRequest extends Request
     /**
      * @OA\Schema(
      *   schema="AccessKeyGenerateRequest",
+     *
      *   @OA\Property(
      *     property="quantity",
      *     type="integer",

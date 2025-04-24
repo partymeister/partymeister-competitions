@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="LiveVoteResource",
+ *
  *   @OA\Property(
  *     property="competition_id",
  *     type="integer",
@@ -46,10 +47,10 @@ class LiveVoteResource extends BaseResource
     {
         return [
             'competition_id' => (int) $this->competition_id,
-            'entry_id'       => (int) $this->entry_id,
-            'sort_position'  => (int) $this->sort_position,
-            'author'         => $this->author,
-            'title'          => $this->title,
+            'entry_id' => (int) $this->entry_id,
+            'sort_position' => (int) $this->sort_position,
+            'author' => $this->author,
+            'title' => $this->title,
         ];
     }
 }

@@ -29,7 +29,7 @@ class EntryStatusInfo extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(from: new Address(config('partymeister-core-visitor-registration.password_reset_from_email'), config('partymeister-core-visitor-registration.password_reset_from_name')), subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix').'Information about your entry',);
+        return new Envelope(from: new Address(config('partymeister-core-visitor-registration.password_reset_from_email'), config('partymeister-core-visitor-registration.password_reset_from_name')), subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix').'Information about your entry');
     }
 
     /**
@@ -39,8 +39,8 @@ class EntryStatusInfo extends Mailable
     {
         return new Content(text: 'partymeister-competitions::emails.entries.status-info', with: [
             'demoparty' => config('motor-cms-frontend.name'),
-            'entry'     => $this->entry,
-        ],);
+            'entry' => $this->entry,
+        ], );
     }
 
     /**

@@ -16,7 +16,6 @@ use Partymeister\Slides\Services\PlaylistService;
 class PlaylistsController extends Controller
 {
     /**
-     * @param  Request  $request
      * @return RedirectResponse|Redirector
      */
     public function store(Request $request)
@@ -29,7 +28,6 @@ class PlaylistsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Request  $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
@@ -70,15 +68,15 @@ class PlaylistsController extends Controller
         }
 
         $prizegivingTemplate = SlideTemplate::where('template_for', 'prizegiving')
-                                            ->first();
+            ->first();
         $comingupTemplate = SlideTemplate::where('template_for', 'coming_up')
-                                         ->first();
+            ->first();
         $nowTemplate = SlideTemplate::where('template_for', 'now')
-                                    ->first();
+            ->first();
         $endTemplate = SlideTemplate::where('template_for', 'end_of_pg')
-                                    ->first();
+            ->first();
         $commentsTemplate = SlideTemplate::where('template_for', 'comments')
-                                         ->first();
+            ->first();
 
         foreach ($results as $key => $competition) {
             foreach ($competition['entries'] as $entryKey => $entry) {

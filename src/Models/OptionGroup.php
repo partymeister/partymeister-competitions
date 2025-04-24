@@ -5,11 +5,11 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Backend\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -47,14 +47,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|OptionGroup whereType($value)
  * @method static Builder|OptionGroup whereUpdatedAt($value)
  * @method static Builder|OptionGroup whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class OptionGroup extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

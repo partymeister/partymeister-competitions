@@ -41,29 +41,29 @@ class EntryOptionForm extends Form
                 switch ($optionGroup->type) {
                     case 'multiple':
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
-                            'choices'        => $options,
-                            'selected'       => $selected,
-                            'wrapper'        => ['class' => 'row'],
+                            'choices' => $options,
+                            'selected' => $selected,
+                            'wrapper' => ['class' => 'row'],
                             'choice_options' => [
-                                'wrapper'    => ['class' => 'col-md-3'],
+                                'wrapper' => ['class' => 'col-md-3'],
                                 'label_attr' => ['class' => 'form-label'],
                             ],
-                            'expanded'       => true,
-                            'multiple'       => true,
-                            'label'          => false,
+                            'expanded' => true,
+                            'multiple' => true,
+                            'label' => false,
                         ]);
                         break;
                     case 'single':
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
-                            'choices'        => $options,
-                            'selected'       => $selected,
-                            'wrapper'        => ['class' => 'row'],
+                            'choices' => $options,
+                            'selected' => $selected,
+                            'wrapper' => ['class' => 'row'],
                             'choice_options' => [
-                                'wrapper'    => ['class' => 'col-md-3'],
+                                'wrapper' => ['class' => 'col-md-3'],
                                 'label_attr' => ['class' => 'form-label'],
                             ],
-                            'expanded'       => true,
-                            'label'          => false,
+                            'expanded' => true,
+                            'label' => false,
                         ]);
                         break;
                 }

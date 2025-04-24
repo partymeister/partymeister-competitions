@@ -32,7 +32,6 @@ class ComponentEntriesController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -51,7 +50,6 @@ class ComponentEntriesController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  ComponentEntry  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function edit(ComponentEntry $record)
@@ -66,8 +64,6 @@ class ComponentEntriesController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  ComponentEntry  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, ComponentEntry $record)

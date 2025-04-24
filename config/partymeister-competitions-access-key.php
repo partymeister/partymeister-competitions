@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'chars'        => [
+    'chars' => [
         'A',
         'B',
         'C',
@@ -26,7 +26,7 @@ return [
         'Y',
         'Z',
     ],
-    'length'       => 8,
-    'divider'      => '-',
+    'length' => 8,
+    'divider' => '-',
     'divide_every' => 4,
 ];

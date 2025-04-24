@@ -18,7 +18,7 @@ class OptionGroupService extends BaseService
     public function afterUpdate()
     {
         $this->record->options()
-                     ->delete();
+            ->delete();
         $this->afterCreate();
     }
 
@@ -28,7 +28,7 @@ class OptionGroupService extends BaseService
         foreach ($this->request->get('options', []) as $option) {
             if (trim($option['name']) != '') {
                 $this->record->options()
-                             ->create(['name' => $option['name'], 'sort_position' => $sortPosition++]);
+                    ->create(['name' => $option['name'], 'sort_position' => $sortPosition++]);
             }
         }
     }

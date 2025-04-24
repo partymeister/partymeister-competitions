@@ -30,8 +30,6 @@ class ComponentEntryDetails
 
     /**
      * ComponentEntryDetails constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -39,13 +37,12 @@ class ComponentEntryDetails
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|View
      */
     public function index(Request $request)
     {
         $visitor = Auth::guard('visitor')
-                       ->user();
+            ->user();
 
         if (is_null($visitor)) {
             return redirect()->back();
@@ -85,11 +82,11 @@ class ComponentEntryDetails
         $entry['previous_title'] = ' ';
 
         $competitionTemplate = SlideTemplate::where('template_for', 'competition')
-                                            ->first();
+            ->first();
 
         $this->data = [
-            'entry'               => $entry,
-            'record'              => $record,
+            'entry' => $entry,
+            'record' => $record,
             'competitionTemplate' => $competitionTemplate,
         ];
 

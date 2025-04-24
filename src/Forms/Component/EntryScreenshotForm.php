@@ -29,12 +29,12 @@ class EntryScreenshotForm extends Form
         $data['id'] = Arr::get($this->getModel(), 'entry-upload.id');
 
         $this->add('competition_id', 'static', [
-            'label'       => trans('partymeister-competitions::backend/competitions.competition'),
+            'label' => trans('partymeister-competitions::backend/competitions.competition'),
             'empty_value' => trans('motor-backend::backend/global.please_choose'),
         ]);
 
         $this->add('submit', 'submit', [
-            'attr'  => ['class' => 'button success expanded'],
+            'attr' => ['class' => 'button success expanded'],
             'label' => trans('partymeister-competitions::backend/entries.save'),
         ]);
 

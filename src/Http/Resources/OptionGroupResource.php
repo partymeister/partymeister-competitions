@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="OptionGroupResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -25,6 +26,7 @@ use Motor\Backend\Http\Resources\BaseResource;
  *   @OA\Property(
  *     property="options",
  *     type="array",
+ *
  *     @OA\Items(
  *       ref="#/components/schemas/OptionResource"
  *     )
@@ -42,9 +44,9 @@ class OptionGroupResource extends BaseResource
     public function toArray($request)
     {
         return [
-            'id'      => (int) $this->id,
-            'name'    => $this->name,
-            'type'    => $this->type,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'type' => $this->type,
             'options' => OptionResource::collection($this->whenLoaded('options')),
         ];
     }

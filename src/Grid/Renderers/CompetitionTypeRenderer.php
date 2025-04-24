@@ -21,9 +21,6 @@ class CompetitionTypeRenderer
 
     /**
      * CompetitionTypeRenderer constructor.
-     *
-     * @param $value
-     * @param $options
      */
     public function __construct($value, $options)
     {
@@ -40,11 +37,11 @@ class CompetitionTypeRenderer
             return '';
         }
 
-        //$list = [];
-        //foreach ($this->value as $property) {
+        // $list = [];
+        // foreach ($this->value as $property) {
         //    $list[] = trans('partymeister-competitions::backend/competition_types.'.$property);
-        //}
+        // }
         return App::make('html')
-                  ->ul($this->value, ['class' => 'list-unstyled']);
+            ->ul($this->value, ['class' => 'list-unstyled']);
     }
 }

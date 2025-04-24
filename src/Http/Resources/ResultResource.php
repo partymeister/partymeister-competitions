@@ -7,6 +7,7 @@ use Motor\Backend\Http\Resources\BaseResource;
 /**
  * @OA\Schema(
  *   schema="ResultResource",
+ *
  *   @OA\Property(
  *     property="tbd",
  *     type="string",

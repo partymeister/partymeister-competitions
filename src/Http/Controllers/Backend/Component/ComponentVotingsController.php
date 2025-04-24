@@ -31,7 +31,6 @@ class ComponentVotingsController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -50,7 +49,6 @@ class ComponentVotingsController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  ComponentVoting  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function edit(ComponentVoting $record)
@@ -65,8 +63,6 @@ class ComponentVotingsController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  ComponentVoting  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, ComponentVoting $record)

@@ -12,6 +12,7 @@ class CompetitionTypeRequest extends Request
     /**
      * @OA\Schema(
      *   schema="CompetitionTypeRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -104,20 +105,20 @@ class CompetitionTypeRequest extends Request
     public function rules()
     {
         return [
-            'name'                  => 'required',
-            'has_platform'          => 'nullable|boolean',
-            'has_filesize'          => 'nullable|boolean',
-            'has_screenshot'        => 'nullable|boolean',
-            'has_video'             => 'nullable|boolean',
-            'has_audio'             => 'nullable|boolean',
-            'has_recordings'        => 'nullable|boolean',
-            'has_composer'          => 'nullable|boolean',
-            'has_running_time'      => 'nullable|boolean',
-            'is_anonymous'          => 'nullable|boolean',
+            'name' => 'required',
+            'has_platform' => 'nullable|boolean',
+            'has_filesize' => 'nullable|boolean',
+            'has_screenshot' => 'nullable|boolean',
+            'has_video' => 'nullable|boolean',
+            'has_audio' => 'nullable|boolean',
+            'has_recordings' => 'nullable|boolean',
+            'has_composer' => 'nullable|boolean',
+            'has_running_time' => 'nullable|boolean',
+            'is_anonymous' => 'nullable|boolean',
             'number_of_work_stages' => 'nullable|integer',
-            'has_remote_entries'    => 'nullable|boolean',
-            'file_is_optional'      => 'nullable|boolean',
-            'has_config_file'       => 'nullable|boolean',
+            'has_remote_entries' => 'nullable|boolean',
+            'file_is_optional' => 'nullable|boolean',
+            'has_config_file' => 'nullable|boolean',
         ];
     }
 }

@@ -5,10 +5,10 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Backend\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -51,14 +51,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|VoteCategory wherePoints($value)
  * @method static Builder|VoteCategory whereUpdatedAt($value)
  * @method static Builder|VoteCategory whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class VoteCategory extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

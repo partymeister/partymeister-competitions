@@ -4,7 +4,6 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -119,14 +119,15 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Entry whereUpdatedAt($value)
  * @method static Builder|Entry whereUploadEnabled($value)
  * @method static Builder|Entry whereVisitorId($value)
+ *
  * @mixin Eloquent
  */
 class Entry extends Model implements HasMedia
 {
-    use InteractsWithMedia;
-    use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+    use InteractsWithMedia;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait
@@ -190,7 +191,7 @@ class Entry extends Model implements HasMedia
         'ai_usage_description',
         'engine_option',
         'engine_option_description',
-        'engine_creator_involvement'
+        'engine_creator_involvement',
     ];
 
     /**
@@ -203,28 +204,25 @@ class Entry extends Model implements HasMedia
          */
         static::creating(function (Entry $entry) {
             $e = Entry::orderBy('identifier', 'DESC')->first();
-            $nextIdentifier = !is_null($e) ? $e->identifier+1 : 1;
+            $nextIdentifier = ! is_null($e) ? $e->identifier + 1 : 1;
             $entry->identifier = $nextIdentifier;
         });
     }
 
-
     /**
-     * @param  Media|null  $media
-     *
      * @throws InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-             ->width(320)
-             ->height(240)
-             ->nonQueued();
+            ->width(320)
+            ->height(240)
+            ->nonQueued();
 
         $this->addMediaConversion('preview')
-             ->width(1280)
-             ->height(1024)
-             ->nonQueued();
+            ->width(1280)
+            ->height(1024)
+            ->nonQueued();
     }
 
     /**
@@ -233,8 +231,8 @@ class Entry extends Model implements HasMedia
     public function getLastFileUploadAttribute()
     {
         $media = $this->getMedia('file')
-                      ->reverse()
-                      ->first();
+            ->reverse()
+            ->first();
         if (! is_null($media)) {
             return $media->created_at;
         }
@@ -258,12 +256,12 @@ class Entry extends Model implements HasMedia
     public function getEngineDataAttribute()
     {
         if ($this->hasEngineOptions && $this->engine_option !== '') {
-            return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option). '<br>'.$this->engine_option_description. '<br>'.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement)."<br>";
-            //return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option). ': '.$this->engine_option_description. '<br>Creator: '.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement)."<br><br>";
+            return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option).'<br>'.$this->engine_option_description.'<br>'.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement).'<br>';
+            // return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option). ': '.$this->engine_option_description. '<br>Creator: '.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement)."<br><br>";
         }
+
         return '';
     }
-
 
     public function getHasAiOptionsAttribute()
     {
@@ -272,9 +270,10 @@ class Entry extends Model implements HasMedia
 
     public function getAiDataAttribute()
     {
-        if ($this->hasAiOptions && !in_array($this->ai_usage, [0, null, 'no_ai_usage', ''])) {
-            return trans('partymeister-competitions::backend/entries.ai_usage_options.'.$this->ai_usage). '<br>'.$this->ai_usage_description. '<br><br>';
+        if ($this->hasAiOptions && ! in_array($this->ai_usage, [0, null, 'no_ai_usage', ''])) {
+            return trans('partymeister-competitions::backend/entries.ai_usage_options.'.$this->ai_usage).'<br>'.$this->ai_usage_description.'<br><br>';
         }
+
         return '';
     }
 
@@ -294,17 +293,19 @@ class Entry extends Model implements HasMedia
         return $this->belongsToMany(Option::class);
     }
 
-    public function getRemoteTypeAttribute() {
+    public function getRemoteTypeAttribute()
+    {
         if ($this->visitor) {
             if ($this->visitor->is_satellite) {
                 return 'Satellite';
-            } else if ($this->visitor->is_remote) {
+            } elseif ($this->visitor->is_remote) {
                 return 'Remote';
             }
         }
         if ($this->is_remote) {
             return 'Remote';
         }
+
         return '';
     }
 
@@ -315,9 +316,9 @@ class Entry extends Model implements HasMedia
     {
         // Get visitor votes
         $query = DB::table('votes')
-                   ->select(DB::raw('SUM(special_vote) as special_votes'))
-                   ->where('entry_id', '=', $this->id)
-                   ->first();
+            ->select(DB::raw('SUM(special_vote) as special_votes'))
+            ->where('entry_id', '=', $this->id)
+            ->first();
 
         if (is_null($query)) {
             return 0;
@@ -332,12 +333,12 @@ class Entry extends Model implements HasMedia
     public function getVoteCommentsAttribute()
     {
         return DB::table('votes')
-                 ->select('comment')
-                 ->where('entry_id', $this->id)
-                 ->where('comment', '!=', '')
-                 ->get()
-                 ->pluck('comment')
-                 ->toArray();
+            ->select('comment')
+            ->where('entry_id', $this->id)
+            ->where('comment', '!=', '')
+            ->get()
+            ->pluck('comment')
+            ->toArray();
     }
 
     /**
@@ -347,22 +348,22 @@ class Entry extends Model implements HasMedia
     {
         // Get visitor votes
         $sub = DB::table('votes')
-                 ->select(DB::raw('SUM(points)/count(id) as points_per_visitor'))
-                 ->where('entry_id', '=', $this->id)
-                 ->groupBy('visitor_id');
+            ->select(DB::raw('SUM(points)/count(id) as points_per_visitor'))
+            ->where('entry_id', '=', $this->id)
+            ->groupBy('visitor_id');
 
         $points = DB::table(DB::raw("({$sub->toSql()}) as sub"))
-                    ->mergeBindings($sub)// you need to get underlying Query Builder
-                    ->select(DB::raw('SUM(points_per_visitor) as points'))
-                    ->pluck('points')
-                    ->first();
+            ->mergeBindings($sub)// you need to get underlying Query Builder
+            ->select(DB::raw('SUM(points_per_visitor) as points'))
+            ->pluck('points')
+            ->first();
 
         // Get manual votes
         $manualPoints = DB::table('manual_votes')
-                          ->select(DB::raw('SUM(points) as points'))
-                          ->where('entry_id', $this->id)
-                          ->pluck('points')
-                          ->first();
+            ->select(DB::raw('SUM(points) as points'))
+            ->where('entry_id', $this->id)
+            ->pluck('points')
+            ->first();
 
         return (is_null($points) ? 0 : $points) + (is_null($manualPoints) ? 0 : $manualPoints);
     }
@@ -373,8 +374,8 @@ class Entry extends Model implements HasMedia
     public function getNewCommentsAttribute()
     {
         return $this->comments()
-                    ->where('read_by_visitor', false)
-                    ->count();
+            ->where('read_by_visitor', false)
+            ->count();
     }
 
     /**

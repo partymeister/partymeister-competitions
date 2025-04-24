@@ -4,10 +4,10 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 
 /**
  * Partymeister\Competitions\Models\LiveVote
@@ -36,11 +36,11 @@ use Illuminate\Support\Carbon;
  * @method static Builder|LiveVote whereSortPosition($value)
  * @method static Builder|LiveVote whereTitle($value)
  * @method static Builder|LiveVote whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class LiveVote extends Model
 {
-
     use HasShortflakePrimary;
 
     /**

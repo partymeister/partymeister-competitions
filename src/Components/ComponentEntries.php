@@ -26,16 +26,10 @@ class ComponentEntries
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $visitor;
 
     /**
      * ComponentEntries constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
-     * @param  ComponentEntry  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -46,13 +40,12 @@ class ComponentEntries
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      */
     public function index(Request $request)
     {
         $this->visitor = Auth::guard('visitor')
-                             ->user();
+            ->user();
 
         return $this->render();
     }
@@ -65,7 +58,7 @@ class ComponentEntries
         if (! is_null($this->visitor)) {
             return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
                 'component' => $this->component,
-                'entries'   => $this->visitor->entries,
+                'entries' => $this->visitor->entries,
             ]);
         } else {
             return redirect('/start');

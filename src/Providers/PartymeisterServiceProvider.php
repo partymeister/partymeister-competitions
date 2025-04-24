@@ -168,7 +168,7 @@ class PartymeisterServiceProvider extends ServiceProvider
     {
         $assets = [
             __DIR__.'/../../resources/assets/sass' => resource_path('assets/sass'),
-            __DIR__.'/../../resources/assets/pdf'  => resource_path('assets/pdf'),
+            __DIR__.'/../../resources/assets/pdf' => resource_path('assets/pdf'),
         ];
 
         $this->publishes($assets, 'partymeister-competitions-install-resources');

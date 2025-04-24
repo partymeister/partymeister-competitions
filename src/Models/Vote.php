@@ -4,10 +4,10 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
@@ -45,13 +45,14 @@ use Motor\Core\Traits\Searchable;
  * @method static Builder|Vote whereUpdatedAt($value)
  * @method static Builder|Vote whereVisitorId($value)
  * @method static Builder|Vote whereVoteCategoryId($value)
+ *
  * @mixin Eloquent
  */
 class Vote extends Model
 {
-    use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

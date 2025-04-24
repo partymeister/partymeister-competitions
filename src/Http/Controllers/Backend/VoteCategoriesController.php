@@ -44,8 +44,8 @@ class VoteCategoriesController extends Controller
     public function create()
     {
         $form = $this->form(VoteCategoryForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.vote_categories.store',
+            'method' => 'POST',
+            'route' => 'backend.vote_categories.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -55,7 +55,6 @@ class VoteCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  VoteCategoryRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(VoteCategoryRequest $request)
@@ -79,8 +78,6 @@ class VoteCategoriesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -90,16 +87,15 @@ class VoteCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  VoteCategory  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(VoteCategory $record)
     {
         $form = $this->form(VoteCategoryForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.vote_categories.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.vote_categories.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-competitions::backend.vote_categories.edit', compact('form'));
@@ -108,8 +104,6 @@ class VoteCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  VoteCategoryRequest  $request
-     * @param  VoteCategory  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(VoteCategoryRequest $request, VoteCategory $record)
@@ -134,7 +128,6 @@ class VoteCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  VoteCategory  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(VoteCategory $record)

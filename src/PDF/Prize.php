@@ -20,7 +20,7 @@ class Prize extends PDF
             64,
         ]);
         $this->AddStyle('Prizesheet Name', 'Helvetica', 'B', 12);
-        $this->AddStyle('Prizesheet Name Remote', 'Helvetica', 'B', 12, 0, [255,0,0]);
+        $this->AddStyle('Prizesheet Name Remote', 'Helvetica', 'B', 12, 0, [255, 0, 0]);
         $this->AddStyle('Prizesheet Text', 'Helvetica', 'R', 12);
 
         $this->AddStyle('Receipt Amount', 'Helvetica', 'B', 30);
@@ -29,27 +29,20 @@ class Prize extends PDF
         $this->AddStyle('Receipt Text', 'Helvetica', 'R', 14);
     }
 
-    /**
-     * @param $name
-     */
     public function renderCompetitionName($name)
     {
         $this->SetStyle('Prizesheet Headline');
         $this->MultiCell(0, 30, $name, 0, 'C');
     }
 
-    /**
-     * @param $entry
-     * @param $prize
-     */
     public function renderCompetitionRankings($entry, $rank, $prize)
     {
         $this->SetStyle('Prizesheet Name');
-        $text = '#'.str_pad($rank, 2, "0", STR_PAD_LEFT).' - '.$entry->title.' by '.$entry->author;
+        $text = '#'.str_pad($rank, 2, '0', STR_PAD_LEFT).' - '.$entry->title.' by '.$entry->author;
         $this->MultiCell(0, 5, $text, 0, 'L');
         if ($entry->remote_type && $entry->remote_type !== '') {
             $this->SetStyle('Prizesheet Name Remote');
-            $text = '(' . $entry->remote_type . ' - Representatitve: '.$entry->representative.')';
+            $text = '('.$entry->remote_type.' - Representatitve: '.$entry->representative.')';
             $this->MultiCell(0, 5, $text, 0, 'L');
         }
 
@@ -107,7 +100,7 @@ class Prize extends PDF
             $this->setXY(15, 44);
 
             // create the number to words "manager" class
-            $numberToWords = new NumberToWords();
+            $numberToWords = new NumberToWords;
 
             // build a new number transformer using the RFC 3066 language identifier
             $numberTransformer = $numberToWords->getNumberTransformer(config('partymeister-competitions-receipt.localize_number_words'));

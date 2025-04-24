@@ -4,9 +4,9 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Backend\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
@@ -47,14 +47,15 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|AccessKey whereUpdatedAt($value)
  * @method static Builder|AccessKey whereUpdatedBy($value)
  * @method static Builder|AccessKey whereVisitorId($value)
+ *
  * @mixin Eloquent
  */
 class AccessKey extends Model
 {
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
     use HasShortflakePrimary;
+    use Searchable;
 
     /**
      * Searchable columns for the searchable trait

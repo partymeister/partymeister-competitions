@@ -30,8 +30,6 @@ class SyncCompetition implements ShouldQueue
      * Create a new job instance.
      *
      * SyncCompetition constructor.
-     *
-     * @param  Competition  $competition
      */
     public function __construct(Competition $competition)
     {

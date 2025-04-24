@@ -37,9 +37,6 @@ class PartymeisterCompetitionsPublishReleaseFilesCommand extends Command
         }
     }
 
-    /**
-     * @param $directory
-     */
     protected function mkdir($directory)
     {
         if (! is_dir($directory)) {

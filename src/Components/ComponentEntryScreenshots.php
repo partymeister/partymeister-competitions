@@ -34,26 +34,14 @@ class ComponentEntryScreenshots
      */
     protected $component;
 
-    /**
-     * @var
-     */
     protected $entryScreenshotForm;
 
-    /**
-     * @var
-     */
     protected $record;
 
-    /**
-     * @var
-     */
     protected $request;
 
     /**
      * ComponentEntryScreenshots constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
-     * @param  ComponentEntryScreenshot  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -64,7 +52,6 @@ class ComponentEntryScreenshots
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      *
      * @throws GuzzleException
@@ -72,7 +59,7 @@ class ComponentEntryScreenshots
     public function index(Request $request)
     {
         $visitor = Auth::guard('visitor')
-                       ->user();
+            ->user();
 
         if (is_null($visitor)) {
             return redirect()->back();
@@ -101,11 +88,11 @@ class ComponentEntryScreenshots
         }
 
         $this->entryScreenshotForm = $this->form(EntryScreenshotForm::class, [
-            'name'    => 'entry-screenshot',
-            'url'     => $url,
-            'method'  => 'PATCH',
+            'name' => 'entry-screenshot',
+            'url' => $url,
+            'method' => 'PATCH',
             'enctype' => 'multipart/form-data',
-            'model'   => $this->record,
+            'model' => $this->record,
         ]);
 
         switch ($request->method()) {
@@ -136,7 +123,7 @@ class ComponentEntryScreenshots
         }
 
         $record = EntryService::updateWithForm($this->record, $this->request, $this->entryScreenshotForm)
-                              ->getResult();
+            ->getResult();
 
         StuhlService::send($record->visitor->name.' just updated the screenshot for the entry '.$record->title.' in the '.$record->competition->name.' competition!');
 
@@ -150,8 +137,8 @@ class ComponentEntryScreenshots
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
             'entryScreenshotForm' => $this->entryScreenshotForm,
-            'record'              => $this->record,
-            'component'           => $this->component,
+            'record' => $this->record,
+            'component' => $this->component,
         ]);
     }
 }

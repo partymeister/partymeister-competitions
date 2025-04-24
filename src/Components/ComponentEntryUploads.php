@@ -34,26 +34,14 @@ class ComponentEntryUploads
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $entryUploadForm;
 
-    /**
-     * @var
-     */
     protected $record;
 
-    /**
-     * @var
-     */
     protected $request;
 
     /**
      * ComponentEntryUploads constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
-     * @param  ComponentEntryUpload  $component
      */
     public function __construct(
         PageVersionComponent $pageVersionComponent,
@@ -64,7 +52,6 @@ class ComponentEntryUploads
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      *
      * @throws GuzzleException
@@ -72,7 +59,7 @@ class ComponentEntryUploads
     public function index(Request $request)
     {
         $visitor = Auth::guard('visitor')
-                       ->user();
+            ->user();
 
         if (is_null($visitor)) {
             return redirect()->back();
@@ -88,9 +75,9 @@ class ComponentEntryUploads
         }
 
         $formOptions = [
-            'name'    => 'entry-upload',
-            'url'     => $url,
-            'method'  => 'POST',
+            'name' => 'entry-upload',
+            'url' => $url,
+            'method' => 'POST',
             'enctype' => 'multipart/form-data',
         ];
 
@@ -151,7 +138,7 @@ class ComponentEntryUploads
         }
 
         $record = EntryService::createWithForm($this->request, $this->entryUploadForm)
-                              ->getResult();
+            ->getResult();
 
         StuhlService::send($record->visitor->name.' just created the entry '.$record->title.' in the '.$record->competition->name.' competition!');
 
@@ -170,7 +157,7 @@ class ComponentEntryUploads
         }
 
         $this->entryUploadForm->getField('file')
-                              ->setOption('rules', '');
+            ->setOption('rules', '');
 
         // It will automatically use current request, get the rules, and do the validation
         if ((int) $this->request->input($this->entryUploadForm->getName().'.reload_on_change') == 1) {
@@ -188,7 +175,7 @@ class ComponentEntryUploads
         }
 
         $record = EntryService::updateWithForm($this->record, $this->request, $this->entryUploadForm)
-                              ->getResult();
+            ->getResult();
 
         StuhlService::send($record->visitor->name.' just updated the entry '.$record->title.' in the '.$record->competition->name.' competition!');
 
@@ -202,8 +189,8 @@ class ComponentEntryUploads
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
             'entryUploadForm' => $this->entryUploadForm,
-            'record'          => $this->record,
-            'component'       => $this->component,
+            'record' => $this->record,
+            'component' => $this->component,
         ]);
     }
 }

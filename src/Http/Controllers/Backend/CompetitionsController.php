@@ -44,8 +44,8 @@ class CompetitionsController extends Controller
     public function create()
     {
         $form = $this->form(CompetitionForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.competitions.store',
+            'method' => 'POST',
+            'route' => 'backend.competitions.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -57,7 +57,6 @@ class CompetitionsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CompetitionRequest  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CompetitionRequest $request)
@@ -81,8 +80,6 @@ class CompetitionsController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -92,16 +89,15 @@ class CompetitionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Competition  $record
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Competition $record)
     {
         $form = $this->form(CompetitionForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.competitions.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.competitions.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         $motorShowRightSidebar = true;
@@ -112,8 +108,6 @@ class CompetitionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CompetitionRequest  $request
-     * @param  Competition  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(CompetitionRequest $request, Competition $record)
@@ -138,7 +132,6 @@ class CompetitionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Competition  $record
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Competition $record)

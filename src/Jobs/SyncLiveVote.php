@@ -29,8 +29,6 @@ class SyncLiveVote implements ShouldQueue
      * Create a new job instance.
      *
      * SyncLiveVote constructor.
-     *
-     * @param  LiveVote  $liveVote
      */
     public function __construct(LiveVote $liveVote)
     {
@@ -50,13 +48,13 @@ class SyncLiveVote implements ShouldQueue
 
         $data = [
             'data' => [
-                'entry_id'       => $this->liveVote->entry_id,
+                'entry_id' => $this->liveVote->entry_id,
                 'competition_id' => $this->liveVote->competition_id,
-                'sort_position'  => $this->liveVote->sort_position,
+                'sort_position' => $this->liveVote->sort_position,
             ],
         ];
         Log::channel('debug')
-           ->info(serialize($data));
+            ->info(serialize($data));
 
         $client = new Client([
             'verify' => false,

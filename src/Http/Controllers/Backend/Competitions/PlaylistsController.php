@@ -27,8 +27,6 @@ class PlaylistsController extends Controller
     use FormBuilderTrait;
 
     /**
-     * @param  Competition  $competition
-     * @param  Request  $request
      * @return RedirectResponse|Redirector
      */
     public function store(Competition $competition, Request $request)
@@ -41,8 +39,6 @@ class PlaylistsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Competition  $competition
-     * @param  Request  $request
      * @return bool|Factory|\Illuminate\Http\JsonResponse|View|string
      */
     public function index(Competition $competition, Request $request)
@@ -52,6 +48,7 @@ class PlaylistsController extends Controller
         switch ($format) {
             case 'timecode':
                 $data = Callback::where('payload->competition_id', $competition->id)->get();
+
                 return response()->streamDownload(function () use ($data) {
                     echo json_encode($data);
                 }, $filename.'.json', ['Content-Type' => 'application/json']);
@@ -62,7 +59,7 @@ class PlaylistsController extends Controller
                 $entryCollection = new CompetitionResource($competition->load('qualified_entries'));
                 $data = $entryCollection->toArrayRecursive();
 
-                //$data = [
+                // $data = [
                 //    'message' => 'Competition playlist for \'' . $competition->name . '\', generated ' . date('Y-m-d H:i:s'),
                 //    'data'    => [
                 //        'competition' => [
@@ -71,7 +68,7 @@ class PlaylistsController extends Controller
                 //        ],
                 //        'entries'     => [ 'data' => $data ]
                 //    ]
-                //];
+                // ];
 
                 if ($request->get('download')) {
                     return response()->streamDownload(function () use ($data) {
@@ -135,23 +132,23 @@ class PlaylistsController extends Controller
                 shuffle($participants);
 
                 $firstEntryTemplate = SlideTemplate::where('template_for', 'competition_entry_1')
-                                                   ->first();
+                    ->first();
                 $entryTemplate = SlideTemplate::where('template_for', 'competition')
-                                              ->first();
+                    ->first();
                 $nowTemplate = SlideTemplate::where('template_for', 'now')
-                                            ->first();
+                    ->first();
                 $comingupTemplate = SlideTemplate::where('template_for', 'coming_up')
-                                                 ->first();
+                    ->first();
                 $endTemplate = SlideTemplate::where('template_for', 'end')
-                                            ->first();
+                    ->first();
                 $participantsTemplate = SlideTemplate::where('template_for', 'participants')
-                                                     ->first();
+                    ->first();
 
                 $videos = [];
                 foreach ($competition->file_associations as $fileAssociation) {
                     $videos[] = [
                         'file_id' => $fileAssociation->file->id,
-                        'data'    => MediaHelper::getFileInformation($fileAssociation->file, 'file', false, [
+                        'data' => MediaHelper::getFileInformation($fileAssociation->file, 'file', false, [
                             'preview',
                             'thumb',
                         ]),
@@ -162,7 +159,7 @@ class PlaylistsController extends Controller
 
                 foreach ($competition->qualified_entries as $entry) {
                     if ($entry->getMedia('file')
-                              ->count() == 1) {
+                        ->count() == 1) {
                         $entry->final_file_media_id = $entry->getFirstMedia('file')->id;
                         $entry->save();
                     }
@@ -179,7 +176,6 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * @param $entries
      * @return string
      */
     protected function generateM3u($entries)
@@ -198,43 +194,42 @@ class PlaylistsController extends Controller
     }
 
     /**
-     * @param $competition
      * @return bool|Factory|View
      */
     protected function checkIfCompetitionIsValid($competition)
     {
         // Check for entries with status 0 or 2 (unchecked and needs feedback)
         if ($competition->entries()
-                        ->whereIn('status', [0, 2])
-                        ->count() > 0) {
+            ->whereIn('status', [0, 2])
+            ->count() > 0) {
             return view('partymeister-competitions::backend.competitions.playlists.show', [
                 'competition' => $competition,
-                'message'     => 'Not all entries are checked and/or disqualified!',
+                'message' => 'Not all entries are checked and/or disqualified!',
             ]);
         }
 
         $sort_position = 1;
         foreach ($competition->entries()
-                             ->where('status', 1)
-                             ->orderBy('sort_position', 'ASC')
-                             ->get() as $entry) {
+            ->where('status', 1)
+            ->orderBy('sort_position', 'ASC')
+            ->get() as $entry) {
             if ($entry->sort_position != $sort_position) {
                 return view('partymeister-competitions::backend.competitions.playlists.show', [
                     'competition' => $competition,
-                    'message'     => 'Not all entries are correctly numbered! Check the sort positions!',
+                    'message' => 'Not all entries are correctly numbered! Check the sort positions!',
                 ]);
             }
             $sort_position++;
         }
 
         if ($competition->competition_type->has_composer && $competition->entries()
-                                                                        ->where('status', 1)
-                                                                        ->where('composer_not_member_of_copyright_collective', false)
-                                                                        ->count() > 0) {
+            ->where('status', 1)
+            ->where('composer_not_member_of_copyright_collective', false)
+            ->count() > 0) {
             if ($entry->sort_position != $sort_position) {
                 return view('partymeister-competitions::backend.competitions.playlists.show', [
                     'competition' => $competition,
-                    'message'     => 'Some entries have composers registered with a copyright collective!',
+                    'message' => 'Some entries have composers registered with a copyright collective!',
                 ]);
             }
         }

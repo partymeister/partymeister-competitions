@@ -19,17 +19,15 @@ use Partymeister\Competitions\Models\VoteCategory;
 class VotesController extends ApiController
 {
     /**
-     * @param  Request  $request
-     * @param    $api_token
      * @return JsonResponse
      */
     public function store(Request $request, $api_token)
     {
         $visitor = Auth::guard('visitor')
-                       ->user();
+            ->user();
         if ($visitor->api_token != $api_token) {
             return response()->json([
-                'error'   => true,
+                'error' => true,
                 'message' => 'Oops, somebody tried to be naughty!',
             ]);
         }
@@ -40,28 +38,28 @@ class VotesController extends ApiController
 
         if (is_null($entry) || is_null($competition) || is_null($voteCategory)) {
             return response()->json([
-                'error'   => true,
+                'error' => true,
                 'message' => 'Oops, something went wrong!',
             ]);
         }
 
         if ($competition->voting_enabled == false && ! $request->get('live', false)) {
             return response()->json([
-                'error'   => true,
+                'error' => true,
                 'message' => 'Voting for this competition is not available yet!',
             ]);
         }
 
         if ($entry->competition_id != $competition->id) {
             return response()->json([
-                'error'   => true,
+                'error' => true,
                 'message' => 'Oops, something went wrong!',
             ]);
         }
 
         if (strtotime(config('partymeister-competitions-voting.deadline')) < time()) {
             return response()->json([
-                'error'   => true,
+                'error' => true,
                 'message' => 'Voting deadline is over, sorry :/',
             ]);
         }
@@ -72,8 +70,8 @@ class VotesController extends ApiController
 
         if ($request->get('special_vote')) {
             foreach ($visitor->votes()
-                             ->where('special_vote', true)
-                             ->get() as $vote) {
+                ->where('special_vote', true)
+                ->get() as $vote) {
                 $vote->special_vote = false;
                 $vote->save();
             }
@@ -81,12 +79,12 @@ class VotesController extends ApiController
 
         // Create new vote item if this one doesn't exist yet
         $vote = $visitor->votes()
-                        ->where('vote_category_id', $request->get('vote_category_id'))
-                        ->where('entry_id', $request->get('entry_id'))
-                        ->first();
+            ->where('vote_category_id', $request->get('vote_category_id'))
+            ->where('entry_id', $request->get('entry_id'))
+            ->first();
 
         if (is_null($vote)) {
-            $vote = new Vote();
+            $vote = new Vote;
             $vote->visitor_id = $visitor->id;
             $vote->competition_id = $request->get('competition_id');
             $vote->entry_id = $request->get('entry_id');

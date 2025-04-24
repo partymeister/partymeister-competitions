@@ -18,15 +18,10 @@ class ComponentReleases
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $competition;
 
     /**
      * ComponentReleases constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -34,20 +29,19 @@ class ComponentReleases
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)
     {
         if ($request->get('competition_id') > 0) {
             $this->competition = Competition::where('voting_enabled', true)
-                                            ->where('id', $request->get('competition_id'))
-                                            ->orderBy('updated_at', 'ASC')
-                                            ->first();
+                ->where('id', $request->get('competition_id'))
+                ->orderBy('updated_at', 'ASC')
+                ->first();
         } else {
             $this->competition = Competition::where('voting_enabled', true)
-                                            ->orderBy('updated_at', 'ASC')
-                                            ->first();
+                ->orderBy('updated_at', 'ASC')
+                ->first();
         }
 
         if (! is_null($this->competition)) {

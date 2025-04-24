@@ -20,15 +20,10 @@ class ComponentLiveVotings
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $visitor;
 
     /**
      * ComponentLiveVotings constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -36,13 +31,12 @@ class ComponentLiveVotings
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      */
     public function index(Request $request)
     {
         $this->visitor = Auth::guard('visitor')
-                             ->user();
+            ->user();
         if (is_null($this->visitor)) {
             return redirect(route('frontend.pages.index', ['slug' => 'start']));
         }

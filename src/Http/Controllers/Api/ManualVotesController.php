@@ -23,7 +23,9 @@ class ManualVotesController extends ApiController
      *   tags={"ManualVotesController"},
      *   path="/api/manual_votes",
      *   summary="Get manual_vote collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class ManualVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/ManualVoteResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class ManualVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class ManualVotesController extends ApiController
     public function index()
     {
         $paginator = ManualVoteService::collection()
-                                      ->getPaginator();
+            ->getPaginator();
 
         return (new ManualVoteCollection($paginator))->additional(['message' => 'ManualVote collection read']);
     }
@@ -79,10 +88,14 @@ class ManualVotesController extends ApiController
      *   tags={"ManualVotesController"},
      *   path="/api/manual_votes",
      *   summary="Create new manual_vote",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/ManualVoteRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class ManualVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class ManualVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  ManualVoteRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(ManualVoteRequest $request)
     {
         $result = ManualVoteService::create($request)
-                                   ->getResult();
+            ->getResult();
 
         return (new ManualVoteResource($result))->additional(['message' => 'ManualVote created'])
-                                                ->response()
-                                                ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class ManualVotesController extends ApiController
      *   tags={"ManualVotesController"},
      *   path="/api/manual_votes/{manual_vote}",
      *   summary="Get single manual_vote",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class ManualVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="manual_vote",
      *     parameter="manual_vote",
      *     description="ManualVote id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +195,30 @@ class ManualVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  ManualVote  $record
      * @return ManualVoteResource
      */
     public function show(ManualVote $record)
     {
         $result = ManualVoteService::show($record)
-                                   ->getResult();
+            ->getResult();
 
         return (new ManualVoteResource($result))->additional(['message' => 'ManualVote read']);
     }
@@ -199,10 +228,14 @@ class ManualVotesController extends ApiController
      *   tags={"ManualVotesController"},
      *   path="/api/manual_votes/{manual_vote}",
      *   summary="Update an existing manual_vote",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/ManualVoteRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +243,22 @@ class ManualVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="manual_vote",
      *     parameter="manual_vote",
      *     description="ManualVote id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +271,30 @@ class ManualVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  ManualVoteRequest  $request
-     * @param  ManualVote  $record
      * @return ManualVoteResource
      */
     public function update(ManualVoteRequest $request, ManualVote $record)
     {
         $result = ManualVoteService::update($record, $request)
-                                   ->getResult();
+            ->getResult();
 
         return (new ManualVoteResource($result))->additional(['message' => 'ManualVote updated']);
     }
@@ -264,7 +304,9 @@ class ManualVotesController extends ApiController
      *   tags={"ManualVotesController"},
      *   path="/api/manual_votes/{manual_vote}",
      *   summary="Delete a manual_vote",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +314,22 @@ class ManualVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="manual_vote",
      *     parameter="manual_vote",
      *     description="ManualVote id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +337,27 @@ class ManualVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +369,12 @@ class ManualVotesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  ManualVote  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(ManualVote $record)
     {
         $result = ManualVoteService::delete($record)
-                                   ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'ManualVote deleted']);

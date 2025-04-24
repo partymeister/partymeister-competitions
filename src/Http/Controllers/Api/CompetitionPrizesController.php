@@ -23,7 +23,9 @@ class CompetitionPrizesController extends ApiController
      *   tags={"CompetitionPrizesController"},
      *   path="/api/competition_prizes",
      *   summary="Get competition_prize collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class CompetitionPrizesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/CompetitionPrizeResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class CompetitionPrizesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class CompetitionPrizesController extends ApiController
     public function index()
     {
         $paginator = CompetitionPrizeService::collection()
-                                            ->getPaginator();
+            ->getPaginator();
 
         return (new CompetitionPrizeCollection($paginator))->additional(['message' => 'CompetitionPrize collection read']);
     }
@@ -79,10 +88,14 @@ class CompetitionPrizesController extends ApiController
      *   tags={"CompetitionPrizesController"},
      *   path="/api/competition_prizes",
      *   summary="Create new competition_prize",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CompetitionPrizeRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class CompetitionPrizesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class CompetitionPrizesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  CompetitionPrizeRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CompetitionPrizeRequest $request)
     {
         $result = CompetitionPrizeService::create($request)
-                                         ->getResult();
+            ->getResult();
 
         return (new CompetitionPrizeResource($result))->additional(['message' => 'CompetitionPrize created'])
-                                                      ->response()
-                                                      ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class CompetitionPrizesController extends ApiController
      *   tags={"CompetitionPrizesController"},
      *   path="/api/competition_prizes/{competition_prize}",
      *   summary="Get single competition_prize",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class CompetitionPrizesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="competition_prize",
      *     parameter="competition_prize",
      *     description="CompetitionPrize id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +195,30 @@ class CompetitionPrizesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  CompetitionPrize  $record
      * @return CompetitionPrizeResource
      */
     public function show(CompetitionPrize $record)
     {
         $result = CompetitionPrizeService::show($record)
-                                         ->getResult();
+            ->getResult();
 
         return (new CompetitionPrizeResource($result))->additional(['message' => 'CompetitionPrize read']);
     }
@@ -199,10 +228,14 @@ class CompetitionPrizesController extends ApiController
      *   tags={"CompetitionPrizesController"},
      *   path="/api/competition_prizes/{competition_prize}",
      *   summary="Update an existing competition_prize",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/CompetitionPrizeRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +243,22 @@ class CompetitionPrizesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="competition_prize",
      *     parameter="competition_prize",
      *     description="CompetitionPrize id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +271,30 @@ class CompetitionPrizesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  CompetitionPrizeRequest  $request
-     * @param  CompetitionPrize  $record
      * @return CompetitionPrizeResource
      */
     public function update(CompetitionPrizeRequest $request, CompetitionPrize $record)
     {
         $result = CompetitionPrizeService::update($record, $request)
-                                         ->getResult();
+            ->getResult();
 
         return (new CompetitionPrizeResource($result))->additional(['message' => 'CompetitionPrize updated']);
     }
@@ -264,7 +304,9 @@ class CompetitionPrizesController extends ApiController
      *   tags={"CompetitionPrizesController"},
      *   path="/api/competition_prizes/{competition_prize}",
      *   summary="Delete a competition_prize",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +314,22 @@ class CompetitionPrizesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="competition_prize",
      *     parameter="competition_prize",
      *     description="CompetitionPrize id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +337,27 @@ class CompetitionPrizesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +369,12 @@ class CompetitionPrizesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  CompetitionPrize  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(CompetitionPrize $record)
     {
         $result = CompetitionPrizeService::delete($record)
-                                         ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'CompetitionPrize deleted']);

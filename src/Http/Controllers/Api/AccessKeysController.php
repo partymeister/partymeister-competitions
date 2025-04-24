@@ -23,7 +23,9 @@ class AccessKeysController extends ApiController
      *   tags={"AccessKeysController"},
      *   path="/api/access_keys",
      *   summary="Get access_key collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +33,20 @@ class AccessKeysController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/AccessKeyResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +62,11 @@ class AccessKeysController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +78,7 @@ class AccessKeysController extends ApiController
     public function index()
     {
         $paginator = AccessKeyService::collection()
-                                     ->getPaginator();
+            ->getPaginator();
 
         return (new AccessKeyCollection($paginator))->additional(['message' => 'AccessKey collection read']);
     }
@@ -79,10 +88,14 @@ class AccessKeysController extends ApiController
      *   tags={"AccessKeysController"},
      *   path="/api/access_keys",
      *   summary="Create new access_key",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessKeyRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +103,13 @@ class AccessKeysController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +122,34 @@ class AccessKeysController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  AccessKeyRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(AccessKeyRequest $request)
     {
         $result = AccessKeyService::create($request)
-                                  ->getResult();
+            ->getResult();
 
         return (new AccessKeyResource($result))->additional(['message' => 'AccessKey created'])
-                                               ->response()
-                                               ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +157,9 @@ class AccessKeysController extends ApiController
      *   tags={"AccessKeysController"},
      *   path="/api/access_keys/{access_key}",
      *   summary="Get single access_key",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +167,22 @@ class AccessKeysController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="access_key",
      *     parameter="access_key",
      *     description="AccessKey id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +195,30 @@ class AccessKeysController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  AccessKey  $record
      * @return AccessKeyResource
      */
     public function show(AccessKey $record)
     {
         $result = AccessKeyService::show($record)
-                                  ->getResult();
+            ->getResult();
 
         return (new AccessKeyResource($result))->additional(['message' => 'AccessKey read']);
     }
@@ -199,10 +228,14 @@ class AccessKeysController extends ApiController
      *   tags={"AccessKeysController"},
      *   path="/api/access_keys/{access_key}",
      *   summary="Update an existing access_key",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessKeyRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +243,22 @@ class AccessKeysController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="access_key",
      *     parameter="access_key",
      *     description="AccessKey id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +271,30 @@ class AccessKeysController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  AccessKeyRequest  $request
-     * @param  AccessKey  $record
      * @return AccessKeyResource
      */
     public function update(AccessKeyRequest $request, AccessKey $record)
     {
         $result = AccessKeyService::update($record, $request)
-                                  ->getResult();
+            ->getResult();
 
         return (new AccessKeyResource($result))->additional(['message' => 'AccessKey updated']);
     }
@@ -264,7 +304,9 @@ class AccessKeysController extends ApiController
      *   tags={"AccessKeysController"},
      *   path="/api/access_keys/{access_key}",
      *   summary="Delete a access_key",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +314,22 @@ class AccessKeysController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="access_key",
      *     parameter="access_key",
      *     description="AccessKey id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +337,27 @@ class AccessKeysController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +369,12 @@ class AccessKeysController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  AccessKey  $record
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(AccessKey $record)
     {
         $result = AccessKeyService::delete($record)
-                                  ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'AccessKey deleted']);
