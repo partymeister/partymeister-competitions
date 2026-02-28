@@ -11,6 +11,10 @@ Route::group([
     Route::apiResource('competitions', 'CompetitionsController');
     //Route::get('competitions/{competition}/playlist', 'Competitions\PlaylistsController@index')
     //     ->name('competitions.playlist.index');
+    Route::get('competitions/{competition}/playlist-data', 'CompetitionPlaylistController@show')
+         ->name('competitions.playlist-data');
+    Route::post('competitions/{competition}/playlist', 'CompetitionPlaylistController@store')
+         ->name('competitions.playlist.store');
     Route::apiResource('vote_categories', 'VoteCategoriesController');
     Route::apiResource('entries', 'EntriesController');
     Route::apiResource('access_keys', 'AccessKeysController');
