@@ -11,7 +11,7 @@
     </a>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="{{route('backend.competitions.playlist.index', ['competition' => $record->id])}}?format=slides">{{trans('partymeister-competitions::backend/competitions.generate_playlist')}}</a>
+        <a class="dropdown-item" href="{{route('backend.slidemeister-generator.competition', ['competition' => $record->id])}}" target="_blank">{{trans('partymeister-competitions::backend/competitions.generate_playlist')}}</a>
         <a class="dropdown-item" href="{{route('backend.competitions.playlist.index', ['competition' => $record->id])}}?format=json&download=true">{{trans('partymeister-competitions::backend/competitions.download_json_playlist')}}</a>
         <a class="dropdown-item" href="{{route('backend.competitions.playlist.index', ['competition' => $record->id])}}?format=m3u&download=true">{{trans('partymeister-competitions::backend/competitions.download_m3u_playlist')}}</a>
         <a class="dropdown-item" href="{{route('backend.competitions.playlist.index', ['competition' => $record->id])}}?format=timecode&download=true">{{trans('partymeister-competitions::backend/competitions.download_callback_timecodes')}}</a>
