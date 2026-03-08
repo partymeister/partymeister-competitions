@@ -19,6 +19,6 @@ class ExportController extends Controller
     {
         return response()->streamDownload(function () {
             echo VoteService::exportCSV();
-        }, Str::kebab(config('motor-cms-frontend.name').'-results-'.Carbon::now().'.csv'));
+        }, Str::kebab(config('motor-cms-frontend.name').'-results-'.Carbon::now()->format('Y-m-d_H-i-s').'.csv'));
     }
 }
