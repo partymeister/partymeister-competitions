@@ -306,10 +306,10 @@
 
 @section('view-scripts')
     <script src="{{mix('js/slidemeister.js')}}"></script>
-    <script>
+    <script type="module">
         $(document).ready(function () {
 
-            Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+            window.eventBus.emit('partymeister-slides:load-definitions', {
                 name: 'template-preview',
                 elements: JSON.parse('{!! addslashes($competitionTemplate->definitions) !!}'),
                 type: 'competition-entry',

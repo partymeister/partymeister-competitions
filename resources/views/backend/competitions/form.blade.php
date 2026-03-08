@@ -49,7 +49,7 @@
 @section('right-sidebar-header')<h5 class="pb-0 mb-0">Media</h5>@endsection
 
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $(document).ready(function () {
 
             $('#has_prizegiving').change(function () {

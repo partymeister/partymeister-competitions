@@ -55,7 +55,7 @@
     {!! form_end($form, false) !!}
 @endsection
 @section('view_scripts')
-    <script>
+    <script type="module">
         $(document).ready(function(){
             $('.mark-as-read').on('click', function(e) {
                 $('input#mark_as_read').val(1);

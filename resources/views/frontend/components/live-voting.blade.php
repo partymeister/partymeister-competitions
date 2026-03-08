@@ -8,8 +8,6 @@
             <div style="text-align: center;">
                 <div data-value="0" @click="updateVote(entry, 0)"
                      v-bind:class="{ 'partymeister-rating-wrapper': true, 'partymeister-rating-cancel-on': (entry.vote && entry.vote.points) == 0, 'partymeister-rating-cancel-off': (entry.vote && entry.vote.points) != 0}"></div>
-{{--                <div data-value="-1" @click="updateVote(entry, -1)"--}}
-{{--                     v-bind:class="{ 'partymeister-rating-wrapper': true, 'partymeister-rating-negative-on': (entry.vote.data[0] && entry.vote.data[0].points) == -1, 'partymeister-rating-negative-off': (entry.vote.data[0] && entry.vote.data[0].points) != -1}"></div>--}}
                 <template v-for="points in entry.vote_category_points">
                     <div v-bind:data-value="points" @click="updateVote(entry, points)"
                          v-bind:class="{ 'partymeister-rating-wrapper': true, 'partymeister-rating-star-on': (entry.vote && entry.vote.points) >= points, 'partymeister-rating-star-off': (entry.vote && entry.vote.points) < points}"></div>
@@ -33,72 +31,70 @@
                 </template>
             </div>
             <span class="toast secondary" v-if="success">Saved</span>
-            <span class="toast secondary" v-if="error">Error</span>
+            <span class="toast secondary" v-if="error" style="background-color: #d9534f; color: #fff;">Error</span>
         </div>
     </div>
 </div>
 
 @section('view-scripts')
-    <script>
-        let liveVoting = new Vue({
-            el: '#live-voting',
-            data: {
-                competition: '',
-                entries: [],
-                success: false,
-                error: false,
-            },
-            methods: {
-                refresh() {
+    <script type="module">
+        const { createApp, ref, onMounted } = Vue;
+
+        const liveVotingApp = createApp({
+            setup() {
+                const competition = ref('');
+                const entries = ref([]);
+                const success = ref(false);
+                const error = ref(false);
+
+                function refresh() {
                     axios.get('{{url('/api/profile/'.$visitor->api_token.'/votes/live')}}').then((response) => {
                         if (response.status == 204) {
                             return;
                         }
-                        let entries = response.data.data;
-                        if (entries.length > 0) {
-                            this.competition = entries[0].competition_name;
+                        let newEntries = response.data.data;
+                        if (newEntries.length > 0) {
+                            competition.value = newEntries[0].competition_name;
                         }
-                        // Save state
-                        for (let [index, ne] of entries.entries()) {
-                            if (entries[index].vote.length == 0) {
-                                entries[index].vote.push({
+                        for (let [index, ne] of newEntries.entries()) {
+                            if (newEntries[index].vote.length == 0) {
+                                newEntries[index].vote.push({
                                     comment: '',
                                     special_vote: false,
                                     points: 0
                                 });
                             }
-                            entries[index].comment = entries[index].vote.comment;
-                            // Save state
-                            for (let e of this.entries) {
+                            newEntries[index].comment = newEntries[index].vote.comment;
+                            for (let e of entries.value) {
                                 if (e.id == ne.id) {
-                                    if (entries[index].vote.length == 0 || entries[index].vote.comment != e.comment) {
-                                        entries[index].comment = e.comment;
+                                    if (newEntries[index].vote.length == 0 || newEntries[index].vote.comment != e.comment) {
+                                        newEntries[index].comment = e.comment;
                                     }
                                 }
                             }
                         }
-                        this.entries = entries;
+                        entries.value = newEntries;
                     });
-                },
-                markSpecial(entry, value) {
-                    for (let e of this.entries) {
+                }
+
+                function markSpecial(entry, value) {
+                    for (let e of entries.value) {
                         if (e.vote.special_vote == true) {
                             e.vote.special_vote = false;
                         }
-                        // if (e.vote.data.special_vote) {
-                        //     Vue.set(e.vote.data, 'special_vote', !value);
-                        // }
                     }
                     entry.vote.special_vote = value;
-                    this.saveVote(entry, value);
-                },
-                updateVote(entry, points) {
+                    saveVote(entry, value);
+                }
+
+                function updateVote(entry, points) {
                     if (points != undefined) {
                         entry.vote.points = points;
                     }
-                    this.saveVote(entry);
-                },
-                saveVote(entry, special) {
+                    saveVote(entry);
+                }
+
+                function saveVote(entry, special) {
                     let data = {
                         entry_id: entry.id,
                         competition_id: entry.competition_id,
@@ -108,36 +104,32 @@
                         live: true
                     };
 
-
                     if (special != undefined) {
                         data.special_vote = special;
                     }
 
                     axios.post('{{route('ajax.votes.submit', ['api_token' => $visitor->api_token])}}', data).then((response) => {
                         if (response.data.success) {
-                            this.success = true;
-                            window.setTimeout(function () {
-                                this.success = false
-                            }, 2000);
+                            success.value = true;
+                            setTimeout(() => { success.value = false; }, 2000);
                         } else if (response.data.error) {
-                            this.error = true;
-                            window.setTimeout(function () {
-                                this.error = false
-                            }, 2000);
+                            error.value = true;
+                            setTimeout(() => { error.value = false; }, 2000);
                         }
                     });
                 }
-            },
-            mounted: function () {
 
-                const configRefreshInterval = '{{config('partymeister-competitions-voting.live-refresh-interval')}}';
-                const refreshInterval = Number(configRefreshInterval || 20000);
+                onMounted(() => {
+                    const configRefreshInterval = '{{config('partymeister-competitions-voting.live-refresh-interval')}}';
+                    const refreshInterval = Number(configRefreshInterval || 20000);
+                    refresh();
+                    window.setInterval(refresh, refreshInterval);
+                });
 
-                this.refresh();
-
-                window.setInterval(this.refresh, refreshInterval);
-
+                return { competition, entries, success, error, updateVote, markSpecial };
             }
         });
+
+        liveVotingApp.mount('#live-voting');
     </script>
 @endsection

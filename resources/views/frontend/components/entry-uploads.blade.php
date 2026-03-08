@@ -203,7 +203,7 @@
     {!! form_end($entryUploadForm, false) !!}
 </div>
 @section('view-scripts')
-    <script type="text/javascript">
+    <script type="module">
         $('.reload-on-change').change(function (e) {
             $('#reload_on_change').val(1);
             $(this).closest('form').submit();

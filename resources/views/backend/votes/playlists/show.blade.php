@@ -152,9 +152,9 @@
 
 @if (!isset($message))
 @section('view_scripts')
-    <script>
+    <script type="module">
         $(document).ready(function () {
-            Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+            window.eventBus.emit('partymeister-slides:load-definitions', {
                 name: 'slidemeister-prizegiving-comingup',
                 elements: JSON.parse('{!! addslashes($comingupTemplate->definitions) !!}'),
                 type: 'prizegiving-support',
@@ -162,14 +162,14 @@
                 replacements: {headline: 'Coming up', body: 'Prizegiving' },
             });
 
-            Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+            window.eventBus.emit('partymeister-slides:load-definitions', {
                 name: 'slidemeister-prizegiving-now',
                 elements: JSON.parse('{!! addslashes($nowTemplate->definitions) !!}'),
                 type: 'prizegiving-support',
                 replacements: {headline: 'Now', body: 'Prizegiving' },
             });
 
-            Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+            window.eventBus.emit('partymeister-slides:load-definitions', {
                 name: 'slidemeister-prizegiving-end',
                 elements: JSON.parse('{!! addslashes($endTemplate->definitions) !!}'),
                 type: 'prizegiving-support',
@@ -177,14 +177,14 @@
             });
 
             @foreach ($results as $key => $competition)
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-prizegiving-{{$key}}-now',
                     elements: JSON.parse('{!! addslashes($comingupTemplate->definitions) !!}'),
                     type: 'prizegiving-support',
                     replacements: {headline: 'Now', body: '{{$competition['name']}}' },
                 });
                 @if ($competition['has_comment'] && $comments[$key] != '')
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                    window.eventBus.emit('partymeister-slides:load-definitions', {
                         name: 'slidemeister-prizegiving-{{$key}}-comments',
                         elements: JSON.parse('{!! addslashes($commentsTemplate->definitions) !!}'),
                         type: 'prizegiving-support',
@@ -192,14 +192,14 @@
                     });
                 @endif
 
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-prizegiving-{{$key}}-slide',
                     elements: JSON.parse('{!! addslashes($prizegivingTemplate->definitions) !!}'),
                     type: 'prizegiving-slide',
                     replacements: {headline: '{{$competition["name"]}}', rows: {!! json_encode($competition['entries']) !!} },
                 });
 
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-prizegiving-{{$key}}-winners',
                     elements: JSON.parse('{!! addslashes($prizegivingTemplate->definitions) !!}'),
                     type: 'prizegiving-winners',
@@ -207,21 +207,21 @@
                 });
             @endforeach
             @if (count($specialVotes) > 0)
-            Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+            window.eventBus.emit('partymeister-slides:load-definitions', {
                 name: 'slidemeister-prizegiving-special-now',
                 elements: JSON.parse('{!! addslashes($comingupTemplate->definitions) !!}'),
                 type: 'prizegiving-support',
                 replacements: {headline: 'Now', body: 'Crowd favourite' },
             });
 
-            Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+            window.eventBus.emit('partymeister-slides:load-definitions', {
                 name: 'slidemeister-prizegiving-special-slide',
                 elements: JSON.parse('{!! addslashes($prizegivingTemplate->definitions) !!}'),
                 type: 'prizegiving-slide',
                 replacements: {headline: 'Crowd favourite', rows: {!! json_encode($specialVotes) !!} },
             });
 
-            Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+            window.eventBus.emit('partymeister-slides:load-definitions', {
                 name: 'slidemeister-prizegiving-special-winners',
                 elements: JSON.parse('{!! addslashes($prizegivingTemplate->definitions) !!}'),
                 type: 'prizegiving-winners',
@@ -237,13 +237,13 @@
 
                 let saveCounter = 0;
 
-                Vue.prototype.$eventHub.$on('partymeister-slides:timetable-finished', () => {
+                window.eventBus.on('partymeister-slides:timetable-finished', () => {
                     if (saveCounter === $('.slidemeister-instance').length) {
                         $('#prizegiving-playlist-save').submit();
                     }
                 });
 
-                Vue.prototype.$eventHub.$on('partymeister-slides:receive-definitions', (data) => {
+                window.eventBus.on('partymeister-slides:receive-definitions', (data) => {
                     if (data.name === 'slidemeister-prizegiving-comingup') {
                         $('input[name="slide[comingup]"]').val(data.definitions_as_form_data);
                         $('input[name="cached_html_preview[comingup]"]').val($('#slidemeister-prizegiving-comingup').html());
@@ -314,24 +314,24 @@
                         saveCounter++;
                     }
                     @endif
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:timetable-finished');
+                    window.eventBus.emit('partymeister-slides:timetable-finished');
                 });
 
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-comingup');
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-now');
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-end');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-comingup');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-now');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-end');
                 @foreach ($results as $key => $competition)
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-now');
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-slide');
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-winners');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-now');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-slide');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-winners');
                 @if ($competition['has_comment'])
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-comments');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-{{$key}}-comments');
                 @endif
                 @endforeach
                 @if (count($specialVotes) > 0)
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-special-now');
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-special-slide');
-                Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-special-winners');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-special-now');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-special-slide');
+                window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-prizegiving-special-winners');
                 @endif
 
                 e.preventDefault();

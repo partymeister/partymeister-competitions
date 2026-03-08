@@ -33,7 +33,7 @@
 {!! form_end($entryCommentForm, false) !!}
 
 @section('view-scripts')
-    <script>
+    <script type="module">
         $(document).ready(function () {
             $('.mark-as-read').on('click', function (e) {
                 $('input#mark_as_read').val(1);

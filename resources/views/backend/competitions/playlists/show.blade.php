@@ -109,9 +109,9 @@
 
 @if (!isset($message))
     @section('view_scripts')
-        <script>
+        <script type="module">
             $(document).ready(function () {
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-competition-comingup',
                     elements: JSON.parse('{!! addslashes($comingupTemplate->definitions) !!}'),
                     type: 'competition-support',
@@ -119,14 +119,14 @@
                     replacements: {headline: 'Coming up', entry: {!! json_encode($entry) !!} },
                 });
 
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-competition-now',
                     elements: JSON.parse('{!! addslashes($nowTemplate->definitions) !!}'),
                     type: 'competition-support',
                     replacements: {headline: 'Now', entry: {!! json_encode($entry) !!} },
                 });
 
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-competition-end',
                     elements: JSON.parse('{!! addslashes($endTemplate->definitions) !!}'),
                     type: 'competition-support',
@@ -134,7 +134,7 @@
                 });
 
                 @if (count($participants) > 0)
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-competition-participants',
                     elements: JSON.parse('{!! addslashes($participantsTemplate->definitions) !!}'),
                     type: 'competition-participants',
@@ -144,14 +144,14 @@
 
                 @foreach($entries as $index => $entry)
                 @if ($index === 0)
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-competition-entry-{{$entry['id']}}',
                     elements: JSON.parse('{!! addslashes($firstEntryTemplate->definitions) !!}'),
                     type: 'competition-entry',
                     replacements: {!! json_encode($entry) !!},
                 });
                 @else
-                Vue.prototype.$eventHub.$emit('partymeister-slides:load-definitions', {
+                window.eventBus.emit('partymeister-slides:load-definitions', {
                     name: 'slidemeister-competition-entry-{{$entry['id']}}',
                     elements: JSON.parse('{!! addslashes($entryTemplate->definitions) !!}'),
                     type: 'competition-entry',
@@ -169,13 +169,13 @@
 
                     let saveCounter = 0;
 
-                    Vue.prototype.$eventHub.$on('partymeister-slides:timetable-finished', () => {
+                    window.eventBus.on('partymeister-slides:timetable-finished', () => {
                         if (saveCounter === $('.slidemeister-instance.slide').length) {
                             $('#competition-playlist-save').submit();
                         }
                     });
 
-                    Vue.prototype.$eventHub.$on('partymeister-slides:receive-definitions', (data) => {
+                    window.eventBus.on('partymeister-slides:receive-definitions', (data) => {
                         if (data.name === 'slidemeister-competition-comingup') {
                             $('input[name="slide[comingup]"]').val(data.definitions_as_form_data);
                             $('input[name="cached_html_preview[comingup]"]').val($('#slidemeister-competition-comingup').html());
@@ -209,17 +209,17 @@
                         }
                         @endforeach
 
-                        Vue.prototype.$eventHub.$emit('partymeister-slides:timetable-finished');
+                        window.eventBus.emit('partymeister-slides:timetable-finished');
                     });
 
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-competition-comingup');
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-competition-now');
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-competition-end');
+                    window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-competition-comingup');
+                    window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-competition-now');
+                    window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-competition-end');
                     @if (count($participants) > 0)
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-competition-participants');
+                    window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-competition-participants');
                     @endif
                     @foreach($entries as $index => $entry)
-                    Vue.prototype.$eventHub.$emit('partymeister-slides:request-definitions', 'slidemeister-competition-entry-{{$entry['id']}}');
+                    window.eventBus.emit('partymeister-slides:request-definitions', 'slidemeister-competition-entry-{{$entry['id']}}');
                     @endforeach
                 });
             });

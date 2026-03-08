@@ -100,7 +100,7 @@
 @endif
 @if (!is_null($competition))
 @section('view-scripts')
-    <script type="text/javascript">
+    <script type="module">
         $(document).ready(function () {
 
             $('.special-vote-on').on('click', function (e) {

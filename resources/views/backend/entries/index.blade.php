@@ -25,7 +25,7 @@
                                            :label="'Entry modal window'"></partymeister-competitions-entry-modal>
 @endsection
 @section('view_scripts')
-    <script type="text/javascript">
+    <script type="module">
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
@@ -223,7 +223,7 @@
             e.preventDefault();
             $.ajax('{{action('\Partymeister\Competitions\Http\Controllers\Api\EntriesController@index')}}/' + $(this).data('id') + '?api_token=' + apiToken)
                 .done(function (results) {
-                    Vue.prototype.$eventHub.$emit('partymeister-competitions:show-entry-modal', results.data);
+                    window.eventBus.emit('partymeister-competitions:show-entry-modal', results.data);
                     $('#entry-modal').modal('show');
                 });
         });
