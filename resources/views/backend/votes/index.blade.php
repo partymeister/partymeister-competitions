@@ -7,7 +7,7 @@
 @section('contentheader_title')
     {{ trans('partymeister-competitions::backend/votes.votes') }}
     @if (has_permission('votes.write'))
-        {!! link_to_route('backend.votes.playlist.index', trans('partymeister-competitions::backend/votes.generate_prizegiving'), [], ['class' => 'float-right btn btn-sm btn-success']) !!}
+        {!! link_to_route('backend.slidemeister-generator.prizegiving', trans('partymeister-competitions::backend/votes.generate_prizegiving'), [], ['class' => 'float-right btn btn-sm btn-success']) !!}
         {!! link_to_route('backend.competition_prizes.create', trans('partymeister-competitions::backend/competition_prizes.edit'), [], ['class' => 'float-right btn btn-sm btn-success']) !!}
         {!! link_to_route('backend.votes.create', trans('partymeister-competitions::backend/votes.edit'), [], ['class' => 'float-right btn btn-sm btn-success']) !!}
         <div class="dropdown float-right">

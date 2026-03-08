@@ -305,7 +305,6 @@
 
 
 @section('view-scripts')
-    <script src="{{mix('js/slidemeister.js')}}"></script>
     <script type="module">
         $(document).ready(function () {
 
