@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Partymeister\Competitions\Integration\Controller\Api;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**

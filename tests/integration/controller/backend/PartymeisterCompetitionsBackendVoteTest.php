@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Partymeister\Competitions\Integration\Controller\Backend;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Partymeister\Competitions\Models\Vote;
 

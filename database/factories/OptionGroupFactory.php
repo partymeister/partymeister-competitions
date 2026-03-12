@@ -1,6 +1,6 @@
 <?php
 
-namespace Motor\Backend\Database\Factories;
+namespace Partymeister\Competitions\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Partymeister\Competitions\Models\OptionGroup;
