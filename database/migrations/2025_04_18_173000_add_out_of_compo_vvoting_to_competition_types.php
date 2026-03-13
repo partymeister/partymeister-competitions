@@ -10,6 +10,10 @@ return new class extends Migration{
      */
     public function up(): void
     {
+        if (Schema::hasColumn('competition_types', 'has_out_of_competition_voting')) {
+            return;
+        }
+
         Schema::table('competition_types', function (Blueprint $table) {
             $table->boolean('has_out_of_competition_voting')
                   ->after('file_is_optional')
