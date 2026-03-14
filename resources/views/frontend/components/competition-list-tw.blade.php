@@ -1,6 +1,6 @@
 @if (count($competitions) > 0)
     <h3 class="mb-4">Please choose a competition</h3>
-    <ul class="rounded-lg bg-surface p-2 space-y-0.5 w-full">
+    <ul class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] p-2 space-y-0.5 w-full">
         @foreach ($competitions as $c)
             <li>
                 <a href="{{Request::url()}}?competition_id={{$c->id}}"

@@ -15,9 +15,9 @@
                     @if($entry->getFirstMedia('screenshot'))
                         <figure>
                             <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif" data-fancybox="gallery"
-                               href="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}">
+                               href="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}" class="hover:opacity-90 transition-opacity">
                                 <img src="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}"
-                                     class="w-full rounded-t-lg">
+                                     alt="Screenshot for {{ $entry->title }}" class="w-full rounded-t-lg">
                             </a>
                         </figure>
                     @endif
@@ -26,9 +26,9 @@
                     @endif
                     <div class="p-5 flex-1 flex flex-col">
                         <h5 class="mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}} @endif</h5>
-                        <h6 class="opacity-70 mb-auto">{{$entry->competition->name}}</h6>
+                        <h6 class="text-text-muted mb-auto">{{$entry->competition->name}}</h6>
                         @if ($entry->download != null)
-                            <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors mt-2 no-underline">
+                            <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors mt-2 no-underline">
                                 Download
                             </a>
                         @endif

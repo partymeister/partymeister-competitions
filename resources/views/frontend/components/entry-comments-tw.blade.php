@@ -11,7 +11,7 @@
                         on {{date('Y-m-d H:i', strtotime($comment->created_at))}}</div>
                 @endif
             </div>
-            <div class="p-5 @if(!$comment->read_by_visitor) bg-warning/10 font-semibold @endif">
+            <div class="p-5 break-words @if(!$comment->read_by_visitor) bg-warning/10 font-semibold @endif">
                 {!! nl2br($comment->message) !!}
             </div>
         @endforeach

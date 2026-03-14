@@ -122,7 +122,7 @@
                 <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
                     <h4 class="flex items-center justify-between">
                         <span>{{ trans('partymeister-competitions::backend/entries.composer_info') }}</span>
-                        <button type="button" class="inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors" x-on:click="copyAuthorToComposer()">Copy author data</button>
+                        <button type="button" class="inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors" x-on:click="copyAuthorToComposer()">Copy author data</button>
                     </h4>
                 </div>
                 <div class="p-5">
@@ -151,7 +151,7 @@
                 {!! form_row($entryUploadForm->notify_about_status) !!}
             </div>
             @if ($visitor->is_remote)
-            <div class="px-5 py-3 bg-surface-raised text-heading font-semibold border-b border-border">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
                 <h4>{{ trans('partymeister-competitions::backend/entries.remote_participation') }}</h4>
             </div>
             <div class="p-5">

@@ -8,7 +8,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
-        <dl class="grid grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
+        <dl class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
             <dt class="font-semibold">
                 Identifier
             </dt>
@@ -71,7 +71,7 @@
         </dl>
     </div>
     <div>
-        <dl class="grid grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
+        <dl class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
             @if ($record->options->count() > 0)
                 <dt class="font-semibold">
                     {{trans('partymeister-competitions::backend/entries.option_info')}}
@@ -131,8 +131,8 @@
             <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
                 <figure>
                     <a data-caption="{{$record->title}} by {{$record->author}}" data-fancybox="gallery"
-                       href="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}">
-                        <img src="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}" class="w-full rounded-lg">
+                       href="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}" class="hover:opacity-90 transition-opacity">
+                        <img src="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}" alt="Screenshot for {{ $record->title }}" class="w-full rounded-lg">
                     </a>
                 </figure>
             </div>
@@ -155,9 +155,9 @@
                             @if($record->getFirstMedia('work_stage_'.$i))
                                 <figure>
                                     <a data-caption="Work stage {{$i}}" data-fancybox="gallery"
-                                       href="{{$record->getFirstMedia('work_stage_'.$i)->getUrl('preview')}}">
+                                       href="{{$record->getFirstMedia('work_stage_'.$i)->getUrl('preview')}}" class="hover:opacity-90 transition-opacity">
                                         <img src="{{$record->getFirstMedia('work_stage_'.$i)->getUrl('preview')}}"
-                                             class="w-full rounded-lg">
+                                             alt="Work stage {{$i}} for {{ $record->title }}" class="w-full rounded-lg">
                                     </a>
                                 </figure>
                             @endif
@@ -174,7 +174,7 @@
             @foreach($record->getMedia('file') as $file)
                 <div class="flex justify-between items-center py-1">
                     <a href="{{$file->getUrl()}}" class="text-accent hover:text-accent-hover transition-colors">{{ $file->file_name }}</a>
-                    <span class="text-sm opacity-70">{{trans('motor-backend::backend/global.uploaded')}} {{ $file->created_at }}</span>
+                    <span class="text-sm text-text-muted">{{trans('motor-backend::backend/global.uploaded')}} {{ $file->created_at }}</span>
                 </div>
             @endforeach
         </div>
@@ -185,7 +185,7 @@
             <h4 class="mb-2">Config file</h4>
             <div class="flex justify-between items-center py-1">
                 <a href="{{ $record->getFirstMedia('config_file')->getUrl() }}" class="text-accent hover:text-accent-hover transition-colors">{{ $record->getFirstMedia('config_file')->file_name }}</a>
-                <span class="text-sm opacity-70">{{trans('motor-backend::backend/global.uploaded')}} {{ $record->getFirstMedia('config_file')->created_at }}</span>
+                <span class="text-sm text-text-muted">{{trans('motor-backend::backend/global.uploaded')}} {{ $record->getFirstMedia('config_file')->created_at }}</span>
             </div>
         </div>
     @endif
@@ -193,7 +193,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div>
             <h4 class="mb-2">{{trans('partymeister-competitions::backend/entries.author_info')}}</h4>
-            <dl class="grid grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
+            <dl class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
                 <dt class="font-semibold">
                     {{trans('partymeister-competitions::backend/entries.name')}}
                 </dt>
@@ -228,7 +228,7 @@
         @if ($record->competition->competition_type->has_composer)
             <div>
                 <h4 class="mb-2">{{trans('partymeister-competitions::backend/entries.composer_info')}}</h4>
-                <dl class="grid grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
+                <dl class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
                     <dt class="font-semibold">
                         {{trans('partymeister-competitions::backend/entries.name')}}
                     </dt>

@@ -33,18 +33,18 @@
                         @if($entry->getFirstMedia('screenshot'))
                             <figure>
                                 <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif" data-fancybox="gallery"
-                                   href="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}">
+                                   href="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}" class="hover:opacity-90 transition-opacity">
                                     <img src="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}"
-                                         class="w-full rounded-t-lg">
+                                         alt="Screenshot for {{ $entry->title }}" class="w-full rounded-t-lg">
                                 </a>
                             </figure>
                         @endif
                         @if($entry->getFirstMedia('audio'))
                             <audio controls src="{{$entry->getFirstMedia('audio')->getUrl()}}" class="w-full"></audio>
                         @endif
-                        <div class="p-5 flex-1 flex flex-col">
+                        <div class="p-5 flex-1 flex flex-col break-words">
                             <h5 class="mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif</h5>
-                            <h6 class="opacity-70">{{$entry->competition->name}}</h6>
+                            <h6 class="text-text-muted">{{$entry->competition->name}}</h6>
                             @if ($entry->options->count() > 0 || $entry->custom_option != '')
                                 <h6 class="mt-2">Options</h6>
                                 <ul class="list-disc list-inside">
@@ -76,18 +76,18 @@
                                     <div class="flex items-center justify-center gap-1.5">
                                         <template x-if="negative">
                                             <template x-for="n in stars" :key="'neg-'+n">
-                                                <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                                <button type="button" class="w-11 h-11 text-2xl cursor-pointer flex items-center justify-center"
                                                         x-bind:class="currentValue <= -n ? 'text-error opacity-100' : 'text-error opacity-30'"
                                                         x-on:click="!readonly && rate(-n)"
                                                         x-text="'\u2716'"></button>
                                             </template>
                                         </template>
-                                        <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                        <button type="button" class="w-11 h-11 text-2xl cursor-pointer flex items-center justify-center"
                                                 x-bind:class="currentValue === 0 ? 'text-accent opacity-100' : 'text-accent opacity-30'"
                                                 x-on:click="!readonly && rate(0)"
                                                 x-text="'\u2205'"></button>
                                         <template x-for="n in stars" :key="'pos-'+n">
-                                            <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                            <button type="button" class="w-11 h-11 text-2xl cursor-pointer flex items-center justify-center"
                                                     x-bind:class="currentValue >= n ? 'text-accent opacity-100' : 'text-accent opacity-30'"
                                                     x-on:click="!readonly && rate(n)"
                                                     x-text="'\u2605'"></button>
@@ -98,7 +98,7 @@
                                     <div class="flex w-full">
                                         <input class="flex-1 rounded-s-lg border border-border bg-body px-4 py-2 text-heading placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors" placeholder="Comment" type="text" name="entry_comment[{{$competition->id}}][{{$entry->id}}]"
                                                value="{{ (isset($votes[$voteCategory->id][$entry->id]) ? $votes[$voteCategory->id][$entry->id]['comment'] : '')}}">
-                                        <button type="button" class="rounded-e-lg bg-success px-4 py-2 font-medium text-body hover:bg-success/90 transition-colors"
+                                        <button type="button" class="rounded-e-lg bg-accent px-4 py-2 font-medium text-body hover:bg-accent-hover transition-colors"
                                                 x-on:click="saveComment({{ $entry->id }}, {{ $voteCategory->id }}, $el.parentElement.querySelector('input').value)">Send</button>
                                     </div>
                                 @endif
@@ -118,7 +118,7 @@
                                 @endif
                             @endforeach
                             @if ($entry->download != null)
-                                <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors mt-4 no-underline">
+                                <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors mt-4 no-underline">
                                     Download
                                 </a>
                             @endif

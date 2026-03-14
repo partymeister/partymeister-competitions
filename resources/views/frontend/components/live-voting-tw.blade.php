@@ -2,8 +2,8 @@
      data-refresh-url="{{ url('/api/profile/'.$visitor->api_token.'/votes/live') }}"
      data-vote-url="{{ route('ajax.votes.submit', ['api_token' => $visitor->api_token]) }}"
      data-refresh-interval="{{ config('partymeister-competitions-voting.live-refresh-interval', 20000) }}">
-    <h2 class="mb-2">Live voting</h2>
-    <h3 class="mb-4" x-text="competition"></h3>
+    <h3 class="mb-4">Live voting</h3>
+    <h4 class="mb-4" x-text="competition"></h4>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
         <template x-for="entry in entries" :key="entry.id">
@@ -12,17 +12,17 @@
                      :class="{ 'ring-2 ring-accent': entry.vote && entry.vote.special_vote && entry.vote_category_has_special_vote }">
                     <div class="p-5 flex-1 flex flex-col">
                         <h5 class="mb-1"><strong>#<span x-text="entry.sort_position_prefixed"></span></strong> <span x-text="entry.title"></span></h5>
-                        <h6 class="opacity-70">by <span x-text="entry.author"></span></h6>
+                        <h6 class="text-text-muted">by <span x-text="entry.author"></span></h6>
 
                         <div class="mt-auto pt-3"></div>
 
                         {{-- Star rating --}}
                         <div class="flex items-center justify-center gap-1.5 my-2">
-                            <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                            <button type="button" class="w-11 h-11 text-2xl cursor-pointer flex items-center justify-center"
                                     :class="(entry.vote && entry.vote.points) == 0 ? 'text-accent opacity-100' : 'text-accent opacity-30'"
                                     @click="updateVote(entry, 0)">&oslash;</button>
                             <template x-for="points in entry.vote_category_points" :key="points">
-                                <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                <button type="button" class="w-11 h-11 text-2xl cursor-pointer flex items-center justify-center"
                                         :class="(entry.vote && entry.vote.points) >= points ? 'text-accent opacity-100' : 'text-accent opacity-30'"
                                         @click="updateVote(entry, points)">&starf;</button>
                             </template>
@@ -33,7 +33,7 @@
                             <div class="flex w-full">
                                 <input placeholder="Comment" x-model="entry.comment"
                                        class="flex-1 rounded-s-lg border border-border bg-body px-4 py-2 text-heading placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors">
-                                <button class="rounded-e-lg bg-success px-4 py-2 font-medium text-body hover:bg-success/90 transition-colors"
+                                <button class="rounded-e-lg bg-accent px-4 py-2 font-medium text-body hover:bg-accent-hover transition-colors"
                                         @click="updateVote(entry)">Send</button>
                             </div>
                         </template>
