@@ -86,6 +86,9 @@
                 {!! form_row($form->config_file) !!}
             @endif
             {!! form_row($form->final_file_media_id) !!}
+            <div id="final-file-name-wrapper" style="{{ old('final_file_media_id', optional($form->getModel())->final_file_media_id) ? '' : 'display: none;' }}">
+                {!! form_row($form->final_file_name) !!}
+            </div>
         </div>
         <!-- /.box-body -->
     </div>
@@ -196,5 +199,22 @@
         $('select[name="engine_option"]').change(function () {
             $('#engine-name-wrapper').toggle($(this).val() === 'other');
         });
+
+        @if (is_object($form->getModel()) && $form->getModel() instanceof \Partymeister\Competitions\Models\Entry)
+            let fileNames = {!! json_encode(
+                $form->getModel()->ordered_files->pluck('file_name', 'id')
+            ) !!};
+
+            $('select[name="final_file_media_id"]').change(function () {
+                let id = $(this).val();
+                if (id && fileNames[id]) {
+                    $('input[name="final_file_name"]').val(fileNames[id]);
+                    $('#final-file-name-wrapper').show();
+                } else {
+                    $('input[name="final_file_name"]').val('');
+                    $('#final-file-name-wrapper').hide();
+                }
+            });
+        @endif
     </script>
 @append

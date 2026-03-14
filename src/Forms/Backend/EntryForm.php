@@ -75,6 +75,12 @@ class EntryForm extends Form
                  'empty_value' => trans('partymeister-competitions::backend/entries.choose'),
                  'choices'     => $files,
              ])
+             ->add('final_file_name', 'text', [
+                 'label' => trans('partymeister-competitions::backend/entries.final_file_name'),
+                 'value' => $this->getModel() instanceof Entry && $this->getModel()->final_file_media_id
+                     ? optional(\Spatie\MediaLibrary\MediaCollections\Models\Media::find($this->getModel()->final_file_media_id))->file_name
+                     : '',
+             ])
              ->add('discord_name', 'text', ['label' => trans('partymeister-competitions::backend/entries.discord_name')])
              ->add('author_name', 'text', ['label' => trans('partymeister-competitions::backend/entries.name')])
              ->add('author_email', 'text', ['label' => trans('partymeister-competitions::backend/entries.email')])

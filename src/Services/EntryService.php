@@ -4,7 +4,9 @@ namespace Partymeister\Competitions\Services;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Motor\Backend\Services\BaseService;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Motor\Core\Filter\Renderers\SelectRenderer;
 use Partymeister\Competitions\Events\EntrySaved;
 use Partymeister\Competitions\Models\Competition;
@@ -114,6 +116,45 @@ class EntryService extends BaseService
             $this->addOptions();
         }
         $this->addImages();
+        $this->renameFinalFile();
         event(new EntrySaved($this->record));
+    }
+
+    protected function renameFinalFile()
+    {
+        $newName = $this->request->input('final_file_name');
+        $mediaId = $this->record->final_file_media_id;
+
+        if (! $newName || ! $mediaId) {
+            return;
+        }
+
+        $media = Media::find($mediaId);
+        if (is_null($media)) {
+            return;
+        }
+
+        // Sanitize: strip path components, keep only the filename
+        $newName = Str::ascii(basename(trim($newName)));
+
+        if ($newName === '' || $newName === $media->file_name) {
+            return;
+        }
+
+        // Get the old absolute path before changing the name
+        $oldPath = $media->getPath();
+
+        // Change the name to compute the new path
+        $media->file_name = $newName;
+        $newPath = $media->getPath();
+
+        // Rename on disk
+        if ($oldPath !== $newPath && file_exists($oldPath)) {
+            rename($oldPath, $newPath);
+        }
+
+        // Persist to database without triggering Spatie's observer
+        // (we already handled the filesystem rename above)
+        $media->saveQuietly();
     }
 }

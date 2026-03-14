@@ -7,6 +7,14 @@
     </div>
 @endif
 @if (!is_null($competition))
+    <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+        <symbol id="icon-satellite" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 7 9 3 5 7l4 4"/><path d="m17 11 4 4-4 4-4-4"/><path d="m8 12 4 4 6-6-4-4Z"/><path d="m16 8 3-3"/><path d="M9 21a6 6 0 0 0-6-6"/>
+        </symbol>
+        <symbol id="icon-remote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="12" x="3" y="4" rx="2" ry="2"/><line x1="2" x2="22" y1="20" y2="20"/>
+        </symbol>
+    </svg>
     <h4 class="mb-4">{{$competition->name}}</h4>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
         @foreach ($entries as $entry)
@@ -24,11 +32,27 @@
                     @if($entry->getFirstMedia('audio'))
                         <audio controls src="{{$entry->getFirstMedia('audio')->getUrl()}}" class="w-full"></audio>
                     @endif
-                    <div class="p-5 flex-1 flex flex-col">
-                        <h5 class="mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}} @endif</h5>
-                        <h6 class="text-text-muted mb-auto">{{$entry->competition->name}}</h6>
+                    <div class="p-5 flex-1 flex flex-col break-words">
+                        <h5 class="mb-3">@if ($entry->remote_type)<svg class="w-5 h-5 text-white float-right ml-2 mt-1" role="img" aria-label="{{ $entry->remote_type }}"><title>{{ $entry->remote_type }}</title><use href="#icon-{{ $entry->remote_type == 'Satellite' ? 'satellite' : 'remote' }}"/></svg>@endif{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}} @endif</h5>
+                        <h6 class="text-text-muted">{{$entry->competition->name}}</h6>
+                        @if ($entry->options->count() > 0 || $entry->custom_option != '')
+                            <h6 class="mt-2">Options</h6>
+                            <ul class="list-disc list-inside">
+                                @foreach ($entry->options as $option)
+                                    <li>{{$option->name}}</li>
+                                @endforeach
+                                @if($entry->custom_option != '')
+                                    <li>{{$entry->custom_option}}</li>
+                                @endif
+                            </ul>
+                        @endif
+                        @if ($entry->description != '')
+                            <h6 class="mt-2">Description</h6>
+                            <p class="mt-1">{!! nl2br($entry->description)!!}</p>
+                        @endif
+                        <div class="mt-auto pt-3"></div>
                         @if ($entry->download != null)
-                            <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors mt-2 no-underline">
+                            <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors no-underline">
                                 Download
                             </a>
                         @endif
