@@ -1,6 +1,15 @@
 <div class="component-entry-upload" x-data="entryUploads">
     <h3 class="mb-4">Upload entry</h3>
-    @include('motor-backend::errors.list')
+    @if ($errors->any())
+        <div class="rounded-lg border border-error/40 border-l-4 border-l-error bg-error/15 px-4 py-3 text-error mb-4">
+            <h4 class="mb-2">Please fix the following errors:</h4>
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     {!! form_start($entryUploadForm) !!}
     <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
         <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
@@ -180,6 +189,10 @@
         document.addEventListener('alpine:init', () => {
             Alpine.data('entryUploads', () => ({
                 init() {
+                    // Reset reload_on_change so normal form submits work
+                    const reloadField = document.getElementById('reload_on_change');
+                    if (reloadField) reloadField.value = '';
+
                     // Prevent form submit on Enter key
                     this.$el.querySelectorAll('input').forEach(input => {
                         input.addEventListener('keypress', (e) => {
