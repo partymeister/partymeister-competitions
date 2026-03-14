@@ -9,7 +9,7 @@
 @if (!is_null($competition))
     <h4 class="mb-4">{{$competition->name}}</h4>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-        @foreach ($competition->entries()->where('status', 1)->orderBy('sort_position', 'ASC')->get() as $entry)
+        @foreach ($competition->entries()->where('status', 1)->orderBy('sort_position', 'ASC')->with(['competition.competition_type'])->get() as $entry)
             <div class="flex">
                 <div class="flex-1 flex flex-col rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
                     @if($entry->getFirstMedia('screenshot'))

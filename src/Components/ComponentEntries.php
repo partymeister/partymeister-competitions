@@ -65,7 +65,7 @@ class ComponentEntries
         if (! is_null($this->visitor)) {
             return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
                 'component' => $this->component,
-                'entries'   => $this->visitor->entries,
+                'entries'   => $this->visitor->entries()->with(['competition.competition_type', 'options'])->get(),
             ]);
         } else {
             return redirect('/start');

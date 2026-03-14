@@ -90,10 +90,12 @@ class ComponentVotings
         if ($request->get('competition_id') > 0) {
             $competition = Competition::where('voting_enabled', true)
                                       ->where('id', $request->get('competition_id'))
+                                      ->with('vote_categories')
                                       ->orderBy('updated_at', 'ASC')
                                       ->first();
         } else {
             $competition = Competition::where('voting_enabled', true)
+                                      ->with('vote_categories')
                                       ->orderBy('updated_at', 'ASC')
                                       ->first();
         }
