@@ -36,12 +36,12 @@
     </style>
 @append
 @include('motor-backend::errors.list')
-<h4 class="text-lg font-bold mb-4">
+<h3 class="mb-4">
     @if ($record->is_remote)
         <span class="badge badge-error">REMOTE</span>
     @endif
     Entry detail for: {{$record->title}} by {{$record->author}}
-</h4>
+</h3>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6" x-data="entryDetails">
     <div>
@@ -164,8 +164,8 @@
 <div class="mt-6">
     <div>
         @if($record->getFirstMedia('screenshot'))
-            <h3 class="text-xl font-bold mb-2">Screenshot</h3>
-            <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+            <h4 class="mb-2">Screenshot</h4>
+            <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
                 <figure>
                     <a data-caption="{{$record->title}} by {{$record->author}}" data-fancybox="gallery"
                        href="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}">
@@ -174,7 +174,7 @@
                 </figure>
             </div>
         @endif
-        <h3 class="text-xl font-bold mb-2">Beamslide preview</h3>
+        <h4 class="mb-2">Beamslide preview</h4>
         <div id="app" x-ref="appContainer">
             <partymeister-slides-elements class="slidemeister-template"
                                           :readonly="true" :id="'template-preview'"
@@ -185,11 +185,11 @@
     </div>
     @if ($record->competition->competition_type->number_of_work_stages > 0)
         <div class="mt-6">
-            <h3 class="text-xl font-bold mb-2">Work stages</h3>
+            <h4 class="mb-2">Work stages</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @for ($i=1; $i<=$record->competition->competition_type->number_of_work_stages; $i++)
                     <div>
-                        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
+                        <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
                             @if($record->getFirstMedia('work_stage_'.$i))
                                 <figure>
                                     <a data-caption="Work stage {{$i}}" data-fancybox="gallery"
@@ -208,7 +208,7 @@
 
     @if($record->getMedia('file')->count() > 0)
         <div class="mt-6">
-            <h3 class="text-xl font-bold mb-2">Files</h3>
+            <h4 class="mb-2">Files</h4>
             @foreach($record->getMedia('file') as $file)
                 <div class="flex justify-between items-center py-1">
                     <a href="{{$file->getUrl()}}" class="text-accent hover:text-accent-hover transition-colors">{{ $file->file_name }}</a>
@@ -220,7 +220,7 @@
 
     @if($record->getMedia('config_file')->count() > 0)
         <div class="mt-6">
-            <h3 class="text-xl font-bold mb-2">Config file</h3>
+            <h4 class="mb-2">Config file</h4>
             <div class="flex justify-between items-center py-1">
                 <a href="{{ $record->getFirstMedia('config_file')->getUrl() }}" class="text-accent hover:text-accent-hover transition-colors">{{ $record->getFirstMedia('config_file')->file_name }}</a>
                 <span class="text-sm opacity-70">{{trans('motor-backend::backend/global.uploaded')}} {{ $record->getFirstMedia('config_file')->created_at }}</span>
@@ -230,7 +230,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         <div>
-            <h3 class="text-xl font-bold mb-2">{{trans('partymeister-competitions::backend/entries.author_info')}}</h3>
+            <h4 class="mb-2">{{trans('partymeister-competitions::backend/entries.author_info')}}</h4>
             <dl class="grid grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
                 <dt class="font-semibold">
                     {{trans('partymeister-competitions::backend/entries.name')}}
@@ -265,7 +265,7 @@
 
         @if ($record->competition->competition_type->has_composer)
             <div>
-                <h3 class="text-xl font-bold mb-2">{{trans('partymeister-competitions::backend/entries.composer_info')}}</h3>
+                <h4 class="mb-2">{{trans('partymeister-competitions::backend/entries.composer_info')}}</h4>
                 <dl class="grid grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
                     <dt class="font-semibold">
                         {{trans('partymeister-competitions::backend/entries.name')}}

@@ -1,18 +1,18 @@
 <div class="component-entry-screenshot">
-    <h4 class="text-lg font-bold mb-4">Upload screenshot</h4>
+    <h3 class="mb-4">Upload screenshot</h3>
     @include('motor-backend::errors.list')
     {!! form_start($entryScreenshotForm) !!}
-    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
-        <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
-            <h5 class="text-base font-semibold">Your entry</h5>
+    <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
+        <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
+            <h4>Your entry</h4>
         </div>
         <div class="p-5">
             {{$record->title}} by {{$record->author}}
         </div>
     </div>
-    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
-        <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
-            <h5 class="text-base font-semibold">Screenshot</h5>
+    <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
+        <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
+            <h4>Screenshot</h4>
         </div>
         <div class="p-5">
             @if ($entryScreenshotForm->has('screenshot'))

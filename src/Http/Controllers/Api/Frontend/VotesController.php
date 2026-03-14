@@ -94,7 +94,7 @@ class VotesController extends ApiController
         }
         $vote->points = $points;
         $vote->vote_category_id = $request->get('vote_category_id');
-        $vote->comment = $request->get('comment', '');
+        $vote->comment = $request->get('comment') ?? '';
 
         if ($request->get('special_vote', null) !== null) {
             $vote->special_vote = $request->get('special_vote');

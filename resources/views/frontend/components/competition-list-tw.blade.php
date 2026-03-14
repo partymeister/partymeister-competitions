@@ -1,5 +1,5 @@
 @if (count($competitions) > 0)
-    <h4 class="text-lg font-bold mb-4">Please choose a competition</h4>
+    <h3 class="mb-4">Please choose a competition</h3>
     <ul class="rounded-lg bg-surface p-2 space-y-0.5 w-full">
         @foreach ($competitions as $c)
             <li>

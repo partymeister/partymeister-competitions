@@ -1,20 +1,20 @@
-<h4 class="text-lg font-bold mb-4">
+<h3 class="mb-4">
     Voting
-</h4>
+</h3>
 @if ($votingDeadlineOver)
-    <div class="rounded-lg border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent mb-4">
+    <div class="rounded-lg border border-accent/40 border-l-4 border-l-accent bg-accent/15 px-4 py-3 text-accent mb-4">
         <span>Voting deadline is over!</span>
     </div>
 @endif
 @if ($liveVoting)
-    <div class="rounded-lg border border-success/30 bg-success/10 px-4 py-3 text-sm text-success mb-4">
-        <a class="text-pink-500 font-bold" href="{{ route('frontend.pages.index', ['slug' => $component->live_voting_page->full_slug])}}">
+    <div class="rounded-lg border border-success/40 border-l-4 border-l-success bg-success/15 px-4 py-3 text-success mb-4">
+        <a class="text-success font-bold underline" href="{{ route('frontend.pages.index', ['slug' => $component->live_voting_page->full_slug])}}">
             Live voting for the {{$liveVotingCompetition}} is active now!
             <strong>Go vote!</strong></a>
     </div>
 @endif
 @if (is_null($competition) && $liveVoting == false)
-    <div class="rounded-lg border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent mb-4">
+    <div class="rounded-lg border border-accent/40 border-l-4 border-l-accent bg-accent/15 px-4 py-3 text-accent mb-4">
         <span>There are no entries to vote for yet!</span>
     </div>
 @endif
@@ -23,11 +23,11 @@
           method="post"
           x-data="votingForm({{ $competition->id }}, '{{ route('ajax.votes.submit', ['api_token' => $visitor->api_token]) }}', {{ $votingDeadlineOver ? 'true' : 'false' }})">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <h4 class="text-lg font-bold mb-4">{{$competition->name}}</h4>
+        <h4 class="mb-4">{{$competition->name}}</h4>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 entries">
             @foreach ($competition->entries()->where('status', 1)->orderBy('sort_position', 'ASC')->get() as $entry)
                 <div>
-                    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
+                    <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
                          x-bind:class="{ 'ring-2 ring-accent': specialVoteEntryId === {{ $entry->id }} }"
                          data-entry-id="{{$entry->id}}">
                         @if($entry->getFirstMedia('screenshot'))
@@ -43,11 +43,11 @@
                             <audio controls src="{{$entry->getFirstMedia('audio')->getUrl()}}" class="w-full"></audio>
                         @endif
                         <div class="p-5">
-                            <h5 class="text-heading font-semibold text-base mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif</h5>
-                            <h6 class="text-sm opacity-70">{{$entry->competition->name}}</h6>
+                            <h5 class="mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif</h5>
+                            <h6 class="opacity-70">{{$entry->competition->name}}</h6>
                             @if ($entry->options->count() > 0 || $entry->custom_option != '')
-                                <h6 class="mt-2 text-sm font-semibold">Options</h6>
-                                <ul class="list-disc list-inside text-sm">
+                                <h6 class="mt-2">Options</h6>
+                                <ul class="list-disc list-inside">
                                     @foreach ($entry->options as $option)
                                         <li>{{$option->name}}</li>
                                     @endforeach
@@ -57,8 +57,8 @@
                                 </ul>
                             @endif
                             @if ($entry->description != '')
-                                <h6 class="text-sm font-semibold">Description</h6>
-                                <p class="mt-1 text-sm">{!! nl2br($entry->description)!!}</p>
+                                <h6>Description</h6>
+                                <p class="mt-1">{!! nl2br($entry->description)!!}</p>
                             @endif
                             @foreach($competition->vote_categories as $voteCategory)
                                 <div class="points my-2"
@@ -72,43 +72,43 @@
                                      })"
                                      data-entry-id="{{$entry->id}}"
                                      data-vote-category-id="{{$voteCategory->id}}">
-                                    <div class="flex items-center justify-center gap-1">
+                                    <div class="flex items-center justify-center gap-1.5">
                                         <template x-if="negative">
                                             <template x-for="n in stars" :key="'neg-'+n">
-                                                <button type="button" class="w-6 h-6 cursor-pointer"
+                                                <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
                                                         x-bind:class="currentValue <= -n ? 'text-error opacity-100' : 'text-error opacity-30'"
                                                         x-on:click="!readonly && rate(-n)"
                                                         x-text="'\u2716'"></button>
                                             </template>
                                         </template>
-                                        <button type="button" class="w-6 h-6 cursor-pointer"
-                                                x-bind:class="currentValue === 0 ? 'text-warning opacity-100' : 'text-warning opacity-30'"
+                                        <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                                x-bind:class="currentValue === 0 ? 'text-accent opacity-100' : 'text-accent opacity-30'"
                                                 x-on:click="!readonly && rate(0)"
                                                 x-text="'\u2205'"></button>
                                         <template x-for="n in stars" :key="'pos-'+n">
-                                            <button type="button" class="w-6 h-6 cursor-pointer"
-                                                    x-bind:class="currentValue >= n ? 'text-warning opacity-100' : 'text-warning opacity-30'"
+                                            <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                                    x-bind:class="currentValue >= n ? 'text-accent opacity-100' : 'text-accent opacity-30'"
                                                     x-on:click="!readonly && rate(n)"
                                                     x-text="'\u2605'"></button>
                                         </template>
                                     </div>
                                 </div>
-                                @if ($loop->last && $voteCategory->has_comment)
+                                @if ($loop->last && $voteCategory->has_comment && !$votingDeadlineOver)
                                     <div class="flex w-full">
-                                        <input @if ($votingDeadlineOver)disabled @endif class="flex-1 rounded-l-lg border border-border bg-body px-4 py-2 text-heading placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors" placeholder="Comment" type="text" name="entry_comment[{{$competition->id}}][{{$entry->id}}]"
+                                        <input class="flex-1 rounded-s-lg border border-border bg-body px-4 py-2 text-heading placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors" placeholder="Comment" type="text" name="entry_comment[{{$competition->id}}][{{$entry->id}}]"
                                                value="{{ (isset($votes[$voteCategory->id][$entry->id]) ? $votes[$voteCategory->id][$entry->id]['comment'] : '')}}">
-                                        <button type="button" class="rounded-r-lg bg-success px-4 py-2 text-sm font-semibold text-body hover:bg-success/90 transition-colors"
+                                        <button type="button" class="rounded-e-lg bg-success px-4 py-2 font-medium text-body hover:bg-success/90 transition-colors"
                                                 x-on:click="saveComment({{ $entry->id }}, {{ $voteCategory->id }}, $el.parentElement.querySelector('input').value)">Send</button>
                                     </div>
                                 @endif
-                                @if ($loop->last && $voteCategory->has_special_vote)
+                                @if ($loop->last && $voteCategory->has_special_vote && !$votingDeadlineOver)
                                     <div class="mt-2">
-                                        <button type="button" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-xs font-semibold text-body hover:bg-success/90 transition-colors"
+                                        <button type="button" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors"
                                                 x-show="specialVoteEntryId !== {{ $entry->id }}"
                                                 x-on:click="setSpecialVote({{ $entry->id }}, {{ $voteCategory->id }}, true)">
                                             &hearts; My party favourite &hearts;
                                         </button>
-                                        <button type="button" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-body hover:bg-accent-hover transition-colors"
+                                        <button type="button" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors"
                                                 x-show="specialVoteEntryId === {{ $entry->id }}"
                                                 x-on:click="setSpecialVote({{ $entry->id }}, {{ $voteCategory->id }}, false)">
                                             &#x2639; Not my favourite anymore &#x2639;
@@ -117,7 +117,7 @@
                                 @endif
                             @endforeach
                             @if ($entry->download != null)
-                                <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-xs font-semibold text-body hover:bg-success/90 transition-colors mt-4 no-underline">
+                                <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors mt-4 no-underline">
                                     Download
                                 </a>
                             @endif
@@ -156,11 +156,17 @@
                 competitionId: competitionId,
                 voteUrl: voteUrl,
                 deadlineOver: deadlineOver,
-                specialVoteEntryId: {!! json_encode(
-                    collect($votes)->flatMap(function($entries) {
-                        return collect($entries)->filter(fn($v) => isset($v['special_vote']) && $v['special_vote'] == 1);
-                    })->keys()->first()
-                ) !!},
+                specialVoteEntryId: @php
+                    $svEntryId = null;
+                    foreach ($votes as $catVotes) {
+                        foreach ($catVotes as $entryId => $voteData) {
+                            if (!empty($voteData['special_vote'])) {
+                                $svEntryId = $entryId;
+                                break 2;
+                            }
+                        }
+                    }
+                @endphp {!! $svEntryId !== null ? (int) $svEntryId : 'null' !!},
                 vote(entryId, voteCategoryId, points, specialVote) {
                     if (this.deadlineOver) return;
                     let data = {

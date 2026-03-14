@@ -1,8 +1,8 @@
-<h4 class="text-lg font-bold mb-4">Messages for entry {{$record->name}}</h4>
+<h3 class="mb-4">Messages for entry {{$record->name}}</h3>
 @if($comments->count() > 0)
-    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+    <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
         @foreach ($comments as $comment)
-            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
                 @if ($comment->author != '')
                     <div class="text-right">{{$comment->author}}
                         on {{date('Y-m-d H:i', strtotime($comment->created_at))}}</div>
@@ -18,10 +18,10 @@
     </div>
 @endif
 {!! form_start($entryCommentForm) !!}
-<div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)]" x-data="entryComments">
+<div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]" x-data="entryComments">
     @if ($comments->where('read_by_visitor', false)->count() > 0)
-    <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
-        <button type="submit" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-body hover:bg-accent-hover transition-colors" x-on:click="markAsRead()">Mark all as read</button>
+    <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
+        <button type="submit" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors" x-on:click="markAsRead()">Mark all as read</button>
     </div>
     @endif
     <div class="p-5">
