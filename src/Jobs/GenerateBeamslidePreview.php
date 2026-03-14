@@ -53,13 +53,26 @@ class GenerateBeamslidePreview implements ShouldQueue
             $replacements['option_'.($i + 1)] = $option->name;
         }
 
-        // Replace template placeholders with entry data
-        $definitions = $template->definitions;
-        foreach ($replacements as $key => $value) {
-            if (is_string($value)) {
-                $definitions = str_replace('{{'.$key.'}}', $value, $definitions);
+        // Replace placeholders: read from placeholder, write to content (mirrors useSlideReplacer.ts)
+        $defsArray = json_decode($template->definitions, true);
+        if (isset($defsArray['elements'])) {
+            foreach ($defsArray['elements'] as &$element) {
+                if (!isset($element['properties'])) continue;
+                $props = &$element['properties'];
+                $source = $props['placeholder'] ?? '';
+                if ($source === '') continue;
+
+                foreach ($replacements as $key => $value) {
+                    if (is_string($value)) {
+                        $source = str_replace('<<'.$key.'>>', $value, $source);
+                    }
+                }
+                $source = preg_replace('/<<[^>]+>>/', '', $source);
+                $props['content'] = $source;
             }
+            unset($element);
         }
+        $definitions = json_encode($defsArray);
 
         // Create temporary slide for the screenshot worker to render
         $s = new Slide();
@@ -72,7 +85,7 @@ class GenerateBeamslidePreview implements ShouldQueue
         $entry->clearMediaCollection('beamslide');
         $browser = new ScreenshotHelper();
         $browser->screenshot(
-            config('app.url_internal').route('backend.slides.show', [$s->id], false).'?preview=true',
+            config('app.url_internal').route('backend.slides.render', [$s->id], false),
             storage_path().'/beamslide_entry_'.$entry->id.'.png',
             $entry->id,
             Entry::class,

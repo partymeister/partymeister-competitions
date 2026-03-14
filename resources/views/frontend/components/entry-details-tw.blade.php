@@ -137,13 +137,11 @@
                 </figure>
             </div>
         @endif
-        @if($record->getFirstMedia('beamslide'))
+        @if(isset($beamslideUrl) && $beamslideUrl)
             <h4 class="mb-2">Beamslide preview</h4>
-            <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
-                <a data-caption="Beamslide preview for {{$record->title}}" data-fancybox="gallery"
-                   href="{{$record->getFirstMedia('beamslide')->getUrl()}}">
-                    <img src="{{$record->getFirstMedia('beamslide')->getUrl()}}" class="w-full rounded-lg">
-                </a>
+            <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4 overflow-hidden"
+                 style="aspect-ratio: 16/9;">
+                <iframe src="{{ $beamslideUrl }}" class="w-full h-full border-0 rounded-lg" scrolling="no"></iframe>
             </div>
         @endif
     </div>
