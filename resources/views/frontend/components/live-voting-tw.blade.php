@@ -2,9 +2,9 @@
     <h2 class="text-2xl font-bold mb-2">Live voting</h2>
     <h3 class="text-xl font-semibold mb-4">@{{ competition }}</h3>
 
-    <div class="card bg-base-200 shadow-md mb-4" v-for="entry in entries" :key="entry.id">
-        <div class="card-body" v-bind:class="{ 'ring-2 ring-warning': (entry.vote && entry.vote.special_vote && entry.vote_category_has_special_vote)}">
-            <h4 class="card-title text-base"><strong># @{{ entry.sort_position_prefixed }}</strong> @{{ entry.title }} by @{{ entry.author }}</h4>
+    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4" v-for="entry in entries" :key="entry.id">
+        <div class="p-5" v-bind:class="{ 'ring-2 ring-accent': (entry.vote && entry.vote.special_vote && entry.vote_category_has_special_vote)}">
+            <h4 class="text-heading font-semibold text-base mb-3"><strong># @{{ entry.sort_position_prefixed }}</strong> @{{ entry.title }} by @{{ entry.author }}</h4>
             <div class="text-center my-2">
                 <div class="inline-block cursor-pointer w-6 h-6"
                      data-value="0" @click="updateVote(entry, 0)"
@@ -17,31 +17,31 @@
             </div>
             <div class="text-center">
                 <template v-if="entry.vote_category_has_comment">
-                    <div class="join w-full max-w-md mx-auto mb-2">
-                        <input name="comment" placeholder="Comment" v-model="entry.comment" class="input  join-item flex-1 text-center">
-                        <button class="btn btn-primary join-item" @click="updateVote(entry)">Send</button>
+                    <div class="flex w-full max-w-md mx-auto mb-2">
+                        <input name="comment" placeholder="Comment" v-model="entry.comment" class="flex-1 rounded-l-lg border border-border bg-body px-4 py-2 text-heading text-center placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors">
+                        <button class="rounded-r-lg bg-accent px-4 py-2 text-sm font-semibold text-body hover:bg-accent-hover transition-colors" @click="updateVote(entry)">Send</button>
                     </div>
                 </template>
 
                 <template v-if="entry.vote_category_has_special_vote">
                     <button v-if="!(entry.vote && entry.vote.special_vote)"
-                            class="btn btn-success btn-sm btn-block"
+                            class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-xs font-semibold text-body hover:bg-success/90 transition-colors"
                             @click="markSpecial(entry, true)">&hearts; My party
                         favourite &hearts;
                     </button>
                     <button v-if="entry.vote && entry.vote.special_vote"
-                            class="btn btn-warning btn-sm btn-block"
+                            class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-body hover:bg-accent-hover transition-colors"
                             @click="markSpecial(entry, false)">
                         &#x2639; Not my favourite
                         anymore &#x2639;
                     </button>
                 </template>
             </div>
-            <div class="toast toast-end" v-if="success">
-                <div class="alert alert-success"><span>Saved</span></div>
+            <div class="fixed bottom-4 right-4 z-50 space-y-2" v-if="success">
+                <div class="rounded-lg border border-success/30 bg-success/10 px-4 py-3 text-sm text-success"><span>Saved</span></div>
             </div>
-            <div class="toast toast-end" v-if="error">
-                <div class="alert alert-error"><span>Error</span></div>
+            <div class="fixed bottom-4 right-4 z-50 space-y-2" v-if="error">
+                <div class="rounded-lg border border-error/30 bg-error/10 px-4 py-3 text-sm text-error"><span>Error</span></div>
             </div>
         </div>
     </div>
