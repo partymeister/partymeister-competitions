@@ -24,10 +24,10 @@
           x-data="votingForm({{ $competition->id }}, '{{ route('ajax.votes.submit', ['api_token' => $visitor->api_token]) }}', {{ $votingDeadlineOver ? 'true' : 'false' }})">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <h4 class="mb-4">{{$competition->name}}</h4>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 entries">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 entries items-stretch">
             @foreach ($competition->entries()->where('status', 1)->orderBy('sort_position', 'ASC')->get() as $entry)
-                <div>
-                    <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
+                <div class="flex">
+                    <div class="flex-1 flex flex-col rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
                          x-bind:class="{ 'ring-2 ring-accent': specialVoteEntryId === {{ $entry->id }} }"
                          data-entry-id="{{$entry->id}}">
                         @if($entry->getFirstMedia('screenshot'))
@@ -42,7 +42,7 @@
                         @if($entry->getFirstMedia('audio'))
                             <audio controls src="{{$entry->getFirstMedia('audio')->getUrl()}}" class="w-full"></audio>
                         @endif
-                        <div class="p-5">
+                        <div class="p-5 flex-1 flex flex-col">
                             <h5 class="mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif</h5>
                             <h6 class="opacity-70">{{$entry->competition->name}}</h6>
                             @if ($entry->options->count() > 0 || $entry->custom_option != '')
@@ -60,6 +60,7 @@
                                 <h6>Description</h6>
                                 <p class="mt-1">{!! nl2br($entry->description)!!}</p>
                             @endif
+                            <div class="mt-auto pt-3"></div>
                             @foreach($competition->vote_categories as $voteCategory)
                                 <div class="points my-2"
                                      x-data="partymeisterRating({

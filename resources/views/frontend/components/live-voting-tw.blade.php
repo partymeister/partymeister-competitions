@@ -1,146 +1,57 @@
-<div id="live-voting">
+<div x-data="liveVoting"
+     data-refresh-url="{{ url('/api/profile/'.$visitor->api_token.'/votes/live') }}"
+     data-vote-url="{{ route('ajax.votes.submit', ['api_token' => $visitor->api_token]) }}"
+     data-refresh-interval="{{ config('partymeister-competitions-voting.live-refresh-interval', 20000) }}">
     <h2 class="mb-2">Live voting</h2>
-    <h3 class="mb-4">@{{ competition }}</h3>
+    <h3 class="mb-4" x-text="competition"></h3>
 
-    <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4" v-for="entry in entries" :key="entry.id">
-        <div class="p-5" v-bind:class="{ 'ring-2 ring-accent': (entry.vote && entry.vote.special_vote && entry.vote_category_has_special_vote)}">
-            <h5 class="mb-3"><strong># @{{ entry.sort_position_prefixed }}</strong> @{{ entry.title }} by @{{ entry.author }}</h5>
-            <div class="text-center my-2">
-                <div class="inline-block cursor-pointer w-6 h-6"
-                     data-value="0" @click="updateVote(entry, 0)"
-                     v-bind:class="{ 'partymeister-rating-wrapper': true, 'partymeister-rating-cancel-on': (entry.vote && entry.vote.points) == 0, 'partymeister-rating-cancel-off': (entry.vote && entry.vote.points) != 0}"></div>
-                <template v-for="points in entry.vote_category_points" :key="points">
-                    <div class="inline-block cursor-pointer w-6 h-6"
-                         v-bind:data-value="points" @click="updateVote(entry, points)"
-                         v-bind:class="{ 'partymeister-rating-wrapper': true, 'partymeister-rating-star-on': (entry.vote && entry.vote.points) >= points, 'partymeister-rating-star-off': (entry.vote && entry.vote.points) < points}"></div>
-                </template>
-            </div>
-            <div class="text-center">
-                <template v-if="entry.vote_category_has_comment">
-                    <div class="flex w-full max-w-md mx-auto mb-2">
-                        <input name="comment" placeholder="Comment" v-model="entry.comment" class="flex-1 rounded-s-lg border border-border bg-body px-4 py-2 text-heading text-center placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors">
-                        <button class="rounded-e-lg bg-accent px-4 py-2 font-medium text-body hover:bg-accent-hover transition-colors" @click="updateVote(entry)">Send</button>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+        <template x-for="entry in entries" :key="entry.id">
+            <div class="flex">
+                <div class="flex-1 flex flex-col rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]"
+                     :class="{ 'ring-2 ring-accent': entry.vote && entry.vote.special_vote && entry.vote_category_has_special_vote }">
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h5 class="mb-1"><strong>#<span x-text="entry.sort_position_prefixed"></span></strong> <span x-text="entry.title"></span></h5>
+                        <h6 class="opacity-70">by <span x-text="entry.author"></span></h6>
+
+                        <div class="mt-auto pt-3"></div>
+
+                        {{-- Star rating --}}
+                        <div class="flex items-center justify-center gap-1.5 my-2">
+                            <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                    :class="(entry.vote && entry.vote.points) == 0 ? 'text-accent opacity-100' : 'text-accent opacity-30'"
+                                    @click="updateVote(entry, 0)">&oslash;</button>
+                            <template x-for="points in entry.vote_category_points" :key="points">
+                                <button type="button" class="w-8 h-8 text-2xl cursor-pointer"
+                                        :class="(entry.vote && entry.vote.points) >= points ? 'text-accent opacity-100' : 'text-accent opacity-30'"
+                                        @click="updateVote(entry, points)">&starf;</button>
+                            </template>
+                        </div>
+
+                        {{-- Comment --}}
+                        <template x-if="entry.vote_category_has_comment">
+                            <div class="flex w-full">
+                                <input placeholder="Comment" x-model="entry.comment"
+                                       class="flex-1 rounded-s-lg border border-border bg-body px-4 py-2 text-heading placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors">
+                                <button class="rounded-e-lg bg-success px-4 py-2 font-medium text-body hover:bg-success/90 transition-colors"
+                                        @click="updateVote(entry)">Send</button>
+                            </div>
+                        </template>
+
+                        {{-- Special vote --}}
+                        <template x-if="entry.vote_category_has_special_vote">
+                            <div class="mt-2">
+                                <button x-show="!(entry.vote && entry.vote.special_vote)"
+                                        class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors"
+                                        @click="markSpecial(entry, true)">&hearts; My party favourite &hearts;</button>
+                                <button x-show="entry.vote && entry.vote.special_vote"
+                                        class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors"
+                                        @click="markSpecial(entry, false)">&#x2639; Not my favourite anymore &#x2639;</button>
+                            </div>
+                        </template>
                     </div>
-                </template>
-
-                <template v-if="entry.vote_category_has_special_vote">
-                    <button v-if="!(entry.vote && entry.vote.special_vote)"
-                            class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors"
-                            @click="markSpecial(entry, true)">&hearts; My party
-                        favourite &hearts;
-                    </button>
-                    <button v-if="entry.vote && entry.vote.special_vote"
-                            class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors"
-                            @click="markSpecial(entry, false)">
-                        &#x2639; Not my favourite
-                        anymore &#x2639;
-                    </button>
-                </template>
+                </div>
             </div>
-            <div class="fixed bottom-4 right-4 z-50 space-y-2" v-if="success">
-                <div class="rounded-lg border border-success/40 border-l-4 border-l-success bg-success/15 px-4 py-3 text-success"><span>Saved</span></div>
-            </div>
-            <div class="fixed bottom-4 right-4 z-50 space-y-2" v-if="error">
-                <div class="rounded-lg border border-error/40 border-l-4 border-l-error bg-error/15 px-4 py-3 text-error"><span>Error</span></div>
-            </div>
-        </div>
+        </template>
     </div>
 </div>
-
-@section('view-scripts')
-    <script type="module">
-        const { createApp, ref, onMounted } = Vue;
-
-        const liveVotingApp = createApp({
-            setup() {
-                const competition = ref('');
-                const entries = ref([]);
-                const success = ref(false);
-                const error = ref(false);
-
-                function refresh() {
-                    axios.get('{{url('/api/profile/'.$visitor->api_token.'/votes/live')}}').then((response) => {
-                        if (response.status == 204) {
-                            return;
-                        }
-                        let newEntries = response.data.data;
-                        if (newEntries.length > 0) {
-                            competition.value = newEntries[0].competition_name;
-                        }
-                        for (let [index, ne] of newEntries.entries()) {
-                            if (newEntries[index].vote.length == 0) {
-                                newEntries[index].vote.push({
-                                    comment: '',
-                                    special_vote: false,
-                                    points: 0
-                                });
-                            }
-                            newEntries[index].comment = newEntries[index].vote.comment;
-                            for (let e of entries.value) {
-                                if (e.id == ne.id) {
-                                    if (newEntries[index].vote.length == 0 || newEntries[index].vote.comment != e.comment) {
-                                        newEntries[index].comment = e.comment;
-                                    }
-                                }
-                            }
-                        }
-                        entries.value = newEntries;
-                    });
-                }
-
-                function markSpecial(entry, value) {
-                    for (let e of entries.value) {
-                        if (e.vote.special_vote == true) {
-                            e.vote.special_vote = false;
-                        }
-                    }
-                    entry.vote.special_vote = value;
-                    saveVote(entry, value);
-                }
-
-                function updateVote(entry, points) {
-                    if (points != undefined) {
-                        entry.vote.points = points;
-                    }
-                    saveVote(entry);
-                }
-
-                function saveVote(entry, special) {
-                    let data = {
-                        entry_id: entry.id,
-                        competition_id: entry.competition_id,
-                        vote_category_id: entry.vote_category_id,
-                        points: entry.vote.points,
-                        comment: entry.comment === null ? '' : entry.comment,
-                        live: true
-                    };
-
-                    if (special != undefined) {
-                        data.special_vote = special;
-                    }
-
-                    axios.post('{{route('ajax.votes.submit', ['api_token' => $visitor->api_token])}}', data).then((response) => {
-                        if (response.data.success) {
-                            success.value = true;
-                            setTimeout(() => { success.value = false; }, 2000);
-                        } else if (response.data.error) {
-                            error.value = true;
-                            setTimeout(() => { error.value = false; }, 2000);
-                        }
-                    });
-                }
-
-                onMounted(() => {
-                    const configRefreshInterval = '{{config('partymeister-competitions-voting.live-refresh-interval')}}';
-                    const refreshInterval = Number(configRefreshInterval || 20000);
-                    refresh();
-                    window.setInterval(refresh, refreshInterval);
-                });
-
-                return { competition, entries, success, error, updateVote, markSpecial };
-            }
-        });
-
-        liveVotingApp.mount('#live-voting');
-    </script>
-@endsection

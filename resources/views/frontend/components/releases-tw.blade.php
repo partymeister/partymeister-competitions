@@ -8,10 +8,10 @@
 @endif
 @if (!is_null($competition))
     <h4 class="mb-4">{{$competition->name}}</h4>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
         @foreach ($competition->entries()->where('status', 1)->orderBy('sort_position', 'ASC')->get() as $entry)
-            <div>
-                <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
+            <div class="flex">
+                <div class="flex-1 flex flex-col rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
                     @if($entry->getFirstMedia('screenshot'))
                         <figure>
                             <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif" data-fancybox="gallery"
@@ -24,9 +24,9 @@
                     @if($entry->getFirstMedia('audio'))
                         <audio controls src="{{$entry->getFirstMedia('audio')->getUrl()}}" class="w-full"></audio>
                     @endif
-                    <div class="p-5">
+                    <div class="p-5 flex-1 flex flex-col">
                         <h5 class="mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}} @endif</h5>
-                        <h6 class="opacity-70">{{$entry->competition->name}}</h6>
+                        <h6 class="opacity-70 mb-auto">{{$entry->competition->name}}</h6>
                         @if ($entry->download != null)
                             <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-sm font-medium text-body hover:bg-success/90 transition-colors mt-2 no-underline">
                                 Download
