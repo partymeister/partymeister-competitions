@@ -141,6 +141,15 @@ class Entry extends Model implements HasMedia
     ];
 
     /**
+     * Default attribute values (prevent NOT NULL constraint violations on optional fields)
+     */
+    protected $attributes = [
+        'description' => '',
+        'organizer_description' => '',
+        'custom_option' => '',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
