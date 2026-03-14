@@ -49,8 +49,8 @@
                            class="flex-1 inline-flex items-center justify-center bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors whitespace-nowrap">Show</a>
                     </div>
                     <a href="{{route('frontend.pages.index', ['slug' => $component->entry_comments_page->full_slug])}}?entry_id={{$entry->id}}"
-                       class="w-full inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium text-body transition-colors mt-2 @if ($entry->new_comments > 0) bg-accent hover:bg-accent-hover @else bg-surface-raised font-medium text-text hover:text-heading @endif">Messages @if ($entry->new_comments > 0)
-                            ({{$entry->new_comments}} NEW) @endif</a>
+                       class="w-full inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium transition-colors mt-2 @if ($entry->new_comments > 0) bg-error text-white hover:bg-error/80 @else bg-surface-raised text-text hover:text-heading @endif">Messages @if ($entry->new_comments > 0)
+                            ({{$entry->new_comments}} new) @endif</a>
                 </div>
             </div>
         </div>
