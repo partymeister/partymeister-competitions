@@ -53,6 +53,7 @@ class PartymeisterServiceProvider extends ServiceProvider
 
     public function config()
     {
+        $this->mergeConfigFrom(__DIR__.'/../../config/partymeister-competitions.php', 'partymeister-competitions');
         $this->mergeConfigFrom(__DIR__.'/../../config/partymeister-competitions-dhl-export.php', 'partymeister-competitions-dhl-export');
     }
 

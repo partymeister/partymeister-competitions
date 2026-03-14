@@ -124,6 +124,20 @@ class Competition extends Model implements HasMedia
              ->nonQueued();
     }
 
+    /**
+     * Check if all qualified entries have their final file confirmed.
+     */
+    public function getAllFinalFilesConfirmedAttribute(): bool
+    {
+        $qualified = $this->qualified_entries()->get();
+
+        if ($qualified->isEmpty()) {
+            return false;
+        }
+
+        return $qualified->every(fn ($entry) => $entry->final_file_media_id > 0);
+    }
+
     public function getLiveVotingEnabledAttribute()
     {
         if ($this->competition_type->has_out_of_competition_voting) {

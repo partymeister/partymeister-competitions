@@ -36,6 +36,9 @@ class CompetitionGrid extends Grid
              ])
              ->onCondition('has_prizegiving', true);
 
+        $this->addColumn('release_status', trans('partymeister-competitions::backend/competitions.release_status_short'))
+             ->renderer(BladeRenderer::class, ['template' => 'partymeister-competitions::grid.competition_release_status']);
+
         $this->addColumn('switches', trans('partymeister-competitions::backend/competitions.status'))
              ->renderer(BladeRenderer::class, ['template' => 'partymeister-competitions::grid.competition_status']);
 

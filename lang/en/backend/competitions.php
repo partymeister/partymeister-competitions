@@ -41,6 +41,11 @@ return [
     'sort_position_updated'             => 'Competition position updated',
     'prizegiving_sort_position_updated' => 'Prizegiving position updated',
     'download_callback_timecodes' => 'Download callback timecodes',
-    'generate_slides'             => 'Generate Slides'
+    'generate_slides'             => 'Generate Slides',
+
+    'release_status_short'        => 'Rel.',
+    'all_final_files_confirmed'   => 'All final files confirmed - ready for release',
+    'final_files_missing'         => 'Some entries are missing their final file',
+    'final_files_missing_blocked' => 'Release blocked - some entries are missing their final file',
 
 ];

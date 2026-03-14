@@ -112,6 +112,12 @@ class CompetitionService extends BaseService
             return;
         }
 
+        if (config('partymeister-competitions.require_all_final_files_for_release', false)
+            && ! $competition->all_final_files_confirmed) {
+            Log::info('Skipping release publish for "'.$competition->name.'": not all final files confirmed');
+            return;
+        }
+
         if (! is_dir(storage_path('releases'))) {
             mkdir(storage_path('releases'));
         }
