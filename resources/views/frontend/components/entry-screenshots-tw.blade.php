@@ -2,24 +2,24 @@
     <h4 class="text-lg font-bold mb-4">Upload screenshot</h4>
     @include('motor-backend::errors.list')
     {!! form_start($entryScreenshotForm) !!}
-    <div class="card bg-base-200 shadow-md mb-4">
-        <div class="card-title bg-base-300 p-4">
+    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+        <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
             <h5 class="text-base font-semibold">Your entry</h5>
         </div>
-        <div class="card-body">
+        <div class="p-5">
             {{$record->title}} by {{$record->author}}
         </div>
     </div>
-    <div class="card bg-base-200 shadow-md mb-4">
-        <div class="card-title bg-base-300 p-4">
+    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+        <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
             <h5 class="text-base font-semibold">Screenshot</h5>
         </div>
-        <div class="card-body">
+        <div class="p-5">
             @if ($entryScreenshotForm->has('screenshot'))
                 {!! form_row($entryScreenshotForm->screenshot, ['label' => false]) !!}
             @endif
         </div>
-        <div class="card-body pt-0">
+        <div class="px-5 pb-5">
             {!! form_row($entryScreenshotForm->submit) !!}
         </div>
     </div>

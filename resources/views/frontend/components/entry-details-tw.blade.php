@@ -165,11 +165,11 @@
     <div>
         @if($record->getFirstMedia('screenshot'))
             <h3 class="text-xl font-bold mb-2">Screenshot</h3>
-            <div class="card bg-base-200 shadow-md mb-4">
+            <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
                 <figure>
                     <a data-caption="{{$record->title}} by {{$record->author}}" data-fancybox="gallery"
                        href="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}">
-                        <img src="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}" class="w-full">
+                        <img src="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}" class="w-full rounded-lg">
                     </a>
                 </figure>
             </div>
@@ -189,13 +189,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @for ($i=1; $i<=$record->competition->competition_type->number_of_work_stages; $i++)
                     <div>
-                        <div class="card bg-base-200 shadow-md">
+                        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)]">
                             @if($record->getFirstMedia('work_stage_'.$i))
                                 <figure>
                                     <a data-caption="Work stage {{$i}}" data-fancybox="gallery"
                                        href="{{$record->getFirstMedia('work_stage_'.$i)->getUrl('preview')}}">
                                         <img src="{{$record->getFirstMedia('work_stage_'.$i)->getUrl('preview')}}"
-                                             class="w-full">
+                                             class="w-full rounded-lg">
                                     </a>
                                 </figure>
                             @endif
@@ -211,7 +211,7 @@
             <h3 class="text-xl font-bold mb-2">Files</h3>
             @foreach($record->getMedia('file') as $file)
                 <div class="flex justify-between items-center py-1">
-                    <a href="{{$file->getUrl()}}" class="link link-primary">{{ $file->file_name }}</a>
+                    <a href="{{$file->getUrl()}}" class="text-accent hover:text-accent-hover transition-colors">{{ $file->file_name }}</a>
                     <span class="text-sm opacity-70">{{trans('motor-backend::backend/global.uploaded')}} {{ $file->created_at }}</span>
                 </div>
             @endforeach
@@ -222,7 +222,7 @@
         <div class="mt-6">
             <h3 class="text-xl font-bold mb-2">Config file</h3>
             <div class="flex justify-between items-center py-1">
-                <a href="{{ $record->getFirstMedia('config_file')->getUrl() }}" class="link link-primary">{{ $record->getFirstMedia('config_file')->file_name }}</a>
+                <a href="{{ $record->getFirstMedia('config_file')->getUrl() }}" class="text-accent hover:text-accent-hover transition-colors">{{ $record->getFirstMedia('config_file')->file_name }}</a>
                 <span class="text-sm opacity-70">{{trans('motor-backend::backend/global.uploaded')}} {{ $record->getFirstMedia('config_file')->created_at }}</span>
             </div>
         </div>

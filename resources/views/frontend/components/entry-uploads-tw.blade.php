@@ -2,11 +2,11 @@
     <h4 class="text-lg font-bold mb-4">Upload entry</h4>
     @include('motor-backend::errors.list')
     {!! form_start($entryUploadForm) !!}
-    <div class="card bg-base-200 shadow-md mb-4">
-        <div class="card-title bg-base-300 p-4">
+    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+        <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
             <h3 class="text-base font-semibold">{{ trans('motor-backend::backend/global.base_info') }}</h3>
         </div>
-        <div class="card-body">
+        <div class="p-5">
             {!! form_row($entryUploadForm->reload_on_change) !!}
             @if ($entryUploadForm->getModel())
                 {!! form_label($entryUploadForm->competition_id) !!}
@@ -23,11 +23,11 @@
         </div>
     </div>
     @if (old($entryUploadForm->getName().'.competition_id') || (isset($entryUploadForm->getModel()[$entryUploadForm->getName()]) && $entryUploadForm->getModel()[$entryUploadForm->getName()]['competition_id'] > 0))
-        <div class="card bg-base-200 shadow-md mb-4">
-            <div class="card-title bg-base-300 p-4">
+        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                 <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.entry_info') }}</h3>
             </div>
-            <div class="card-body">
+            <div class="p-5">
                 {!! form_row($entryUploadForm->description) !!}
                 {!! form_row($entryUploadForm->organizer_description) !!}
                 {!! form_row($entryUploadForm->discord_name) !!}
@@ -36,21 +36,21 @@
                 @endif
             </div>
         </div>
-        <div class="card bg-base-200 shadow-md mb-4">
-            <div class="card-title bg-base-300 p-4">
+        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                 <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.option_info') }}</h3>
             </div>
-            <div class="card-body">
+            <div class="p-5">
                 {!! form_row($entryUploadForm->options) !!}
                 {!! form_row($entryUploadForm->custom_option) !!}
             </div>
         </div>
 
-        <div class="card bg-base-200 shadow-md mb-4">
-            <div class="card-title bg-base-300 p-4">
+        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                 <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.file_info') }}</h3>
             </div>
-            <div class="card-body">
+            <div class="p-5">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     @if ($entryUploadForm->has('screenshot'))
                         <div>
@@ -96,11 +96,11 @@
         </div>
 
         @if ($entryUploadForm->has('ai_usage'))
-            <div class="card bg-base-200 shadow-md mb-4">
-                <div class="card-title bg-base-300 p-4">
+            <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+                <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                     <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.ai_information') }}</h3>
                 </div>
-                <div class="card-body">
+                <div class="p-5">
                     {!! form_row($entryUploadForm->ai_usage) !!}
                     {!! form_row($entryUploadForm->ai_usage_description) !!}
                 </div>
@@ -109,11 +109,11 @@
 
 
         @if ($entryUploadForm->has('engine_option'))
-            <div class="card bg-base-200 shadow-md mb-4">
-                <div class="card-title bg-base-300 p-4">
+            <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+                <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                     <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.engine_information') }}</h3>
                 </div>
-                <div class="card-body">
+                <div class="p-5">
                     {!! form_row($entryUploadForm->engine_option) !!}
                     {!! form_row($entryUploadForm->engine_option_description) !!}
                     {!! form_row($entryUploadForm->engine_creator_involvement) !!}
@@ -122,11 +122,11 @@
         @endif
 
 
-        <div class="card bg-base-200 shadow-md mb-4">
-            <div class="card-title bg-base-300 p-4">
+        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                 <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.author_info') }}</h3>
             </div>
-            <div class="card-body">
+            <div class="p-5">
                 {!! form_row($entryUploadForm->author_name) !!}
                 {!! form_row($entryUploadForm->author_email) !!}
                 {!! form_row($entryUploadForm->author_phone) !!}
@@ -137,14 +137,14 @@
             </div>
         </div>
         @if ($entryUploadForm->has('composer_name'))
-            <div class="card bg-base-200 shadow-md mb-4">
-                <div class="card-title bg-base-300 p-4">
+            <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+                <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                     <h3 class="text-base font-semibold flex items-center justify-between">
                         <span>{{ trans('partymeister-competitions::backend/entries.composer_info') }}</span>
-                        <button type="button" class="btn btn-success btn-sm" x-on:click="copyAuthorToComposer()">Copy author data</button>
+                        <button type="button" class="inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-xs font-semibold text-body hover:bg-success/90 transition-colors" x-on:click="copyAuthorToComposer()">Copy author data</button>
                     </h3>
                 </div>
-                <div class="card-body">
+                <div class="p-5">
                     {!! form_row($entryUploadForm->composer_name) !!}
                     {!! form_row($entryUploadForm->composer_email) !!}
                     {!! form_row($entryUploadForm->composer_phone) !!}
@@ -155,11 +155,11 @@
                 </div>
             </div>
         @endif
-        <div class="card bg-base-200 shadow-md mb-4">
-            <div class="card-title bg-base-300 p-4">
+        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold text-sm border-b border-border">
                 <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.notify_about_status') }}</h3>
             </div>
-            <div class="card-body">
+            <div class="p-5">
                 <p class="mb-2">
                     Be aware that we have competitions which involve jury preselection, mostly - but not limited to - individual competitions such as music or graphics.
                 </p>
@@ -170,10 +170,10 @@
                 {!! form_row($entryUploadForm->notify_about_status) !!}
             </div>
             @if ($visitor->is_remote)
-            <div class="card-title bg-base-300 p-4">
+            <div class="px-5 py-3 bg-surface-raised text-heading font-semibold text-sm border-b border-border">
                 <h3 class="text-base font-semibold">{{ trans('partymeister-competitions::backend/entries.remote_participation') }}</h3>
             </div>
-            <div class="card-body">
+            <div class="p-5">
                 <p class="mb-2">
                     In order to avoid having an empty stage in case your entry ranks among the top three of this competition, we ask you kindly to name a
                     representative at the party location. This can be a group member, a friend or a kind soul that accepts the prize in your stead.
@@ -186,8 +186,8 @@
             </div>
             @endif
         </div>
-        <div class="card bg-base-200 shadow-md mb-4">
-            <div class="card-body">
+        <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)] mb-4">
+            <div class="p-5">
                 {!! form_row($entryUploadForm->submit) !!}
             </div>
         </div>
