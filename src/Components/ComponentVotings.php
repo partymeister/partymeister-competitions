@@ -121,7 +121,7 @@ class ComponentVotings
         // Check if livevoting is active
         $liveVoting = false;
         $liveVotingCompetition = '';
-        $live = LiveVote::first();
+        $live = LiveVote::with('competition')->first();
         if (! is_null($live)) {
             if (! $live->competition->voting_enabled) {
                 $liveVoting = true;
@@ -133,8 +133,18 @@ class ComponentVotings
             \View::share('activeCompetitionId', $competition->id);
         }
 
+        $entries = collect();
+        if (! is_null($competition)) {
+            $entries = $competition->entries()
+                ->where('status', 1)
+                ->orderBy('sort_position', 'ASC')
+                ->with(['competition.competition_type', 'options', 'media'])
+                ->get();
+        }
+
         $this->viewData = [
             'competition'           => $competition,
+            'entries'               => $entries,
             'votes'                 => $votes,
             'votingDeadlineOver'    => $votingDeadlineOver,
             'liveVoting'            => $liveVoting,

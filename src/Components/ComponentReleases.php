@@ -23,6 +23,8 @@ class ComponentReleases
      */
     protected $competition;
 
+    protected $entries;
+
     /**
      * ComponentReleases constructor.
      *
@@ -39,19 +41,23 @@ class ComponentReleases
      */
     public function index(Request $request)
     {
+        $query = Competition::where('voting_enabled', true)
+                            ->orderBy('updated_at', 'ASC');
+
         if ($request->get('competition_id') > 0) {
-            $this->competition = Competition::where('voting_enabled', true)
-                                            ->where('id', $request->get('competition_id'))
-                                            ->orderBy('updated_at', 'ASC')
-                                            ->first();
-        } else {
-            $this->competition = Competition::where('voting_enabled', true)
-                                            ->orderBy('updated_at', 'ASC')
-                                            ->first();
+            $query->where('id', $request->get('competition_id'));
         }
+
+        $this->competition = $query->first();
 
         if (! is_null($this->competition)) {
             \View::share('activeCompetitionId', $this->competition->id);
+
+            $this->entries = $this->competition->entries()
+                ->where('status', 1)
+                ->orderBy('sort_position', 'ASC')
+                ->with(['competition.competition_type', 'media'])
+                ->get();
         }
 
         return $this->render();
@@ -62,6 +68,9 @@ class ComponentReleases
      */
     public function render()
     {
-        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), ['competition' => $this->competition]);
+        return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
+            'competition' => $this->competition,
+            'entries'     => $this->entries ?? collect(),
+        ]);
     }
 }
