@@ -130,15 +130,12 @@ class CompetitionService extends BaseService
                 }
             }
         } catch (Exception $e) {
-            Log::channel('debug')
-               ->info($e->getMessage());
+            Log::warning('Failed to clear release directory: '.$e->getMessage());
         }
 
         // Hardlink the files in the correct order, clear directory beforehand
         foreach ($competition->qualified_entries as $entry) {
             if ($entry->final_file_media_id > 0) {
-                Log::channel('debug')
-                   ->info($entry->final_file_media_id);
                 $media = Media::find($entry->final_file_media_id);
                 if (is_null($media)) {
                     continue;
