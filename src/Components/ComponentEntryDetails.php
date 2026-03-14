@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Entry;
-use Partymeister\Slides\Models\Slide;
 use Partymeister\Slides\Models\SlideTemplate;
 
 /**
@@ -138,16 +138,11 @@ class ComponentEntryDetails
             }
             $definitions = json_encode($defsArray);
 
-            $tempSlide = Slide::where('name', '[PREVIEW] Entry: '.$record->id)->first();
-            if (!$tempSlide) {
-                $tempSlide = new Slide();
-                $tempSlide->name = '[PREVIEW] Entry: '.$record->id;
-            }
-            $tempSlide->slide_type = 'compo';
-            $tempSlide->definitions = $definitions;
-            $tempSlide->save();
+            // Store in cache with a stable key per entry (no DB record needed)
+            $cacheKey = 'entry_'.$record->id.'_'.md5($definitions);
+            cache()->put('slide_preview:'.$cacheKey, $definitions, now()->addHour());
 
-            $beamslideUrl = route('backend.slides.render', [$tempSlide->id]);
+            $beamslideUrl = route('backend.slides.render-preview', ['cacheKey' => $cacheKey]);
         }
 
         $this->data = [
