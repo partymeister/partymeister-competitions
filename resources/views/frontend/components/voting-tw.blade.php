@@ -2,19 +2,19 @@
     Voting
 </h4>
 @if ($votingDeadlineOver)
-    <div class="alert alert-warning mb-4">
+    <div class="rounded-lg border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent mb-4">
         <span>Voting deadline is over!</span>
     </div>
 @endif
 @if ($liveVoting)
-    <div class="alert alert-success mb-4">
+    <div class="rounded-lg border border-success/30 bg-success/10 px-4 py-3 text-sm text-success mb-4">
         <a class="text-pink-500 font-bold" href="{{ route('frontend.pages.index', ['slug' => $component->live_voting_page->full_slug])}}">
             Live voting for the {{$liveVotingCompetition}} is active now!
             <strong>Go vote!</strong></a>
     </div>
 @endif
 @if (is_null($competition) && $liveVoting == false)
-    <div class="alert alert-warning mb-4">
+    <div class="rounded-lg border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent mb-4">
         <span>There are no entries to vote for yet!</span>
     </div>
 @endif
@@ -27,23 +27,23 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 entries">
             @foreach ($competition->entries()->where('status', 1)->orderBy('sort_position', 'ASC')->get() as $entry)
                 <div>
-                    <div class="card bg-base-200 shadow-md"
-                         x-bind:class="{ 'ring-2 ring-warning': specialVoteEntryId === {{ $entry->id }} }"
+                    <div class="rounded-lg bg-surface shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
+                         x-bind:class="{ 'ring-2 ring-accent': specialVoteEntryId === {{ $entry->id }} }"
                          data-entry-id="{{$entry->id}}">
                         @if($entry->getFirstMedia('screenshot'))
                             <figure>
                                 <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif" data-fancybox="gallery"
                                    href="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}">
                                     <img src="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}"
-                                         class="w-full">
+                                         class="w-full rounded-t-lg">
                                 </a>
                             </figure>
                         @endif
                         @if($entry->getFirstMedia('audio'))
                             <audio controls src="{{$entry->getFirstMedia('audio')->getUrl()}}" class="w-full"></audio>
                         @endif
-                        <div class="card-body">
-                            <h5 class="card-title text-base">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif</h5>
+                        <div class="p-5">
+                            <h5 class="text-heading font-semibold text-base mb-3">{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif</h5>
                             <h6 class="text-sm opacity-70">{{$entry->competition->name}}</h6>
                             @if ($entry->options->count() > 0 || $entry->custom_option != '')
                                 <h6 class="mt-2 text-sm font-semibold">Options</h6>
@@ -94,21 +94,21 @@
                                     </div>
                                 </div>
                                 @if ($loop->last && $voteCategory->has_comment)
-                                    <div class="join w-full">
-                                        <input @if ($votingDeadlineOver)disabled @endif class="input  join-item flex-1" placeholder="Comment" type="text" name="entry_comment[{{$competition->id}}][{{$entry->id}}]"
+                                    <div class="flex w-full">
+                                        <input @if ($votingDeadlineOver)disabled @endif class="flex-1 rounded-l-lg border border-border bg-body px-4 py-2 text-heading placeholder-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent transition-colors" placeholder="Comment" type="text" name="entry_comment[{{$competition->id}}][{{$entry->id}}]"
                                                value="{{ (isset($votes[$voteCategory->id][$entry->id]) ? $votes[$voteCategory->id][$entry->id]['comment'] : '')}}">
-                                        <button type="button" class="btn btn-success join-item"
+                                        <button type="button" class="rounded-r-lg bg-success px-4 py-2 text-sm font-semibold text-body hover:bg-success/90 transition-colors"
                                                 x-on:click="saveComment({{ $entry->id }}, {{ $voteCategory->id }}, $el.parentElement.querySelector('input').value)">Send</button>
                                     </div>
                                 @endif
                                 @if ($loop->last && $voteCategory->has_special_vote)
                                     <div class="mt-2">
-                                        <button type="button" class="btn btn-success btn-sm btn-block"
+                                        <button type="button" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-xs font-semibold text-body hover:bg-success/90 transition-colors"
                                                 x-show="specialVoteEntryId !== {{ $entry->id }}"
                                                 x-on:click="setSpecialVote({{ $entry->id }}, {{ $voteCategory->id }}, true)">
                                             &hearts; My party favourite &hearts;
                                         </button>
-                                        <button type="button" class="btn btn-warning btn-sm btn-block"
+                                        <button type="button" class="w-full inline-flex items-center justify-center rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-body hover:bg-accent-hover transition-colors"
                                                 x-show="specialVoteEntryId === {{ $entry->id }}"
                                                 x-on:click="setSpecialVote({{ $entry->id }}, {{ $voteCategory->id }}, false)">
                                             &#x2639; Not my favourite anymore &#x2639;
@@ -117,7 +117,7 @@
                                 @endif
                             @endforeach
                             @if ($entry->download != null)
-                                <a href="{{$entry->download->getUrl()}}" class="btn btn-success btn-sm btn-block mt-4 no-underline">
+                                <a href="{{$entry->download->getUrl()}}" class="w-full inline-flex items-center justify-center rounded-lg bg-success px-3 py-1.5 text-xs font-semibold text-body hover:bg-success/90 transition-colors mt-4 no-underline">
                                     Download
                                 </a>
                             @endif
