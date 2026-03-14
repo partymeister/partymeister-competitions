@@ -98,8 +98,12 @@ return [
         'stable_diffusion' => 'Stable diffusion (or derivative)',
         'midjourney'       => 'Midjourney',
         'dalle'            => 'Dall-E',
+        'nanobanana'       => 'Nanobanana',
+        'sora'             => 'Sora',
         'audio'            => 'Suno.ai or udio.com',
         'voice'            => 'Elevenlabs or other speech synthesis',
+        'own_trained_llm'  => 'Own trained LLM',
+        'own_ml_model'     => 'Own ML model',
         'multiple'         => 'Multiple GenAI tools (see description)',
     ],
 

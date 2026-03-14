@@ -1,49 +1,12 @@
-@section('view-styles')
-    @include('partymeister-slides::layouts.partials.slide_fonts')
-    <style type="text/css">
-        .slidemeister-instance {
-            zoom: 0.75;
-            float: left;
-            margin-right: 15px;
-            margin-bottom: 15px;
-
-            clip-path: inset(0);
-            background-color: #fff;
-            border: 1px solid black;
-            position: relative;
-            width: 960px;
-            height: 540px;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-        }
-
-        .slidemeister-element {
-            position: absolute;
-            display: flex;
-            width: 200px;
-            height: 100px;
-            left: 50px;
-            top: 50px;
-            background-color: transparent;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            border: 2px solid transparent;
-            padding: 0;
-            margin: 0;
-        }
-    </style>
-@append
 @include('motor-backend::errors.list')
 <h3 class="mb-4">
     @if ($record->is_remote)
-        <span class="badge badge-error">REMOTE</span>
+        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-error/15 text-error border border-error/40">REMOTE</span>
     @endif
     Entry detail for: {{$record->title}} by {{$record->author}}
 </h3>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6" x-data="entryDetails">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
         <dl class="grid grid-cols-[1fr_2fr] gap-y-2 gap-x-4">
             <dt class="font-semibold">
@@ -73,14 +36,14 @@
                 {{trans('partymeister-competitions::backend/entries.description')}}
             </dt>
             <dd>
-                <p>{{nl2br($record->description)}}</p>
+                <p>{!! nl2br(e($record->description)) !!}</p>
             </dd>
 
             <dt class="font-semibold">
                 {{trans('partymeister-competitions::backend/entries.organizer_description')}}
             </dt>
             <dd>
-                <p>{{nl2br($record->organizer_description)}}</p>
+                <p>{!! nl2br(e($record->organizer_description)) !!}</p>
             </dd>
             <dt class="font-semibold">
                 {{trans('partymeister-competitions::backend/entries.notify_about_status')}}
@@ -94,7 +57,7 @@
                 {{trans('partymeister-competitions::backend/entries.discord_name_short')}}
             </dt>
             <dd>
-                <p>{{nl2br($record->discord_name)}}</p>
+                <p>{!! nl2br(e($record->discord_name)) !!}</p>
             </dd>
             @endif
             @if ($record->representative !== '')
@@ -102,7 +65,7 @@
                     {{trans('partymeister-competitions::backend/entries.representative')}}
                 </dt>
                 <dd>
-                    <p>{{nl2br($record->representative)}}</p>
+                    <p>{!! nl2br(e($record->representative)) !!}</p>
                 </dd>
             @endif
         </dl>
@@ -174,14 +137,15 @@
                 </figure>
             </div>
         @endif
-        <h4 class="mb-2">Beamslide preview</h4>
-        <div id="app" x-ref="appContainer">
-            <partymeister-slides-elements class="slidemeister-template"
-                                          :readonly="true" :id="'template-preview'"
-                                          :name="'template-preview'">
-
-            </partymeister-slides-elements>
-        </div>
+        @if($record->getFirstMedia('beamslide'))
+            <h4 class="mb-2">Beamslide preview</h4>
+            <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
+                <a data-caption="Beamslide preview for {{$record->title}}" data-fancybox="gallery"
+                   href="{{$record->getFirstMedia('beamslide')->getUrl()}}">
+                    <img src="{{$record->getFirstMedia('beamslide')->getUrl()}}" class="w-full rounded-lg">
+                </a>
+            </div>
+        @endif
     </div>
     @if ($record->competition->competition_type->number_of_work_stages > 0)
         <div class="mt-6">
@@ -300,32 +264,3 @@
         @endif
     </div>
 </div>
-
-
-@section('view-scripts')
-    <script type="module">
-        document.addEventListener('DOMContentLoaded', function () {
-
-            window.eventBus.emit('partymeister-slides:load-definitions', {
-                name: 'template-preview',
-                elements: JSON.parse('{!! addslashes($competitionTemplate->definitions) !!}'),
-                type: 'competition-entry',
-                replacements: {!! json_encode($entry) !!},
-            });
-
-            function resize() {
-                let appEl = document.getElementById('app');
-                let width = appEl.parentElement.offsetWidth;
-                let zoom = width / 960;
-                appEl.style.zoom = zoom;
-                appEl.style.height = '560px';
-            }
-
-            resize();
-
-            window.addEventListener('resize', function () {
-                resize();
-            });
-        });
-    </script>
-@append

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Jobs\GenerateBeamslidePreview;
 use Partymeister\Core\Models\Visitor;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
@@ -206,6 +207,12 @@ class Entry extends Model implements HasMedia
             $nextIdentifier = !is_null($e) ? $e->identifier+1 : 1;
             $entry->identifier = $nextIdentifier;
         });
+
+        static::saved(function (Entry $entry) {
+            if ($entry->status == 1 && $entry->competition_id) {
+                GenerateBeamslidePreview::dispatch($entry)->delay(now()->addSeconds(5));
+            }
+        });
     }
 
 
@@ -224,6 +231,12 @@ class Entry extends Model implements HasMedia
         $this->addMediaConversion('preview')
              ->width(1280)
              ->height(1024)
+             ->nonQueued();
+
+        $this->addMediaConversion('preview')
+             ->performOnCollections('beamslide')
+             ->width(960)
+             ->height(540)
              ->nonQueued();
     }
 

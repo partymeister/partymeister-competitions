@@ -7,9 +7,10 @@
         <span>You haven't uploaded any entries yet!</span>
     </div>
 @endif
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
     @foreach ($entries as $entry)
-        <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
+        <div class="flex">
+        <div class="flex-1 flex flex-col rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
             @if($entry->getFirstMedia('screenshot'))
                 <figure>
                     <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}} @endif" data-fancybox="gallery"
@@ -18,8 +19,7 @@
                     </a>
                 </figure>
             @endif
-            <div class="p-5 flex flex-col">
-                <div class="flex-grow">
+            <div class="p-5 flex flex-col flex-1">
                     <h5 class="mb-3">{{$entry->title}}@if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}}@endif</h5>
                     <h6 class="opacity-70">{{$entry->competition->name}}</h6>
                     @if ($entry->options->count() > 0 || $entry->custom_option != '')
@@ -34,25 +34,26 @@
                         </ul>
                     @endif
                     <p class="mt-2">{{$entry->description}}</p>
-                </div>
+                <div class="mt-auto pt-3"></div>
                 <div class="mt-4">
-                    <div class="flex w-full">
+                    <div class="flex w-full [&>a:first-child]:rounded-l-lg [&>a:last-child]:rounded-r-lg">
                         @if ($entry->competition->upload_enabled || $entry->upload_enabled)
                             <a href="{{route('frontend.pages.index', ['slug' => $component->entry_edit_page->full_slug]) }}?entry_id={{$entry->id}}"
-                               class="flex-1 inline-flex items-center justify-center bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors rounded-l-lg">Edit</a>
+                               class="flex-1 inline-flex items-center justify-center bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors whitespace-nowrap">Edit</a>
                         @endif
                         @if ($entry->competition->competition_type->has_screenshot)
                             <a href="{{route('frontend.pages.index', ['slug' => $component->entry_screenshots_page->full_slug])}}?entry_id={{$entry->id}}"
-                               class="flex-1 inline-flex items-center justify-center bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors">Update screenshot</a>
+                               class="flex-1 inline-flex items-center justify-center bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors whitespace-nowrap">Screenshot</a>
                         @endif
                         <a href="{{route('frontend.pages.index', ['slug' => $component->entry_detail_page->full_slug])}}?entry_id={{$entry->id}}"
-                           class="flex-1 inline-flex items-center justify-center bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors rounded-r-lg">Show</a>
+                           class="flex-1 inline-flex items-center justify-center bg-accent px-3 py-1.5 text-sm font-medium text-body hover:bg-accent-hover transition-colors whitespace-nowrap">Show</a>
                     </div>
                     <a href="{{route('frontend.pages.index', ['slug' => $component->entry_comments_page->full_slug])}}?entry_id={{$entry->id}}"
                        class="w-full inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-sm font-medium text-body transition-colors mt-2 @if ($entry->new_comments > 0) bg-accent hover:bg-accent-hover @else bg-surface-raised font-medium text-text hover:text-heading @endif">Messages @if ($entry->new_comments > 0)
                             ({{$entry->new_comments}} NEW) @endif</a>
                 </div>
             </div>
+        </div>
         </div>
     @endforeach
 </div>

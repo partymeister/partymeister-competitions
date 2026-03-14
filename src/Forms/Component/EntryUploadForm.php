@@ -108,7 +108,7 @@ class EntryUploadForm extends Form
         if ($this->getModel() && $this->getModel()[$this->getName()]['id'] > 0) {
             $rules = '';
         }
-        $this->add('file', 'file_file', [
+        $this->add('file', 'frontend_file_file', [
             'label' => trans('partymeister-competitions::backend/entries.file') . ' (RAR/ZIP)',
             'model' => Entry::class,
             'rules' => $rules,
@@ -117,7 +117,7 @@ class EntryUploadForm extends Form
         if (isset($data['competition'])) {
             if ($data['competition']->competition_type->has_screenshot) {
                 for ($i = 1; $i <= $data['competition']->competition_type->number_of_work_stages; $i++) {
-                    $this->add('work_stage_'.$i, 'file_image', [
+                    $this->add('work_stage_'.$i, 'frontend_file_image', [
                         'label' => trans('partymeister-competitions::backend/entries.work_stage').' '.$i,
                         'model' => Entry::class,
                         'rules' => $rules,
@@ -125,20 +125,20 @@ class EntryUploadForm extends Form
                 }
             }
             if ($data['competition']->competition_type->has_screenshot) {
-                $this->add('screenshot', 'file_image', [
+                $this->add('screenshot', 'frontend_file_image', [
                     'label' => trans('partymeister-competitions::backend/entries.screenshot'),
                     'model' => Entry::class,
                 ]);
             }
             if ($data['competition']->competition_type->has_video) {
-                $this->add('video', 'file_video', [
+                $this->add('video', 'frontend_file_video', [
                     'label' => trans('partymeister-competitions::backend/entries.video'),
                     'model' => Entry::class,
                 ]);
             }
 
             if ($data['competition']->competition_type->has_config_file) {
-                $this->add('config_file', 'file_file', [
+                $this->add('config_file', 'frontend_file_file', [
                     'label' => trans('partymeister-competitions::backend/entries.config_file'),
                     'model' => Entry::class,
                 ]);

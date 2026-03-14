@@ -43,9 +43,9 @@ class EntryOptionForm extends Form
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
                             'choices'        => $options,
                             'selected'       => $selected,
-                            'wrapper'        => ['class' => 'row'],
+                            'wrapper'        => ['class' => 'grid grid-cols-2 md:grid-cols-4 gap-2'],
                             'choice_options' => [
-                                'wrapper'    => ['class' => 'col-md-3'],
+                                'wrapper'    => ['class' => ''],
                                 'label_attr' => ['class' => 'form-label'],
                             ],
                             'expanded'       => true,
@@ -57,9 +57,9 @@ class EntryOptionForm extends Form
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
                             'choices'        => $options,
                             'selected'       => $selected,
-                            'wrapper'        => ['class' => 'row'],
+                            'wrapper'        => ['class' => 'grid grid-cols-2 md:grid-cols-4 gap-2'],
                             'choice_options' => [
-                                'wrapper'    => ['class' => 'col-md-3'],
+                                'wrapper'    => ['class' => ''],
                                 'label_attr' => ['class' => 'form-label'],
                             ],
                             'expanded'       => true,

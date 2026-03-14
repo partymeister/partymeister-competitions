@@ -51,44 +51,25 @@
                 <h4>{{ trans('partymeister-competitions::backend/entries.file_info') }}</h4>
             </div>
             <div class="p-5">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    @if ($entryUploadForm->has('screenshot'))
-                        <div>
-                            {!! form_row($entryUploadForm->screenshot) !!}
-                        </div>
-                    @endif
-                    @if ($entryUploadForm->has('audio'))
-                        <div>
-                            {!! form_row($entryUploadForm->audio) !!}
-                        </div>
-                    @endif
-                    @if ($entryUploadForm->has('video'))
-                        <div>
-                            {!! form_row($entryUploadForm->video) !!}
-                        </div>
-                    @endif
-                        @if ($entryUploadForm->has('config_file'))
-                            <div>
-                                {!! form_row($entryUploadForm->config_file) !!}
-                            </div>
-                        @endif
-                </div>
+                @if ($entryUploadForm->has('screenshot'))
+                    {!! form_row($entryUploadForm->screenshot) !!}
+                @endif
+                @if ($entryUploadForm->has('audio'))
+                    {!! form_row($entryUploadForm->audio) !!}
+                @endif
+                @if ($entryUploadForm->has('video'))
+                    {!! form_row($entryUploadForm->video) !!}
+                @endif
+                @if ($entryUploadForm->has('config_file'))
+                    {!! form_row($entryUploadForm->config_file) !!}
+                @endif
 
                 @if ($entryUploadForm->has('work_stage_1'))
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-
-                        @php
-                            $i = 1;
-                        @endphp
-                        @while ($entryUploadForm->has('work_stage_'.$i))
-                            <div>
-                                {!! form_row($entryUploadForm->{'work_stage_'.$i}) !!}
-                            </div>
-                            @php
-                                $i++;
-                            @endphp
-                        @endwhile
-                    </div>
+                    @php $i = 1; @endphp
+                    @while ($entryUploadForm->has('work_stage_'.$i))
+                        {!! form_row($entryUploadForm->{'work_stage_'.$i}) !!}
+                        @php $i++; @endphp
+                    @endwhile
                 @endif
 
                 {!! form_row($entryUploadForm->file) !!}
@@ -207,6 +188,14 @@
                             }
                         });
                     });
+
+                    // Auto-reload when competition is selected
+                    const competitionSelect = this.$el.querySelector('select[name="entry-upload[competition_id]"]');
+                    if (competitionSelect) {
+                        competitionSelect.addEventListener('change', (e) => {
+                            this.reloadOnChange(e);
+                        });
+                    }
                 },
                 reloadOnChange(event) {
                     document.getElementById('reload_on_change').value = 1;
