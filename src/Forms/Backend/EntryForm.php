@@ -149,15 +149,6 @@ class EntryForm extends Form
             if ($data['competition']->competition_type->has_recordings) {
                 $this->add('is_recorded', 'checkbox', ['label' => trans('partymeister-competitions::backend/entries.is_recorded')]);
             }
-            if ($data['competition']->competition_type->has_ai_options) {
-                $this->add('ai_usage', 'select2', [
-                    'label'   => trans('partymeister-competitions::backend/entries.ai_usage'),
-                    'choices' => trans('partymeister-competitions::backend/entries.ai_usage_options'),
-                    'empty_value' => trans('motor-backend::backend/global.please_choose'),
-                    'rules' => 'required',
-                ]);
-                $this->add('ai_usage_description', 'textarea', ['label' => trans('partymeister-competitions::backend/entries.ai_usage_description')]);
-            }
             if ($data['competition']->competition_type->has_engine_options) {
                 $this->add('engine_option', 'select2', [
                     'label'   => trans('partymeister-competitions::backend/entries.engine_option'),
@@ -166,12 +157,6 @@ class EntryForm extends Form
                     'rules' => 'required',
                 ]);
                 $this->add('engine_option_description', 'text', ['label' => trans('partymeister-competitions::backend/entries.engine_option_description')]);
-                $this->add('engine_creator_involvement', 'select2', [
-                    'label'   => trans('partymeister-competitions::backend/entries.engine_creator_involvement'),
-                    'choices' => trans('partymeister-competitions::backend/entries.engine_creator_involvement_options'),
-                    'empty_value' => trans('motor-backend::backend/global.please_choose'),
-                    'rules' => 'required',
-                ]);
             }
 
             if ($data['competition']->competition_type->has_composer) {

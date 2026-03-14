@@ -99,20 +99,6 @@
             <!-- /.box-body -->
         </div>
 
-        @if ($entryUploadForm->has('ai_usage'))
-            <div class="@boxWrapper box-primary">
-                <div class="@boxHeader with-border">
-                    <h3 class="box-title">{{ trans('partymeister-competitions::backend/entries.ai_information') }}</h3>
-                </div>
-                <div class="@boxBody">
-                    {!! form_row($entryUploadForm->ai_usage) !!}
-                    {!! form_row($entryUploadForm->ai_usage_description) !!}
-                </div>
-                <!-- /.box-body -->
-            </div>
-        @endif
-
-
         @if ($entryUploadForm->has('engine_option'))
             <div class="@boxWrapper box-primary">
                 <div class="@boxHeader with-border">
@@ -121,7 +107,6 @@
                 <div class="@boxBody">
                     {!! form_row($entryUploadForm->engine_option) !!}
                     {!! form_row($entryUploadForm->engine_option_description) !!}
-                    {!! form_row($entryUploadForm->engine_creator_involvement) !!}
                 </div>
                 <!-- /.box-body -->
             </div>

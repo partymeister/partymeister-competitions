@@ -199,7 +199,6 @@ class Entry extends Model implements HasMedia
         'ai_usage_description',
         'engine_option',
         'engine_option_description',
-        'engine_creator_involvement'
     ];
 
     /**
@@ -266,11 +265,15 @@ class Entry extends Model implements HasMedia
 
     public function getEngineDataAttribute()
     {
-        if ($this->hasEngineOptions && $this->engine_option !== '') {
-            return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option). '<br>'.$this->engine_option_description. '<br>'.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement)."<br>";
-            //return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option). ': '.$this->engine_option_description. '<br>Creator: '.trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.'.$this->engine_creator_involvement)."<br><br>";
+        if (!$this->hasEngineOptions || empty($this->engine_option) || $this->engine_option === 'none') {
+            return '';
         }
-        return '';
+
+        if ($this->engine_option === 'other') {
+            return $this->engine_option_description.'<br>';
+        }
+
+        return trans('partymeister-competitions::backend/entries.engine_options.'.$this->engine_option).'<br>';
     }
 
 

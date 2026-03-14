@@ -46,11 +46,14 @@ class CompetitionPlaylistController extends Controller
 
             $entries[$key]['options_string'] = '';
             foreach (Arr::get($entry, 'options', []) as $i => $option) {
-                $entries[$key]['options_string'] .= ' '.$option['name'];
-                $entries[$key]['option_'.($i + 1)] = $option['name'];
+                $entries[$key]['options_string'] .= $option['name'].'<br>';
+                $entries[$key]['option_'.($i + 1)] = $option['name'].'<br>';
             }
-            $entries[$key]['custom_option'] = Arr::get($entry, 'custom_option');
-            $entries[$key]['options_string'] .= ' '.Arr::get($entry, 'custom_option');
+            $customOption = Arr::get($entry, 'custom_option');
+            $entries[$key]['custom_option'] = $customOption;
+            if ($customOption) {
+                $entries[$key]['options_string'] .= $customOption.'<br>';
+            }
         }
 
         $participants = [];

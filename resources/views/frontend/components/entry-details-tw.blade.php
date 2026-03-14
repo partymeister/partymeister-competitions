@@ -53,7 +53,7 @@
 </div>
 
 {{-- Options & technical info card --}}
-@if ($record->options->count() > 0 || $record->custom_option != '' || ($record->ai_data && $record->ai_usage != '') || ($record->engine_data && $record->engine_option != ''))
+@if ($record->options->count() > 0 || $record->custom_option != '' || !empty($record->engine_option))
 <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
     <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
         <h4>Options & technical details</h4>
@@ -76,20 +76,13 @@
                 <dd>{{ $record->custom_option }}</dd>
             @endif
 
-            @if ($record->ai_data && $record->ai_usage != '')
-                <dt class="font-semibold">{{trans('partymeister-competitions::backend/entries.ai_information')}}</dt>
+            @if (!empty($record->engine_option))
+                <dt class="font-semibold">{{trans('partymeister-competitions::backend/entries.engine_option')}}</dt>
                 <dd>
-                    <strong>{{ trans('partymeister-competitions::backend/entries.ai_usage') }}:</strong> {{ trans('partymeister-competitions::backend/entries.ai_usage_options.' . $record->ai_usage) }}<br>
-                    {{ $record->ai_usage_description }}
-                </dd>
-            @endif
-
-            @if ($record->engine_data && $record->engine_option != '')
-                <dt class="font-semibold">{{trans('partymeister-competitions::backend/entries.engine_information')}}</dt>
-                <dd>
-                    <strong>{{ trans('partymeister-competitions::backend/entries.engine_option') }}:</strong> {{ trans('partymeister-competitions::backend/entries.engine_options.' . $record->engine_option) }}<br>
-                    <strong>Engine:</strong> {{ $record->engine_option_description }}<br>
-                    <strong>Creator involvement:</strong> {{ trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.' . $record->engine_creator_involvement) }}
+                    {{ trans('partymeister-competitions::backend/entries.engine_options.' . $record->engine_option) }}
+                    @if ($record->engine_option === 'other' && $record->engine_option_description)
+                        ({{ $record->engine_option_description }})
+                    @endif
                 </dd>
             @endif
         </dl>

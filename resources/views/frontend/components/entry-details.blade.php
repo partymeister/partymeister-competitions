@@ -130,30 +130,17 @@
             </dd>
             @endif
 
-            @if ($record->ai_data && $record->ai_usage != '')
-            <dt class="small-4">
-                {{trans('partymeister-competitions::backend/entries.ai_information')}}
-            </dt>
-            <dd class="small-8">
-                <b>{{ trans('partymeister-competitions::backend/entries.ai_usage') }}: {{ trans('partymeister-competitions::backend/entries.ai_usage_options.' . $record->ai_usage) }}</b>
-                <p>
-                    {{ $record->ai_usage_description }}
-                </p>
-            </dd>
-            @endif
-
             @if ($record->engine_data && $record->engine_option != '')
             <dt class="small-4">
                 {{trans('partymeister-competitions::backend/entries.engine_information')}}
             </dt>
             <dd class="small-8">
                 <b>{{ trans('partymeister-competitions::backend/entries.engine_option') }}: {{ trans('partymeister-competitions::backend/entries.engine_options.' . $record->engine_option) }}</b>
+                @if ($record->engine_option_description)
                 <p>
                     <b>Engine:</b> {{ $record->engine_option_description }}
                 </p>
-                <p>
-                    <b>Creator involvement:</b> {{ trans('partymeister-competitions::backend/entries.engine_creator_involvement_options.' . $record->engine_creator_involvement) }}
-                </p>
+                @endif
             </dd>
             @endif
 

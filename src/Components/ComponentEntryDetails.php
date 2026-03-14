@@ -89,12 +89,15 @@ class ComponentEntryDetails
         foreach ($options as $i => $option) {
             $name = is_array($option) ? ($option['name'] ?? '') : (string) $option;
             if ($name) {
-                $entry['options_string'] .= ' '.$name;
-                $entry['option_'.($i + 1)] = $name;
+                $entry['options_string'] .= $name.'<br>';
+                $entry['option_'.($i + 1)] = $name.'<br>';
             }
         }
-        $entry['custom_option'] = (string) Arr::get($entry, 'custom_option', '');
-        $entry['options_string'] .= ' '.$entry['custom_option'];
+        $customOption = (string) Arr::get($entry, 'custom_option', '');
+        $entry['custom_option'] = $customOption;
+        if ($customOption) {
+            $entry['options_string'] .= $customOption.'<br>';
+        }
 
         // Ensure all placeholder fields are strings
         foreach (['platform', 'ai_data', 'engine_data', 'remote_type', 'running_time'] as $field) {

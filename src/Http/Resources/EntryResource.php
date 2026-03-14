@@ -295,7 +295,6 @@ class EntryResource extends BaseResource
             'ai_data'                                     => $this->ai_data,
             'engine_option'                               => $this->engine_option,
             'engine_option_description'                   => $this->engine_option_description,
-            'engine_creator_involvement'                  => $this->engine_creator_involvement,
             'author_name'                                 => $this->author_name,
             'author_email'                                => $this->author_email,
             'author_phone'                                => $this->author_phone,

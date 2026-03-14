@@ -85,28 +85,22 @@
             </div>
         </div>
 
-        @if ($entryUploadForm->has('ai_usage'))
-            <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
-                <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
-                    <h4>{{ trans('partymeister-competitions::backend/entries.ai_information') }}</h4>
-                </div>
-                <div class="p-5">
-                    {!! form_row($entryUploadForm->ai_usage) !!}
-                    {!! form_row($entryUploadForm->ai_usage_description) !!}
-                </div>
-            </div>
-        @endif
-
-
         @if ($entryUploadForm->has('engine_option'))
-            <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
+            <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4"
+                 x-data="{ engineOption: '{{ old('entry-upload.engine_option', '') }}' }">
                 <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
                     <h4>{{ trans('partymeister-competitions::backend/entries.engine_information') }}</h4>
                 </div>
                 <div class="p-5">
-                    {!! form_row($entryUploadForm->engine_option) !!}
-                    {!! form_row($entryUploadForm->engine_option_description) !!}
-                    {!! form_row($entryUploadForm->engine_creator_involvement) !!}
+                    <div x-init="
+                        const sel = $el.parentElement.querySelector('select[name=\'entry-upload[engine_option]\']');
+                        if (sel) { engineOption = sel.value; sel.addEventListener('change', e => engineOption = e.target.value); }
+                    ">
+                        {!! form_row($entryUploadForm->engine_option) !!}
+                    </div>
+                    <div x-show="engineOption === 'other'" x-cloak>
+                        {!! form_row($entryUploadForm->engine_option_description) !!}
+                    </div>
                 </div>
             </div>
         @endif
@@ -175,6 +169,15 @@
                 {!! form_row($entryUploadForm->representative) !!}
             </div>
             @endif
+        </div>
+        <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4 border-l-4 border-l-warning">
+            <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
+                <h4>Confirmation</h4>
+            </div>
+            <div class="p-5 space-y-3">
+                {!! form_row($entryUploadForm->confirm_no_genai) !!}
+                {!! form_row($entryUploadForm->confirm_rules) !!}
+            </div>
         </div>
         <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
             <div class="p-5">

@@ -141,29 +141,15 @@
                         </div>
                     </div>
 
-                  <div class="row clearfix" v-if="entry.ai_usage !== '' || entry.engine_data">
-                    <template v-if="entry.usage !== ''">
+                  <div class="row clearfix" v-if="entry.engine_option">
                       <div class="col-md-6">
                         <h4 style="margin-top: 0.5rem;">
-                          {{ t('partymeister-competitions.backend.entries.ai_information') }}</h4>
-                        <b>{{ t('partymeister-competitions.backend.entries.ai_usage_options.'+entry.ai_usage) }}</b>
+                          {{ t('partymeister-competitions.backend.entries.engine_option') }}</h4>
                         <p>
-                          {{ entry.ai_usage_description }}
+                          <template v-if="entry.engine_option === 'other'">{{ t('partymeister-competitions.backend.entries.engine_options.other') }} ({{ entry.engine_option_description }})</template>
+                          <template v-else>{{ t('partymeister-competitions.backend.entries.engine_options.'+entry.engine_option) }}</template>
                         </p>
                       </div>
-                  </template>
-
-                  <template v-if="entry.engine_data">
-                      <div class="col-md-6">
-                        <h4 style="margin-top: 0.5rem;">
-                          {{ t('partymeister-competitions.backend.entries.engine_information') }}</h4>
-                        <b>{{ t('partymeister-competitions.backend.entries.engine_options.'+entry.engine_option) }}</b>
-                        <p>
-                          <b>Engine:</b> {{ entry.engine_option_description }}<br>
-                          <b>Creator involvement:</b> {{ t('partymeister-competitions.backend.entries.engine_creator_involvement_options.'+entry.engine_creator_involvement) }}
-                        </p>
-                      </div>
-                  </template>
                   </div>
 
                     <div class="row clearfix">
