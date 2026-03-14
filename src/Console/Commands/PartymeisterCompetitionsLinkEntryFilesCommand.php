@@ -106,18 +106,6 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
             }
         }
 
-        //$callbacks = Callback::where('is_timed', true)->where('has_fired', false)->where('embargo_until', '<', date('Y-m-d H:i:s'))->get();
-        //
-        //foreach ($callbacks as $callback) {
-        //    Log::info('Firing callback '.$callback->name);
-        //
-        //    if ($callback->action == 'notification') {
-        //        $status = StuhlService::send($callback->body, $callback->title, '', EVENT_LEVEL_BORING, $callback->destination);
-        //    }
-        //
-        //    $callback->has_fired = true;
-        //    $callback->save();
-        //}
     }
 
     /**
