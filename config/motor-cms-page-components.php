@@ -10,7 +10,7 @@ return [
         'voting'            => [
             'name'            => 'Voting',
             'description'     => 'Show Voting component',
-            'view'            => 'partymeister-competitions::frontend.components.voting',
+            'view'            => 'partymeister-competitions::frontend.components.voting-tw',
             'route'           => 'component.votings',
             'component_class' => 'Partymeister\Competitions\Components\ComponentVotings',
             'compatibility'   => [
@@ -24,7 +24,7 @@ return [
         'live-voting'       => [
             'name'            => 'LiveVoting',
             'description'     => 'Show LiveVoting component',
-            'view'            => 'partymeister-competitions::frontend.components.live-voting',
+            'view'            => 'partymeister-competitions::frontend.components.live-voting-tw',
             'component_class' => 'Partymeister\Competitions\Components\ComponentLiveVotings',
             'compatibility'   => [
 
@@ -37,7 +37,7 @@ return [
         'competition-list'  => [
             'name'            => 'CompetitionList',
             'description'     => 'Show CompetitionList component',
-            'view'            => 'partymeister-competitions::frontend.components.competition-list',
+            'view'            => 'partymeister-competitions::frontend.components.competition-list-tw',
             'component_class' => 'Partymeister\Competitions\Components\ComponentCompetitionLists',
             'compatibility'   => [
 
@@ -50,7 +50,7 @@ return [
         'releases'          => [
             'name'            => 'Releases',
             'description'     => 'Show Release component',
-            'view'            => 'partymeister-competitions::frontend.components.releases',
+            'view'            => 'partymeister-competitions::frontend.components.releases-tw',
             'component_class' => 'Partymeister\Competitions\Components\ComponentReleases',
             'compatibility'   => [
 
@@ -63,7 +63,7 @@ return [
         'entries'           => [
             'name'            => 'Entry',
             'description'     => 'Show Entry component',
-            'view'            => 'partymeister-competitions::frontend.components.entries',
+            'view'            => 'partymeister-competitions::frontend.components.entries-tw',
             'route'           => 'component.entries',
             'component_class' => 'Partymeister\Competitions\Components\ComponentEntries',
             'compatibility'   => [
@@ -77,7 +77,7 @@ return [
         'entry-details'     => [
             'name'            => 'EntryDetail',
             'description'     => 'Show EntryDetail component',
-            'view'            => 'partymeister-competitions::frontend.components.entry-details',
+            'view'            => 'partymeister-competitions::frontend.components.entry-details-tw',
             'component_class' => 'Partymeister\Competitions\Components\ComponentEntryDetails',
             'compatibility'   => [
 
@@ -90,7 +90,7 @@ return [
         'entry-screenshots' => [
             'name'            => 'EntryScreenshot',
             'description'     => 'Show EntryScreenshot component',
-            'view'            => 'partymeister-competitions::frontend.components.entry-screenshots',
+            'view'            => 'partymeister-competitions::frontend.components.entry-screenshots-tw',
             'route'           => 'component.entry-screenshots',
             'component_class' => 'Partymeister\Competitions\Components\ComponentEntryScreenshots',
             'compatibility'   => [
@@ -104,7 +104,7 @@ return [
         'entry-uploads'     => [
             'name'            => 'EntryUpload',
             'description'     => 'Show EntryUpload component',
-            'view'            => 'partymeister-competitions::frontend.components.entry-uploads',
+            'view'            => 'partymeister-competitions::frontend.components.entry-uploads-tw',
             'route'           => 'component.entry-uploads',
             'component_class' => 'Partymeister\Competitions\Components\ComponentEntryUploads',
             'compatibility'   => [
@@ -118,7 +118,7 @@ return [
         'entry-comments'    => [
             'name'            => 'EntryComment',
             'description'     => 'Show EntryComment component',
-            'view'            => 'partymeister-competitions::frontend.components.entry-comments',
+            'view'            => 'partymeister-competitions::frontend.components.entry-comments-tw',
             'component_class' => 'Partymeister\Competitions\Components\ComponentEntryComments',
             'compatibility'   => [
 
