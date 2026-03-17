@@ -138,7 +138,7 @@ class ComponentEntryScreenshots
         $record = EntryService::updateWithForm($this->record, $this->request, $this->entryScreenshotForm)
                               ->getResult();
 
-        StuhlService::send($record->visitor->name.' just updated the screenshot for the entry '.$record->title.' in the '.$record->competition->name.' competition!');
+        StuhlService::send($record->visitor->name.' just updated the screenshot for the entry '.$record->title.' in the *'.$record->competition->name.'* competition!');
 
         return redirect(route('frontend.pages.index', ['slug' => $this->component->entries_page->full_slug]));
     }

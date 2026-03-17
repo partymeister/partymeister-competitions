@@ -153,7 +153,7 @@ class ComponentEntryUploads
         $record = EntryService::createWithForm($this->request, $this->entryUploadForm)
                               ->getResult();
 
-        StuhlService::send($record->visitor->name.' just created the entry '.$record->title.' in the '.$record->competition->name.' competition!');
+        StuhlService::send($record->visitor->name.' just created the entry '.$record->title.' in the *'.$record->competition->name.'* competition!');
 
         return redirect(route('frontend.pages.index', ['slug' => $this->component->entries_page->full_slug]));
     }
@@ -190,7 +190,7 @@ class ComponentEntryUploads
         $record = EntryService::updateWithForm($this->record, $this->request, $this->entryUploadForm)
                               ->getResult();
 
-        StuhlService::send($record->visitor->name.' just updated the entry '.$record->title.' in the '.$record->competition->name.' competition!');
+        StuhlService::send($record->visitor->name.' just updated the entry '.$record->title.' in the *'.$record->competition->name.'* competition!');
 
         return redirect(route('frontend.pages.index', ['slug' => $this->component->entries_page->full_slug]));
     }
