@@ -55,9 +55,12 @@ Route::group([
          ->name('access_keys.generate');
 });
 
-Route::post('api/sync/competition', [SyncController::class, 'competition']);
-Route::post('api/sync/entry', [SyncController::class, 'entry']);
-Route::post('api/sync/livevote', [SyncController::class, 'livevote']);
+// Disabled 2026-03-18: these sync routes have no authentication and allow unauthenticated
+// writes to competitions, entries (including arbitrary file writes via path traversal), and
+// live votes. No longer needed — both instances share a central database.
+// Route::post('api/sync/competition', [SyncController::class, 'competition']);
+// Route::post('api/sync/entry', [SyncController::class, 'entry']);
+// Route::post('api/sync/livevote', [SyncController::class, 'livevote']);
 
 Route::group([
     'middleware' => ['web', 'auth:visitor', 'bindings'],

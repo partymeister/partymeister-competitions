@@ -48,7 +48,7 @@
                         @endif
                         @if ($entry->description != '')
                             <h6 class="mt-2">Description</h6>
-                            <p class="mt-1">{!! nl2br($entry->description)!!}</p>
+                            <p class="mt-1">{!! nl2br(e($entry->description)) !!}</p>
                         @endif
                         <div class="mt-auto pt-3"></div>
                         @if ($entry->download != null)

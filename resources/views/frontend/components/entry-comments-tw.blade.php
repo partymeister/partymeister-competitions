@@ -12,7 +12,7 @@
                 @endif
             </div>
             <div class="p-5 break-words @if(!$comment->read_by_visitor) bg-warning/10 font-semibold @endif">
-                {!! nl2br($comment->message) !!}
+                {!! nl2br(e($comment->message)) !!}
             </div>
         @endforeach
     </div>

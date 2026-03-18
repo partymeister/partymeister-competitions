@@ -12,7 +12,7 @@
                 @endif
             </div>
             <div class="card-section @if(!$comment->read_by_visitor) unread @endif">
-                {!! nl2br($comment->message) !!}
+                {!! nl2br(e($comment->message)) !!}
             </div>
         @endforeach
     </div>

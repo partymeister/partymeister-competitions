@@ -32,7 +32,7 @@
                     @endif
                 </div>
                 <div class="@boxBody @if(!$comment->read_by_organizer) unread @endif" style="@if ($comment->author == '') background-color: #e1e1e1 @endif">
-                    {!! nl2br($comment->message) !!}
+                    {!! nl2br(e($comment->message)) !!}
                 </div>
             @endforeach
         </div>

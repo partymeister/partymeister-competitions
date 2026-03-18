@@ -56,7 +56,7 @@
                             @endif
                             @if ($entry->description != '')
                                 <h6>Description</h6>
-                                <p class="mt-2">{!! nl2br($entry->description)!!}</p>
+                                <p class="mt-2">{!! nl2br(e($entry->description)) !!}</p>
                             @endif
                             @foreach($competition->vote_categories as $voteCategory)
                                 <div class="points" data-entry-id="{{$entry->id}}"
