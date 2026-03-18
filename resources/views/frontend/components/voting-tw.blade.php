@@ -29,7 +29,7 @@
     </svg>
     <form id="save-votes" action="{{ route('frontend.pages.index', ['slug' => 'voting'])}}?competition_id={{$competition->id}}"
           method="post"
-          x-data="votingForm({{ $competition->id }}, '{{ route('ajax.votes.submit', ['api_token' => $visitor->api_token]) }}', {{ $votingDeadlineOver ? 'true' : 'false' }})">
+          x-data="votingForm({{ $competition->id }}, '{{ url('/api/v2/profile/votes') }}', {{ $votingDeadlineOver ? 'true' : 'false' }})">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <h4 class="mb-4">{{$competition->name}}</h4>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 entries items-stretch">
@@ -195,7 +195,7 @@
                         data.special_vote = specialVote;
                     }
 
-                    axios.post(this.voteUrl, data).then((response) => {
+                    axios.post(this.voteUrl + '/' + entryId, data).then((response) => {
                         if (response.data.success) {
                             toastr.success(response.data.message);
                         } else if (response.data.error) {
@@ -216,7 +216,7 @@
                         comment: comment,
                     };
 
-                    axios.post(this.voteUrl, data).then((response) => {
+                    axios.post(this.voteUrl + '/' + entryId, data).then((response) => {
                         if (response.data.success) {
                             toastr.success(response.data.message);
                         } else if (response.data.error) {

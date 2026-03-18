@@ -1,6 +1,6 @@
 <div x-data="liveVoting"
-     data-refresh-url="{{ url('/api/profile/'.$visitor->api_token.'/votes/live') }}"
-     data-vote-url="{{ route('ajax.votes.submit', ['api_token' => $visitor->api_token]) }}"
+     data-refresh-url="{{ route('api.v2.profile.votes.live') }}"
+     data-vote-url="{{ url('/api/v2/profile/votes') }}"
      data-refresh-interval="{{ config('partymeister-competitions-voting.live-refresh-interval', 20000) }}">
     <h3 class="mb-4">Live voting</h3>
     <h4 class="mb-4" x-text="competition"></h4>
