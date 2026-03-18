@@ -51,7 +51,7 @@ class AccessKeyService extends BaseService
      */
     public static function generate($request)
     {
-        $quantity = (int) $request->get('quantity');
+        $quantity = min((int) $request->get('quantity'), 2000);
 
         // Chars to use
         $chars = config('partymeister-competitions-access-key.chars');
