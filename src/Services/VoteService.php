@@ -5,8 +5,11 @@ namespace Partymeister\Competitions\Services;
 use League\Csv\Writer;
 use Motor\Backend\Services\BaseService;
 use Partymeister\Competitions\Models\Competition;
+use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\ManualVote;
 use Partymeister\Competitions\Models\Vote;
+use Partymeister\Competitions\Models\VoteCategory;
+use Partymeister\Core\Models\Visitor;
 use Request;
 
 /**
@@ -14,6 +17,85 @@ use Request;
  */
 class VoteService extends BaseService
 {
+    /**
+     * Submit a vote for an entry.
+     *
+     * @return array{success: bool, message: string, status?: int}
+     */
+    public static function submitVote(
+        Visitor $visitor,
+        int $entryId,
+        int $voteCategoryId,
+        int $points,
+        string $comment = '',
+        ?bool $specialVote = null,
+        bool $isLive = false,
+        ?string $ipAddress = null,
+    ): array {
+        $entry = Entry::find($entryId);
+        $voteCategory = VoteCategory::find($voteCategoryId);
+
+        if (is_null($entry) || is_null($voteCategory)) {
+            return ['success' => false, 'message' => 'Entry or vote category not found', 'status' => 404];
+        }
+
+        $competition = $entry->competition;
+
+        if (is_null($competition)) {
+            return ['success' => false, 'message' => 'Competition not found', 'status' => 404];
+        }
+
+        // Check voting is enabled (skip for live voting)
+        if (! $isLive && ! $competition->voting_enabled) {
+            return ['success' => false, 'message' => 'Voting for this competition is not available yet!', 'status' => 403];
+        }
+
+        // Check deadline
+        if (strtotime(config('partymeister-competitions-voting.deadline')) < time()) {
+            return ['success' => false, 'message' => 'Voting deadline is over, sorry :/', 'status' => 403];
+        }
+
+        // Cap points to category max
+        $points = min($points, $voteCategory->points);
+
+        // Handle special vote — clear previous if setting a new one
+        if ($specialVote) {
+            foreach ($visitor->votes()->where('special_vote', true)->get() as $existingVote) {
+                $existingVote->special_vote = false;
+                $existingVote->save();
+            }
+        }
+
+        // Find or create vote
+        $vote = $visitor->votes()
+            ->where('vote_category_id', $voteCategoryId)
+            ->where('entry_id', $entryId)
+            ->first();
+
+        if (is_null($vote)) {
+            $vote = new Vote();
+            $vote->visitor_id = $visitor->id;
+            $vote->competition_id = $competition->id;
+            $vote->entry_id = $entryId;
+            $vote->ip_address = $ipAddress;
+        }
+
+        $vote->points = $points;
+        $vote->vote_category_id = $voteCategoryId;
+        $vote->comment = $comment;
+
+        if ($specialVote !== null) {
+            $vote->special_vote = $specialVote;
+        }
+
+        $vote->save();
+
+        return [
+            'success' => true,
+            'message' => 'You voted for '.$entry->title.' in the '.$competition->name.' competition!',
+        ];
+    }
+
     /**
      * @var string
      */
