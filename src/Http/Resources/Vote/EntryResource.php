@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Resources\Vote;
 
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use Motor\Backend\Helpers\Filesize;
 use Motor\Backend\Http\Resources\BaseResource;
 use Motor\Backend\Http\Resources\MediaResource;
@@ -162,7 +162,7 @@ class EntryResource extends BaseResource
         if ($this->competition && $this->competition->vote_categories && $this->competition->vote_categories[0]) {
             $vote = Vote::where('entry_id', $this->id)
                         ->where('vote_category_id', $this->competition->vote_categories[0]->id)
-                        ->where('visitor_id', Session::get('visitor')) //$params->get('visitor_id'))
+                        ->where('visitor_id', Auth::guard('visitor')->id())
                         ->first();
 
             if (is_null($vote)) {
