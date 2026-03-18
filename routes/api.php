@@ -14,7 +14,6 @@ use Partymeister\Competitions\Http\Controllers\Api\SyncController;
 use Partymeister\Competitions\Http\Controllers\Api\VoteCategoriesController;
 use Partymeister\Competitions\Http\Controllers\Api\VotesController;
 use Partymeister\Competitions\Http\Controllers\Api\Votes\ResultsController;
-use Partymeister\Competitions\Http\Controllers\Api\Frontend\VotesController as FrontendVotesController;
 use Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys\GenerateController;
 
 Route::group([
@@ -61,15 +60,6 @@ Route::group([
 // Route::post('api/sync/competition', [SyncController::class, 'competition']);
 // Route::post('api/sync/entry', [SyncController::class, 'entry']);
 // Route::post('api/sync/livevote', [SyncController::class, 'livevote']);
-
-Route::group([
-    'middleware' => ['web', 'auth:visitor', 'bindings'],
-    'prefix'     => 'ajax',
-    'as'         => 'ajax.',
-], function () {
-    Route::post('votes/{api_token}/submit', [FrontendVotesController::class, 'store'])
-         ->name('votes.submit');
-});
 
 // TODO: remove once we abandon the php powered backend
 Route::group([
