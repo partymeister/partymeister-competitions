@@ -99,25 +99,25 @@ class CompetitionRequest extends Request
      */
     public function rules()
     {
-        switch ($this->method()) {
-            case 'POST':
-                return [
-                    'name'                      => 'required',
-                    'competition_type_id'       => 'required|integer',
-                    'has_prizegiving'           => 'nullable|boolean',
-                    'sort_position'             => 'nullable|integer',
-                    'prizegiving_sort_position' => 'nullable|integer',
-                    'upload_enabled'            => 'nullable|boolean',
-                    'voting_enabled'            => 'nullable|boolean',
-                    'option_groups'             => 'nullable|array',
-                    'vote_category_id'          => 'nullable|integer',
-                    'video_1'                   => 'nullable|file',
-                    'video_2'                   => 'nullable|file',
-                    'video_3'                   => 'nullable|file',
-                ];
-            case 'PUT':
-            case 'PATCH':
-                return [];
+        $rules = [
+            'name'                      => 'required',
+            'competition_type_id'       => 'required|integer',
+            'has_prizegiving'           => 'nullable|boolean',
+            'sort_position'             => 'nullable|integer',
+            'prizegiving_sort_position' => 'nullable|integer',
+            'upload_enabled'            => 'nullable|boolean',
+            'voting_enabled'            => 'nullable|boolean',
+            'option_groups'             => 'nullable|array',
+            'vote_category_id'          => 'nullable|integer',
+            'video_1'                   => 'nullable|file',
+            'video_2'                   => 'nullable|file',
+            'video_3'                   => 'nullable|file',
+        ];
+
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
+            $rules = array_map(fn ($rule) => str_replace('required', 'sometimes|required', $rule), $rules);
         }
+
+        return $rules;
     }
 }
