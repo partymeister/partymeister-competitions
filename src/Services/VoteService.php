@@ -24,8 +24,8 @@ class VoteService extends BaseService
      */
     public static function submitVote(
         Visitor $visitor,
-        int $entryId,
-        int $voteCategoryId,
+        mixed $entryId,
+        mixed $voteCategoryId,
         int $points,
         string $comment = '',
         ?bool $specialVote = null,
