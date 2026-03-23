@@ -15,7 +15,7 @@ class AccessKeyService extends BaseService
     /**
      * @var string
      */
-    protected $model = AccessKey::class;
+    protected string $model = AccessKey::class;
 
     public function filters()
     {

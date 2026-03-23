@@ -13,7 +13,7 @@ class ComponentEntryScreenshotService extends ComponentBaseService
     /**
      * @var string
      */
-    protected $model = ComponentEntryScreenshot::class;
+    protected string $model = ComponentEntryScreenshot::class;
 
     /**
      * @var string

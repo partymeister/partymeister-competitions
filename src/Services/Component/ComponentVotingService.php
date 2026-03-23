@@ -13,7 +13,7 @@ class ComponentVotingService extends ComponentBaseService
     /**
      * @var string
      */
-    protected $model = ComponentVoting::class;
+    protected string $model = ComponentVoting::class;
 
     /**
      * @var string

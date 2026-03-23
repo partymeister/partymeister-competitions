@@ -15,7 +15,7 @@ class CompetitionPrizeService extends BaseService
     /**
      * @var string
      */
-    protected $model = CompetitionPrize::class;
+    protected string $model = CompetitionPrize::class;
 
     /**
      * @param $request

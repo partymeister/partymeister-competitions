@@ -21,7 +21,7 @@ class CompetitionService extends BaseService
     /**
      * @var string
      */
-    protected $model = Competition::class;
+    protected string $model = Competition::class;
 
     public function filters()
     {

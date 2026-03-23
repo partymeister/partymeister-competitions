@@ -13,5 +13,5 @@ class VoteCategoryService extends BaseService
     /**
      * @var string
      */
-    protected $model = VoteCategory::class;
+    protected string $model = VoteCategory::class;
 }

@@ -13,7 +13,7 @@ class ComponentEntryUploadService extends ComponentBaseService
     /**
      * @var string
      */
-    protected $model = ComponentEntryUpload::class;
+    protected string $model = ComponentEntryUpload::class;
 
     /**
      * @var string

@@ -13,7 +13,7 @@ class OptionGroupService extends BaseService
     /**
      * @var string
      */
-    protected $model = OptionGroup::class;
+    protected string $model = OptionGroup::class;
 
     public function afterUpdate()
     {

@@ -99,7 +99,7 @@ class VoteService extends BaseService
     /**
      * @var string
      */
-    protected $model = Vote::class;
+    protected string $model = Vote::class;
 
     /**
      * @param $request

@@ -13,7 +13,7 @@ class ComponentEntryService extends ComponentBaseService
     /**
      * @var string
      */
-    protected $model = ComponentEntry::class;
+    protected string $model = ComponentEntry::class;
 
     /**
      * @var string

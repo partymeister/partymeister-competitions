@@ -13,5 +13,5 @@ class CompetitionTypeService extends BaseService
     /**
      * @var string
      */
-    protected $model = CompetitionType::class;
+    protected string $model = CompetitionType::class;
 }

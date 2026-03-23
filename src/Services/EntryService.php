@@ -20,7 +20,7 @@ class EntryService extends BaseService
     /**
      * @var string
      */
-    protected $model = Entry::class;
+    protected string $model = Entry::class;
 
     public function filters()
     {
