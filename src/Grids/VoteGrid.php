@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Grids;
 
-use Motor\Backend\Grid\Grid;
+use Motor\Admin\Grid\Grid;
 
 /**
  * Class VoteGrid
@@ -13,7 +13,7 @@ class VoteGrid extends Grid
     {
         $this->addColumn('id', 'ID', true);
         $this->setDefaultSorting('id', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.votes.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.votes.destroy');
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.votes.edit');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.votes.destroy');
     }
 }

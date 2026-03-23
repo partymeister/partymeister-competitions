@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Services\VoteService;
 use Partymeister\Slides\Models\SlideTemplate;
 use Partymeister\Slides\Services\PlaylistService;

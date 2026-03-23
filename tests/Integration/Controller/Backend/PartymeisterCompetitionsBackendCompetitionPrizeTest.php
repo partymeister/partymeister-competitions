@@ -73,7 +73,7 @@ class PartymeisterCompetitionsBackendCompetitionPrizeTest extends TestCase
     {
         $this->visit('/backend/competition_prizes')
             ->see(trans('partymeister-competitions::backend/competition_prizes.competition_prizes'))
-            ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -91,10 +91,10 @@ class PartymeisterCompetitionsBackendCompetitionPrizeTest extends TestCase
         $record = create_test_competition_prize();
         $this->visit('/backend/competition_prizes')
             ->within('table', function () {
-                $this->click(trans('motor-backend::backend/global.edit'));
+                $this->click(trans('motor-admin::backend/global.edit'));
             })
             ->seePageIs('/backend/competition_prizes/'.$record->id.'/edit')
-            ->click(trans('motor-backend::backend/global.back'))
+            ->click(trans('motor-admin::backend/global.back'))
             ->seePageIs('/backend/competition_prizes');
     }
 
@@ -175,7 +175,7 @@ class PartymeisterCompetitionsBackendCompetitionPrizeTest extends TestCase
 
         $this->visit('/backend/competition_prizes')
             ->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
+                $this->press(trans('motor-admin::backend/global.delete'));
             })
             ->seePageIs('/backend/competition_prizes')
             ->see(trans('partymeister-competitions::backend/competition_prizes.deleted'));

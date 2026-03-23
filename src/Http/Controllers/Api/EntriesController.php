@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\ApiController;
+use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Competitions\Http\Requests\Backend\EntryRequest;
 use Partymeister\Competitions\Http\Resources\EntryCollection;
 use Partymeister\Competitions\Http\Resources\EntryResource;

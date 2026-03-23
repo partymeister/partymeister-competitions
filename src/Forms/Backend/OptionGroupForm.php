@@ -14,7 +14,7 @@ class OptionGroupForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('type', 'select', [
                  'label'   => trans('partymeister-competitions::backend/option_groups.type'),
                  'choices' => trans('partymeister-competitions::backend/option_groups.types'),

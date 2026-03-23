@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Http\Controllers\Backend\AccessKeys;
 
 use Illuminate\Http\Response;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Motor\Core\Filter\Renderers\WhereRenderer;
 use Partymeister\Competitions\Grids\AccessKeyGrid;
 use Partymeister\Competitions\Models\AccessKey;

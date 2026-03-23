@@ -30,7 +30,7 @@ class EntryScreenshotForm extends Form
 
         $this->add('competition_id', 'static', [
             'label'       => trans('partymeister-competitions::backend/competitions.competition'),
-            'empty_value' => trans('motor-backend::backend/global.please_choose'),
+            'empty_value' => trans('motor-admin::backend/global.please_choose'),
         ]);
 
         $this->add('submit', 'submit', [

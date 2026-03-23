@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Services;
 
 use League\Csv\Writer;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\ManualVote;

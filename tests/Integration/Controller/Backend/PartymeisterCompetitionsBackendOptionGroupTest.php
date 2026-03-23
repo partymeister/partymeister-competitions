@@ -73,7 +73,7 @@ class PartymeisterCompetitionsBackendOptionGroupTest extends TestCase
     {
         $this->visit('/backend/option_groups')
             ->see(trans('partymeister-competitions::backend/option_groups.option_groups'))
-            ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -91,10 +91,10 @@ class PartymeisterCompetitionsBackendOptionGroupTest extends TestCase
         $record = create_test_option_group();
         $this->visit('/backend/option_groups')
             ->within('table', function () {
-                $this->click(trans('motor-backend::backend/global.edit'));
+                $this->click(trans('motor-admin::backend/global.edit'));
             })
             ->seePageIs('/backend/option_groups/'.$record->id.'/edit')
-            ->click(trans('motor-backend::backend/global.back'))
+            ->click(trans('motor-admin::backend/global.back'))
             ->seePageIs('/backend/option_groups');
     }
 
@@ -175,7 +175,7 @@ class PartymeisterCompetitionsBackendOptionGroupTest extends TestCase
 
         $this->visit('/backend/option_groups')
             ->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
+                $this->press(trans('motor-admin::backend/global.delete'));
             })
             ->seePageIs('/backend/option_groups')
             ->see(trans('partymeister-competitions::backend/option_groups.deleted'));

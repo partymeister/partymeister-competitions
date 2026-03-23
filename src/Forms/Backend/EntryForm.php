@@ -34,7 +34,7 @@ class EntryForm extends Form
         $this->add('competition_id', 'select2', [
             'attr'        => ['class' => 'form-control reload-on-change'],
             'label'       => trans('partymeister-competitions::backend/competitions.competition'),
-            'empty_value' => trans('motor-backend::backend/global.please_choose'),
+            'empty_value' => trans('motor-admin::backend/global.please_choose'),
             'choices'     => Competition::orderBy('sort_position')
                                         ->pluck('name', 'id')
                                         ->toArray(),
@@ -159,7 +159,7 @@ class EntryForm extends Form
                 $this->add('engine_option', 'select2', [
                     'label'   => trans('partymeister-competitions::backend/entries.engine_option'),
                     'choices' => trans('partymeister-competitions::backend/entries.engine_options'),
-                    'empty_value' => trans('motor-backend::backend/global.please_choose'),
+                    'empty_value' => trans('motor-admin::backend/global.please_choose'),
                     'rules' => 'required',
                 ]);
                 $this->add('engine_option_description', 'text', ['label' => trans('partymeister-competitions::backend/entries.engine_option_description')]);

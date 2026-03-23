@@ -17,7 +17,7 @@ class CompetitionForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('competition_type_id', 'select2', [
                  'label'   => trans('partymeister-competitions::backend/competition_types.competition_type'),
                  'choices' => CompetitionType::orderBy('name')

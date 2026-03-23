@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Forms\Fields;
 
-use Motor\Backend\Forms\Fields\FileImageType;
+use Motor\Admin\Forms\Fields\FileImageType;
 
 class FrontendFileImageType extends FileImageType
 {

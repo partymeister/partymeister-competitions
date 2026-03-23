@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
-use Motor\Backend\Http\Controllers\ApiController;
+use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Competitions\Http\Requests\Backend\LiveVoteRequest;
 use Partymeister\Competitions\Http\Resources\LiveVoteCollection;
 use Partymeister\Competitions\Http\Resources\LiveVoteResource;

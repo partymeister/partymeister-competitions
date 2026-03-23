@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Forms\Fields;
 
-use Motor\Backend\Forms\Fields\FileVideoType;
+use Motor\Admin\Forms\Fields\FileVideoType;
 
 class FrontendFileVideoType extends FileVideoType
 {

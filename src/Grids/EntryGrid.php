@@ -2,10 +2,10 @@
 
 namespace Partymeister\Competitions\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BladeRenderer;
-use Motor\Backend\Grid\Renderers\DateRenderer;
-use Motor\Backend\Grid\Renderers\DecorationRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BladeRenderer;
+use Motor\Admin\Grid\Renderers\DateRenderer;
+use Motor\Admin\Grid\Renderers\DecorationRenderer;
 
 /**
  * Class EntryGrid
@@ -32,7 +32,7 @@ class EntryGrid extends Grid
              ->renderer(BladeRenderer::class, ['template' => 'partymeister-competitions::grid.entry_status'])
              ->style('min-width: 500px;');
         $this->setDefaultSorting('sort_position', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.entries.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.entries.destroy');
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.entries.edit');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.entries.destroy');
     }
 }

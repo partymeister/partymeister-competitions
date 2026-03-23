@@ -2,9 +2,9 @@
 
 namespace Partymeister\Competitions\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BooleanRenderer;
-use Motor\Backend\Grid\Renderers\DateRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BooleanRenderer;
+use Motor\Admin\Grid\Renderers\DateRenderer;
 
 /**
  * Class AccessKeyGrid
@@ -24,7 +24,7 @@ class AccessKeyGrid extends Grid
         $this->addColumn('is_prepaid', trans('partymeister-competitions::backend/access_keys.is_prepaid'), true)->renderer(BooleanRenderer::class);
 
         $this->setDefaultSorting('id', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.access_keys.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.access_keys.destroy');
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.access_keys.edit');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.access_keys.destroy');
     }
 }

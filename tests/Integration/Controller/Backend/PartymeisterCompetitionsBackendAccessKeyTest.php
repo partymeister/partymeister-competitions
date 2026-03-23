@@ -73,7 +73,7 @@ class PartymeisterCompetitionsBackendAccessKeyTest extends TestCase
     {
         $this->visit('/backend/access_keys')
             ->see(trans('partymeister-competitions::backend/access_keys.access_keys'))
-            ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -91,10 +91,10 @@ class PartymeisterCompetitionsBackendAccessKeyTest extends TestCase
         $record = create_test_access_key();
         $this->visit('/backend/access_keys')
             ->within('table', function () {
-                $this->click(trans('motor-backend::backend/global.edit'));
+                $this->click(trans('motor-admin::backend/global.edit'));
             })
             ->seePageIs('/backend/access_keys/'.$record->id.'/edit')
-            ->click(trans('motor-backend::backend/global.back'))
+            ->click(trans('motor-admin::backend/global.back'))
             ->seePageIs('/backend/access_keys');
     }
 
@@ -175,7 +175,7 @@ class PartymeisterCompetitionsBackendAccessKeyTest extends TestCase
 
         $this->visit('/backend/access_keys')
             ->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
+                $this->press(trans('motor-admin::backend/global.delete'));
             })
             ->seePageIs('/backend/access_keys')
             ->see(trans('partymeister-competitions::backend/access_keys.deleted'));

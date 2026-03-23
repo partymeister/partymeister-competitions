@@ -13,7 +13,7 @@
     {!! form_start($entryUploadForm) !!}
     <div class="rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)] mb-4">
         <div class="px-5 py-3 bg-surface-raised rounded-t-lg text-heading font-semibold border-b border-border">
-            <h4>{{ trans('motor-backend::backend/global.base_info') }}</h4>
+            <h4>{{ trans('motor-admin::backend/global.base_info') }}</h4>
         </div>
         <div class="p-5">
             {!! form_row($entryUploadForm->reload_on_change) !!}

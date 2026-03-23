@@ -2,9 +2,9 @@
 
 namespace Partymeister\Competitions\Grids;
 
-use Motor\Backend\Grid\Grid;
-use Motor\Backend\Grid\Renderers\BladeRenderer;
-use Motor\Backend\Grid\Renderers\BooleanRenderer;
+use Motor\Admin\Grid\Grid;
+use Motor\Admin\Grid\Renderers\BladeRenderer;
+use Motor\Admin\Grid\Renderers\BooleanRenderer;
 
 /**
  * Class CompetitionGrid
@@ -13,7 +13,7 @@ class CompetitionGrid extends Grid
 {
     protected function setup()
     {
-        $this->addColumn('name', trans('motor-backend::backend/global.name'), true)
+        $this->addColumn('name', trans('motor-admin::backend/global.name'), true)
              ->renderer(BladeRenderer::class, ['template' => 'partymeister-competitions::grid.competition_name']);
 
         $this->addColumn('entry_count', trans('partymeister-competitions::backend/entries.entries'));
@@ -43,7 +43,7 @@ class CompetitionGrid extends Grid
              ->renderer(BladeRenderer::class, ['template' => 'partymeister-competitions::grid.competition_status']);
 
         $this->setDefaultSorting('sort_position', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.competitions.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.competitions.destroy');
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.competitions.edit');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.competitions.destroy');
     }
 }

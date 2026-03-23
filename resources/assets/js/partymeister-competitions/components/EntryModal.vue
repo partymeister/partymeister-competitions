@@ -119,7 +119,7 @@
                                     <dd class="col-sm-8">
                                         <ul class="list-unstyled">
                                             <li v-for="(file, index) in entry.files" style="margin-bottom: 5px;">
-                                                {{ t('motor-backend.backend.global.uploaded') }} {{ file.created_at
+                                                {{ t('motor-admin.backend.global.uploaded') }} {{ file.created_at
                                                 }}<br>
                                                 <a :href="file.url">{{ wordwrap(file.file_name, 25) }}</a>
                                             </li>
@@ -131,7 +131,7 @@
                                     <div class="col-md-6">
                                         <h4 style="margin-top: 0.5rem;">
                                             {{ t('partymeister-competitions.backend.entries.config_file') }}</h4>
-                                        {{ t('motor-backend.backend.global.uploaded') }} {{ entry.config_file.created_at
+                                        {{ t('motor-admin.backend.global.uploaded') }} {{ entry.config_file.created_at
                                         }}<br>
                                         <a :href="entry.config_file.url">{{ entry.config_file.file_name }}</a>
                                     </div>
@@ -326,9 +326,9 @@ function nl2br(string) {
 
 function bool(value) {
     if (value == 0) {
-        return t('motor-backend.backend.global.no');
+        return t('motor-admin.backend.global.no');
     } else {
-        return t('motor-backend.backend.global.yes');
+        return t('motor-admin.backend.global.yes');
     }
 }
 

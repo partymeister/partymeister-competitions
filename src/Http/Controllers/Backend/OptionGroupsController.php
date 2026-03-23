@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Http\Controllers\Backend;
 
 use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\OptionGroupForm;
 use Partymeister\Competitions\Grids\OptionGroupGrid;
 use Partymeister\Competitions\Http\Requests\Backend\OptionGroupRequest;

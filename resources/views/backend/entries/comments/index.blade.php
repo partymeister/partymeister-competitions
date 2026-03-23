@@ -1,4 +1,4 @@
-@extends('motor-backend::layouts.backend')
+@extends('motor-admin::layouts.backend')
 
 @section('view_scripts')
     <style type="text/css">
@@ -8,13 +8,13 @@
     </style>
 @endsection
 @section('htmlheader_title')
-    {{ trans('motor-backend::backend/global.home') }}
+    {{ trans('motor-admin::backend/global.home') }}
 @endsection
 
 @section('contentheader_title')
     Messages for entry {{$record->name}}
     @if (has_permission('entries.write'))
-        {!! link_to_route('backend.entries.index', trans('motor-backend::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
+        {!! link_to_route('backend.entries.index', trans('motor-admin::backend/global.back'), [], ['class' => 'pull-right float-right btn btn-sm btn-danger']) !!}
     @endif
 @endsection
 

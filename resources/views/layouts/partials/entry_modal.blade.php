@@ -108,7 +108,7 @@
                                 <dd class="col-sm-8">
                                     <ul class="list-unstyled">
                                     <li v-for="(file, index) in entry.files.data" style="margin-bottom: 5px;">
-                                        {{trans('motor-backend::backend/global.uploaded')}} @{{ file.created_at }}<br>
+                                        {{trans('motor-admin::backend/global.uploaded')}} @{{ file.created_at }}<br>
                                         <a :href="file.url">@{{ file.file_name }}</a>
                                     </li>
                                     </ul>

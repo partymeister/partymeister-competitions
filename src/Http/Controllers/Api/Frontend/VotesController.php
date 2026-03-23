@@ -5,7 +5,7 @@ namespace Partymeister\Competitions\Http\Controllers\Api\Frontend;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Motor\Backend\Http\Controllers\ApiController;
+use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\Vote;

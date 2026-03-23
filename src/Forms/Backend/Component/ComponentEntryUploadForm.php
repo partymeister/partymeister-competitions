@@ -32,7 +32,7 @@ class ComponentEntryUploadForm extends Form
 
         $this->add('entries_page_id', 'select', [
             'label'       => trans('partymeister-competitions::component/entry-uploads.entries_page'),
-            'empty_value' => trans('motor-backend::backend/global.please_choose'),
+            'empty_value' => trans('motor-admin::backend/global.please_choose'),
             'choices'     => $navigationItemOptions,
         ]);
     }

@@ -14,7 +14,7 @@ class CompetitionTypeForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('has_platform', 'checkbox', ['label' => trans('partymeister-competitions::backend/competition_types.has_platform')])
              ->add('has_filesize', 'checkbox', ['label' => trans('partymeister-competitions::backend/competition_types.has_filesize')])
              ->add('has_screenshot', 'checkbox', ['label' => trans('partymeister-competitions::backend/competition_types.has_screenshot')])

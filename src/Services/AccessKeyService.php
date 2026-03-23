@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Services;
 
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Motor\Core\Filter\Renderers\SelectRenderer;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Models\Competition;
@@ -23,24 +23,24 @@ class AccessKeyService extends BaseService
                      ->setOptionPrefix(trans('partymeister-competitions::backend/access_keys.is_remote'))
                      ->setEmptyOption('-- '.trans('partymeister-competitions::backend/access_keys.is_remote').' --')
                      ->setOptions([
-                         1 => trans('motor-backend::backend/global.yes'),
-                         0 => trans('motor-backend::backend/global.no'),
+                         1 => trans('motor-admin::backend/global.yes'),
+                         0 => trans('motor-admin::backend/global.no'),
                      ]);
 
         $this->filter->add(new SelectRenderer('is_satellite'))
                      ->setOptionPrefix(trans('partymeister-competitions::backend/access_keys.is_satellite'))
                      ->setEmptyOption('-- '.trans('partymeister-competitions::backend/access_keys.is_satellite').' --')
                      ->setOptions([
-                         1 => trans('motor-backend::backend/global.yes'),
-                         0 => trans('motor-backend::backend/global.no'),
+                         1 => trans('motor-admin::backend/global.yes'),
+                         0 => trans('motor-admin::backend/global.no'),
                      ]);
 
         $this->filter->add(new SelectRenderer('is_prepaid'))
                      ->setOptionPrefix(trans('partymeister-competitions::backend/access_keys.is_prepaid'))
                      ->setEmptyOption('-- '.trans('partymeister-competitions::backend/access_keys.is_prepaid').' --')
                      ->setOptions([
-                         1 => trans('motor-backend::backend/global.yes'),
-                         0 => trans('motor-backend::backend/global.no'),
+                         1 => trans('motor-admin::backend/global.yes'),
+                         0 => trans('motor-admin::backend/global.no'),
                      ]);
     }
 

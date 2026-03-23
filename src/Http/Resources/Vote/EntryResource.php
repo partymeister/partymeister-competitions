@@ -3,9 +3,9 @@
 namespace Partymeister\Competitions\Http\Resources\Vote;
 
 use Illuminate\Support\Facades\Auth;
-use Motor\Backend\Helpers\Filesize;
-use Motor\Backend\Http\Resources\BaseResource;
-use Motor\Backend\Http\Resources\MediaResource;
+use Motor\Admin\Helpers\Filesize;
+use Motor\Admin\Http\Resources\BaseResource;
+use Motor\Admin\Http\Resources\MediaResource;
 use Partymeister\Competitions\Http\Resources\VoteResource;
 use Partymeister\Competitions\Models\Vote;
 

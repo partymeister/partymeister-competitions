@@ -31,7 +31,7 @@ class EntryUploadForm extends Form
             $this->add('competition_id', 'select', [
                 'attr'        => ['class' => 'form-control reload-on-change'],
                 'label'       => trans('partymeister-competitions::backend/competitions.competition'),
-                'empty_value' => trans('motor-backend::backend/global.please_choose'),
+                'empty_value' => trans('motor-admin::backend/global.please_choose'),
                 'choices'     => $competitions,
             ]);
         } elseif (isset($this->getModel()[$this->getName()]) && $this->getModel()[$this->getName()]['competition_id'] > 0) {
@@ -40,13 +40,13 @@ class EntryUploadForm extends Form
             $this->add('competition_id', 'static', [
                 'attr'        => ['class' => 'form-control reload-on-change'],
                 'label'       => trans('partymeister-competitions::backend/competitions.competition'),
-                'empty_value' => trans('motor-backend::backend/global.please_choose'),
+                'empty_value' => trans('motor-admin::backend/global.please_choose'),
             ]);
         } else {
             $this->add('competition_id', 'select', [
                 'attr'        => ['class' => 'form-control reload-on-change'],
                 'label'       => trans('partymeister-competitions::backend/competitions.competition'),
-                'empty_value' => trans('motor-backend::backend/global.please_choose'),
+                'empty_value' => trans('motor-admin::backend/global.please_choose'),
                 'choices'     => $competitions,
             ]);
         }
@@ -156,7 +156,7 @@ class EntryUploadForm extends Form
                 $this->add('engine_option', 'select2', [
                     'label'   => trans('partymeister-competitions::backend/entries.engine_option'),
                     'choices' => trans('partymeister-competitions::backend/entries.engine_options'),
-                    'empty_value' => trans('motor-backend::backend/global.please_choose'),
+                    'empty_value' => trans('motor-admin::backend/global.please_choose'),
                     'rules' => 'required',
                 ]);
                 $this->add('engine_option_description', 'text', ['label' => trans('partymeister-competitions::backend/entries.engine_option_description')]);

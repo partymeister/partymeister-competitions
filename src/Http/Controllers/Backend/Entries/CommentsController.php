@@ -4,7 +4,7 @@ namespace Partymeister\Competitions\Http\Controllers\Backend\Entries;
 
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\CommentForm;
 use Partymeister\Competitions\Models\Comment;
 use Partymeister\Competitions\Models\Entry;

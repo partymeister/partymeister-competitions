@@ -5,7 +5,7 @@ namespace Partymeister\Competitions\Services;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Motor\Core\Filter\Renderers\SelectRenderer;
 use Motor\Media\Models\FileAssociation;
 use Partymeister\Competitions\Events\CompetitionSaved;
@@ -30,22 +30,22 @@ class CompetitionService extends BaseService
                      ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.has_prizegiving'))
                      ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.has_prizegiving').' --')
                      ->setOptions([
-                         1 => trans('motor-backend::backend/global.yes'),
-                         0 => trans('motor-backend::backend/global.no'),
+                         1 => trans('motor-admin::backend/global.yes'),
+                         0 => trans('motor-admin::backend/global.no'),
                      ]);
         $this->filter->add(new SelectRenderer('upload_enabled'))
                      ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.upload_enabled'))
                      ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.upload_enabled').' --')
                      ->setOptions([
-                         1 => trans('motor-backend::backend/global.yes'),
-                         0 => trans('motor-backend::backend/global.no'),
+                         1 => trans('motor-admin::backend/global.yes'),
+                         0 => trans('motor-admin::backend/global.no'),
                      ]);
         $this->filter->add(new SelectRenderer('voting_enabled'))
                      ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.voting_enabled'))
                      ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.voting_enabled').' --')
                      ->setOptions([
-                         1 => trans('motor-backend::backend/global.yes'),
-                         0 => trans('motor-backend::backend/global.no'),
+                         1 => trans('motor-admin::backend/global.yes'),
+                         0 => trans('motor-admin::backend/global.no'),
                      ]);
     }
 

@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Grids;
 
-use Motor\Backend\Grid\Grid;
+use Motor\Admin\Grid\Grid;
 use Partymeister\Competitions\Grid\Renderers\CompetitionTypeRenderer;
 
 /**
@@ -12,11 +12,11 @@ class CompetitionTypeGrid extends Grid
 {
     protected function setup()
     {
-        $this->addColumn('name', trans('motor-backend::backend/global.name'), true);
+        $this->addColumn('name', trans('motor-admin::backend/global.name'), true);
         $this->addColumn('translated_properties', trans('partymeister-competitions::backend/competition_types.properties'))
              ->renderer(CompetitionTypeRenderer::class);
         $this->setDefaultSorting('name', 'ASC');
-        $this->addEditAction(trans('motor-backend::backend/global.edit'), 'backend.competition_types.edit');
-        $this->addDeleteAction(trans('motor-backend::backend/global.delete'), 'backend.competition_types.destroy');
+        $this->addEditAction(trans('motor-admin::backend/global.edit'), 'backend.competition_types.edit');
+        $this->addDeleteAction(trans('motor-admin::backend/global.delete'), 'backend.competition_types.destroy');
     }
 }

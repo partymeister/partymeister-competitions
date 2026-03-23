@@ -5,7 +5,7 @@ namespace Partymeister\Competitions\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Motor\Core\Filter\Renderers\SelectRenderer;
 use Partymeister\Competitions\Events\EntrySaved;

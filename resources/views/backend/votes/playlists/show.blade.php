@@ -1,4 +1,4 @@
-@extends('motor-backend::layouts.backend')
+@extends('motor-admin::layouts.backend')
 @section('view_styles')
     @include('partymeister-slides::layouts.partials.slide_fonts')
     <style type="text/css">
@@ -11,14 +11,14 @@
     </style>
 @append
 @section('htmlheader_title')
-    {{ trans('motor-backend::backend/global.home') }}
+    {{ trans('motor-admin::backend/global.home') }}
 @endsection
 
 @section('contentheader_title')
     {{ trans('partymeister-competitions::backend/competitions.playlist_preview') }}
     <button class="btn btn-sm btn-success float-right prizegiving-playlist-save"
             disabled>{{trans('partymeister-competitions::backend/competitions.save_playlist')}}</button>
-    {!! link_to_route('backend.competitions.index', trans('motor-backend::backend/global.back'), [], ['class' => 'float-right btn btn-sm btn-danger']) !!}
+    {!! link_to_route('backend.competitions.index', trans('motor-admin::backend/global.back'), [], ['class' => 'float-right btn btn-sm btn-danger']) !!}
 @endsection
 
 @section('main-content')

@@ -1,7 +1,7 @@
-@extends('motor-backend::layouts.backend')
+@extends('motor-admin::layouts.backend')
 
 @section('htmlheader_title')
-    {{ trans('motor-backend::backend/global.home') }}
+    {{ trans('motor-admin::backend/global.home') }}
 @endsection
 
 @section('contentheader_title')
@@ -95,7 +95,7 @@
 @section('view_scripts')
     <script type="module">
         $('.delete-record').click(function (e) {
-            if (!confirm('{{ trans('motor-backend::backend/global.delete_question') }}')) {
+            if (!confirm('{{ trans('motor-admin::backend/global.delete_question') }}')) {
                 e.preventDefault();
                 return false;
             }

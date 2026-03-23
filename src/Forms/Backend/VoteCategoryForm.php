@@ -14,7 +14,7 @@ class VoteCategoryForm extends Form
      */
     public function buildForm()
     {
-        $this->add('name', 'text', ['label' => trans('motor-backend::backend/global.name'), 'rules' => 'required'])
+        $this->add('name', 'text', ['label' => trans('motor-admin::backend/global.name'), 'rules' => 'required'])
              ->add('points', 'text', ['label' => trans('partymeister-competitions::backend/vote_categories.points')])
              ->add('has_negative', 'checkbox', ['label' => trans('partymeister-competitions::backend/vote_categories.has_negative')])
              ->add('has_comment', 'checkbox', ['label' => trans('partymeister-competitions::backend/vote_categories.has_comment')])

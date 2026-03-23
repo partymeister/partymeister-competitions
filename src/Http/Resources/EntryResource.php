@@ -3,9 +3,9 @@
 namespace Partymeister\Competitions\Http\Resources;
 
 use Illuminate\Support\Facades\Session;
-use Motor\Backend\Helpers\Filesize;
-use Motor\Backend\Http\Resources\BaseResource;
-use Motor\Backend\Http\Resources\MediaResource;
+use Motor\Admin\Helpers\Filesize;
+use Motor\Admin\Http\Resources\BaseResource;
+use Motor\Admin\Http\Resources\MediaResource;
 use Partymeister\Competitions\Models\Vote;
 use Partymeister\Core\Http\Resources\VisitorResource;
 

@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
 use Kris\LaravelFormBuilder\FormBuilderTrait;
-use Motor\Backend\Http\Controllers\Controller;
+use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\EntryForm;
 use Partymeister\Competitions\Grids\EntryGrid;
 use Partymeister\Competitions\Http\Requests\Backend\EntryRequest;

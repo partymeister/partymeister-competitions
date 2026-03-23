@@ -3,7 +3,7 @@
 namespace Partymeister\Competitions\Services;
 
 use Illuminate\Support\Arr;
-use Motor\Backend\Services\BaseService;
+use Motor\Admin\Services\BaseService;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\CompetitionPrize;
 

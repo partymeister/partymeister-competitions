@@ -1,7 +1,7 @@
-@extends('motor-backend::layouts.backend')
+@extends('motor-admin::layouts.backend')
 
 @section('htmlheader_title')
-    {{ trans('motor-backend::backend/global.home') }}
+    {{ trans('motor-admin::backend/global.home') }}
 @endsection
 
 @section('contentheader_title')
@@ -14,11 +14,11 @@
 @section('main-content')
     <div class="@boxWrapper">
         <div class="@boxHeader">
-            @include('motor-backend::layouts.partials.search')
+            @include('motor-admin::layouts.partials.search')
         </div>
         <!-- /.box-header -->
         @if (isset($grid))
-            @include('motor-backend::grid.table')
+            @include('motor-admin::grid.table')
         @endif
     </div>
 @endsection
@@ -26,7 +26,7 @@
 @section('view_scripts')
     <script type="module">
         $('.delete-record').click(function (e) {
-            if (!confirm('{{ trans('motor-backend::backend/global.delete_question') }}')) {
+            if (!confirm('{{ trans('motor-admin::backend/global.delete_question') }}')) {
                 e.preventDefault();
                 return false;
             }
@@ -56,10 +56,10 @@
                 $(that).data('live-voting-enabled', results.data.live_voting_enabled ? 0 : 1);
                 if (results.data.live_voting_enabled) {
                     toastr.options = {progressBar: true};
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.live_voting_enabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.live_voting_enabled')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                 } else {
                     toastr.options = {progressBar: true};
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.live_voting_disabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.live_voting_disabled')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                 }
             });
         });
@@ -73,12 +73,12 @@
                 $(that).data('upload-enabled', results.data.upload_enabled ? 0 : 1);
                 if (results.data.upload_enabled) {
                     toastr.options = {progressBar: true};
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.upload_enabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.upload_enabled')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                     $(that).parent().find('.change-competition-voting').prop('disabled', true);
                 } else {
                     $(that).parent().find('.change-competition-voting').prop('disabled', false);
                     toastr.options = {progressBar: true};
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.upload_disabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.upload_disabled')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                 }
             });
         });
@@ -91,11 +91,11 @@
                 $(that).data('voting-enabled', results.data.voting_enabled ? 0 : 1);
                 if (results.data.voting_enabled) {
                     toastr.options = {progressBar: true};
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.voting_enabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.voting_enabled')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                     $(that).parent().find('.change-competition-upload').prop('disabled', true);
                 } else {
                     toastr.options = {progressBar: true};
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.voting_disabled')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.voting_disabled')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                     $(that).parent().find('.change-competition-upload').prop('disabled', false);
                 }
             });
@@ -120,9 +120,9 @@
             updateRecord(this, $(this).data('record'), data, function (that, results) {
                 toastr.options = {progressBar: true};
                 if ($(that).data('field') === 'sort_position') {
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.sort_position_updated')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.sort_position_updated')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                 } else {
-                    toastr.success('{{trans('partymeister-competitions::backend/competitions.prizegiving_sort_position_updated')}}', '{{ trans('motor-backend::backend/global.flash.success') }}');
+                    toastr.success('{{trans('partymeister-competitions::backend/competitions.prizegiving_sort_position_updated')}}', '{{ trans('motor-admin::backend/global.flash.success') }}');
                 }
             });
         });

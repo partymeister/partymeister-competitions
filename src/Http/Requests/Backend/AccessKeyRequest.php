@@ -2,7 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Requests\Backend;
 
-use Motor\Backend\Http\Requests\Request;
+use Motor\Admin\Http\Requests\Request;
 
 /**
  * Class AccessKeyRequest

@@ -73,7 +73,7 @@ class PartymeisterCompetitionsBackendCompetitionTypeTest extends TestCase
     {
         $this->visit('/backend/competition_types')
             ->see(trans('partymeister-competitions::backend/competition_types.competition_types'))
-            ->see(trans('motor-backend::backend/global.no_records'));
+            ->see(trans('motor-admin::backend/global.no_records'));
     }
 
     /** @test */
@@ -91,10 +91,10 @@ class PartymeisterCompetitionsBackendCompetitionTypeTest extends TestCase
         $record = create_test_competition_type();
         $this->visit('/backend/competition_types')
             ->within('table', function () {
-                $this->click(trans('motor-backend::backend/global.edit'));
+                $this->click(trans('motor-admin::backend/global.edit'));
             })
             ->seePageIs('/backend/competition_types/'.$record->id.'/edit')
-            ->click(trans('motor-backend::backend/global.back'))
+            ->click(trans('motor-admin::backend/global.back'))
             ->seePageIs('/backend/competition_types');
     }
 
@@ -175,7 +175,7 @@ class PartymeisterCompetitionsBackendCompetitionTypeTest extends TestCase
 
         $this->visit('/backend/competition_types')
             ->within('table', function () {
-                $this->press(trans('motor-backend::backend/global.delete'));
+                $this->press(trans('motor-admin::backend/global.delete'));
             })
             ->seePageIs('/backend/competition_types')
             ->see(trans('partymeister-competitions::backend/competition_types.deleted'));
