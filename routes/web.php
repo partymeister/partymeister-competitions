@@ -19,6 +19,11 @@ use Partymeister\Competitions\Http\Controllers\Backend\Component\ComponentEntrie
 use Partymeister\Competitions\Http\Controllers\Backend\Component\ComponentEntryScreenshotsController;
 use Partymeister\Competitions\Http\Controllers\Backend\Component\ComponentEntryUploadsController;
 
+// Shader Showdown — standalone Vue app (token auth via API, no backend login required)
+Route::get('backend/shader-showdown', function () {
+    return view('partymeister-competitions::shader-showdown.index');
+})->middleware('web')->name('backend.shader-showdown');
+
 Route::group([
     'as'         => 'backend.',
     'prefix'     => 'backend',
