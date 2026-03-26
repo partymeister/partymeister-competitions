@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Services;
 
+use Illuminate\Support\Facades\DB;
 use League\Csv\Writer;
 use Motor\Backend\Services\BaseService;
 use Partymeister\Competitions\Models\Competition;
@@ -177,23 +178,60 @@ class VoteService extends BaseService
     public static function getAllVotesByRank($direction = 'DESC')
     {
         $results = [];
-        $maxPoints = [];
 
+        // Eager load competitions with their relations in 2 queries instead of N+1
         $competitionsWithPG = Competition::where('has_prizegiving', true)
-                                         ->orderBy('prizegiving_sort_position', $direction)
-                                         ->get();
+            ->with(['competition_type', 'vote_categories'])
+            ->orderBy('prizegiving_sort_position', $direction)
+            ->get();
 
-        // FIXME: SUPER HACK REVISION 2025
-        $competitionsWithOOCVoting = [];
-
-        foreach (Competition::where('has_prizegiving', false)
-                                         ->get() as $competition) {
-            if ($competition->competition_type->has_out_of_competition_voting) {
-                $competitionsWithOOCVoting[] = $competition;
-            }
-        }
+        $competitionsWithOOCVoting = Competition::where('has_prizegiving', false)
+            ->with(['competition_type', 'vote_categories'])
+            ->get()
+            ->filter(fn ($c) => $c->competition_type && $c->competition_type->has_out_of_competition_voting);
 
         $competitions = $competitionsWithPG->merge($competitionsWithOOCVoting);
+
+        // Load all qualified entries for these competitions in one query, with visitor.access_key eager loaded
+        $competitionIds = $competitions->pluck('id');
+        $allEntries = Entry::whereIn('competition_id', $competitionIds)
+            ->where('status', 1)
+            ->with('visitor.access_key')
+            ->get()
+            ->groupBy('competition_id');
+
+        // Collect all entry IDs for bulk vote queries
+        $allEntryIds = $allEntries->flatten()->pluck('id')->all();
+
+        if (count($allEntryIds) > 0) {
+            // Bulk: visitor vote totals (SUM per visitor, then SUM across visitors)
+            $voteTotals = DB::table(
+                DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN (' . implode(',', $allEntryIds) . ') GROUP BY entry_id, visitor_id) as sub')
+            )
+                ->select('entry_id', DB::raw('SUM(points_per_visitor) as total_points'))
+                ->groupBy('entry_id')
+                ->pluck('total_points', 'entry_id');
+
+            // Bulk: manual vote totals
+            $manualVoteTotals = DB::table('manual_votes')
+                ->select('entry_id', DB::raw('SUM(points) as total_points'))
+                ->whereIn('entry_id', $allEntryIds)
+                ->groupBy('entry_id')
+                ->pluck('total_points', 'entry_id');
+
+            // Bulk: vote comments
+            $allComments = DB::table('votes')
+                ->select('entry_id', 'comment')
+                ->whereIn('entry_id', $allEntryIds)
+                ->where('comment', '!=', '')
+                ->get()
+                ->groupBy('entry_id')
+                ->map(fn ($rows) => $rows->pluck('comment')->toArray());
+        } else {
+            $voteTotals = collect();
+            $manualVoteTotals = collect();
+            $allComments = collect();
+        }
 
         foreach ($competitions as $competition) {
             $results[$competition->id] = [
@@ -202,11 +240,13 @@ class VoteService extends BaseService
                 'has_comment' => isset($competition->vote_categories[0]) ? (bool) $competition->vote_categories[0]->has_comment : false,
                 'entries'     => [],
             ];
-            $maxPoints[$competition->id] = 0;
-            foreach ($competition->entries()
-                                 ->where('status', 1)
-                                 ->get() as $entry) {
-                $maxPoints[$competition->id] = max($entry->votes, $maxPoints[$competition->id]);
+            $maxPoints = 0;
+            $entries = $allEntries->get($competition->id, collect());
+
+            foreach ($entries as $entry) {
+                $points = ($voteTotals[$entry->id] ?? 0) + ($manualVoteTotals[$entry->id] ?? 0);
+                $maxPoints = max($points, $maxPoints);
+
                 $results[$competition->id]['entries'][$entry->id] = [
                     'id'                        => $entry->id,
                     'title'                     => $entry->title,
@@ -220,8 +260,8 @@ class VoteService extends BaseService
                     'author_phone'              => $entry->author_phone,
                     'remote_type'               => $entry->remote_type,
 
-                    'points'   => $entry->votes,
-                    'comments' => $entry->vote_comments,
+                    'points'   => $points,
+                    'comments' => $allComments[$entry->id] ?? [],
                     'tie'      => false,
                 ];
             }
@@ -234,14 +274,15 @@ class VoteService extends BaseService
             $uniquePoints = [];
 
             foreach ($results[$competition->id]['entries'] as $key => $entry) {
-                if (! array_key_exists((string) $entry['points'], $uniquePoints)) {
-                    $uniquePoints[$entry['points']] = 1;
+                $pointsKey = (string) $entry['points'];
+                if (! array_key_exists($pointsKey, $uniquePoints)) {
+                    $uniquePoints[$pointsKey] = 1;
                     $rank = array_sum($uniquePoints);
                 } else {
-                    $uniquePoints[$entry['points']]++;
+                    $uniquePoints[$pointsKey]++;
                 }
 
-                $results[$competition->id]['entries'][$key]['max_points'] = $maxPoints[$competition->id];
+                $results[$competition->id]['entries'][$key]['max_points'] = $maxPoints;
                 $results[$competition->id]['entries'][$key]['rank'] = $rank;
 
                 // Identify ties
@@ -262,56 +303,70 @@ class VoteService extends BaseService
      */
     public static function getAllSpecialVotesByRank()
     {
+        // Eager load competitions with relations
+        $competitions = Competition::where('has_prizegiving', true)
+            ->with(['competition_type', 'vote_categories'])
+            ->orderBy('prizegiving_sort_position', 'DESC')
+            ->get()
+            ->filter(fn ($c) => isset($c->vote_categories[0]) && $c->vote_categories[0]->has_special_vote);
+
+        // Load all qualified entries for these competitions
+        $competitionIds = $competitions->pluck('id');
+        $allEntries = Entry::whereIn('competition_id', $competitionIds)
+            ->where('status', 1)
+            ->with('visitor.access_key')
+            ->get();
+
+        $allEntryIds = $allEntries->pluck('id')->all();
+
+        // Bulk: special vote totals
+        if (count($allEntryIds) > 0) {
+            $specialVoteTotals = DB::table('votes')
+                ->select('entry_id', DB::raw('SUM(special_vote) as special_votes'))
+                ->whereIn('entry_id', $allEntryIds)
+                ->groupBy('entry_id')
+                ->pluck('special_votes', 'entry_id');
+        } else {
+            $specialVoteTotals = collect();
+        }
+
+        // Build a competition name lookup for entries
+        $competitionNames = $competitions->pluck('name', 'id');
+
         $results = [];
         $maxPoints = 0;
-        foreach (Competition::where('has_prizegiving', true)
-                            ->orderBy('prizegiving_sort_position', 'DESC')
-                            ->get() as $competition) {
-            if (isset($competition->vote_categories[0]) && $competition->vote_categories[0]->has_special_vote) {
-                foreach ($competition->entries()
-                                     ->where('status', 1)
-                                     ->get() as $entry) {
-                    $specialVotes = (int) $entry->special_votes;
-                    $maxPoints = max($specialVotes, $maxPoints);
-                    if ($specialVotes > 0) {
-                        $results[$entry->id] = [
-                            'id'            => $entry->id,
-                            'title'         => $entry->title,
-                            'author'        => $entry->author,
-                            'competition'   => $competition->name,
-                            'special_votes' => (int) $specialVotes,
-                            'points'        => (int) $specialVotes,
-                            'remote_type'   => $entry->remote_type,
-                            'tie'           => false,
-                        ];
-                    }
-                }
 
-                // Sort by points
-                unset($results['entries']);
-                usort($results, function ($item1, $item2) {
-                    return $item2['special_votes'] <=> $item1['special_votes'];
-                });
+        foreach ($allEntries as $entry) {
+            $specialVotes = (int) ($specialVoteTotals[$entry->id] ?? 0);
+            $maxPoints = max($specialVotes, $maxPoints);
+            if ($specialVotes > 0) {
+                $results[] = [
+                    'id'            => $entry->id,
+                    'title'         => $entry->title,
+                    'author'        => $entry->author,
+                    'competition'   => $competitionNames[$entry->competition_id] ?? '',
+                    'special_votes' => $specialVotes,
+                    'points'        => $specialVotes,
+                    'remote_type'   => $entry->remote_type,
+                    'tie'           => false,
+                ];
+            }
+        }
 
-                foreach ($results as $key => $entry) {
-                    $results[$key]['max_points'] = $maxPoints;
-                    $results[$key]['rank'] = ($key + 1);
+        // Sort by special votes descending
+        usort($results, function ($item1, $item2) {
+            return $item2['special_votes'] <=> $item1['special_votes'];
+        });
 
-                    // Identify ties
-                    if (isset($results[$key - 1])) {
-                        if (! isset($results[$key]['points'])) {
-                            continue;
-                        }
-                        if (! isset($results[$key - 1]['points'])) {
-                            continue;
-                        }
-                        if ($results[$key]['points'] == $results[$key - 1]['points']) {
-                            $results['entries'][$key]['tie'] = true;
-                            $results['entries'][$key - 1]['tie'] = true;
-                            $results['entries'][$key]['rank'] = ($key);
-                        }
-                    }
-                }
+        // Assign ranks and detect ties
+        foreach ($results as $key => $entry) {
+            $results[$key]['max_points'] = $maxPoints;
+            $results[$key]['rank'] = $key + 1;
+
+            if (isset($results[$key - 1]) && $results[$key]['points'] == $results[$key - 1]['points']) {
+                $results[$key]['tie'] = true;
+                $results[$key - 1]['tie'] = true;
+                $results[$key]['rank'] = $results[$key - 1]['rank'];
             }
         }
 

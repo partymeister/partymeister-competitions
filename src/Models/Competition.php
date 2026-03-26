@@ -5,6 +5,7 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -181,6 +182,98 @@ class Competition extends Model implements HasMedia
                     ->where('visitor_id', '>', 0)
                     ->where('notify_about_status', true)
                     ->orderBy('sort_position', 'ASC');
+    }
+
+    /**
+     * Get all qualified entries for this competition with bulk-computed vote totals.
+     *
+     * Returns a collection of arrays keyed by entry_id, each containing:
+     *   id, title, author, points, special_votes, comments, remote_type, rank, tie
+     *
+     * Uses bulk queries instead of per-entry accessors to avoid N+1.
+     */
+    public function getEntryVotesAttribute(): array
+    {
+        $entries = $this->entries()
+            ->where('status', 1)
+            ->with('visitor.access_key')
+            ->get();
+
+        if ($entries->isEmpty()) {
+            return [];
+        }
+
+        $entryIds = $entries->pluck('id')->all();
+
+        // Bulk: visitor vote totals (average per visitor, then sum across visitors)
+        $voteTotals = DB::table(
+            DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN (' . implode(',', $entryIds) . ') GROUP BY entry_id, visitor_id) as sub')
+        )
+            ->select('entry_id', DB::raw('SUM(points_per_visitor) as total_points'))
+            ->groupBy('entry_id')
+            ->pluck('total_points', 'entry_id');
+
+        // Bulk: manual vote totals
+        $manualVoteTotals = DB::table('manual_votes')
+            ->select('entry_id', DB::raw('SUM(points) as total_points'))
+            ->whereIn('entry_id', $entryIds)
+            ->groupBy('entry_id')
+            ->pluck('total_points', 'entry_id');
+
+        // Bulk: special vote totals
+        $specialVoteTotals = DB::table('votes')
+            ->select('entry_id', DB::raw('SUM(special_vote) as special_votes'))
+            ->whereIn('entry_id', $entryIds)
+            ->groupBy('entry_id')
+            ->pluck('special_votes', 'entry_id');
+
+        // Bulk: vote comments
+        $allComments = DB::table('votes')
+            ->select('entry_id', 'comment')
+            ->whereIn('entry_id', $entryIds)
+            ->where('comment', '!=', '')
+            ->get()
+            ->groupBy('entry_id')
+            ->map(fn ($rows) => $rows->pluck('comment')->toArray());
+
+        $results = [];
+        foreach ($entries as $entry) {
+            $points = ($voteTotals[$entry->id] ?? 0) + ($manualVoteTotals[$entry->id] ?? 0);
+            $results[] = [
+                'id'            => $entry->id,
+                'title'         => $entry->title,
+                'author'        => $entry->author,
+                'points'        => $points,
+                'special_votes' => (int) ($specialVoteTotals[$entry->id] ?? 0),
+                'comments'      => $allComments[$entry->id] ?? [],
+                'remote_type'   => $entry->remote_type,
+                'tie'           => false,
+            ];
+        }
+
+        // Sort by points descending
+        usort($results, fn ($a, $b) => $b['points'] <=> $a['points']);
+
+        // Assign ranks and detect ties
+        $uniquePoints = [];
+        foreach ($results as $key => $entry) {
+            $pointsKey = (string) $entry['points'];
+            if (! array_key_exists($pointsKey, $uniquePoints)) {
+                $uniquePoints[$pointsKey] = 1;
+                $rank = array_sum($uniquePoints);
+            } else {
+                $uniquePoints[$pointsKey]++;
+            }
+
+            $results[$key]['rank'] = $rank;
+
+            if (isset($results[$key - 1]) && $results[$key]['points'] == $results[$key - 1]['points']) {
+                $results[$key]['tie'] = true;
+                $results[$key - 1]['tie'] = true;
+            }
+        }
+
+        return $results;
     }
 
     /**
