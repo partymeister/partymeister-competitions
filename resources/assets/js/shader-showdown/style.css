@@ -83,9 +83,9 @@ body {
 }
 
 .status-pill.live {
-  border-color: var(--success);
-  background: var(--success-dim);
-  color: var(--success);
+  border-color: var(--danger);
+  background: var(--danger-dim);
+  color: var(--danger);
 }
 
 .status-pill .dot {
@@ -122,8 +122,9 @@ body {
 }
 
 .competition-card.is-live {
-  border-color: var(--success);
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.08);
+  border-color: var(--danger);
+  background: var(--danger-dim);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.1);
 }
 
 .competition-card.is-final {
@@ -165,7 +166,7 @@ body {
 }
 
 .card-badge.live {
-  background: var(--success);
+  background: var(--danger);
   color: #fff;
   animation: pulse 1.5s ease-in-out infinite;
 }

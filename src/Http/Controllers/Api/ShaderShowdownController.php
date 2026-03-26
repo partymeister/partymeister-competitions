@@ -99,11 +99,8 @@ class ShaderShowdownController extends Controller
             })
             ->findOrFail($id);
 
-        // Already live?
-        $existing = LiveVote::where('competition_id', $id)->first();
-        if ($existing) {
-            return response()->json(['message' => 'Live voting already active for this competition'], 409);
-        }
+        // Clear any existing live vote (only one can be active at a time)
+        LiveVote::query()->delete();
 
         $lastEntry = $competition->entries()->orderBy('sort_position', 'DESC')->first();
         if (! $lastEntry) {

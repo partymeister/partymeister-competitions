@@ -281,12 +281,13 @@ onUnmounted(() => {
       <template v-else>
         <!-- Status bar -->
         <div class="status-bar">
-          <div class="status-pill" :class="{ live: activeLiveCount > 0 }">
+          <div v-if="activeLiveCount > 0" class="status-pill live">
             <span class="dot"></span>
-            {{ activeLiveCount > 0 ? `${activeLiveCount} Live` : 'No active votes' }}
+            LIVE
           </div>
-          <div class="status-pill">
-            {{ allCompetitions.length }} Competitions
+          <div v-else class="status-pill">
+            <span class="dot"></span>
+            No voting active
           </div>
         </div>
 
