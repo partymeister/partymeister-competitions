@@ -17,6 +17,8 @@ class AccessKeyService extends BaseService
      */
     protected string $model = AccessKey::class;
 
+    protected array $loadColumns = ['visitor'];
+
     public function filters()
     {
         $this->filter->add(new SelectRenderer('is_remote'))

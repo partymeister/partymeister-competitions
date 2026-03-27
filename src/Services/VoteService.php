@@ -102,6 +102,8 @@ class VoteService extends BaseService
      */
     protected string $model = Vote::class;
 
+    protected array $loadColumns = ['vote_category'];
+
     /**
      * @param $request
      */

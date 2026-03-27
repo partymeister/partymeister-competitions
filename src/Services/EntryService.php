@@ -22,6 +22,8 @@ class EntryService extends BaseService
      */
     protected string $model = Entry::class;
 
+    protected array $loadColumns = ['competition'];
+
     public function filters()
     {
         //$this->filter->addClientFilter();

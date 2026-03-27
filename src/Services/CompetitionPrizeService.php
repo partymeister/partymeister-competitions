@@ -17,6 +17,8 @@ class CompetitionPrizeService extends BaseService
      */
     protected string $model = CompetitionPrize::class;
 
+    protected array $loadColumns = ['competition'];
+
     /**
      * @param $request
      *

@@ -15,6 +15,8 @@ class OptionGroupService extends BaseService
      */
     protected string $model = OptionGroup::class;
 
+    protected array $loadColumns = ['options'];
+
     public function afterUpdate()
     {
         $this->record->options()
