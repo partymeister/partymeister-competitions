@@ -34,7 +34,7 @@ class OptionGroupsController extends ApiController
     {
         $result = OptionGroupService::create($request)->getResult();
 
-        return (new OptionGroupResource($result->load('options')))
+        return (new OptionGroupResource($result))
             ->additional(['meta' => ['message' => 'Option group created']])
             ->response()
             ->setStatusCode(201);
@@ -44,7 +44,7 @@ class OptionGroupsController extends ApiController
     {
         $result = OptionGroupService::show($option_group)->getResult();
 
-        return (new OptionGroupResource($result->load('options')))
+        return (new OptionGroupResource($result))
             ->additional(['meta' => ['message' => 'Option group retrieved']]);
     }
 
@@ -52,7 +52,7 @@ class OptionGroupsController extends ApiController
     {
         $result = OptionGroupService::update($option_group, $request)->getResult();
 
-        return (new OptionGroupResource($result->load('options')))
+        return (new OptionGroupResource($result))
             ->additional(['meta' => ['message' => 'Option group updated']]);
     }
 

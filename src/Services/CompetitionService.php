@@ -20,7 +20,7 @@ class CompetitionService extends BaseService
 {
     protected string $model = Competition::class;
 
-    protected array $loadColumns = ['competition_type', 'vote_categories', 'option_groups'];
+    protected array $loadColumns = ['competition_type', 'vote_categories', 'option_groups.options'];
 
     public function filters(): void
     {
