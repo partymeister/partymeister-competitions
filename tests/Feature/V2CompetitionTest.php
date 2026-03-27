@@ -101,12 +101,9 @@ describe('V2 Competitions API', function () {
     });
 
     it('includes vote_categories as array in show response', function () {
-        $voteCategory = VoteCategory::create([
+        $voteCategory = VoteCategory::factory()->create([
             'name' => 'Overall',
             'points' => 10,
-            'has_negative' => false,
-            'has_comment' => false,
-            'has_special_vote' => false,
         ]);
         $competition = Competition::first();
         $competition->vote_categories()->attach($voteCategory->id);
@@ -120,7 +117,7 @@ describe('V2 Competitions API', function () {
     });
 
     it('includes option_groups as array in show response', function () {
-        $optionGroup = OptionGroup::create(['name' => 'Engine', 'type' => 'single']);
+        $optionGroup = OptionGroup::factory()->create(['name' => 'Engine', 'type' => 'single']);
         $competition = Competition::first();
         $competition->option_groups()->attach($optionGroup->id);
 

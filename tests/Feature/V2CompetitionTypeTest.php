@@ -14,8 +14,8 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    CompetitionType::create(['name' => 'Demo']);
-    CompetitionType::create(['name' => 'Executable']);
+    CompetitionType::factory()->create(['name' => 'Demo']);
+    CompetitionType::factory()->create(['name' => 'Executable']);
 });
 
 describe('V2 CompetitionTypes API', function () {

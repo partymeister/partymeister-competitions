@@ -15,11 +15,11 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    $group1 = OptionGroup::create(['name' => 'Engine', 'type' => 'single']);
+    $group1 = OptionGroup::factory()->create(['name' => 'Engine', 'type' => 'single']);
     $group1->options()->create(['name' => 'Unity', 'sort_position' => 0]);
     $group1->options()->create(['name' => 'Unreal', 'sort_position' => 1]);
 
-    OptionGroup::create(['name' => 'Platform', 'type' => 'multiple']);
+    OptionGroup::factory()->create(['name' => 'Platform', 'type' => 'multiple']);
 });
 
 describe('V2 OptionGroups API', function () {

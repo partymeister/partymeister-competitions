@@ -14,8 +14,8 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    VoteCategory::create(['name' => 'Overall', 'points' => 10]);
-    VoteCategory::create(['name' => 'Technical', 'points' => 5]);
+    VoteCategory::factory()->create(['name' => 'Overall', 'points' => 10]);
+    VoteCategory::factory()->create(['name' => 'Technical', 'points' => 5]);
 });
 
 describe('V2 VoteCategories API', function () {

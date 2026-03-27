@@ -20,36 +20,25 @@ beforeEach(function () {
     ]);
     $user->assignRole($role);
 
-    $competitionType = CompetitionType::create(['name' => 'Demo']);
+    $competitionType = CompetitionType::factory()->create(['name' => 'Demo']);
 
-    $competition = Competition::create([
+    $competition = Competition::factory()->create([
         'name' => 'Test Competition',
         'competition_type_id' => $competitionType->id,
         'sort_position' => 1,
         'prizegiving_sort_position' => 1,
-        'has_prizegiving' => false,
-        'upload_enabled' => false,
-        'voting_enabled' => false,
     ]);
 
-    $entry = Entry::create([
+    $entry = Entry::factory()->create([
         'competition_id' => $competition->id,
         'title' => 'Test Entry',
         'author' => 'Test Author',
-        'description' => '',
-        'organizer_description' => '',
-        'custom_option' => '',
         'sort_position' => 1,
-        'status' => 0,
-        'ip_address' => '127.0.0.1',
     ]);
 
-    $voteCategory = VoteCategory::create([
+    $voteCategory = VoteCategory::factory()->create([
         'name' => 'Overall',
         'points' => 10,
-        'has_negative' => false,
-        'has_comment' => false,
-        'has_special_vote' => false,
     ]);
 
     $this->competition = $competition;
@@ -79,7 +68,7 @@ describe('V2 Votes API', function () {
     });
 
     it('can get all votes with existing data', function () {
-        Vote::create([
+        Vote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'visitor_id' => null,
@@ -94,7 +83,7 @@ describe('V2 Votes API', function () {
     });
 
     it('can get a specific vote', function () {
-        $vote = Vote::create([
+        $vote = Vote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'visitor_id' => null,
@@ -109,7 +98,7 @@ describe('V2 Votes API', function () {
     });
 
     it('includes vote_category in show response', function () {
-        $vote = Vote::create([
+        $vote = Vote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'visitor_id' => null,
@@ -147,7 +136,7 @@ describe('V2 Votes API', function () {
     });
 
     it('can update a vote', function () {
-        $vote = Vote::create([
+        $vote = Vote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'visitor_id' => null,
@@ -162,7 +151,7 @@ describe('V2 Votes API', function () {
     });
 
     it('can delete a vote with 204 No Content', function () {
-        $vote = Vote::create([
+        $vote = Vote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'visitor_id' => null,
@@ -199,7 +188,7 @@ describe('V2 ManualVotes API', function () {
     });
 
     it('can get all manual votes with existing data', function () {
-        ManualVote::create([
+        ManualVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'points' => 5,
@@ -210,7 +199,7 @@ describe('V2 ManualVotes API', function () {
     });
 
     it('can get a specific manual vote', function () {
-        $manualVote = ManualVote::create([
+        $manualVote = ManualVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'points' => 6,
@@ -237,7 +226,7 @@ describe('V2 ManualVotes API', function () {
     });
 
     it('can update a manual vote', function () {
-        $manualVote = ManualVote::create([
+        $manualVote = ManualVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'points' => 2,
@@ -248,7 +237,7 @@ describe('V2 ManualVotes API', function () {
     });
 
     it('can delete a manual vote with 204 No Content', function () {
-        $manualVote = ManualVote::create([
+        $manualVote = ManualVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'points' => 3,
@@ -281,7 +270,7 @@ describe('V2 LiveVotes API', function () {
     });
 
     it('can get all live votes with existing data', function () {
-        LiveVote::create([
+        LiveVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'sort_position' => 1,
@@ -293,7 +282,7 @@ describe('V2 LiveVotes API', function () {
     });
 
     it('can get a specific live vote', function () {
-        $liveVote = LiveVote::create([
+        $liveVote = LiveVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'sort_position' => 2,
@@ -322,7 +311,7 @@ describe('V2 LiveVotes API', function () {
     });
 
     it('can update a live vote', function () {
-        $liveVote = LiveVote::create([
+        $liveVote = LiveVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'sort_position' => 5,
@@ -334,7 +323,7 @@ describe('V2 LiveVotes API', function () {
     });
 
     it('can delete a live vote with 204 No Content', function () {
-        $liveVote = LiveVote::create([
+        $liveVote = LiveVote::factory()->create([
             'competition_id' => $this->competition->id,
             'entry_id' => $this->entry->id,
             'sort_position' => 4,
