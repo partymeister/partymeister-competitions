@@ -2,11 +2,11 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Api\V2\Competitions;
 
-use Illuminate\Routing\Controller;
+use Motor\Core\Http\Controllers\Api\V2\ApiController;
 use Partymeister\Competitions\Http\Resources\V2\EntryCollection;
 use Partymeister\Competitions\Models\Competition;
 
-class EntriesController extends Controller
+class EntriesController extends ApiController
 {
     public function index(Competition $competition): EntryCollection
     {

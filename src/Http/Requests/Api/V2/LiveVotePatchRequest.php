@@ -2,23 +2,14 @@
 
 namespace Partymeister\Competitions\Http\Requests\Api\V2;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class LiveVotePatchRequest extends FormRequest
+class LiveVotePatchRequest extends LiveVotePostRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
-        return [
-            'competition_id' => 'sometimes|required|exists:competitions,id',
-            'entry_id' => 'sometimes|required|exists:entries,id',
-            'sort_position' => 'sometimes|required|integer',
-            'title' => 'sometimes|required|string|max:255',
-            'author' => 'sometimes|required|string|max:255',
-        ];
+        return collect(parent::rules())
+            ->mapWithKeys(fn ($rule, $key) => [
+                $key => 'sometimes|' . $rule,
+            ])
+            ->all();
     }
 }

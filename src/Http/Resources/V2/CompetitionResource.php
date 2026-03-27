@@ -21,6 +21,7 @@ class CompetitionResource extends BaseResource
             'voting_enabled' => (bool) $this->voting_enabled,
             'sort_position' => (int) $this->sort_position,
             'prizegiving_sort_position' => (int) $this->prizegiving_sort_position,
+            'entry_count' => $this->whenCounted('entries', $this->entries_count),
             'vote_categories' => VoteCategoryResource::collection($this->whenLoaded('vote_categories')),
             'option_groups' => OptionGroupResource::collection($this->whenLoaded('option_groups')),
             'created_at' => $this->created_at?->toIso8601String(),

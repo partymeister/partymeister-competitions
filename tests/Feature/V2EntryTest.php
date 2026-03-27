@@ -50,6 +50,16 @@ describe('V2 Entries API', function () {
         );
     });
 
+    it('includes competition in show response', function () {
+        $entry = Entry::first();
+
+        $response = $this->asAdmin()->getJson('/api/v2/entries/'.$entry->id);
+
+        $response->assertOk()
+            ->assertJsonStructure(['data' => ['competition' => ['id', 'name']]])
+            ->assertJsonPath('data.competition.name', 'Demo Competition');
+    });
+
     it('can create an entry', function () {
         $competition = Competition::first();
         assertV2CrudCreate('/api/v2/entries', [

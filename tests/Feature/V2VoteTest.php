@@ -104,6 +104,25 @@ describe('V2 Votes API', function () {
         assertV2CrudShow('/api/v2/votes/'.$vote->id, ['id', 'competition_id', 'entry_id', 'points', 'special_vote', 'comment', 'ip_address']);
     });
 
+    it('includes vote_category in show response', function () {
+        $vote = Vote::create([
+            'competition_id' => $this->competition->id,
+            'entry_id' => $this->entry->id,
+            'visitor_id' => null,
+            'vote_category_id' => $this->voteCategory->id,
+            'points' => 5,
+            'special_vote' => false,
+            'comment' => '',
+            'ip_address' => '127.0.0.1',
+        ]);
+
+        $response = $this->asAdmin()->getJson('/api/v2/votes/'.$vote->id);
+
+        $response->assertOk()
+            ->assertJsonStructure(['data' => ['vote_category' => ['id', 'name']]])
+            ->assertJsonPath('data.vote_category.name', 'Overall');
+    });
+
     it('can create a vote', function () {
         assertV2CrudCreate('/api/v2/votes', [
             'competition_id' => $this->competition->id,

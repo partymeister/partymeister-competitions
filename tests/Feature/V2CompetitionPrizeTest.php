@@ -49,6 +49,16 @@ describe('V2 Competition Prizes API', function () {
         );
     });
 
+    it('includes competition in show response', function () {
+        $prize = CompetitionPrize::first();
+
+        $response = $this->asAdmin()->getJson('/api/v2/competition-prizes/'.$prize->id);
+
+        $response->assertOk()
+            ->assertJsonStructure(['data' => ['competition' => ['id', 'name']]])
+            ->assertJsonPath('data.competition.name', 'Demo Competition');
+    });
+
     it('can create a competition prize', function () {
         $competition = Competition::first();
         assertV2CrudCreate('/api/v2/competition-prizes', [
