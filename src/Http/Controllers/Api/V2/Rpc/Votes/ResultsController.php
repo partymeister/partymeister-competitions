@@ -6,8 +6,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Partymeister\Competitions\Services\VoteService;
 
+/**
+ * @tags Votes
+ */
 class ResultsController extends Controller
 {
+    /**
+     * @response array{data: array{results: array, special: array}, meta: array{api_version: string, message: string}}
+     */
     public function __invoke(): JsonResponse
     {
         $results = VoteService::getAllVotesByRank();

@@ -8,8 +8,14 @@ use Partymeister\Competitions\Http\Requests\Api\V2\AccessKeyGeneratePostRequest;
 use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Services\AccessKeyService;
 
+/**
+ * @tags Access Keys
+ */
 class GenerateController extends Controller
 {
+    /**
+     * @response 201 array{data: array{generated: int}, meta: array{api_version: string, message: string}}
+     */
     public function __invoke(AccessKeyGeneratePostRequest $request): JsonResponse
     {
         $countBefore = AccessKey::count();

@@ -6,8 +6,14 @@ use Motor\Core\Http\Controllers\Api\V2\ApiController;
 use Partymeister\Competitions\Http\Resources\V2\EntryCollection;
 use Partymeister\Competitions\Models\Competition;
 
+/**
+ * @tags Competitions
+ */
 class EntriesController extends ApiController
 {
+    /**
+     * @response Illuminate\Http\Resources\Json\AnonymousResourceCollection<Illuminate\Pagination\LengthAwarePaginator<\Partymeister\Competitions\Http\Resources\V2\EntryResource>>
+     */
     public function index(Competition $competition): EntryCollection
     {
         $entries = $competition->entries()
