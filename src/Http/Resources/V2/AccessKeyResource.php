@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Resources\V2;
 
+use Illuminate\Support\Carbon;
 use Motor\Core\Http\Resources\V2\BaseResource;
 use Partymeister\Competitions\Models\AccessKey;
 
@@ -16,7 +17,7 @@ class AccessKeyResource extends BaseResource
             'id' => (int) $this->id,
             'access_key' => $this->access_key,
             'ip_address' => $this->ip_address,
-            'registered_at' => $this->registered_at ? \Illuminate\Support\Carbon::parse($this->registered_at)->toIso8601String() : null,
+            'registered_at' => $this->registered_at ? Carbon::parse($this->registered_at)->toIso8601String() : null,
             'is_remote' => (bool) $this->is_remote,
             'is_satellite' => (bool) $this->is_satellite,
             'is_prepaid' => (bool) $this->is_prepaid,

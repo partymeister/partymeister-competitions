@@ -8,7 +8,7 @@ class VoteCategoryPatchRequest extends VoteCategoryPostRequest
     {
         return collect(parent::rules())
             ->mapWithKeys(fn ($rule, $key) => [
-                $key => 'sometimes|' . $rule,
+                $key => 'sometimes|'.$rule,
             ])
             ->all();
     }
