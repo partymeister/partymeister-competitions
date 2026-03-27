@@ -7,22 +7,16 @@ use Partymeister\Competitions\Models\VoteCategory;
 
 class VoteCategoryFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = VoteCategory::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->words(2, true),
+            'points' => $this->faker->numberBetween(1, 10),
+            'has_negative' => false,
+            'has_comment' => false,
+            'has_special_vote' => false,
         ];
     }
 }

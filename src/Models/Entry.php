@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -123,10 +124,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Entry extends Model implements HasMedia
 {
+    use HasFactory;
     use InteractsWithMedia;
     use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+
+    protected static function newFactory()
+    {
+        return \Partymeister\Competitions\Database\Factories\EntryFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

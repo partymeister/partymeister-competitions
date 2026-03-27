@@ -7,22 +7,16 @@ use Partymeister\Competitions\Models\AccessKey;
 
 class AccessKeyFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = AccessKey::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->word,
+            'access_key' => strtoupper($this->faker->unique()->bothify('????-????')),
+            'ip_address' => $this->faker->ipv4(),
+            'is_remote' => false,
+            'is_satellite' => false,
+            'is_prepaid' => false,
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -75,10 +76,16 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  */
 class CompetitionType extends Model
 {
+    use HasFactory;
     use Searchable;
     use Filterable;
     use BlameableTrait;
     use HasShortflakePrimary;
+
+    protected static function newFactory()
+    {
+        return \Partymeister\Competitions\Database\Factories\CompetitionTypeFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

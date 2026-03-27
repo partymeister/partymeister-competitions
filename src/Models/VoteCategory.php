@@ -5,6 +5,7 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -55,10 +56,16 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  */
 class VoteCategory extends Model
 {
+    use HasFactory;
     use Searchable;
     use Filterable;
     use BlameableTrait;
     use HasShortflakePrimary;
+
+    protected static function newFactory()
+    {
+        return \Partymeister\Competitions\Database\Factories\VoteCategoryFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

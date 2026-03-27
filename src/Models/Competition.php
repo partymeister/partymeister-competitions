@@ -5,6 +5,7 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
@@ -76,11 +77,17 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Competition extends Model implements HasMedia
 {
+    use HasFactory;
     use InteractsWithMedia;
     use Searchable;
     use Filterable;
     use BlameableTrait;
     use HasShortflakePrimary;
+
+    protected static function newFactory()
+    {
+        return \Partymeister\Competitions\Database\Factories\CompetitionFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

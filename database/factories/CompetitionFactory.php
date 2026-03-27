@@ -4,25 +4,22 @@ namespace Partymeister\Competitions\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Partymeister\Competitions\Models\Competition;
+use Partymeister\Competitions\Models\CompetitionType;
 
 class CompetitionFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Competition::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->words(3, true),
+            'competition_type_id' => CompetitionType::factory(),
+            'sort_position' => $this->faker->numberBetween(0, 100),
+            'prizegiving_sort_position' => $this->faker->numberBetween(0, 100),
+            'has_prizegiving' => false,
+            'upload_enabled' => false,
+            'voting_enabled' => false,
         ];
     }
 }
