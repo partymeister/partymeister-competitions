@@ -17,14 +17,14 @@ class OptionGroupService extends BaseService
 
     protected array $loadColumns = ['options'];
 
-    public function afterUpdate()
+    public function afterUpdate(): void
     {
         $this->record->options()
                      ->delete();
         $this->afterCreate();
     }
 
-    public function afterCreate()
+    public function afterCreate(): void
     {
         $sortPosition = 0;
         foreach ($this->request->get('options', []) as $option) {

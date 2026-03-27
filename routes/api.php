@@ -82,3 +82,16 @@ Route::group([
     Route::post('competitions/{id}/start', [ShaderShowdownController::class, 'start'])->where('id', '[0-9]+');
     Route::post('competitions/{id}/stop', [ShaderShowdownController::class, 'stop'])->where('id', '[0-9]+');
 });
+
+use Motor\Core\Http\Middleware\V2\V2ErrorHandler;
+use Partymeister\Competitions\Http\Controllers\Api\V2;
+
+// V2 API routes
+Route::prefix('api/v2')
+    ->name('v2.')
+    ->middleware([V2ErrorHandler::class, 'auth:sanctum', 'bindings'])
+    ->group(function () {
+        Route::apiResource('competition-types', V2\CompetitionTypesController::class);
+        Route::apiResource('vote-categories', V2\VoteCategoriesController::class);
+        Route::apiResource('option-groups', V2\OptionGroupsController::class);
+    });
