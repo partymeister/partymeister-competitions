@@ -31,6 +31,10 @@ beforeEach(function () {
 
 describe('V2 Competition Prizes API', function () {
 
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/competition-prizes');
+    });
+
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/competition-prizes');
 

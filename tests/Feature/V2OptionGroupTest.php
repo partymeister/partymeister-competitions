@@ -24,6 +24,10 @@ beforeEach(function () {
 
 describe('V2 OptionGroups API', function () {
 
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/option-groups');
+    });
+
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/option-groups');
 

@@ -28,6 +28,10 @@ beforeEach(function () {
 
 describe('V2 RPC Vote Results', function () {
 
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/rpc/votes/results');
+    });
+
     it('returns 200 with api_version v2', function () {
         $response = $this->asAdmin()->getJson('/api/v2/rpc/votes/results');
 
@@ -67,6 +71,10 @@ describe('V2 RPC Vote Results', function () {
 // ─────────────────────────────────────────────
 
 describe('V2 RPC Access Key Generation', function () {
+
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/rpc/access-keys/generate', 'post');
+    });
 
     it('generates access keys and returns 201', function () {
         $countBefore = AccessKey::count();

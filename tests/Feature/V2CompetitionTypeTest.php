@@ -20,6 +20,10 @@ beforeEach(function () {
 
 describe('V2 CompetitionTypes API', function () {
 
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/competition-types');
+    });
+
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/competition-types');
 

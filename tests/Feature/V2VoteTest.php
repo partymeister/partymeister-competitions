@@ -63,6 +63,10 @@ beforeEach(function () {
 
 describe('V2 Votes API', function () {
 
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/votes');
+    });
+
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/votes');
 
@@ -179,6 +183,10 @@ describe('V2 Votes API', function () {
 
 describe('V2 ManualVotes API', function () {
 
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/manual-votes');
+    });
+
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/manual-votes');
 
@@ -256,6 +264,10 @@ describe('V2 ManualVotes API', function () {
 // ─────────────────────────────────────────────
 
 describe('V2 LiveVotes API', function () {
+
+    it('requires authentication', function () {
+        assertV2RequiresAuth('/api/v2/live-votes');
+    });
 
     it('includes api_version v2 in response meta', function () {
         $response = $this->asAdmin()->getJson('/api/v2/live-votes');
