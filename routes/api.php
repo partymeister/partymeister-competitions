@@ -101,3 +101,14 @@ Route::prefix('api/v2')
         Route::apiResource('access-keys', V2\AccessKeysController::class);
         Route::apiResource('competition-prizes', V2\CompetitionPrizesController::class);
     });
+
+// V2 RPC routes
+Route::prefix('api/v2/rpc')
+    ->name('v2.rpc.')
+    ->middleware([V2ErrorHandler::class, 'auth:sanctum', 'bindings'])
+    ->group(function () {
+        Route::get('votes/results', \Partymeister\Competitions\Http\Controllers\Api\V2\Rpc\Votes\ResultsController::class)
+            ->name('votes.results');
+        Route::post('access-keys/generate', \Partymeister\Competitions\Http\Controllers\Api\V2\Rpc\AccessKeys\GenerateController::class)
+            ->name('access-keys.generate');
+    });

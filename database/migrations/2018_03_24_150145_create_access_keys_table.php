@@ -19,7 +19,7 @@ class CreateAccessKeysTable extends Migration
             $table->id();
             $table->bigInteger('visitor_id')->unsigned()->index()->nullable();
             $table->string('access_key');
-            $table->string('ip_address');
+            $table->string('ip_address')->nullable();
             $table->datetime('registered_at')->nullable();
 
             $table->timestamps();
