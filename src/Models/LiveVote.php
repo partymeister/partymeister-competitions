@@ -4,10 +4,13 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Motor\Core\Traits\Filterable;
+use Motor\Core\Traits\Searchable;
 
 /**
  * Partymeister\Competitions\Models\LiveVote
@@ -40,8 +43,15 @@ use Illuminate\Support\Carbon;
  */
 class LiveVote extends Model
 {
-
+    use HasFactory;
+    use Searchable;
+    use Filterable;
     use HasShortflakePrimary;
+
+    protected static function newFactory()
+    {
+        return \Partymeister\Competitions\Database\Factories\LiveVoteFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

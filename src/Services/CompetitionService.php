@@ -25,7 +25,7 @@ class CompetitionService extends BaseService
 
     protected array $loadColumns = ['competition_type', 'vote_categories', 'option_groups'];
 
-    public function filters()
+    public function filters(): void
     {
         //$this->filter->addClientFilter();
         $this->filter->add(new SelectRenderer('has_prizegiving'))
@@ -51,7 +51,7 @@ class CompetitionService extends BaseService
                      ]);
     }
 
-    public function beforeUpdate()
+    public function beforeUpdate(): void
     {
         if (isset($this->data['upload_enabled'])) {
             $this->data['upload_enabled'] = (bool) $this->data['upload_enabled'];
@@ -61,7 +61,7 @@ class CompetitionService extends BaseService
         }
     }
 
-    public function afterUpdate()
+    public function afterUpdate(): void
     {
         if (! is_null($this->request->get('switch_live_voting'))) {
             if ($this->record->live_voting_enabled) {
@@ -155,7 +155,7 @@ class CompetitionService extends BaseService
         }
     }
 
-    public function afterCreate()
+    public function afterCreate(): void
     {
         foreach ($this->request->get('option_groups', []) as $id) {
             $this->record->option_groups()

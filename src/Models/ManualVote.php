@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -39,9 +40,15 @@ use Motor\Core\Traits\Searchable;
  */
 class ManualVote extends Model
 {
+    use HasFactory;
     use Searchable;
     use Filterable;
     use HasShortflakePrimary;
+
+    protected static function newFactory()
+    {
+        return \Partymeister\Competitions\Database\Factories\ManualVoteFactory::new();
+    }
 
     /**
      * Searchable columns for the searchable trait

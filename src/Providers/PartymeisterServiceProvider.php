@@ -23,6 +23,8 @@ use Partymeister\Competitions\Models\Component\ComponentEntryUpload;
 use Partymeister\Competitions\Models\Component\ComponentVoting;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Models\OptionGroup;
+use Partymeister\Competitions\Models\LiveVote;
+use Partymeister\Competitions\Models\ManualVote;
 use Partymeister\Competitions\Models\Vote;
 use Partymeister\Competitions\Models\VoteCategory;
 
@@ -63,6 +65,7 @@ class PartymeisterServiceProvider extends ServiceProvider
         if (! $this->app->routesAreCached()) {
             require __DIR__.'/../../routes/web.php';
             require __DIR__.'/../../routes/api.php';
+            require __DIR__.'/../../routes/api_v2_votes.php';
         }
     }
 
@@ -95,6 +98,14 @@ class PartymeisterServiceProvider extends ServiceProvider
         });
         Route::bind('vote', function ($id) {
             return Vote::findOrFail($id);
+        });
+
+        Route::bind('manual_vote', function ($id) {
+            return ManualVote::findOrFail($id);
+        });
+
+        Route::bind('live_vote', function ($id) {
+            return LiveVote::findOrFail($id);
         });
 
         // Components

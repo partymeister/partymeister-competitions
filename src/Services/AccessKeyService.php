@@ -19,7 +19,7 @@ class AccessKeyService extends BaseService
 
     protected array $loadColumns = ['visitor'];
 
-    public function filters()
+    public function filters(): void
     {
         $this->filter->add(new SelectRenderer('is_remote'))
                      ->setOptionPrefix(trans('partymeister-competitions::backend/access_keys.is_remote'))

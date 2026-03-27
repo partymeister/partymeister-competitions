@@ -24,7 +24,7 @@ class EntryService extends BaseService
 
     protected array $loadColumns = ['competition'];
 
-    public function filters()
+    public function filters(): void
     {
         //$this->filter->addClientFilter();
         $this->filter->add(new SelectRenderer('competition_id'))
@@ -39,7 +39,7 @@ class EntryService extends BaseService
                      ->setOptions(trans('partymeister-competitions::backend/entries.stati'));
     }
 
-    public function beforeCreate()
+    public function beforeCreate(): void
     {
         $visitor = Auth::guard('visitor')
                        ->user();
@@ -54,7 +54,7 @@ class EntryService extends BaseService
         }
     }
 
-    public function afterCreate()
+    public function afterCreate(): void
     {
         $this->addOptions();
         $this->addImages();
@@ -106,7 +106,7 @@ class EntryService extends BaseService
         $this->uploadFile($this->request->file($prefix.'config_file'), 'config_file', 'config_file');
     }
 
-    public function afterUpdate()
+    public function afterUpdate(): void
     {
         $prefix = '';
         if (! is_null($this->form)) {

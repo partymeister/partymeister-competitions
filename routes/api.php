@@ -94,4 +94,10 @@ Route::prefix('api/v2')
         Route::apiResource('competition-types', V2\CompetitionTypesController::class);
         Route::apiResource('vote-categories', V2\VoteCategoriesController::class);
         Route::apiResource('option-groups', V2\OptionGroupsController::class);
+        Route::apiResource('competitions', V2\CompetitionsController::class);
+        Route::get('competitions/{competition}/entries', [V2\Competitions\EntriesController::class, 'index'])->name('competitions.entries.index');
+        Route::get('competitions/{competition}/prizes', [V2\Competitions\PrizesController::class, 'index'])->name('competitions.prizes.index');
+        Route::apiResource('entries', V2\EntriesController::class);
+        Route::apiResource('access-keys', V2\AccessKeysController::class);
+        Route::apiResource('competition-prizes', V2\CompetitionPrizesController::class);
     });
