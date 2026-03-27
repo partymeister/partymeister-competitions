@@ -2,11 +2,13 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="CompetitionPrizeResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -39,17 +41,17 @@ class CompetitionPrizeResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'          => (int) $this->id,
+            'id' => (int) $this->id,
             'competition' => new CompetitionResource($this->whenLoaded('competition')),
-            'amount'      => $this->amount,
-            'additional'  => $this->additional,
-            'rank'        => $this->rank,
+            'amount' => $this->amount,
+            'additional' => $this->additional,
+            'rank' => $this->rank,
         ];
     }
 }

@@ -10,7 +10,7 @@ beforeEach(function () {
     $role = Role::create(['name' => 'SuperAdmin', 'guard_name' => 'web']);
     $user = User::factory()->create([
         'email' => 'admin@motor-cms.com',
-        'name'  => 'Admin',
+        'name' => 'Admin',
     ]);
     $user->assignRole($role);
 

@@ -2,11 +2,13 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="ResultResource",
+ *
  *   @OA\Property(
  *     property="tbd",
  *     type="string",
@@ -19,7 +21,7 @@ class ResultResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)

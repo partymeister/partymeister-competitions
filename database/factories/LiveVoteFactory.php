@@ -15,10 +15,10 @@ class LiveVoteFactory extends Factory
     {
         return [
             'competition_id' => Competition::factory(),
-            'entry_id'       => Entry::factory(),
-            'sort_position'  => $this->faker->numberBetween(1, 100),
-            'title'          => $this->faker->words(3, true),
-            'author'         => $this->faker->name(),
+            'entry_id' => Entry::factory(),
+            'sort_position' => $this->faker->numberBetween(1, 100),
+            'title' => $this->faker->words(3, true),
+            'author' => $this->faker->name(),
         ];
     }
 }

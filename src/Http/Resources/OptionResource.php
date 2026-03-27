@@ -2,11 +2,13 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="OptionResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -34,16 +36,16 @@ class OptionResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'            => (int) $this->id,
-            'option_group'  => new OptionGroupResource($this->whenLoaded('option_group')),
+            'id' => (int) $this->id,
+            'option_group' => new OptionGroupResource($this->whenLoaded('option_group')),
             'sort_position' => (int) $this->sort_position,
-            'name'          => $this->name,
+            'name' => $this->name,
         ];
     }
 }

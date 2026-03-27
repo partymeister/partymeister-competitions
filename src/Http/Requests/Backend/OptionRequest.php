@@ -12,6 +12,7 @@ class OptionRequest extends Request
     /**
      * @OA\Schema(
      *   schema="OptionRequest",
+     *
      *   @OA\Property(
      *     property="option_group_id",
      *     type="integer",
@@ -50,8 +51,8 @@ class OptionRequest extends Request
     {
         return [
             'option_group_id' => 'nullable|integer',
-            'sort_position'   => 'nullable|integer',
-            'name'            => 'required',
+            'sort_position' => 'nullable|integer',
+            'name' => 'required',
         ];
     }
 }

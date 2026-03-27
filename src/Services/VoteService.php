@@ -3,6 +3,9 @@
 namespace Partymeister\Competitions\Services;
 
 use Illuminate\Support\Facades\DB;
+use League\Csv\CannotInsertRecord;
+use League\Csv\Exception;
+use League\Csv\InvalidArgument;
 use League\Csv\Writer;
 use Motor\Admin\Services\BaseService;
 use Partymeister\Competitions\Models\Competition;
@@ -74,7 +77,7 @@ class VoteService extends BaseService
             ->first();
 
         if (is_null($vote)) {
-            $vote = new Vote();
+            $vote = new Vote;
             $vote->visitor_id = $visitor->id;
             $vote->competition_id = $competition->id;
             $vote->entry_id = $entryId;
@@ -97,22 +100,16 @@ class VoteService extends BaseService
         ];
     }
 
-    /**
-     * @var string
-     */
     protected string $model = Vote::class;
 
     protected array $loadColumns = ['vote_category'];
 
-    /**
-     * @param $request
-     */
     public static function addVotes($request)
     {
         foreach ($request->get('entry') as $competitionId => $entries) {
             foreach ($entries as $entryId => $points) {
                 if ((int) $points !== 0) {
-                    $mv = new ManualVote();
+                    $mv = new ManualVote;
                     $mv->competition_id = $competitionId;
                     $mv->entry_id = $entryId;
                     $mv->points = $points;
@@ -124,10 +121,11 @@ class VoteService extends BaseService
     }
 
     /**
-     * @return \League\Csv\Writer
-     * @throws \League\Csv\CannotInsertRecord
-     * @throws \League\Csv\Exception
-     * @throws \League\Csv\InvalidArgument
+     * @return Writer
+     *
+     * @throws CannotInsertRecord
+     * @throws Exception
+     * @throws InvalidArgument
      */
     public static function exportCSV()
     {
@@ -159,22 +157,22 @@ class VoteService extends BaseService
             }
         }
 
-        //load the CSV document from a string
+        // load the CSV document from a string
         $csv = Writer::createFromString();
         $csv->setEnclosure('"');
         $csv->setDelimiter(';');
 
-        //insert the header
+        // insert the header
         $csv->insertOne($header);
 
-        //insert all the records
+        // insert all the records
         $csv->insertAll($records);
 
         return $csv;
     }
 
     /**
-     * @param string $direction
+     * @param  string  $direction
      * @return array
      */
     public static function getAllVotesByRank($direction = 'DESC')
@@ -208,7 +206,7 @@ class VoteService extends BaseService
         if (count($allEntryIds) > 0) {
             // Bulk: visitor vote totals (SUM per visitor, then SUM across visitors)
             $voteTotals = DB::table(
-                DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN (' . implode(',', $allEntryIds) . ') GROUP BY entry_id, visitor_id) as sub')
+                DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN ('.implode(',', $allEntryIds).') GROUP BY entry_id, visitor_id) as sub')
             )
                 ->select('entry_id', DB::raw('SUM(points_per_visitor) as total_points'))
                 ->groupBy('entry_id')
@@ -237,10 +235,10 @@ class VoteService extends BaseService
 
         foreach ($competitions as $competition) {
             $results[$competition->id] = [
-                'id'          => $competition->id,
-                'name'        => $competition->name,
+                'id' => $competition->id,
+                'name' => $competition->name,
                 'has_comment' => isset($competition->vote_categories[0]) ? (bool) $competition->vote_categories[0]->has_comment : false,
-                'entries'     => [],
+                'entries' => [],
             ];
             $maxPoints = 0;
             $entries = $allEntries->get($competition->id, collect());
@@ -250,21 +248,21 @@ class VoteService extends BaseService
                 $maxPoints = max($points, $maxPoints);
 
                 $results[$competition->id]['entries'][$entry->id] = [
-                    'id'                        => $entry->id,
-                    'title'                     => $entry->title,
-                    'author'                    => $entry->author,
-                    'author_name'               => $entry->author_name,
-                    'author_address'            => $entry->author_address,
-                    'author_city'               => $entry->author_city,
-                    'author_zip'                => $entry->author_zip,
+                    'id' => $entry->id,
+                    'title' => $entry->title,
+                    'author' => $entry->author,
+                    'author_name' => $entry->author_name,
+                    'author_address' => $entry->author_address,
+                    'author_city' => $entry->author_city,
+                    'author_zip' => $entry->author_zip,
                     'author_country_iso_3166_1' => $entry->author_country_iso_3166_1,
-                    'author_email'              => $entry->author_email,
-                    'author_phone'              => $entry->author_phone,
-                    'remote_type'               => $entry->remote_type,
+                    'author_email' => $entry->author_email,
+                    'author_phone' => $entry->author_phone,
+                    'remote_type' => $entry->remote_type,
 
-                    'points'   => $points,
+                    'points' => $points,
                     'comments' => $allComments[$entry->id] ?? [],
-                    'tie'      => false,
+                    'tie' => false,
                 ];
             }
 
@@ -343,14 +341,14 @@ class VoteService extends BaseService
             $maxPoints = max($specialVotes, $maxPoints);
             if ($specialVotes > 0) {
                 $results[] = [
-                    'id'            => $entry->id,
-                    'title'         => $entry->title,
-                    'author'        => $entry->author,
-                    'competition'   => $competitionNames[$entry->competition_id] ?? '',
+                    'id' => $entry->id,
+                    'title' => $entry->title,
+                    'author' => $entry->author,
+                    'competition' => $competitionNames[$entry->competition_id] ?? '',
                     'special_votes' => $specialVotes,
-                    'points'        => $specialVotes,
-                    'remote_type'   => $entry->remote_type,
-                    'tie'           => false,
+                    'points' => $specialVotes,
+                    'remote_type' => $entry->remote_type,
+                    'tie' => false,
                 ];
             }
         }

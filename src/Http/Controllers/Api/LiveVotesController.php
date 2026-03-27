@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Competitions\Http\Requests\Backend\LiveVoteRequest;
 use Partymeister\Competitions\Http\Resources\LiveVoteCollection;
@@ -23,7 +24,9 @@ class LiveVotesController extends ApiController
      *   tags={"LiveVotesController"},
      *   path="/api/live_votes",
      *   summary="Get live_vote collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +34,20 @@ class LiveVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/LiveVoteResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +63,11 @@ class LiveVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +79,7 @@ class LiveVotesController extends ApiController
     public function index()
     {
         $paginator = LiveVoteService::collection()
-                                    ->getPaginator();
+            ->getPaginator();
 
         return (new LiveVoteCollection($paginator))->additional(['message' => 'LiveVote collection read']);
     }
@@ -79,10 +89,14 @@ class LiveVotesController extends ApiController
      *   tags={"LiveVotesController"},
      *   path="/api/live_votes",
      *   summary="Create new live_vote",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/LiveVoteRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +104,13 @@ class LiveVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +123,34 @@ class LiveVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  LiveVoteRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(LiveVoteRequest $request)
     {
         $result = LiveVoteService::create($request)
-                                 ->getResult();
+            ->getResult();
 
         return (new LiveVoteResource($result))->additional(['message' => 'LiveVote created'])
-                                              ->response()
-                                              ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +158,9 @@ class LiveVotesController extends ApiController
      *   tags={"LiveVotesController"},
      *   path="/api/live_votes/{live_vote}",
      *   summary="Get single live_vote",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +168,22 @@ class LiveVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="live_vote",
      *     parameter="live_vote",
      *     description="LiveVote id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +196,30 @@ class LiveVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  LiveVote  $record
      * @return LiveVoteResource
      */
     public function show(LiveVote $record)
     {
         $result = LiveVoteService::show($record)
-                                 ->getResult();
+            ->getResult();
 
         return (new LiveVoteResource($result))->additional(['message' => 'LiveVote read']);
     }
@@ -199,10 +229,14 @@ class LiveVotesController extends ApiController
      *   tags={"LiveVotesController"},
      *   path="/api/live_votes/{live_vote}",
      *   summary="Update an existing live_vote",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/LiveVoteRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +244,22 @@ class LiveVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="live_vote",
      *     parameter="live_vote",
      *     description="LiveVote id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +272,30 @@ class LiveVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  LiveVoteRequest  $request
-     * @param  LiveVote  $record
      * @return LiveVoteResource
      */
     public function update(LiveVoteRequest $request, LiveVote $record)
     {
         $result = LiveVoteService::update($record, $request)
-                                 ->getResult();
+            ->getResult();
 
         return (new LiveVoteResource($result))->additional(['message' => 'LiveVote updated']);
     }
@@ -264,7 +305,9 @@ class LiveVotesController extends ApiController
      *   tags={"LiveVotesController"},
      *   path="/api/live_votes/{live_vote}",
      *   summary="Delete a live_vote",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +315,22 @@ class LiveVotesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="live_vote",
      *     parameter="live_vote",
      *     description="LiveVote id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +338,27 @@ class LiveVotesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +370,12 @@ class LiveVotesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  LiveVote  $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy(LiveVote $record)
     {
         $result = LiveVoteService::delete($record)
-                                 ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'LiveVote deleted']);

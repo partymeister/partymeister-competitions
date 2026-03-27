@@ -15,9 +15,9 @@ class ManualVoteFactory extends Factory
     {
         return [
             'competition_id' => Competition::factory(),
-            'entry_id'       => Entry::factory(),
-            'points'         => $this->faker->numberBetween(1, 10),
-            'ip_address'     => $this->faker->ipv4(),
+            'entry_id' => Entry::factory(),
+            'points' => $this->faker->numberBetween(1, 10),
+            'ip_address' => $this->faker->ipv4(),
         ];
     }
 }

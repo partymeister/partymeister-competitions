@@ -13,16 +13,16 @@ class AccessKeyResource extends BaseResource
     public function toArray($request): array
     {
         return [
-            'id'            => (int) $this->id,
-            'access_key'    => $this->access_key,
-            'ip_address'    => $this->ip_address,
+            'id' => (int) $this->id,
+            'access_key' => $this->access_key,
+            'ip_address' => $this->ip_address,
             'registered_at' => $this->registered_at,
-            'is_remote'     => (bool) $this->is_remote,
-            'is_satellite'  => (bool) $this->is_satellite,
-            'is_prepaid'    => (bool) $this->is_prepaid,
-            'visitor_id'    => $this->visitor_id,
-            'created_at'    => $this->created_at?->toIso8601String(),
-            'updated_at'    => $this->updated_at?->toIso8601String(),
+            'is_remote' => (bool) $this->is_remote,
+            'is_satellite' => (bool) $this->is_satellite,
+            'is_prepaid' => (bool) $this->is_prepaid,
+            'visitor_id' => $this->visitor_id,
+            'created_at' => $this->created_at?->toIso8601String(),
+            'updated_at' => $this->updated_at?->toIso8601String(),
         ];
     }
 }

@@ -5,14 +5,15 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Database\Factories\CompetitionPrizeFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -49,19 +50,20 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|CompetitionPrize whereRank($value)
  * @method static Builder|CompetitionPrize whereUpdatedAt($value)
  * @method static Builder|CompetitionPrize whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class CompetitionPrize extends Model
 {
-    use HasFactory;
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
+    use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     protected static function newFactory()
     {
-        return \Partymeister\Competitions\Database\Factories\CompetitionPrizeFactory::new();
+        return CompetitionPrizeFactory::new();
     }
 
     /**

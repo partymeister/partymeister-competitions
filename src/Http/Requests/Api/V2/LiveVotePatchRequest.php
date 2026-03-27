@@ -15,10 +15,10 @@ class LiveVotePatchRequest extends FormRequest
     {
         return [
             'competition_id' => 'sometimes|required|exists:competitions,id',
-            'entry_id'       => 'sometimes|required|exists:entries,id',
-            'sort_position'  => 'sometimes|required|integer',
-            'title'          => 'sometimes|required|string|max:255',
-            'author'         => 'sometimes|required|string|max:255',
+            'entry_id' => 'sometimes|required|exists:entries,id',
+            'sort_position' => 'sometimes|required|integer',
+            'title' => 'sometimes|required|string|max:255',
+            'author' => 'sometimes|required|string|max:255',
         ];
     }
 }

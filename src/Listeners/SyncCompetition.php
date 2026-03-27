@@ -21,8 +21,6 @@ class SyncCompetition
 
     /**
      * Handle the event.
-     *
-     * @param  CompetitionSaved  $event
      */
     public function handle(CompetitionSaved $event)
     {

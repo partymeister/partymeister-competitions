@@ -5,9 +5,9 @@ namespace Partymeister\Competitions\Models\Component;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\CMS\Models\ComponentBaseModel;
 use Motor\CMS\Models\Navigation;
 use Motor\CMS\Models\PageVersionComponent;
@@ -29,11 +29,11 @@ use Motor\CMS\Models\PageVersionComponent;
  * @method static Builder|ComponentEntryUpload whereEntriesPageId($value)
  * @method static Builder|ComponentEntryUpload whereId($value)
  * @method static Builder|ComponentEntryUpload whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class ComponentEntryUpload extends ComponentBaseModel
 {
-
     use HasShortflakePrimary;
 
     /**
@@ -53,7 +53,7 @@ class ComponentEntryUpload extends ComponentBaseModel
     public function preview()
     {
         return [
-            'name'    => trans('partymeister-competitions::component/entry-uploads.component'),
+            'name' => trans('partymeister-competitions::component/entry-uploads.component'),
             'preview' => 'Preview for ComponentEntryUpload component',
         ];
     }

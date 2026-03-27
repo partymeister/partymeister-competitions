@@ -6,6 +6,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Services\VoteService;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Class PlaylistsController
@@ -13,7 +14,7 @@ use Partymeister\Competitions\Services\VoteService;
 class ExportController extends Controller
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @return StreamedResponse
      */
     public function csv()
     {

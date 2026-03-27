@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend\Component;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
@@ -32,8 +33,7 @@ class ComponentEntriesController extends ComponentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -51,8 +51,7 @@ class ComponentEntriesController extends ComponentController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  ComponentEntry  $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function edit(ComponentEntry $record)
     {
@@ -66,9 +65,7 @@ class ComponentEntriesController extends ComponentController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  ComponentEntry  $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(Request $request, ComponentEntry $record)
     {

@@ -10,8 +10,5 @@ use Partymeister\Competitions\Models\VoteCategory;
  */
 class VoteCategoryService extends BaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = VoteCategory::class;
 }

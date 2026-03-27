@@ -10,7 +10,7 @@ beforeEach(function () {
     $role = Role::create(['name' => 'SuperAdmin', 'guard_name' => 'web']);
     $user = User::factory()->create([
         'email' => 'admin@motor-cms.com',
-        'name'  => 'Admin',
+        'name' => 'Admin',
     ]);
     $user->assignRole($role);
 
@@ -41,7 +41,7 @@ describe('V2 VoteCategories API', function () {
 
     it('can create a vote category', function () {
         assertV2CrudCreate('/api/v2/vote-categories', [
-            'name'   => 'Originality',
+            'name' => 'Originality',
             'points' => 8,
         ], VoteCategory::class);
     });

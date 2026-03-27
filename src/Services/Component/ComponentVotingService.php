@@ -10,9 +10,6 @@ use Partymeister\Competitions\Models\Component\ComponentVoting;
  */
 class ComponentVotingService extends ComponentBaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = ComponentVoting::class;
 
     /**

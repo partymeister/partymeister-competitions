@@ -56,7 +56,7 @@ class PartymeisterCompetitionsGenerateEntryCommand extends Command
         }
 
         for ($i = 0; $i < $count; $i++) {
-            $entry = new Entry();
+            $entry = new Entry;
             $entry->competition_id = $competition->id;
             $entry->title = $faker->catchPhrase;
             $entry->author = $faker->name;
@@ -98,11 +98,11 @@ class PartymeisterCompetitionsGenerateEntryCommand extends Command
                 $option3 = array_rand($options);
 
                 $entry->options()
-                      ->attach($option1);
+                    ->attach($option1);
                 $entry->options()
-                      ->attach($option2);
+                    ->attach($option2);
                 $entry->options()
-                      ->attach($option3);
+                    ->attach($option3);
             }
 
             $this->info('Created entry: '.$entry->title.' for competition: '.$competition->name);

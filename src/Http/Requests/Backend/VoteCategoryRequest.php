@@ -12,6 +12,7 @@ class VoteCategoryRequest extends Request
     /**
      * @OA\Schema(
      *   schema="VoteCategoryRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -59,10 +60,10 @@ class VoteCategoryRequest extends Request
     public function rules()
     {
         return [
-            'name'             => 'required',
-            'points'           => 'required|integer',
-            'has_negative'     => 'nullable|boolean',
-            'has_comment'      => 'nullable|boolean',
+            'name' => 'required',
+            'points' => 'required|integer',
+            'has_negative' => 'nullable|boolean',
+            'has_comment' => 'nullable|boolean',
             'has_special_vote' => 'nullable|boolean',
         ];
     }

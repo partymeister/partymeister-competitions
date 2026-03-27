@@ -2,11 +2,13 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="VoteCategoryResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -44,17 +46,17 @@ class VoteCategoryResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'               => (int) $this->id,
-            'name'             => $this->name,
-            'points'           => (int) $this->points,
-            'has_negative'     => (bool) $this->has_negative,
-            'has_comment'      => (bool) $this->has_comment,
+            'id' => (int) $this->id,
+            'name' => $this->name,
+            'points' => (int) $this->points,
+            'has_negative' => (bool) $this->has_negative,
+            'has_comment' => (bool) $this->has_comment,
             'has_special_vote' => (bool) $this->has_special_vote,
         ];
     }

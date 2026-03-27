@@ -5,6 +5,7 @@ namespace Partymeister\Competitions\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -29,7 +30,7 @@ class EntryStatusInfo extends Mailable
      */
     public function envelope(): Envelope
     {
-        return new Envelope(from: new Address(config('partymeister-core-visitor-registration.password_reset_from_email'), config('partymeister-core-visitor-registration.password_reset_from_name')), subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix').'Information about your entry',);
+        return new Envelope(from: new Address(config('partymeister-core-visitor-registration.password_reset_from_email'), config('partymeister-core-visitor-registration.password_reset_from_name')), subject: config('partymeister-core-visitor-registration.password_reset_subject_prefix').'Information about your entry');
     }
 
     /**
@@ -39,14 +40,14 @@ class EntryStatusInfo extends Mailable
     {
         return new Content(text: 'partymeister-competitions::emails.entries.status-info', with: [
             'demoparty' => config('motor-cms-frontend.name'),
-            'entry'     => $this->entry,
-        ],);
+            'entry' => $this->entry,
+        ], );
     }
 
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {

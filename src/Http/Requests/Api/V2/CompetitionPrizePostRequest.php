@@ -15,9 +15,9 @@ class CompetitionPrizePostRequest extends FormRequest
     {
         return [
             'competition_id' => 'required|exists:competitions,id',
-            'amount'         => 'nullable|string|max:255',
-            'additional'     => 'nullable|string|max:255',
-            'rank'           => 'required|integer|min:1',
+            'amount' => 'nullable|string|max:255',
+            'additional' => 'nullable|string|max:255',
+            'rank' => 'required|integer|min:1',
         ];
     }
 }

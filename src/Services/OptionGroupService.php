@@ -10,9 +10,6 @@ use Partymeister\Competitions\Models\OptionGroup;
  */
 class OptionGroupService extends BaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = OptionGroup::class;
 
     protected array $loadColumns = ['options'];
@@ -20,7 +17,7 @@ class OptionGroupService extends BaseService
     public function afterUpdate(): void
     {
         $this->record->options()
-                     ->delete();
+            ->delete();
         $this->afterCreate();
     }
 
@@ -30,7 +27,7 @@ class OptionGroupService extends BaseService
         foreach ($this->request->get('options', []) as $option) {
             if (trim($option['name']) != '') {
                 $this->record->options()
-                             ->create(['name' => $option['name'], 'sort_position' => $sortPosition++]);
+                    ->create(['name' => $option['name'], 'sort_position' => $sortPosition++]);
             }
         }
     }

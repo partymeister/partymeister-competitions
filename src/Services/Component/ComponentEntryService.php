@@ -10,9 +10,6 @@ use Partymeister\Competitions\Models\Component\ComponentEntry;
  */
 class ComponentEntryService extends ComponentBaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = ComponentEntry::class;
 
     /**

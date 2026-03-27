@@ -12,6 +12,7 @@ class LiveVoteRequest extends Request
     /**
      * @OA\Schema(
      *   schema="LiveVoteRequest",
+     *
      *   @OA\Property(
      *     property="competition_id",
      *     type="integer",
@@ -60,10 +61,10 @@ class LiveVoteRequest extends Request
     {
         return [
             'competition_id' => 'required|integer',
-            'entry_id'       => 'required|integer',
-            'sort_position'  => 'required|integer',
-            'title'          => 'required',
-            'author'         => 'required',
+            'entry_id' => 'required|integer',
+            'sort_position' => 'required|integer',
+            'title' => 'required',
+            'author' => 'required',
         ];
     }
 }

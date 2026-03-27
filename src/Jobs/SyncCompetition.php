@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\Jobs;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,8 +31,6 @@ class SyncCompetition implements ShouldQueue
      * Create a new job instance.
      *
      * SyncCompetition constructor.
-     *
-     * @param  Competition  $competition
      */
     public function __construct(Competition $competition)
     {
@@ -41,7 +40,7 @@ class SyncCompetition implements ShouldQueue
     /**
      * Execute the job.
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function handle()
     {

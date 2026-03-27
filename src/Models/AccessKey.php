@@ -5,13 +5,15 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Database\Factories\AccessKeyFactory;
 use Partymeister\Core\Models\Visitor;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
@@ -48,19 +50,20 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|AccessKey whereUpdatedAt($value)
  * @method static Builder|AccessKey whereUpdatedBy($value)
  * @method static Builder|AccessKey whereVisitorId($value)
+ *
  * @mixin Eloquent
  */
 class AccessKey extends Model
 {
-    use HasFactory;
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
+    use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     protected static function newFactory()
     {
-        return \Partymeister\Competitions\Database\Factories\AccessKeyFactory::new();
+        return AccessKeyFactory::new();
     }
 
     /**
@@ -89,7 +92,7 @@ class AccessKey extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function visitor()
     {

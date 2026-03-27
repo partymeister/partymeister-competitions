@@ -116,7 +116,7 @@ class ShaderShowdownController extends Controller
             'author' => $competition->name,
         ]);
 
-        return response()->json(['message' => 'Live voting started for ' . $competition->name]);
+        return response()->json(['message' => 'Live voting started for '.$competition->name]);
     }
 
     /**
@@ -127,8 +127,8 @@ class ShaderShowdownController extends Controller
     public function stop(int $id): JsonResponse
     {
         $competition = Competition::whereHas('competition_type', function ($q) {
-                $q->whereIn('name', ['Shader Showdown', 'Shader Showdown Final']);
-            })
+            $q->whereIn('name', ['Shader Showdown', 'Shader Showdown Final']);
+        })
             ->findOrFail($id);
 
         $liveVote = LiveVote::where('competition_id', $id)->first();
@@ -140,6 +140,6 @@ class ShaderShowdownController extends Controller
 
         $competition->update(['voting_enabled' => false]);
 
-        return response()->json(['message' => 'Live voting stopped for ' . $competition->name]);
+        return response()->json(['message' => 'Live voting stopped for '.$competition->name]);
     }
 }

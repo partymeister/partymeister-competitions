@@ -12,6 +12,7 @@ class VoteRequest extends Request
     /**
      * @OA\Schema(
      *   schema="VoteRequest",
+     *
      *   @OA\Property(
      *     property="competition_id",
      *     type="integer",
@@ -69,13 +70,13 @@ class VoteRequest extends Request
     public function rules()
     {
         return [
-            'competition_id'   => 'required|integer',
-            'entry_id'         => 'required|integer',
-            'visitor_id'       => 'required|integer',
+            'competition_id' => 'required|integer',
+            'entry_id' => 'required|integer',
+            'visitor_id' => 'required|integer',
             'vote_category_id' => 'required|integer',
-            'special_vote'     => 'nullable|boolean',
-            'comment'          => 'nullable',
-            'points'           => 'required|integer',
+            'special_vote' => 'nullable|boolean',
+            'comment' => 'nullable',
+            'points' => 'required|integer',
         ];
     }
 }

@@ -21,8 +21,6 @@ class SyncLiveVote
 
     /**
      * Handle the event.
-     *
-     * @param  LiveVoteUpdated  $event
      */
     public function handle(LiveVoteUpdated $event)
     {

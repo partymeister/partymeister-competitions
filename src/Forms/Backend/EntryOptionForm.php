@@ -41,29 +41,29 @@ class EntryOptionForm extends Form
                 switch ($optionGroup->type) {
                     case 'multiple':
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
-                            'choices'        => $options,
-                            'selected'       => $selected,
-                            'wrapper'        => ['class' => 'w-full grid grid-cols-2 md:grid-cols-4 gap-2'],
+                            'choices' => $options,
+                            'selected' => $selected,
+                            'wrapper' => ['class' => 'w-full grid grid-cols-2 md:grid-cols-4 gap-2'],
                             'choice_options' => [
-                                'wrapper'    => ['class' => ''],
+                                'wrapper' => ['class' => ''],
                                 'label_attr' => ['class' => 'form-label'],
                             ],
-                            'expanded'       => true,
-                            'multiple'       => true,
-                            'label'          => false,
+                            'expanded' => true,
+                            'multiple' => true,
+                            'label' => false,
                         ]);
                         break;
                     case 'single':
                         $this->add(Str::slug($optionGroup->name, '_'), 'choice', [
-                            'choices'        => $options,
-                            'selected'       => $selected,
-                            'wrapper'        => ['class' => 'w-full grid grid-cols-2 md:grid-cols-4 gap-2'],
+                            'choices' => $options,
+                            'selected' => $selected,
+                            'wrapper' => ['class' => 'w-full grid grid-cols-2 md:grid-cols-4 gap-2'],
                             'choice_options' => [
-                                'wrapper'    => ['class' => ''],
+                                'wrapper' => ['class' => ''],
                                 'label_attr' => ['class' => 'form-label'],
                             ],
-                            'expanded'       => true,
-                            'label'          => false,
+                            'expanded' => true,
+                            'label' => false,
                         ]);
                         break;
                 }

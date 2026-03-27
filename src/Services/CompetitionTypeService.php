@@ -10,8 +10,5 @@ use Partymeister\Competitions\Models\CompetitionType;
  */
 class CompetitionTypeService extends BaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = CompetitionType::class;
 }

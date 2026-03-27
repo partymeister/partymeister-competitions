@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\Jobs;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,8 +30,6 @@ class SyncLiveVote implements ShouldQueue
      * Create a new job instance.
      *
      * SyncLiveVote constructor.
-     *
-     * @param  LiveVote  $liveVote
      */
     public function __construct(LiveVote $liveVote)
     {
@@ -40,7 +39,7 @@ class SyncLiveVote implements ShouldQueue
     /**
      * Execute the job.
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function handle()
     {
@@ -50,9 +49,9 @@ class SyncLiveVote implements ShouldQueue
 
         $data = [
             'data' => [
-                'entry_id'       => $this->liveVote->entry_id,
+                'entry_id' => $this->liveVote->entry_id,
                 'competition_id' => $this->liveVote->competition_id,
-                'sort_position'  => $this->liveVote->sort_position,
+                'sort_position' => $this->liveVote->sort_position,
             ],
         ];
         $client = new Client([

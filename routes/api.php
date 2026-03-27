@@ -1,47 +1,47 @@
 <?php
 
 use Partymeister\Competitions\Http\Controllers\Api\AccessKeysController;
-use Partymeister\Competitions\Http\Controllers\Api\CompetitionsController;
 use Partymeister\Competitions\Http\Controllers\Api\CompetitionPlaylistController;
 use Partymeister\Competitions\Http\Controllers\Api\CompetitionPrizesController;
+use Partymeister\Competitions\Http\Controllers\Api\CompetitionsController;
 use Partymeister\Competitions\Http\Controllers\Api\CompetitionTypesController;
 use Partymeister\Competitions\Http\Controllers\Api\EntriesController;
 use Partymeister\Competitions\Http\Controllers\Api\LiveVotesController;
 use Partymeister\Competitions\Http\Controllers\Api\ManualVotesController;
 use Partymeister\Competitions\Http\Controllers\Api\OptionGroupsController;
 use Partymeister\Competitions\Http\Controllers\Api\PrizegivingPlaylistController;
+use Partymeister\Competitions\Http\Controllers\Api\ShaderShowdownController;
 use Partymeister\Competitions\Http\Controllers\Api\SyncController;
 use Partymeister\Competitions\Http\Controllers\Api\VoteCategoriesController;
-use Partymeister\Competitions\Http\Controllers\Api\VotesController;
 use Partymeister\Competitions\Http\Controllers\Api\Votes\ResultsController;
-use Partymeister\Competitions\Http\Controllers\Api\ShaderShowdownController;
+use Partymeister\Competitions\Http\Controllers\Api\VotesController;
 use Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys\GenerateController;
 use Partymeister\Competitions\Http\Middleware\ShaderShowdownTokenAuth;
 
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
-    'prefix'     => 'api',
-    'as'         => 'api.',
+    'prefix' => 'api',
+    'as' => 'api.',
 ], function () {
     Route::apiResource('option_groups', OptionGroupsController::class);
     Route::apiResource('competition_types', CompetitionTypesController::class);
     Route::apiResource('competitions', CompetitionsController::class);
-    //Route::get('competitions/{competition}/playlist', 'Competitions\PlaylistsController@index')
+    // Route::get('competitions/{competition}/playlist', 'Competitions\PlaylistsController@index')
     //     ->name('competitions.playlist.index');
     Route::get('competitions/{competition}/playlist-data', [CompetitionPlaylistController::class, 'show'])
-         ->name('competitions.playlist-data');
+        ->name('competitions.playlist-data');
     Route::post('competitions/{competition}/playlist', [CompetitionPlaylistController::class, 'store'])
-         ->name('competitions.playlist.store');
+        ->name('competitions.playlist.store');
     Route::get('prizegiving/playlist-data', [PrizegivingPlaylistController::class, 'show'])
-         ->name('prizegiving.playlist-data');
+        ->name('prizegiving.playlist-data');
     Route::post('prizegiving/playlist', [PrizegivingPlaylistController::class, 'store'])
-         ->name('prizegiving.playlist.store');
+        ->name('prizegiving.playlist.store');
     Route::apiResource('vote_categories', VoteCategoriesController::class);
     Route::apiResource('entries', EntriesController::class);
     Route::apiResource('access_keys', AccessKeysController::class);
     Route::apiResource('competition_prizes', CompetitionPrizesController::class);
     Route::get('votes/results', [ResultsController::class, 'index'])
-         ->name('votes.results');
+        ->name('votes.results');
     Route::apiResource('votes', VotesController::class);
     Route::apiResource('live_votes', LiveVotesController::class);
     Route::apiResource('manual_votes', ManualVotesController::class);
@@ -49,11 +49,11 @@ Route::group([
 
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
-    'prefix'     => 'api-rpc',
-    'as'         => 'api-rpc.',
+    'prefix' => 'api-rpc',
+    'as' => 'api-rpc.',
 ], function () {
     Route::post('access_keys/generate', [GenerateController::class, 'store'])
-         ->name('access_keys.generate');
+        ->name('access_keys.generate');
 });
 
 // Disabled 2026-03-18: these sync routes have no authentication and allow unauthenticated
@@ -66,11 +66,11 @@ Route::group([
 // TODO: remove once we abandon the php powered backend
 Route::group([
     'middleware' => ['web', 'web_auth', 'bindings', 'permission'],
-    'prefix'     => 'ajax',
-    'as'         => 'ajax.',
+    'prefix' => 'ajax',
+    'as' => 'ajax.',
 ], function () {
     Route::post('access_keys/generate', [GenerateController::class, 'store'])
-         ->name('access_keys.generate');
+        ->name('access_keys.generate');
 });
 
 Route::group([
@@ -107,8 +107,8 @@ Route::prefix('api/v2/rpc')
     ->name('v2.rpc.')
     ->middleware([V2ErrorHandler::class, 'auth:sanctum', 'bindings'])
     ->group(function () {
-        Route::get('votes/results', \Partymeister\Competitions\Http\Controllers\Api\V2\Rpc\Votes\ResultsController::class)
+        Route::get('votes/results', V2\Rpc\Votes\ResultsController::class)
             ->name('votes.results');
-        Route::post('access-keys/generate', \Partymeister\Competitions\Http\Controllers\Api\V2\Rpc\AccessKeys\GenerateController::class)
+        Route::post('access-keys/generate', V2\Rpc\AccessKeys\GenerateController::class)
             ->name('access-keys.generate');
     });

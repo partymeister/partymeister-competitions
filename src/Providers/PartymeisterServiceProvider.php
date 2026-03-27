@@ -22,9 +22,9 @@ use Partymeister\Competitions\Models\Component\ComponentEntryScreenshot;
 use Partymeister\Competitions\Models\Component\ComponentEntryUpload;
 use Partymeister\Competitions\Models\Component\ComponentVoting;
 use Partymeister\Competitions\Models\Entry;
-use Partymeister\Competitions\Models\OptionGroup;
 use Partymeister\Competitions\Models\LiveVote;
 use Partymeister\Competitions\Models\ManualVote;
+use Partymeister\Competitions\Models\OptionGroup;
 use Partymeister\Competitions\Models\Vote;
 use Partymeister\Competitions\Models\VoteCategory;
 
@@ -182,7 +182,7 @@ class PartymeisterServiceProvider extends ServiceProvider
     {
         $assets = [
             __DIR__.'/../../resources/assets/sass' => resource_path('assets/sass'),
-            __DIR__.'/../../resources/assets/pdf'  => resource_path('assets/pdf'),
+            __DIR__.'/../../resources/assets/pdf' => resource_path('assets/pdf'),
         ];
 
         $this->publishes($assets, 'partymeister-competitions-install-resources');

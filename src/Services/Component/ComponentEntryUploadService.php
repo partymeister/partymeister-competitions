@@ -10,9 +10,6 @@ use Partymeister\Competitions\Models\Component\ComponentEntryUpload;
  */
 class ComponentEntryUploadService extends ComponentBaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = ComponentEntryUpload::class;
 
     /**

@@ -24,9 +24,6 @@ class PDF extends Fpdi
      */
     protected $StartY = false;
 
-    /**
-     * @var
-     */
     protected $FontSpacing;
 
     /**
@@ -35,7 +32,6 @@ class PDF extends Fpdi
     protected $FontStyles = [];
 
     /**
-     * @param    $family
      * @param  string  $style
      * @param  string  $fontfile
      * @param  string  $subset
@@ -78,27 +74,20 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param    $name
-     * @param    $family
-     * @param    $style
-     * @param    $size
      * @param  int  $spacing
      * @param  array  $color
      */
     public function AddStyle($name, $family, $style, $size, $spacing = 0, $color = [])
     {
         $this->FontStyles[$name] = [
-            'family'  => $family,
-            'style'   => $style,
-            'size'    => $size,
+            'family' => $family,
+            'style' => $style,
+            'size' => $size,
             'spacing' => $spacing,
-            'color'   => $color,
+            'color' => $color,
         ];
     }
 
-    /**
-     * @param $style
-     */
     public function SetStyle($style)
     {
         $style = $this->FontStyles[$style];
@@ -112,8 +101,6 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param    $alias
-     * @param    $path
      * @param  int  $page
      *
      * @throws CrossReferenceException
@@ -142,16 +129,11 @@ class PDF extends Fpdi
         parent::UseTemplate($this->fpdi_templates[$alias], $x, $y, $width, $height, $adjustPageSize);
     }
 
-    public function Header()
-    {
-    }
+    public function Header() {}
 
-    public function Footer()
-    {
-    }
+    public function Footer() {}
 
     /**
-     * @param    $render_method
      * @param  array  $arguments
      * @param  bool  $page_break_method
      */
@@ -182,7 +164,6 @@ class PDF extends Fpdi
     }
 
     /**
-     * @param    $w
      * @param  int  $h
      * @param  string  $txt
      * @param  int  $border

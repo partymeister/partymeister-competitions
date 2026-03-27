@@ -15,9 +15,9 @@ class CompetitionPrizePatchRequest extends FormRequest
     {
         return [
             'competition_id' => 'sometimes|required|exists:competitions,id',
-            'amount'         => 'sometimes|nullable|string|max:255',
-            'additional'     => 'sometimes|nullable|string|max:255',
-            'rank'           => 'sometimes|required|integer|min:1',
+            'amount' => 'sometimes|nullable|string|max:255',
+            'additional' => 'sometimes|nullable|string|max:255',
+            'rank' => 'sometimes|required|integer|min:1',
         ];
     }
 }

@@ -2,7 +2,11 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend\Entries;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\CommentForm;
@@ -19,8 +23,7 @@ class CommentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Entry  $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index(Entry $record)
     {
@@ -28,10 +31,10 @@ class CommentsController extends Controller
         $url = route('backend.entries.comments.store', [$record->id]);
 
         $form = $this->form(CommentForm::class, [
-            'method'  => 'POST',
-            'url'     => $url,
+            'method' => 'POST',
+            'url' => $url,
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         $comments = $record->comments;
@@ -42,9 +45,7 @@ class CommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
-     * @param  Entry  $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(Request $request, Entry $record)
     {
@@ -52,7 +53,7 @@ class CommentsController extends Controller
 
         if ($request->get('mark_as_read') == 1) {
             foreach ($record->comments()
-                            ->get() as $comment) {
+                ->get() as $comment) {
                 $comment->read_by_organizer = true;
                 $comment->save();
             }
@@ -60,7 +61,7 @@ class CommentsController extends Controller
             return redirect('backend/entries/comments/'.$record->id);
         } else {
             $form->getField('message')
-                 ->setOption('rules', ['required']);
+                ->setOption('rules', ['required']);
         }
 
         if (! $form->isValid()) {
@@ -71,12 +72,12 @@ class CommentsController extends Controller
         }
 
         foreach ($record->comments()
-                        ->get() as $comment) {
+            ->get() as $comment) {
             $comment->read_by_organizer = true;
             $comment->save();
         }
 
-        $c = new Comment();
+        $c = new Comment;
         $c->visitor_id = $record->visitor_id;
         $c->read_by_organizer = true;
         $c->model_type = get_class($record);

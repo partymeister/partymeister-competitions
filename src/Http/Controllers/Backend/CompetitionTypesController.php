@@ -2,7 +2,11 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\CompetitionTypeForm;
@@ -21,7 +25,7 @@ class CompetitionTypesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      *
      * @throws \ReflectionException
      */
@@ -44,8 +48,8 @@ class CompetitionTypesController extends Controller
     public function create()
     {
         $form = $this->form(CompetitionTypeForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.competition_types.store',
+            'method' => 'POST',
+            'route' => 'backend.competition_types.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -55,8 +59,7 @@ class CompetitionTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CompetitionTypeRequest  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(CompetitionTypeRequest $request)
     {
@@ -79,8 +82,6 @@ class CompetitionTypesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -90,16 +91,15 @@ class CompetitionTypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  CompetitionType  $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(CompetitionType $record)
     {
         $form = $this->form(CompetitionTypeForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.competition_types.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.competition_types.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-competitions::backend.competition_types.edit', compact('form'));
@@ -108,9 +108,7 @@ class CompetitionTypesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CompetitionTypeRequest  $request
-     * @param  CompetitionType  $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(CompetitionTypeRequest $request, CompetitionType $record)
     {
@@ -134,8 +132,7 @@ class CompetitionTypesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  CompetitionType  $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(CompetitionType $record)
     {

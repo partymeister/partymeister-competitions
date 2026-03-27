@@ -25,8 +25,6 @@ class CompetitionSaved
      * Create a new event instance.
      *
      * CompetitionSaved constructor.
-     *
-     * @param  Competition  $competition
      */
     public function __construct(Competition $competition)
     {

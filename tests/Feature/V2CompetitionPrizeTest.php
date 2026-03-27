@@ -11,7 +11,7 @@ beforeEach(function () {
     $role = Role::create(['name' => 'SuperAdmin', 'guard_name' => 'web']);
     $user = User::factory()->create([
         'email' => 'admin@motor-cms.com',
-        'name'  => 'Admin',
+        'name' => 'Admin',
     ]);
     $user->assignRole($role);
 
@@ -19,13 +19,13 @@ beforeEach(function () {
 
     CompetitionPrize::factory()->create([
         'competition_id' => $competition->id,
-        'amount'         => '500',
-        'rank'           => 1,
+        'amount' => '500',
+        'rank' => 1,
     ]);
     CompetitionPrize::factory()->create([
         'competition_id' => $competition->id,
-        'amount'         => '250',
-        'rank'           => 2,
+        'amount' => '250',
+        'rank' => 2,
     ]);
 });
 
@@ -53,9 +53,9 @@ describe('V2 Competition Prizes API', function () {
         $competition = Competition::first();
         assertV2CrudCreate('/api/v2/competition-prizes', [
             'competition_id' => $competition->id,
-            'amount'         => '100',
-            'additional'     => '',
-            'rank'           => 3,
+            'amount' => '100',
+            'additional' => '',
+            'rank' => 3,
         ], CompetitionPrize::class);
     });
 

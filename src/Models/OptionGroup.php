@@ -6,15 +6,16 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Database\Factories\OptionGroupFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -48,19 +49,20 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|OptionGroup whereType($value)
  * @method static Builder|OptionGroup whereUpdatedAt($value)
  * @method static Builder|OptionGroup whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class OptionGroup extends Model
 {
-    use HasFactory;
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
+    use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     protected static function newFactory()
     {
-        return \Partymeister\Competitions\Database\Factories\OptionGroupFactory::new();
+        return OptionGroupFactory::new();
     }
 
     /**

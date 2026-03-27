@@ -10,9 +10,6 @@ use Partymeister\Competitions\Models\Component\ComponentEntryScreenshot;
  */
 class ComponentEntryScreenshotService extends ComponentBaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = ComponentEntryScreenshot::class;
 
     /**

@@ -5,12 +5,13 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Database\Factories\LiveVoteFactory;
 
 /**
  * Partymeister\Competitions\Models\LiveVote
@@ -39,18 +40,19 @@ use Motor\Core\Traits\Searchable;
  * @method static Builder|LiveVote whereSortPosition($value)
  * @method static Builder|LiveVote whereTitle($value)
  * @method static Builder|LiveVote whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class LiveVote extends Model
 {
-    use HasFactory;
-    use Searchable;
     use Filterable;
+    use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     protected static function newFactory()
     {
-        return \Partymeister\Competitions\Database\Factories\LiveVoteFactory::new();
+        return LiveVoteFactory::new();
     }
 
     /**

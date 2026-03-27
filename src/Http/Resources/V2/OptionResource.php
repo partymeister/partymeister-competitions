@@ -13,8 +13,8 @@ class OptionResource extends BaseResource
     public function toArray($request): array
     {
         return [
-            'id'            => (int) $this->id,
-            'name'          => $this->name,
+            'id' => (int) $this->id,
+            'name' => $this->name,
             'sort_position' => (int) $this->sort_position,
         ];
     }

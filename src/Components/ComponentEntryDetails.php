@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Illuminate\Support\Str;
 use Motor\CMS\Models\PageVersionComponent;
 use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Entry;
@@ -31,8 +30,6 @@ class ComponentEntryDetails
 
     /**
      * ComponentEntryDetails constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -40,13 +37,12 @@ class ComponentEntryDetails
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|View
      */
     public function index(Request $request)
     {
         $visitor = Auth::guard('visitor')
-                       ->user();
+            ->user();
 
         if (is_null($visitor)) {
             return redirect()->back();
@@ -106,7 +102,7 @@ class ComponentEntryDetails
         $entry['competition_name'] = Arr::get($entry, 'competition.name', '');
 
         $competitionTemplate = SlideTemplate::where('template_for', 'competition')
-                                            ->first();
+            ->first();
 
         // Create a temp slide with entry data replaced in definitions for live preview
         $beamslideUrl = null;
@@ -116,15 +112,21 @@ class ComponentEntryDetails
             // For each element, replace <<key>> in placeholder field, write result to content
             if (isset($defsArray['elements'])) {
                 foreach ($defsArray['elements'] as &$element) {
-                    if (!isset($element['properties'])) continue;
+                    if (! isset($element['properties'])) {
+                        continue;
+                    }
                     $props = &$element['properties'];
 
                     $source = $props['placeholder'] ?? '';
-                    if (trim($source) === '') continue;
+                    if (trim($source) === '') {
+                        continue;
+                    }
 
                     // Replace all entry properties as placeholders (same as JS renderCompetitionEntry)
                     foreach ($entry as $key => $value) {
-                        if (is_array($value) || is_object($value)) continue;
+                        if (is_array($value) || is_object($value)) {
+                            continue;
+                        }
                         $strValue = (string) ($value ?? '');
                         if ($key === 'remote_type') {
                             $strValue = strtolower($strValue);
@@ -149,10 +151,10 @@ class ComponentEntryDetails
         }
 
         $this->data = [
-            'entry'               => $entry,
-            'record'              => $record,
+            'entry' => $entry,
+            'record' => $record,
             'competitionTemplate' => $competitionTemplate,
-            'beamslideUrl'        => $beamslideUrl,
+            'beamslideUrl' => $beamslideUrl,
         ];
 
         return $this->render();

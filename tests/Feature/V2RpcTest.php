@@ -10,14 +10,14 @@ beforeEach(function () {
     $role = Role::create(['name' => 'SuperAdmin', 'guard_name' => 'web']);
     $user = User::factory()->create([
         'email' => 'admin@motor-cms.com',
-        'name'  => 'Admin',
+        'name' => 'Admin',
     ]);
     $user->assignRole($role);
 
     config([
-        'partymeister-competitions-access-key.chars'        => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
-        'partymeister-competitions-access-key.length'       => 8,
-        'partymeister-competitions-access-key.divider'      => '-',
+        'partymeister-competitions-access-key.chars' => ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+        'partymeister-competitions-access-key.length' => 8,
+        'partymeister-competitions-access-key.divider' => '-',
         'partymeister-competitions-access-key.divide_every' => 4,
     ]);
 });

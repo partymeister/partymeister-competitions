@@ -15,9 +15,9 @@ class ManualVotePostRequest extends FormRequest
     {
         return [
             'competition_id' => 'required|exists:competitions,id',
-            'entry_id'       => 'required|exists:entries,id',
-            'points'         => 'required|integer',
-            'ip_address'     => 'nullable|string|max:255',
+            'entry_id' => 'required|exists:entries,id',
+            'points' => 'required|integer',
+            'ip_address' => 'nullable|string|max:255',
         ];
     }
 }

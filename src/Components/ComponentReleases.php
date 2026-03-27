@@ -18,17 +18,12 @@ class ComponentReleases
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $competition;
 
     protected $entries;
 
     /**
      * ComponentReleases constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -36,13 +31,12 @@ class ComponentReleases
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|View
      */
     public function index(Request $request)
     {
         $query = Competition::where('voting_enabled', true)
-                            ->orderBy('updated_at', 'ASC');
+            ->orderBy('updated_at', 'ASC');
 
         if ($request->get('competition_id') > 0) {
             $query->where('id', $request->get('competition_id'));
@@ -70,7 +64,7 @@ class ComponentReleases
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
             'competition' => $this->competition,
-            'entries'     => $this->entries ?? collect(),
+            'entries' => $this->entries ?? collect(),
         ]);
     }
 }

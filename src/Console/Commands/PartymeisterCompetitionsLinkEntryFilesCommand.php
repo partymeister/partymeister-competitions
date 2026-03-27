@@ -38,7 +38,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
                 $this->mkdir($directory);
             }
             foreach ($competition->entries()
-                                 ->get() as $entry) {
+                ->get() as $entry) {
                 $entryDir = $entry->identifier;
                 while (strlen($entryDir) < 4) {
                     $entryDir = '0'.$entryDir;
@@ -48,7 +48,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
 
                 // Link files
                 if ($entry->getMedia('file')
-                          ->count() > 0) {
+                    ->count() > 0) {
                     $this->mkdir($directory.'/'.$entryDir.'/files');
                     $numFiles = count($entry->getMedia('file'));
                     foreach ($entry->getMedia('file') as $index => $media) {
@@ -60,7 +60,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
 
                 // Link screenshot
                 if ($entry->getMedia('screenshot')
-                          ->count() > 0) {
+                    ->count() > 0) {
                     $this->mkdir($directory.'/'.$entryDir.'/screenshot');
                     foreach ($entry->getMedia('screenshot') as $media) {
                         if (file_exists($media->getPath()) && ! file_exists($directory.'/'.$entryDir.'/screenshot/'.$media->file_name)) {
@@ -84,7 +84,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
 
                 // Link audio
                 if ($entry->getMedia('audio')
-                          ->count() > 0) {
+                    ->count() > 0) {
                     $this->mkdir($directory.'/'.$entryDir.'/audio');
                     foreach ($entry->getMedia('audio') as $media) {
                         if (file_exists($media->getPath()) && ! file_exists($directory.'/'.$entryDir.'/audio/'.$media->file_name)) {
@@ -95,7 +95,7 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
 
                 // Link video
                 if ($entry->getMedia('video')
-                          ->count() > 0) {
+                    ->count() > 0) {
                     $this->mkdir($directory.'/'.$entryDir.'/video');
                     foreach ($entry->getMedia('video') as $media) {
                         if (file_exists($media->getPath()) && ! file_exists($directory.'/'.$entryDir.'/video/'.$media->file_name)) {
@@ -108,9 +108,6 @@ class PartymeisterCompetitionsLinkEntryFilesCommand extends Command
 
     }
 
-    /**
-     * @param $directory
-     */
     protected function mkdir($directory)
     {
         if (! is_dir($directory)) {

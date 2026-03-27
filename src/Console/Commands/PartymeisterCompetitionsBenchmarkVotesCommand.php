@@ -4,7 +4,6 @@ namespace Partymeister\Competitions\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Services\VoteService;
 
@@ -47,6 +46,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
         $benchmarks['resultsEndpoint'] = $this->benchmark('Results endpoint (both combined)', $runs, function () {
             $results = VoteService::getAllVotesByRank();
             $special = VoteService::getAllSpecialVotesByRank();
+
             return [$results, $special];
         });
 
@@ -62,6 +62,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
                 function () use ($sampleEntry) {
                     // Force fresh query each time
                     $entry = Entry::find($sampleEntry->id);
+
                     return $entry->votes;
                 }
             );
@@ -71,6 +72,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
                 $runs,
                 function () use ($sampleEntry) {
                     $entry = Entry::find($sampleEntry->id);
+
                     return $entry->special_votes;
                 }
             );
@@ -80,6 +82,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
                 $runs,
                 function () use ($sampleEntry) {
                     $entry = Entry::find($sampleEntry->id);
+
                     return $entry->vote_comments;
                 }
             );
@@ -93,11 +96,11 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
 
         if (count($entryIds) > 0) {
             $benchmarks['bulkVisitorVotes'] = $this->benchmark(
-                "Bulk visitor vote totals (" . count($entryIds) . " entries, single query)",
+                'Bulk visitor vote totals ('.count($entryIds).' entries, single query)',
                 $runs,
                 function () use ($entryIds) {
                     return DB::table(
-                        DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN (' . implode(',', $entryIds) . ') GROUP BY entry_id, visitor_id) as sub')
+                        DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN ('.implode(',', $entryIds).') GROUP BY entry_id, visitor_id) as sub')
                     )
                         ->select('entry_id', DB::raw('SUM(points_per_visitor) as total_points'))
                         ->groupBy('entry_id')
@@ -106,7 +109,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
             );
 
             $benchmarks['bulkManualVotes'] = $this->benchmark(
-                "Bulk manual vote totals (" . count($entryIds) . " entries, single query)",
+                'Bulk manual vote totals ('.count($entryIds).' entries, single query)',
                 $runs,
                 function () use ($entryIds) {
                     return DB::table('manual_votes')
@@ -118,7 +121,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
             );
 
             $benchmarks['bulkSpecialVotes'] = $this->benchmark(
-                "Bulk special vote totals (" . count($entryIds) . " entries, single query)",
+                'Bulk special vote totals ('.count($entryIds).' entries, single query)',
                 $runs,
                 function () use ($entryIds) {
                     return DB::table('votes')
@@ -130,7 +133,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
             );
 
             $benchmarks['bulkComments'] = $this->benchmark(
-                "Bulk vote comments (" . count($entryIds) . " entries, single query)",
+                'Bulk vote comments ('.count($entryIds).' entries, single query)',
                 $runs,
                 function () use ($entryIds) {
                     return DB::table('votes')
@@ -164,7 +167,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
             $sql = preg_replace('/\b\d+\b/', '?', $q['query']);
             $sql = preg_replace("/'.+?'/", '?', $sql);
             $key = substr($sql, 0, 80);
-            if (!isset($patterns[$key])) {
+            if (! isset($patterns[$key])) {
                 $patterns[$key] = ['count' => 0, 'total_time' => 0];
             }
             $patterns[$key]['count']++;
@@ -175,7 +178,9 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
         $this->info("\n  Top query patterns:");
         $i = 0;
         foreach ($patterns as $pattern => $stats) {
-            if ($i++ >= 10) break;
+            if ($i++ >= 10) {
+                break;
+            }
             $avgTime = round($stats['total_time'] / $stats['count'], 2);
             $this->line("    [{$stats['count']}x, avg {$avgTime}ms] {$pattern}...");
         }
@@ -218,7 +223,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
                 $count = DB::table($table)->count();
                 $this->line("  {$label} ({$table}): {$count}");
             } catch (\Exception $e) {
-                $this->line("  {$label} ({$table}): ERROR - " . $e->getMessage());
+                $this->line("  {$label} ({$table}): ERROR - ".$e->getMessage());
             }
         }
 
@@ -262,7 +267,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
             }
         }
 
-        if (!$hasEntryVisitorComposite) {
+        if (! $hasEntryVisitorComposite) {
             $missing[] = [
                 'table' => 'votes',
                 'columns' => 'entry_id, visitor_id',
@@ -271,7 +276,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
             ];
         }
 
-        if (!$hasEntrySpecialVote) {
+        if (! $hasEntrySpecialVote) {
             $missing[] = [
                 'table' => 'votes',
                 'columns' => 'entry_id, special_vote',
@@ -290,7 +295,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
             }
         }
 
-        if (!$hasStatusCompetition) {
+        if (! $hasStatusCompetition) {
             $missing[] = [
                 'table' => 'entries',
                 'columns' => 'competition_id, status',
@@ -303,7 +308,7 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
         // Already has single entry_id index, which is fine for the simple SUM query
 
         if (empty($missing)) {
-            $this->info("  All recommended indexes are present.");
+            $this->info('  All recommended indexes are present.');
         } else {
             $this->warn("  Missing recommended indexes:\n");
             foreach ($missing as $idx) {
@@ -311,25 +316,25 @@ class PartymeisterCompetitionsBenchmarkVotesCommand extends Command
                 $this->line("  Columns: {$idx['columns']}");
                 $this->line("  Reason: {$idx['reason']}");
                 $this->line("  SQL: {$idx['sql']}");
-                $this->line("");
+                $this->line('');
             }
         }
 
         // Show existing indexes for reference
-        $this->info("  Existing indexes on votes:");
+        $this->info('  Existing indexes on votes:');
         foreach ($votesIndexNames as $name => $columns) {
             $cols = $columns->pluck('Column_name')->implode(', ');
             $this->line("    {$name}: ({$cols})");
         }
 
-        $this->info("  Existing indexes on entries:");
+        $this->info('  Existing indexes on entries:');
         foreach ($entriesIndexNames as $name => $columns) {
             $cols = $columns->pluck('Column_name')->implode(', ');
             $this->line("    {$name}: ({$cols})");
         }
 
         $manualVotesIndexNames = collect(DB::select('SHOW INDEX FROM manual_votes'))->groupBy('Key_name');
-        $this->info("  Existing indexes on manual_votes:");
+        $this->info('  Existing indexes on manual_votes:');
         foreach ($manualVotesIndexNames as $name => $columns) {
             $cols = $columns->pluck('Column_name')->implode(', ');
             $this->line("    {$name}: ({$cols})");

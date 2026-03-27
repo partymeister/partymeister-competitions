@@ -2,11 +2,13 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="ManualVoteResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -39,17 +41,17 @@ class ManualVoteResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'             => (int) $this->id,
+            'id' => (int) $this->id,
             'competition_id' => (int) $this->competition_id,
-            'entry_id'       => (int) $this->entry_id,
-            'points'         => (int) $this->points,
-            'ip_address'     => $this->ip_address,
+            'entry_id' => (int) $this->entry_id,
+            'points' => (int) $this->points,
+            'ip_address' => $this->ip_address,
         ];
     }
 }

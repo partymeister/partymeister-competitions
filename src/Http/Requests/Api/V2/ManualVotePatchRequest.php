@@ -15,9 +15,9 @@ class ManualVotePatchRequest extends FormRequest
     {
         return [
             'competition_id' => 'sometimes|required|exists:competitions,id',
-            'entry_id'       => 'sometimes|required|exists:entries,id',
-            'points'         => 'sometimes|required|integer',
-            'ip_address'     => 'sometimes|nullable|string|max:255',
+            'entry_id' => 'sometimes|required|exists:entries,id',
+            'points' => 'sometimes|required|integer',
+            'ip_address' => 'sometimes|nullable|string|max:255',
         ];
     }
 }

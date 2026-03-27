@@ -5,9 +5,9 @@ namespace Partymeister\Competitions\Models\Component;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\CMS\Models\ComponentBaseModel;
 use Motor\CMS\Models\Navigation;
 use Motor\CMS\Models\PageVersionComponent;
@@ -38,11 +38,11 @@ use Motor\CMS\Models\PageVersionComponent;
  * @method static Builder|ComponentEntry whereEntryScreenshotsPageId($value)
  * @method static Builder|ComponentEntry whereId($value)
  * @method static Builder|ComponentEntry whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class ComponentEntry extends ComponentBaseModel
 {
-
     use HasShortflakePrimary;
 
     /**
@@ -65,7 +65,7 @@ class ComponentEntry extends ComponentBaseModel
     public function preview()
     {
         return [
-            'name'    => trans('partymeister-competitions::component/entries.component'),
+            'name' => trans('partymeister-competitions::component/entries.component'),
             'preview' => 'Preview for ComponentEntry component',
         ];
     }

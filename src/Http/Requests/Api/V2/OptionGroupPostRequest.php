@@ -14,9 +14,9 @@ class OptionGroupPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'           => 'required|string|max:255',
-            'type'           => 'required|in:single,multiple',
-            'options'        => 'nullable|array',
+            'name' => 'required|string|max:255',
+            'type' => 'required|in:single,multiple',
+            'options' => 'nullable|array',
             'options.*.name' => 'required_with:options|string|max:255',
         ];
     }

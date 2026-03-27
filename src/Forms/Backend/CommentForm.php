@@ -15,7 +15,7 @@ class CommentForm extends Form
     public function buildForm()
     {
         $this->add('message', 'textarea', ['label' => 'Message'])
-             ->add('mark_as_read', 'hidden', ['attr' => ['id' => 'mark_as_read']])
-             ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary btn-block'], 'label' => 'Send']);
+            ->add('mark_as_read', 'hidden', ['attr' => ['id' => 'mark_as_read']])
+            ->add('submit', 'submit', ['attr' => ['class' => 'btn btn-primary btn-block'], 'label' => 'Send']);
     }
 }

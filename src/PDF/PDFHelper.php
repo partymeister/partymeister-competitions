@@ -8,7 +8,6 @@ namespace Partymeister\Competitions\PDF;
 class PDFHelper
 {
     /**
-     * @param $value
      * @return float
      */
     public static function pica2mm($value)
@@ -17,7 +16,6 @@ class PDFHelper
     }
 
     /**
-     * @param    $value
      * @param  int  $dpi
      * @return float|int
      */
@@ -27,7 +25,6 @@ class PDFHelper
     }
 
     /**
-     * @param    $value
      * @param  int  $dpi
      * @return float
      */
@@ -37,8 +34,6 @@ class PDFHelper
     }
 
     /**
-     * @param $fontsize
-     * @param $pica
      * @return float|int
      */
     public static function cellheightratio($fontsize, $pica)
@@ -47,7 +42,6 @@ class PDFHelper
     }
 
     /**
-     * @param    $value
      * @param  int  $decimals
      * @param  string  $dec_point
      * @param  string  $thousands_sep
@@ -59,7 +53,6 @@ class PDFHelper
     }
 
     /**
-     * @param    $value
      * @param  int  $decimals
      * @param  string  $suffix
      * @param  string  $dec_point
@@ -72,7 +65,6 @@ class PDFHelper
     }
 
     /**
-     * @param    $date
      * @param  string  $format
      * @return string
      */

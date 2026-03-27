@@ -2,11 +2,13 @@
 
 namespace Partymeister\Competitions\Http\Resources;
 
+use Illuminate\Http\Request;
 use Motor\Admin\Http\Resources\BaseResource;
 
 /**
  * @OA\Schema(
  *   schema="AccessKeyResource",
+ *
  *   @OA\Property(
  *     property="id",
  *     type="integer",
@@ -34,15 +36,15 @@ class AccessKeyResource extends BaseResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'id'            => (int) $this->id,
-            'access_key'    => $this->access_key,
-            'ip_address'    => $this->ip_address,
+            'id' => (int) $this->id,
+            'access_key' => $this->access_key,
+            'ip_address' => $this->ip_address,
             'registered_at' => $this->registered_at,
         ];
     }

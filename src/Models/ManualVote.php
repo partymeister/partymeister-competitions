@@ -5,12 +5,13 @@ namespace Partymeister\Competitions\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Database\Factories\ManualVoteFactory;
 
 /**
  * Partymeister\Competitions\Models\ManualVote
@@ -36,18 +37,19 @@ use Motor\Core\Traits\Searchable;
  * @method static Builder|ManualVote whereIpAddress($value)
  * @method static Builder|ManualVote wherePoints($value)
  * @method static Builder|ManualVote whereUpdatedAt($value)
+ *
  * @mixin Eloquent
  */
 class ManualVote extends Model
 {
-    use HasFactory;
-    use Searchable;
     use Filterable;
+    use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     protected static function newFactory()
     {
-        return \Partymeister\Competitions\Database\Factories\ManualVoteFactory::new();
+        return ManualVoteFactory::new();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Motor\Admin\Http\Controllers\ApiController;
 use Partymeister\Competitions\Http\Requests\Backend\VoteCategoryRequest;
 use Partymeister\Competitions\Http\Resources\VoteCategoryCollection;
@@ -23,7 +24,9 @@ class VoteCategoriesController extends ApiController
      *   tags={"VoteCategoriesController"},
      *   path="/api/vote_categories",
      *   summary="Get vote_category collection",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -31,15 +34,20 @@ class VoteCategoriesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="array",
+     *
      *         @OA\Items(ref="#/components/schemas/VoteCategoryResource")
      *       ),
+     *
      *       @OA\Property(
      *         property="meta",
      *         ref="#/components/schemas/PaginationMeta"
@@ -55,9 +63,11 @@ class VoteCategoriesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   )
      * )
@@ -69,7 +79,7 @@ class VoteCategoriesController extends ApiController
     public function index()
     {
         $paginator = VoteCategoryService::collection()
-                                        ->getPaginator();
+            ->getPaginator();
 
         return (new VoteCategoryCollection($paginator))->additional(['message' => 'VoteCategory collection read']);
     }
@@ -79,10 +89,14 @@ class VoteCategoriesController extends ApiController
      *   tags={"VoteCategoriesController"},
      *   path="/api/vote_categories",
      *   summary="Create new vote_category",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/VoteCategoryRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -90,10 +104,13 @@ class VoteCategoriesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -106,31 +123,34 @@ class VoteCategoriesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Store a newly created resource in storage.
      *
-     * @param  VoteCategoryRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(VoteCategoryRequest $request)
     {
         $result = VoteCategoryService::create($request)
-                                     ->getResult();
+            ->getResult();
 
         return (new VoteCategoryResource($result))->additional(['message' => 'VoteCategory created'])
-                                                  ->response()
-                                                  ->setStatusCode(201);
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -138,7 +158,9 @@ class VoteCategoriesController extends ApiController
      *   tags={"VoteCategoriesController"},
      *   path="/api/vote_categories/{vote_category}",
      *   summary="Get single vote_category",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -146,17 +168,22 @@ class VoteCategoriesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="vote_category",
      *     parameter="vote_category",
      *     description="VoteCategory id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -169,27 +196,30 @@ class VoteCategoriesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Display the specified resource.
      *
-     * @param  VoteCategory  $record
      * @return VoteCategoryResource
      */
     public function show(VoteCategory $record)
     {
         $result = VoteCategoryService::show($record)
-                                     ->getResult();
+            ->getResult();
 
         return (new VoteCategoryResource($result))->additional(['message' => 'VoteCategory read']);
     }
@@ -199,10 +229,14 @@ class VoteCategoriesController extends ApiController
      *   tags={"VoteCategoriesController"},
      *   path="/api/vote_categories/{vote_category}",
      *   summary="Update an existing vote_category",
+     *
      *   @OA\RequestBody(
+     *
      *     @OA\JsonContent(ref="#/components/schemas/VoteCategoryRequest")
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -210,17 +244,22 @@ class VoteCategoriesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="vote_category",
      *     parameter="vote_category",
      *     description="VoteCategory id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="data",
      *         type="object",
@@ -233,28 +272,30 @@ class VoteCategoriesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   )
      * )
      *
      * Update the specified resource in storage.
      *
-     * @param  VoteCategoryRequest  $request
-     * @param  VoteCategory  $record
      * @return VoteCategoryResource
      */
     public function update(VoteCategoryRequest $request, VoteCategory $record)
     {
         $result = VoteCategoryService::update($record, $request)
-                                     ->getResult();
+            ->getResult();
 
         return (new VoteCategoryResource($result))->additional(['message' => 'VoteCategory updated']);
     }
@@ -264,7 +305,9 @@ class VoteCategoriesController extends ApiController
      *   tags={"VoteCategoriesController"},
      *   path="/api/vote_categories/{vote_category}",
      *   summary="Delete a vote_category",
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="string"),
      *     in="query",
      *     allowReserved=true,
@@ -272,17 +315,22 @@ class VoteCategoriesController extends ApiController
      *     parameter="api_token",
      *     description="Personal api_token of the user"
      *   ),
+     *
      *   @OA\Parameter(
+     *
      *     @OA\Schema(type="integer"),
      *     in="path",
      *     name="vote_category",
      *     parameter="vote_category",
      *     description="VoteCategory id"
      *   ),
+     *
      *   @OA\Response(
      *     response=200,
      *     description="Success",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -290,20 +338,27 @@ class VoteCategoriesController extends ApiController
      *       )
      *     )
      *   ),
+     *
      *   @OA\Response(
      *     response="403",
      *     description="Access denied",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/AccessDenied"),
      *   ),
+     *
      *   @OA\Response(
      *     response="404",
      *     description="Not found",
+     *
      *     @OA\JsonContent(ref="#/components/schemas/NotFound"),
      *   ),
+     *
      *   @OA\Response(
      *     response="400",
      *     description="Bad request",
+     *
      *     @OA\JsonContent(
+     *
      *       @OA\Property(
      *         property="message",
      *         type="string",
@@ -315,13 +370,12 @@ class VoteCategoriesController extends ApiController
      *
      * Remove the specified resource from storage.
      *
-     * @param  VoteCategory  $record
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy(VoteCategory $record)
     {
         $result = VoteCategoryService::delete($record)
-                                     ->getResult();
+            ->getResult();
 
         if ($result) {
             return response()->json(['message' => 'VoteCategory deleted']);

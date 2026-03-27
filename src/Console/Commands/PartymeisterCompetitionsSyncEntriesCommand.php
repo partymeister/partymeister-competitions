@@ -34,7 +34,7 @@ class PartymeisterCompetitionsSyncEntriesCommand extends Command
     {
         foreach (Competition::all() as $competition) {
             foreach ($competition->entries()
-                                 ->get() as $entry) {
+                ->get() as $entry) {
                 event(new EntrySaved($entry));
             }
         }

@@ -12,6 +12,7 @@ class CompetitionPrizeRequest extends Request
     /**
      * @OA\Schema(
      *   schema="CompetitionPrizeRequest",
+     *
      *   @OA\Property(
      *     property="competition_id",
      *     type="integer",
@@ -54,9 +55,9 @@ class CompetitionPrizeRequest extends Request
     public function rules()
     {
         return [
-            'amount'     => 'array',
+            'amount' => 'array',
             'additional' => 'array',
-            'rank'       => 'array',
+            'rank' => 'array',
         ];
     }
 }

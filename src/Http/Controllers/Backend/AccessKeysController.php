@@ -2,7 +2,11 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\AccessKeyForm;
@@ -21,7 +25,7 @@ class AccessKeysController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      *
      * @throws \ReflectionException
      */
@@ -44,8 +48,8 @@ class AccessKeysController extends Controller
     public function create()
     {
         $form = $this->form(AccessKeyForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.access_keys.store',
+            'method' => 'POST',
+            'route' => 'backend.access_keys.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -55,8 +59,7 @@ class AccessKeysController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  AccessKeyRequest  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(AccessKeyRequest $request)
     {
@@ -79,8 +82,6 @@ class AccessKeysController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -90,16 +91,15 @@ class AccessKeysController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  AccessKey  $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(AccessKey $record)
     {
         $form = $this->form(AccessKeyForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.access_keys.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.access_keys.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-competitions::backend.access_keys.edit', compact('form'));
@@ -108,9 +108,7 @@ class AccessKeysController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  AccessKeyRequest  $request
-     * @param  AccessKey  $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(AccessKeyRequest $request, AccessKey $record)
     {
@@ -134,8 +132,7 @@ class AccessKeysController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  AccessKey  $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(AccessKey $record)
     {

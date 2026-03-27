@@ -2,7 +2,11 @@
 
 namespace Partymeister\Competitions\Http\Controllers\Backend;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Forms\Backend\VoteForm;
@@ -43,8 +47,8 @@ class VotesController extends Controller
     public function create()
     {
         $form = $this->form(VoteForm::class, [
-            'method'  => 'POST',
-            'route'   => 'backend.votes.store',
+            'method' => 'POST',
+            'route' => 'backend.votes.store',
             'enctype' => 'multipart/form-data',
         ]);
 
@@ -57,7 +61,7 @@ class VotesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  VoteRequest  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(ManualVoteRequest $request)
     {
@@ -80,8 +84,6 @@ class VotesController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param $id
      */
     public function show($id)
     {
@@ -91,16 +93,15 @@ class VotesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Vote  $record
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function edit(Vote $record)
     {
         $form = $this->form(VoteForm::class, [
-            'method'  => 'PATCH',
-            'url'     => route('backend.votes.update', [$record->id]),
+            'method' => 'PATCH',
+            'url' => route('backend.votes.update', [$record->id]),
             'enctype' => 'multipart/form-data',
-            'model'   => $record,
+            'model' => $record,
         ]);
 
         return view('partymeister-competitions::backend.votes.edit', compact('form'));
@@ -109,9 +110,7 @@ class VotesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  VoteRequest  $request
-     * @param  Vote  $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(VoteRequest $request, Vote $record)
     {
@@ -135,8 +134,7 @@ class VotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Vote  $record
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy(Vote $record)
     {

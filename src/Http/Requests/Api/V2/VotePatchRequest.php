@@ -14,14 +14,14 @@ class VotePatchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'competition_id'   => 'sometimes|required|exists:competitions,id',
-            'entry_id'         => 'sometimes|required|exists:entries,id',
-            'visitor_id'       => 'sometimes|nullable|exists:visitors,id',
+            'competition_id' => 'sometimes|required|exists:competitions,id',
+            'entry_id' => 'sometimes|required|exists:entries,id',
+            'visitor_id' => 'sometimes|nullable|exists:visitors,id',
             'vote_category_id' => 'sometimes|required|exists:vote_categories,id',
-            'points'           => 'sometimes|required|integer',
-            'special_vote'     => 'sometimes|nullable|boolean',
-            'comment'          => 'sometimes|nullable|string',
-            'ip_address'       => 'sometimes|nullable|string|max:255',
+            'points' => 'sometimes|required|integer',
+            'special_vote' => 'sometimes|nullable|boolean',
+            'comment' => 'sometimes|nullable|string',
+            'ip_address' => 'sometimes|nullable|string|max:255',
         ];
     }
 }

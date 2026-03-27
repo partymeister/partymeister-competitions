@@ -11,7 +11,7 @@ beforeEach(function () {
     $role = Role::create(['name' => 'SuperAdmin', 'guard_name' => 'web']);
     $user = User::factory()->create([
         'email' => 'admin@motor-cms.com',
-        'name'  => 'Admin',
+        'name' => 'Admin',
     ]);
     $user->assignRole($role);
 
@@ -52,8 +52,8 @@ describe('V2 OptionGroups API', function () {
         $countBefore = OptionGroup::count();
 
         $response = $this->asAdmin()->postJson('/api/v2/option-groups', [
-            'name'    => 'AI Tool',
-            'type'    => 'single',
+            'name' => 'AI Tool',
+            'type' => 'single',
             'options' => [
                 ['name' => 'None'],
                 ['name' => 'Midjourney'],

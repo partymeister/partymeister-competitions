@@ -12,6 +12,7 @@ class AccessKeyRequest extends Request
     /**
      * @OA\Schema(
      *   schema="AccessKeyRequest",
+     *
      *   @OA\Property(
      *     property="visitor_id",
      *     type="integer",
@@ -54,9 +55,9 @@ class AccessKeyRequest extends Request
     public function rules()
     {
         return [
-            'visitor_id'    => 'nullable|integer',
-            'access_key'    => 'required',
-            'ip_address'    => 'nullable',
+            'visitor_id' => 'nullable|integer',
+            'access_key' => 'required',
+            'ip_address' => 'nullable',
             'registered_at' => 'nullable|date_format:Y-m-d H:i:s',
         ];
     }

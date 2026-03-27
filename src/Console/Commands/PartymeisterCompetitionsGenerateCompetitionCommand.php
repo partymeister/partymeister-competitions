@@ -2,6 +2,7 @@
 
 namespace Partymeister\Competitions\Console\Commands;
 
+use Faker\Factory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Motor\Admin\Models\User;
@@ -38,24 +39,24 @@ class PartymeisterCompetitionsGenerateCompetitionCommand extends Command
     {
         Auth::login(User::find(1));
 
-        $faker = \Faker\Factory::create($this->argument('locale'));
+        $faker = Factory::create($this->argument('locale'));
 
-        $competition = new Competition();
+        $competition = new Competition;
         $competition->name = $this->argument('name') === 'faker' ? $faker->catchPhrase : $this->argument('name');
         $competition->sort_position = $faker->numberBetween(0, 99);
         $competition->prizegiving_sort_position = $faker->numberBetween(0, 99);
         $competition->competition_type_id = CompetitionType::inRandomOrder()
-                                                           ->first()->id;
+            ->first()->id;
         $competition->has_prizegiving = true;
         $competition->upload_enabled = true;
         $competition->voting_enabled = false;
 
         $competition->save();
         $competition->option_groups()
-                    ->attach(OptionGroup::inRandomOrder()
-                                        ->first()->id);
+            ->attach(OptionGroup::inRandomOrder()
+                ->first()->id);
         $competition->vote_categories()
-                    ->attach(VoteCategory::first()->id);
+            ->attach(VoteCategory::first()->id);
 
         $this->info('Generated competition '.$competition->name);
     }

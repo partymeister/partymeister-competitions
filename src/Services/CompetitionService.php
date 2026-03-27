@@ -18,37 +18,34 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class CompetitionService extends BaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = Competition::class;
 
     protected array $loadColumns = ['competition_type', 'vote_categories', 'option_groups'];
 
     public function filters(): void
     {
-        //$this->filter->addClientFilter();
+        // $this->filter->addClientFilter();
         $this->filter->add(new SelectRenderer('has_prizegiving'))
-                     ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.has_prizegiving'))
-                     ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.has_prizegiving').' --')
-                     ->setOptions([
-                         1 => trans('motor-admin::backend/global.yes'),
-                         0 => trans('motor-admin::backend/global.no'),
-                     ]);
+            ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.has_prizegiving'))
+            ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.has_prizegiving').' --')
+            ->setOptions([
+                1 => trans('motor-admin::backend/global.yes'),
+                0 => trans('motor-admin::backend/global.no'),
+            ]);
         $this->filter->add(new SelectRenderer('upload_enabled'))
-                     ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.upload_enabled'))
-                     ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.upload_enabled').' --')
-                     ->setOptions([
-                         1 => trans('motor-admin::backend/global.yes'),
-                         0 => trans('motor-admin::backend/global.no'),
-                     ]);
+            ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.upload_enabled'))
+            ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.upload_enabled').' --')
+            ->setOptions([
+                1 => trans('motor-admin::backend/global.yes'),
+                0 => trans('motor-admin::backend/global.no'),
+            ]);
         $this->filter->add(new SelectRenderer('voting_enabled'))
-                     ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.voting_enabled'))
-                     ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.voting_enabled').' --')
-                     ->setOptions([
-                         1 => trans('motor-admin::backend/global.yes'),
-                         0 => trans('motor-admin::backend/global.no'),
-                     ]);
+            ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.voting_enabled'))
+            ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.voting_enabled').' --')
+            ->setOptions([
+                1 => trans('motor-admin::backend/global.yes'),
+                0 => trans('motor-admin::backend/global.no'),
+            ]);
     }
 
     public function beforeUpdate(): void
@@ -72,29 +69,29 @@ class CompetitionService extends BaseService
             } else {
                 LiveVote::create([
                     'competition_id' => $this->record->id,
-                    'entry_id'       => $this->record->entries()
-                                                     ->orderBy('sort_position', 'DESC')
-                                                     ->first()->id,
-                    'sort_position'  => $this->record->entries->count(),
-                    'title'          => $this->record->name,
-                    'author'         => $this->record->name,
-                    'is_current'     => true,
+                    'entry_id' => $this->record->entries()
+                        ->orderBy('sort_position', 'DESC')
+                        ->first()->id,
+                    'sort_position' => $this->record->entries->count(),
+                    'title' => $this->record->name,
+                    'author' => $this->record->name,
+                    'is_current' => true,
                 ]);
             }
         }
 
         if (count($this->request->get('option_groups', [])) > 0) {
             $this->record->option_groups()
-                         ->detach();
+                ->detach();
         }
         if ($this->request->get('vote_categories', null) > 0) {
             $this->record->vote_categories()
-                         ->detach();
+                ->detach();
         }
 
         // Delete all playlist items for this playlist
         foreach ($this->record->file_associations()
-                              ->get() as $fileAssociation) {
+            ->get() as $fileAssociation) {
             if ($this->request->get($fileAssociation->identifier) != '' || $this->request->get($fileAssociation->identifier) == 'deleted') {
                 $fileAssociation->delete();
             }
@@ -105,9 +102,6 @@ class CompetitionService extends BaseService
         $this->afterCreate();
     }
 
-    /**
-     * @param $competition
-     */
     public static function hardLinkReleases($competition)
     {
         if (! $competition->voting_enabled) {
@@ -117,6 +111,7 @@ class CompetitionService extends BaseService
         if (config('partymeister-competitions.require_all_final_files_for_release', false)
             && ! $competition->all_final_files_confirmed) {
             Log::info('Skipping release publish for "'.$competition->name.'": not all final files confirmed');
+
             return;
         }
 
@@ -131,7 +126,7 @@ class CompetitionService extends BaseService
         }
 
         try {
-            $files = glob($directory.'/*'); //get all file names
+            $files = glob($directory.'/*'); // get all file names
             foreach ($files as $file) {
                 if (is_file($file)) {
                     unlink($file);
@@ -159,11 +154,11 @@ class CompetitionService extends BaseService
     {
         foreach ($this->request->get('option_groups', []) as $id) {
             $this->record->option_groups()
-                         ->attach($id);
+                ->attach($id);
         }
         if ($this->request->get('vote_categories', null) > 0) {
             $this->record->vote_categories()
-                         ->attach($this->request->get('vote_categories'));
+                ->attach($this->request->get('vote_categories'));
         }
         $this->addFileAssociation('video_1');
         $this->addFileAssociation('video_2');
@@ -172,9 +167,6 @@ class CompetitionService extends BaseService
         event(new CompetitionSaved($this->record));
     }
 
-    /**
-     * @param $field
-     */
     protected function addFileAssociation($field)
     {
         if ($this->request->get($field) == '' || $this->request->get($field) == 'deleted') {
@@ -184,7 +176,7 @@ class CompetitionService extends BaseService
         $file = json_decode($this->request->get($field));
 
         // Create file association
-        $fa = new FileAssociation();
+        $fa = new FileAssociation;
         $fa->file_id = $file->id;
         $fa->model_type = get_class($this->record);
         $fa->model_id = $this->record->id;

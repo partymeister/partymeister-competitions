@@ -6,43 +6,40 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Motor\Admin\Services\BaseService;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Motor\Core\Filter\Renderers\SelectRenderer;
 use Partymeister\Competitions\Events\EntrySaved;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class EntryService
  */
 class EntryService extends BaseService
 {
-    /**
-     * @var string
-     */
     protected string $model = Entry::class;
 
     protected array $loadColumns = ['competition'];
 
     public function filters(): void
     {
-        //$this->filter->addClientFilter();
+        // $this->filter->addClientFilter();
         $this->filter->add(new SelectRenderer('competition_id'))
-                     ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.competition'))
-                     ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.competition').' --')
-                     ->setOptions(Competition::orderBy('sort_position', 'ASC')
-                                             ->pluck('name', 'id'));
+            ->setOptionPrefix(trans('partymeister-competitions::backend/competitions.competition'))
+            ->setEmptyOption('-- '.trans('partymeister-competitions::backend/competitions.competition').' --')
+            ->setOptions(Competition::orderBy('sort_position', 'ASC')
+                ->pluck('name', 'id'));
 
         $this->filter->add(new SelectRenderer('status'))
-                     ->setOptionPrefix(trans('partymeister-competitions::backend/entries.status'))
-                     ->setEmptyOption('-- '.trans('partymeister-competitions::backend/entries.status').' --')
-                     ->setOptions(trans('partymeister-competitions::backend/entries.stati'));
+            ->setOptionPrefix(trans('partymeister-competitions::backend/entries.status'))
+            ->setEmptyOption('-- '.trans('partymeister-competitions::backend/entries.status').' --')
+            ->setOptions(trans('partymeister-competitions::backend/entries.stati'));
     }
 
     public function beforeCreate(): void
     {
         $visitor = Auth::guard('visitor')
-                       ->user();
+            ->user();
         if ($visitor != null) {
             $this->data['visitor_id'] = $visitor->id;
 
@@ -68,11 +65,11 @@ class EntryService extends BaseService
             if (is_array($group)) {
                 foreach ($group as $id) {
                     $this->record->options()
-                                 ->attach($id);
+                        ->attach($id);
                 }
             } else {
                 $this->record->options()
-                             ->attach($group);
+                    ->attach($group);
             }
         }
     }
@@ -114,7 +111,7 @@ class EntryService extends BaseService
         }
         if (count($this->request->input($prefix.'options', [])) > 0) {
             $this->record->options()
-                         ->detach();
+                ->detach();
             $this->addOptions();
         }
         $this->addImages();

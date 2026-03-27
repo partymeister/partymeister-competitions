@@ -7,7 +7,6 @@ namespace Partymeister\Competitions\PDF;
  */
 class AccessKey extends PDF
 {
-
     protected $paginator;
 
     public function __construct($paginator)

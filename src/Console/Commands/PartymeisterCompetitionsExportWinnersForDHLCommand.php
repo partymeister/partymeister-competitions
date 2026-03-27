@@ -63,10 +63,10 @@ class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
         ];
 
         $records = [
-            'DE'    => [],
-            'EU'    => [],
+            'DE' => [],
+            'EU' => [],
             'WORLD' => [],
-            'ALL'   => [],
+            'ALL' => [],
         ];
 
         foreach ($results as $competition) {
@@ -155,15 +155,15 @@ class PartymeisterCompetitionsExportWinnersForDHLCommand extends Command
 
         // Export by region
         foreach ($records as $destination => $data) {
-            //load the CSV document from a string
+            // load the CSV document from a string
             $csv = Writer::createFromString();
             $csv->setEnclosure('"');
             $csv->setDelimiter(';');
 
-            //insert the header
+            // insert the header
             $csv->insertOne($header);
 
-            //insert all the records
+            // insert all the records
             $csv->insertAll($data);
 
             file_put_contents('dhl_export_'.$destination.'.csv', $csv->toString());

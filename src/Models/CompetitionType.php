@@ -6,14 +6,15 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
+use Partymeister\Competitions\Database\Factories\CompetitionTypeFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
@@ -72,19 +73,20 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  * @method static Builder|CompetitionType whereNumberOfWorkStages($value)
  * @method static Builder|CompetitionType whereUpdatedAt($value)
  * @method static Builder|CompetitionType whereUpdatedBy($value)
+ *
  * @mixin Eloquent
  */
 class CompetitionType extends Model
 {
-    use HasFactory;
-    use Searchable;
-    use Filterable;
     use BlameableTrait;
+    use Filterable;
+    use HasFactory;
     use HasShortflakePrimary;
+    use Searchable;
 
     protected static function newFactory()
     {
-        return \Partymeister\Competitions\Database\Factories\CompetitionTypeFactory::new();
+        return CompetitionTypeFactory::new();
     }
 
     /**

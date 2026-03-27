@@ -21,8 +21,6 @@ class SyncEntry
 
     /**
      * Handle the event.
-     *
-     * @param  EntrySaved  $event
      */
     public function handle(EntrySaved $event)
     {

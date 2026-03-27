@@ -10,13 +10,14 @@ use Motor\Admin\Http\Controllers\Controller;
 use Partymeister\Competitions\Http\Resources\EntryResource;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Slides\Models\SlideTemplate;
+use Partymeister\Slides\Services\PlaylistService;
 
 class CompetitionPlaylistController extends Controller
 {
     public function show(Competition $competition): JsonResponse
     {
         $warnings = $this->validateCompetition($competition);
-        if (!empty($warnings)) {
+        if (! empty($warnings)) {
             return response()->json([
                 'warnings' => $warnings,
             ]);
@@ -135,7 +136,7 @@ class CompetitionPlaylistController extends Controller
             $data['name'][$key] = ucfirst(str_replace('_', ' ', $key));
         }
 
-        \Partymeister\Slides\Services\PlaylistService::generateCompetitionPlaylist($competition, $data);
+        PlaylistService::generateCompetitionPlaylist($competition, $data);
 
         return response()->json(['status' => 'ok']);
     }

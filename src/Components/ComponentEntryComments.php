@@ -28,35 +28,18 @@ class ComponentEntryComments
      */
     protected $pageVersionComponent;
 
-    /**
-     * @var
-     */
     protected $entryCommentForm;
 
-    /**
-     * @var
-     */
     protected $request;
 
-    /**
-     * @var
-     */
     protected $comments;
 
-    /**
-     * @var
-     */
     protected $record;
 
-    /**
-     * @var
-     */
     protected $visitor;
 
     /**
      * ComponentEntryComments constructor.
-     *
-     * @param  PageVersionComponent  $pageVersionComponent
      */
     public function __construct(PageVersionComponent $pageVersionComponent)
     {
@@ -64,7 +47,6 @@ class ComponentEntryComments
     }
 
     /**
-     * @param  Request  $request
      * @return Factory|RedirectResponse|Redirector|View
      *
      * @throws GuzzleException
@@ -72,7 +54,7 @@ class ComponentEntryComments
     public function index(Request $request)
     {
         $this->visitor = Auth::guard('visitor')
-                             ->user();
+            ->user();
 
         if (is_null($this->visitor)) {
             return redirect()->back();
@@ -90,18 +72,17 @@ class ComponentEntryComments
             return redirect()->back();
         }
 
-
         $url = $this->request->url().'?entry_id='.$this->record->id;
         if (app()->environment('production')) {
             $url = str_replace('http:', 'https:', $url);
         }
 
         $this->entryCommentForm = $this->form(EntryCommentForm::class, [
-            'name'    => 'entry-comment',
-            'method'  => 'POST',
-            'url'     => $url,
+            'name' => 'entry-comment',
+            'method' => 'POST',
+            'url' => $url,
             'enctype' => 'multipart/form-data',
-            'model'   => $this->record,
+            'model' => $this->record,
         ]);
 
         $this->comments = $this->record->comments;
@@ -127,7 +108,7 @@ class ComponentEntryComments
     {
         if ($this->request->input($this->entryCommentForm->getName().'.mark_as_read') == 1) {
             foreach ($this->record->comments()
-                                  ->get() as $comment) {
+                ->get() as $comment) {
                 $comment->read_by_visitor = true;
                 $comment->save();
             }
@@ -135,7 +116,7 @@ class ComponentEntryComments
             return redirect($this->request->url().'?entry_id='.$this->record->id);
         } else {
             $this->entryCommentForm->getField('message')
-                                   ->setOption('rules', ['required']);
+                ->setOption('rules', ['required']);
         }
 
         if (! $this->entryCommentForm->isValid()) {
@@ -146,12 +127,12 @@ class ComponentEntryComments
         }
 
         foreach ($this->record->comments()
-                              ->get() as $comment) {
+            ->get() as $comment) {
             $comment->read_by_visitor = true;
             $comment->save();
         }
 
-        $c = new Comment();
+        $c = new Comment;
         $c->visitor_id = $this->visitor->id;
         $c->read_by_visitor = true;
         $c->model_type = get_class($this->record);
@@ -170,9 +151,9 @@ class ComponentEntryComments
     public function render()
     {
         return view(config('motor-cms-page-components.components.'.$this->pageVersionComponent->component_name.'.view'), [
-            'comments'         => $this->comments,
+            'comments' => $this->comments,
             'entryCommentForm' => $this->entryCommentForm,
-            'record'           => $this->record,
+            'record' => $this->record,
         ]);
     }
 }

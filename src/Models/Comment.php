@@ -4,10 +4,10 @@ namespace Partymeister\Competitions\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Partymeister\Core\Models\Visitor;
 
 /**
@@ -39,11 +39,11 @@ use Partymeister\Core\Models\Visitor;
  * @method static Builder|Comment whereReadByVisitor($value)
  * @method static Builder|Comment whereUpdatedAt($value)
  * @method static Builder|Comment whereVisitorId($value)
+ *
  * @mixin Eloquent
  */
 class Comment extends Model
 {
-
     use HasShortflakePrimary;
 
     /**

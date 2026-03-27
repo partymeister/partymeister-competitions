@@ -10,7 +10,7 @@ beforeEach(function () {
     $role = Role::create(['name' => 'SuperAdmin', 'guard_name' => 'web']);
     $user = User::factory()->create([
         'email' => 'admin@motor-cms.com',
-        'name'  => 'Admin',
+        'name' => 'Admin',
     ]);
     $user->assignRole($role);
 
@@ -70,7 +70,7 @@ describe('V2 CompetitionTypes API', function () {
         $id = CompetitionType::first()->id;
 
         $response = $this->asAdmin()->patchJson('/api/v2/competition-types/'.$id, [
-            'has_platform'  => true,
+            'has_platform' => true,
             'has_screenshot' => true,
         ]);
 

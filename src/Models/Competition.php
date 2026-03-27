@@ -6,19 +6,20 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\DB;
-use Kra8\Snowflake\HasShortflakePrimary;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Kra8\Snowflake\HasShortflakePrimary;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 use Motor\Media\Models\FileAssociation;
+use Partymeister\Competitions\Database\Factories\CompetitionFactory;
 use RichanFongdasen\EloquentBlameable\BlameableTrait;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
@@ -73,20 +74,21 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Competition whereUpdatedBy($value)
  * @method static Builder|Competition whereUploadEnabled($value)
  * @method static Builder|Competition whereVotingEnabled($value)
+ *
  * @mixin Eloquent
  */
 class Competition extends Model implements HasMedia
 {
+    use BlameableTrait;
+    use Filterable;
     use HasFactory;
+    use HasShortflakePrimary;
     use InteractsWithMedia;
     use Searchable;
-    use Filterable;
-    use BlameableTrait;
-    use HasShortflakePrimary;
 
     protected static function newFactory()
     {
-        return \Partymeister\Competitions\Database\Factories\CompetitionFactory::new();
+        return CompetitionFactory::new();
     }
 
     /**
@@ -115,21 +117,19 @@ class Competition extends Model implements HasMedia
     ];
 
     /**
-     * @param Media|null $media
-     *
      * @throws InvalidManipulation
      */
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-             ->width(320)
-             ->height(240)
-             ->nonQueued();
+            ->width(320)
+            ->height(240)
+            ->nonQueued();
 
         $this->addMediaConversion('preview')
-             ->width(1280)
-             ->height(1024)
-             ->nonQueued();
+            ->width(1280)
+            ->height(1024)
+            ->nonQueued();
     }
 
     /**
@@ -150,45 +150,46 @@ class Competition extends Model implements HasMedia
     {
         if ($this->competition_type->has_out_of_competition_voting) {
             $lv = LiveVote::first();
-            if (!is_null($lv) && $lv->competition_id == $this->id) {
+            if (! is_null($lv) && $lv->competition_id == $this->id) {
                 return true;
             }
         }
+
         return false;
     }
 
-    ///**
+    // /**
     // * @return Collection
     // */
-    //public function getSortedEntriesAttribute()
-    //{
+    // public function getSortedEntriesAttribute()
+    // {
     //    return $this->entries()
     //                ->where('status', 1)
     //                ->orderBy('sort_position', 'ASC')
     //                ->with('competition')
     //                ->get();
-    //}
+    // }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function qualified_entries()
     {
         return $this->hasMany(Entry::class)
-                    ->where('status', 1)
-                    ->orderBy('sort_position', 'ASC');
+            ->where('status', 1)
+            ->orderBy('sort_position', 'ASC');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function unqualified_entries_with_opt_in()
     {
         return $this->hasMany(Entry::class)
-                    ->where('status', '>=', 3) // not preselected or disqualified
-                    ->where('visitor_id', '>', 0)
-                    ->where('notify_about_status', true)
-                    ->orderBy('sort_position', 'ASC');
+            ->where('status', '>=', 3) // not preselected or disqualified
+            ->where('visitor_id', '>', 0)
+            ->where('notify_about_status', true)
+            ->orderBy('sort_position', 'ASC');
     }
 
     /**
@@ -214,7 +215,7 @@ class Competition extends Model implements HasMedia
 
         // Bulk: visitor vote totals (average per visitor, then sum across visitors)
         $voteTotals = DB::table(
-            DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN (' . implode(',', $entryIds) . ') GROUP BY entry_id, visitor_id) as sub')
+            DB::raw('(SELECT entry_id, visitor_id, SUM(points)/COUNT(id) as points_per_visitor FROM votes WHERE entry_id IN ('.implode(',', $entryIds).') GROUP BY entry_id, visitor_id) as sub')
         )
             ->select('entry_id', DB::raw('SUM(points_per_visitor) as total_points'))
             ->groupBy('entry_id')
@@ -247,14 +248,14 @@ class Competition extends Model implements HasMedia
         foreach ($entries as $entry) {
             $points = ($voteTotals[$entry->id] ?? 0) + ($manualVoteTotals[$entry->id] ?? 0);
             $results[] = [
-                'id'            => $entry->id,
-                'title'         => $entry->title,
-                'author'        => $entry->author,
-                'points'        => $points,
+                'id' => $entry->id,
+                'title' => $entry->title,
+                'author' => $entry->author,
+                'points' => $points,
                 'special_votes' => (int) ($specialVoteTotals[$entry->id] ?? 0),
-                'comments'      => $allComments[$entry->id] ?? [],
-                'remote_type'   => $entry->remote_type,
-                'tie'           => false,
+                'comments' => $allComments[$entry->id] ?? [],
+                'remote_type' => $entry->remote_type,
+                'tie' => false,
             ];
         }
 
@@ -297,7 +298,7 @@ class Competition extends Model implements HasMedia
     public function getEntryCountAttribute()
     {
         return $this->entries()
-                    ->count();
+            ->count();
     }
 
     /**

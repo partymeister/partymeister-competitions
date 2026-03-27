@@ -12,6 +12,7 @@ class OptionGroupRequest extends Request
     /**
      * @OA\Schema(
      *   schema="OptionGroupRequest",
+     *
      *   @OA\Property(
      *     property="name",
      *     type="string",
@@ -25,6 +26,7 @@ class OptionGroupRequest extends Request
      *   @OA\Property(
      *     property="options",
      *     type="array",
+     *
      *     @OA\Items(
      *       ref="#/components/schemas/OptionRequest"
      *     )
@@ -51,8 +53,8 @@ class OptionGroupRequest extends Request
     public function rules()
     {
         return [
-            'name'    => 'required',
-            'type'    => 'required|in:'.implode(',', array_flip(trans('partymeister-competitions::backend/option_groups.types'))),
+            'name' => 'required',
+            'type' => 'required|in:'.implode(',', array_flip(trans('partymeister-competitions::backend/option_groups.types'))),
             'options' => 'nullable|array',
         ];
     }

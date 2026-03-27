@@ -8,6 +8,11 @@ use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\PDF\Prize;
 use Partymeister\Competitions\Services\VoteService;
+use setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException;
+use setasign\Fpdi\PdfParser\Filter\FilterException;
+use setasign\Fpdi\PdfParser\PdfParserException;
+use setasign\Fpdi\PdfParser\Type\PdfTypeException;
+use setasign\Fpdi\PdfReader\PdfReaderException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -18,15 +23,15 @@ class ExportController extends Controller
     /**
      * @return StreamedResponse
      *
-     * @throws \setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException
-     * @throws \setasign\Fpdi\PdfParser\Filter\FilterException
-     * @throws \setasign\Fpdi\PdfParser\PdfParserException
-     * @throws \setasign\Fpdi\PdfParser\Type\PdfTypeException
-     * @throws \setasign\Fpdi\PdfReader\PdfReaderException
+     * @throws CrossReferenceException
+     * @throws FilterException
+     * @throws PdfParserException
+     * @throws PdfTypeException
+     * @throws PdfReaderException
      */
     public function receipt()
     {
-        $pdf = new Prize();
+        $pdf = new Prize;
         $pdf->SetCompression(true);
         $pdf->SetDisplayMode('fullpage');
         $pdf->SetMargins(20, 20, 20);
@@ -45,26 +50,25 @@ class ExportController extends Controller
     }
 
     /**
-     * @param  CompetitionPrizeRequest  $request
      * @return StreamedResponse
      *
-     * @throws \setasign\Fpdi\PdfParser\CrossReference\CrossReferenceException
-     * @throws \setasign\Fpdi\PdfParser\Filter\FilterException
-     * @throws \setasign\Fpdi\PdfParser\PdfParserException
-     * @throws \setasign\Fpdi\PdfParser\Type\PdfTypeException
-     * @throws \setasign\Fpdi\PdfReader\PdfReaderException
+     * @throws CrossReferenceException
+     * @throws FilterException
+     * @throws PdfParserException
+     * @throws PdfTypeException
+     * @throws PdfReaderException
      */
     public function prizesheet(CompetitionPrizeRequest $request)
     {
-        $pdf = new Prize();
+        $pdf = new Prize;
         $pdf->SetCompression(true);
         $pdf->SetDisplayMode('fullpage');
         $pdf->SetMargins(20, 20, 20);
         $pdf->setTemplate('receipt', resource_path('assets/pdf/partymeister-competitions-receipt'));
 
         $competitions = Competition::where('has_prizegiving', true)
-                                   ->orderBy('prizegiving_sort_position', 'DESC')
-                                   ->get();
+            ->orderBy('prizegiving_sort_position', 'DESC')
+            ->get();
 
         if ($competitions->count() == 0) {
             // FIXME
@@ -83,13 +87,13 @@ class ExportController extends Controller
                 $num = 1;
                 foreach ($competition['entries'] as $entry) {
                     $e = Entry::find($entry['id']);
-                    //foreach ($competition->entries->find_all_by_rank() as $entry) {
+                    // foreach ($competition->entries->find_all_by_rank() as $entry) {
                     if ($num >= 4) {
                         continue;
                     }
                     $pdf->renderCompetitionRankings($e, $num, $c->prizes()
-                                                          ->where('rank', $num)
-                                                          ->first());
+                        ->where('rank', $num)
+                        ->first());
                     $num++;
                 }
             }
@@ -97,7 +101,7 @@ class ExportController extends Controller
             // Receipts
             if ($request->get('receipt') !== null) {
                 $num = 1;
-                //foreach ($competition->entries()->get() as $entry) {
+                // foreach ($competition->entries()->get() as $entry) {
                 foreach ($competition['entries'] as $entry) {
                     $e = Entry::find($entry['id']);
                     if ($num >= 4) {
@@ -105,8 +109,8 @@ class ExportController extends Controller
                     }
 
                     $prize = $c->prizes()
-                               ->where('rank', $num)
-                               ->first();
+                        ->where('rank', $num)
+                        ->first();
                     if ((int) $prize->amount > 0) {
                         $pdf->addPage();
                         $pdf->UseTemplate('receipt');
@@ -126,7 +130,7 @@ class ExportController extends Controller
             $filename = 'prizesheet.pdf';
         }
 
-        //Send the file content as the response
+        // Send the file content as the response
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->Output('prizegiving.pdf', 'S');
             $pdf->Close();
