@@ -14,7 +14,9 @@ use Partymeister\Competitions\Http\Controllers\Api\SyncController;
 use Partymeister\Competitions\Http\Controllers\Api\VoteCategoriesController;
 use Partymeister\Competitions\Http\Controllers\Api\VotesController;
 use Partymeister\Competitions\Http\Controllers\Api\Votes\ResultsController;
+use Partymeister\Competitions\Http\Controllers\Api\ShaderShowdownController;
 use Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys\GenerateController;
+use Partymeister\Competitions\Http\Middleware\ShaderShowdownTokenAuth;
 
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
@@ -69,4 +71,14 @@ Route::group([
 ], function () {
     Route::post('access_keys/generate', [GenerateController::class, 'store'])
          ->name('access_keys.generate');
+});
+
+Route::group([
+    'middleware' => [ShaderShowdownTokenAuth::class],
+    'prefix' => 'api/shader-showdown',
+], function () {
+    Route::get('competitions', [ShaderShowdownController::class, 'index']);
+    Route::get('competitions/{id}', [ShaderShowdownController::class, 'show'])->where('id', '[0-9]+');
+    Route::post('competitions/{id}/start', [ShaderShowdownController::class, 'start'])->where('id', '[0-9]+');
+    Route::post('competitions/{id}/stop', [ShaderShowdownController::class, 'stop'])->where('id', '[0-9]+');
 });

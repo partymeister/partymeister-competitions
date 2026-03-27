@@ -66,8 +66,8 @@ class ResultsController extends ApiController
 
         return response()->json([
             'message' => 'Results generated',
-            'results' => $resultsData['data'],
-            'special' => $specialData['data'],
+            'results' => $resultsData,
+            'special' => $specialData,
         ]);
     }
 }

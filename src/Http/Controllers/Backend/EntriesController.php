@@ -41,7 +41,7 @@ class EntriesController extends Controller
      * @param  EntryRequest  $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(EntryRequest $request)
+    public function create()
     {
         $form = $this->form(EntryForm::class, [
             'method'  => 'POST',

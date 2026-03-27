@@ -4,6 +4,7 @@ namespace Partymeister\Competitions\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsBenchmarkVotesCommand;
 use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsExportVotesToCSVCommand;
 use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsExportWinnersForDHLCommand;
 use Partymeister\Competitions\Console\Commands\PartymeisterCompetitionsGenerateCompetitionCommand;
@@ -156,6 +157,7 @@ class PartymeisterServiceProvider extends ServiceProvider
                 PartymeisterCompetitionsGenerateCompetitionCommand::class,
                 PartymeisterCompetitionsGenerateEntryCommand::class,
                 PartymeisterCompetitionsExportWinnersForDHLCommand::class,
+                PartymeisterCompetitionsBenchmarkVotesCommand::class,
             ]);
         }
     }
