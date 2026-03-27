@@ -82,6 +82,7 @@ class VoteService extends BaseService
             $vote->competition_id = $competition->id;
             $vote->entry_id = $entryId;
             $vote->ip_address = $ipAddress;
+            $vote->special_vote = false;
         }
 
         $vote->points = $points;
