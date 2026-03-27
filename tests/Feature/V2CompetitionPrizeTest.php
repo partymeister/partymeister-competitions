@@ -54,6 +54,7 @@ describe('V2 Competition Prizes API', function () {
         assertV2CrudCreate('/api/v2/competition-prizes', [
             'competition_id' => $competition->id,
             'amount'         => '100',
+            'additional'     => '',
             'rank'           => 3,
         ], CompetitionPrize::class);
     });

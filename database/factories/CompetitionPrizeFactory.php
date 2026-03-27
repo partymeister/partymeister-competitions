@@ -15,7 +15,7 @@ class CompetitionPrizeFactory extends Factory
         return [
             'competition_id' => Competition::factory(),
             'amount' => $this->faker->randomElement(['100', '50', '25']),
-            'additional' => $this->faker->optional()->sentence(),
+            'additional' => $this->faker->sentence(),
             'rank' => $this->faker->numberBetween(1, 3),
         ];
     }

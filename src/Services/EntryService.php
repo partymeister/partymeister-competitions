@@ -61,9 +61,9 @@ class EntryService extends BaseService
         event(new EntrySaved($this->record));
     }
 
-    protected function addOptions()
+    protected function addOptions(): void
     {
-        $prefix = $this->form->getName() ? $this->form->getName().'.' : '';
+        $prefix = (! empty($this->form) && $this->form->getName()) ? $this->form->getName().'.' : '';
         foreach ($this->request->input($prefix.'options', []) as $group) {
             if (is_array($group)) {
                 foreach ($group as $id) {
@@ -81,8 +81,8 @@ class EntryService extends BaseService
     {
         // We need this in case we have named forms
         $prefix = '';
-        if (! is_null($this->form)) {
-            $prefix = $this->form->getName() != null ? $this->form->getName().'.' : '';
+        if (! empty($this->form) && $this->form->getName() !== null) {
+            $prefix = $this->form->getName().'.' ?? '';
         }
 
         $numberOfWorkStages = $this->record->competition->competition_type->number_of_work_stages;
@@ -109,8 +109,8 @@ class EntryService extends BaseService
     public function afterUpdate(): void
     {
         $prefix = '';
-        if (! is_null($this->form)) {
-            $prefix = $this->form->getName() ? $this->form->getName().'.' : '';
+        if (! empty($this->form) && $this->form->getName()) {
+            $prefix = $this->form->getName().'.';
         }
         if (count($this->request->input($prefix.'options', [])) > 0) {
             $this->record->options()

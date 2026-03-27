@@ -51,8 +51,10 @@ describe('V2 Competitions API', function () {
     it('can create a competition', function () {
         $type = CompetitionType::first();
         assertV2CrudCreate('/api/v2/competitions', [
-            'name'               => 'Music',
-            'competition_type_id' => $type->id,
+            'name'                     => 'Music',
+            'competition_type_id'      => $type->id,
+            'sort_position'            => 0,
+            'prizegiving_sort_position' => 0,
         ], Competition::class);
     });
 

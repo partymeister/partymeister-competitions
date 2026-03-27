@@ -56,6 +56,7 @@ describe('V2 Entries API', function () {
             'competition_id' => $competition->id,
             'title'          => 'New Entry',
             'author'         => 'New Author',
+            'sort_position'  => 0,
         ], Entry::class);
     });
 
