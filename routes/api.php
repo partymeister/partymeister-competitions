@@ -18,6 +18,8 @@ use Partymeister\Competitions\Http\Controllers\Api\VotesController;
 use Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys\GenerateController;
 use Partymeister\Competitions\Http\Middleware\ShaderShowdownTokenAuth;
 
+// V1 routes commented out — V2 API is the active API
+/*
 Route::group([
     'middleware' => ['auth:api', 'bindings', 'permission'],
     'prefix' => 'api',
@@ -82,6 +84,7 @@ Route::group([
     Route::post('competitions/{id}/start', [ShaderShowdownController::class, 'start'])->where('id', '[0-9]+');
     Route::post('competitions/{id}/stop', [ShaderShowdownController::class, 'stop'])->where('id', '[0-9]+');
 });
+*/
 
 use Motor\Core\Http\Middleware\V2\V2ErrorHandler;
 use Partymeister\Competitions\Http\Controllers\Api\V2;
