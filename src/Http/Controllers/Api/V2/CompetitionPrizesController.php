@@ -14,7 +14,7 @@ use Partymeister\Competitions\Models\CompetitionPrize;
 use Partymeister\Competitions\Services\CompetitionPrizeService;
 
 /**
- * @tags Competition Prizes
+ * @tags Competitions: Competition Prizes
  */
 class CompetitionPrizesController extends ApiController
 {

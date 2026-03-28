@@ -14,7 +14,7 @@ use Partymeister\Competitions\Models\Vote;
 use Partymeister\Competitions\Services\VoteService;
 
 /**
- * @tags Votes
+ * @tags Competitions: Votes
  */
 class VotesController extends ApiController
 {

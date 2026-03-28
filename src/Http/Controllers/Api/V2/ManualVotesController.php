@@ -14,7 +14,7 @@ use Partymeister\Competitions\Models\ManualVote;
 use Partymeister\Competitions\Services\ManualVoteService;
 
 /**
- * @tags Manual Votes
+ * @tags Competitions: Manual Votes
  */
 class ManualVotesController extends ApiController
 {

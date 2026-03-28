@@ -9,7 +9,7 @@ use Partymeister\Competitions\Models\AccessKey;
 use Partymeister\Competitions\Services\AccessKeyService;
 
 /**
- * @tags Access Keys
+ * @tags Competitions: Access Keys
  */
 class GenerateController extends Controller
 {

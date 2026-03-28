@@ -14,7 +14,7 @@ use Partymeister\Competitions\Models\OptionGroup;
 use Partymeister\Competitions\Services\OptionGroupService;
 
 /**
- * @tags Option Groups
+ * @tags Competitions: Option Groups
  */
 class OptionGroupsController extends ApiController
 {

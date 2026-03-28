@@ -14,7 +14,7 @@ use Partymeister\Competitions\Models\Entry;
 use Partymeister\Competitions\Services\EntryService;
 
 /**
- * @tags Entries
+ * @tags Competitions: Entries
  */
 class EntriesController extends ApiController
 {

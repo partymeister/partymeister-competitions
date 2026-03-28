@@ -14,7 +14,7 @@ use Partymeister\Competitions\Models\LiveVote;
 use Partymeister\Competitions\Services\LiveVoteService;
 
 /**
- * @tags Live Votes
+ * @tags Competitions: Live Votes
  */
 class LiveVotesController extends ApiController
 {

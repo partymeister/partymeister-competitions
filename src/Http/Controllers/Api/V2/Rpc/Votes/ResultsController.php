@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Partymeister\Competitions\Services\VoteService;
 
 /**
- * @tags Votes
+ * @tags Competitions: Votes
  */
 class ResultsController extends Controller
 {

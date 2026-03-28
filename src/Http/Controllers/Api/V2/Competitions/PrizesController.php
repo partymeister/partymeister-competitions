@@ -7,7 +7,7 @@ use Partymeister\Competitions\Http\Resources\V2\CompetitionPrizeCollection;
 use Partymeister\Competitions\Models\Competition;
 
 /**
- * @tags Competitions
+ * @tags Competitions: Competitions
  */
 class PrizesController extends ApiController
 {
