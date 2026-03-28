@@ -14,7 +14,7 @@ use Partymeister\Competitions\Services\AccessKeyService;
 class GenerateController extends Controller
 {
     /**
-     * @response 201 array{data: array{generated: int}, meta: array{api_version: string, message: string}}
+     * @response array{data: array{generated: int}, meta: array{api_version: string, message: string}}
      */
     public function __invoke(AccessKeyGeneratePostRequest $request): JsonResponse
     {
