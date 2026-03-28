@@ -1,5 +1,6 @@
 <?php
-
+// Legacy backend web routes commented out — backend uses V2 API
+/*
 use Partymeister\Competitions\Http\Controllers\Backend\AccessKeys\ExportController as AccessKeysExportController;
 use Partymeister\Competitions\Http\Controllers\Backend\AccessKeysController;
 use Partymeister\Competitions\Http\Controllers\Backend\CompetitionPrizes\ExportController as CompetitionPrizesExportController;
@@ -133,3 +134,4 @@ Route::group([
     Route::patch('entry-uploads/{component_entry_upload}', [ComponentEntryUploadsController::class, 'update'])
         ->name('entry-uploads.update');
 });
+*/
