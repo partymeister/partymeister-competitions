@@ -171,6 +171,7 @@ class Entry extends Model implements HasMedia
         'is_remote',
         'is_recorded',
         'is_prepared',
+        'hide_author',
         'upload_enabled',
         'composer_not_member_of_copyright_collective',
         'author_name',

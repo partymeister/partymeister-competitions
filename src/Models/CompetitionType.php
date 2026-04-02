@@ -105,6 +105,7 @@ class CompetitionType extends Model
         'has_composer',
         'has_running_time',
         'is_anonymous',
+        'can_hide_author',
         'number_of_work_stages',
         'has_remote_entries',
         'file_is_optional',
@@ -174,6 +175,9 @@ class CompetitionType extends Model
         }
         if ($this->is_anonymous) {
             $properties[] = 'is_anonymous';
+        }
+        if ($this->can_hide_author) {
+            $properties[] = 'can_hide_author';
         }
         if ($this->has_remote_entries) {
             $properties[] = 'has_remote_entries';
