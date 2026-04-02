@@ -194,7 +194,7 @@ class EntryResource extends BaseResource
             'competition_id'                 => $this->competition_id,
             'competition_name'               => $this->competition->name,
             'title'                          => $this->title,
-            'author'                         => $this->author,
+            'author'                         => ($this->hide_author || $this->competition->competition_type->is_anonymous) ? ' ' : $this->author,
             'description'                    => $this->description,
             'has_screenshot'                 => (bool) $this->competition->competition_type->has_screenshot,
             'screenshot'                     => $screenshot,
