@@ -9,7 +9,7 @@
     @if ($record->is_remote)
         <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-error/15 text-error border border-error/40">REMOTE</span>
     @endif
-    Entry detail for: {{$record->title}} by {{$record->author}}
+    Entry detail for: {{$record->title}}@if (!$record->competition->competition_type->is_anonymous && !$record->hide_author) by {{$record->author}}@endif
 </h3>
 
 {{-- Entry info card --}}
@@ -99,7 +99,7 @@
     <div class="p-5 space-y-4">
         @if($record->getFirstMedia('screenshot'))
             <h5 class="mb-2">Screenshot</h5>
-            <a data-caption="{{$record->title}} by {{$record->author}}" data-fancybox="gallery"
+            <a data-caption="{{$record->title}}@if (!$record->competition->competition_type->is_anonymous && !$record->hide_author) by {{$record->author}}@endif" data-fancybox="gallery"
                href="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}" class="hover:opacity-90 transition-opacity block">
                 <img src="{{$record->getFirstMedia('screenshot')->getUrl('preview')}}" alt="Screenshot for {{ $record->title }}" class="w-full rounded-lg">
             </a>

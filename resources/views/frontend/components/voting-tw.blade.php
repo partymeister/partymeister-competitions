@@ -40,7 +40,7 @@
                          data-entry-id="{{$entry->id}}">
                         @if($entry->getFirstMedia('screenshot'))
                             <figure>
-                                <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif" data-fancybox="gallery"
+                                <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous && !$entry->hide_author)by {{$entry->author}}@endif" data-fancybox="gallery"
                                    href="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}" class="hover:opacity-90 transition-opacity">
                                     <img src="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}"
                                          alt="Screenshot for {{ $entry->title }}" class="w-full rounded-t-lg">
@@ -51,7 +51,7 @@
                             <audio controls src="{{$entry->getFirstMedia('audio')->getUrl()}}" class="w-full"></audio>
                         @endif
                         <div class="p-5 flex-1 flex flex-col break-words">
-                            <h5 class="mb-3">@if ($entry->remote_type)<svg class="w-5 h-5 text-white float-right ml-2 mt-1" role="img" aria-label="{{ $entry->remote_type }}"><title>{{ $entry->remote_type }}</title><use href="#icon-{{ $entry->remote_type == 'Satellite' ? 'satellite' : 'remote' }}"/></svg>@endif{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous)by {{$entry->author}}@endif</h5>
+                            <h5 class="mb-3">@if ($entry->remote_type)<svg class="w-5 h-5 text-white float-right ml-2 mt-1" role="img" aria-label="{{ $entry->remote_type }}"><title>{{ $entry->remote_type }}</title><use href="#icon-{{ $entry->remote_type == 'Satellite' ? 'satellite' : 'remote' }}"/></svg>@endif{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous && !$entry->hide_author)by {{$entry->author}}@endif</h5>
                             <h6 class="text-text-muted">{{$entry->competition->name}}</h6>
                             @if ($entry->options->count() > 0 || $entry->custom_option != '')
                                 <h6 class="mt-2">Options</h6>

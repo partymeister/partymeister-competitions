@@ -13,14 +13,14 @@
         <div class="flex-1 flex flex-col rounded-lg bg-surface border border-border shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
             @if($entry->getFirstMedia('screenshot'))
                 <figure>
-                    <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}} @endif" data-fancybox="gallery"
+                    <a data-caption="{{$entry->title}} @if (!$entry->competition->competition_type->is_anonymous && !$entry->hide_author) by {{$entry->author}} @endif" data-fancybox="gallery"
                        href="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}" class="hover:opacity-90 transition-opacity">
                         <img src="{{$entry->getFirstMedia('screenshot')->getUrl('preview')}}" alt="Screenshot for {{ $entry->title }}" class="w-full rounded-t-lg">
                     </a>
                 </figure>
             @endif
             <div class="p-5 flex flex-col flex-1 break-words">
-                    <h5 class="mb-3">{{$entry->title}}@if (!$entry->competition->competition_type->is_anonymous) by {{$entry->author}}@endif</h5>
+                    <h5 class="mb-3">{{$entry->title}}@if (!$entry->competition->competition_type->is_anonymous && !$entry->hide_author) by {{$entry->author}}@endif</h5>
                     <h6 class="text-text-muted">{{$entry->competition->name}}</h6>
                     @if ($entry->options->count() > 0 || $entry->custom_option != '')
                         <h6 class="mt-2">Options</h6>
