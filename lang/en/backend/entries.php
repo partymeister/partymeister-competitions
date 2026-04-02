@@ -25,6 +25,7 @@ return [
     'is_remote'                                   => 'Is remote entry',
     'is_recorded'                                 => 'Is recorded',
     'is_prepared'                                 => 'Is prepared',
+    'hide_author'                                 => 'Hide author',
     'has_explicit_content'                        => 'Has explicit content',
     'needs_content_check'                         => 'Needs content check',
     'upload_enabled'                              => 'Upload enabled',

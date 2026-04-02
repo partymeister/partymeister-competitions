@@ -24,6 +24,7 @@ return [
     'number_of_work_stages'         => 'work stages required',
     'n_number_of_work_stages'       => ':number work stages required',
     'is_anonymous'                  => 'Is anonymous (author omitted)',
+    'can_hide_author'               => 'Can hide author per entry',
     'file_is_optional'              => 'File upload optional',
     'has_remote_entries'            => 'Remote entries allowed',
     'has_config_file'               => 'Has config file as separate upload',
