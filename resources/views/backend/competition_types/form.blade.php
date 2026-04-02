@@ -43,16 +43,11 @@
                 {!! form_row($form->is_anonymous) !!}
             </div>
             <div class="col-md-3">
-                {!! form_row($form->can_hide_author) !!}
-            </div>
-            <div class="col-md-3">
                 {!! form_row($form->has_remote_entries) !!}
             </div>
             <div class="col-md-3">
                 {!! form_row($form->file_is_optional) !!}
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-3">
                 {!! form_widget($form->number_of_work_stages, ['attr' => ['class' => '', 'style' => 'width: 2rem; text-align: center;']]) !!}
                 {!! form_label($form->number_of_work_stages) !!}
@@ -70,6 +65,11 @@
             </div>
             <div class="col-md-3">
                 {!! form_row($form->has_out_of_competition_voting) !!}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                {!! form_row($form->can_hide_author) !!}
             </div>
         </div>
     </div>
