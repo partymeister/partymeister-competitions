@@ -63,6 +63,18 @@ class CompetitionPlaylistController extends Controller
                 $entries[$key]['author'] = ' ';
                 $entries[$key]['previous_author'] = ' ';
             }
+        } else {
+            foreach ($entries as $key => $entry) {
+                if ($entry['hide_author']) {
+                    $entries[$key]['author'] = ' ';
+                }
+            }
+            // Blank previous_author if the previous entry has hide_author
+            foreach ($entries as $key => $entry) {
+                if ($key > 0 && $entries[$key - 1]['hide_author']) {
+                    $entries[$key]['previous_author'] = ' ';
+                }
+            }
         }
         shuffle($participants);
 
