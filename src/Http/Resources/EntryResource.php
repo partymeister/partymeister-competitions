@@ -271,7 +271,7 @@ class EntryResource extends BaseResource
             'sort_position'                               => (int) $this->sort_position,
             'sort_position_prefixed'                      => (strlen($this->sort_position) == 1 ? '0'.$this->sort_position : $this->sort_position),
             'title'                                       => $this->title,
-            'author'                                      => ($this->hide_author || $this->competition->competition_type->is_anonymous) ? ' ' : $this->author,
+            'author'                                      => $this->author,
             'hide_author'                                 => (bool) $this->hide_author,
             'filesize'                                    => (int) $this->filesize,
             'filesize_human'                              => Filesize::bytesToHuman((int) $this->filesize),

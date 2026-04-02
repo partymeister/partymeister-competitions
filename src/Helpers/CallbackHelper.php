@@ -107,7 +107,7 @@ class CallbackHelper
             $callback = new Callback();
         }
 
-        if ($entry->competition->competition_type->is_anonymous) {
+        if ($entry->competition->competition_type->is_anonymous || $entry->hide_author) {
             $name = $entry->title;
         } else {
             $name = $entry->title.' by '.$entry->author;
