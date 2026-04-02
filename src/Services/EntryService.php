@@ -95,8 +95,8 @@ class EntryService extends BaseService
         $this->uploadFile($this->request->file($prefix.'audio'), 'audio');
 
         $file = $this->request->file($prefix.'file');
+        $this->uploadFile($file, 'file', 'file', null, true);
         if ($file instanceof UploadedFile && $file->isValid()) {
-            $this->uploadFile($this->request->file($prefix.'file'), 'file', 'file', null, true);
             $this->record->is_recorded = false;
             $this->record->save();
         }
