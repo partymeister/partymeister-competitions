@@ -155,6 +155,9 @@ class EntryForm extends Form
             if ($data['competition']->competition_type->has_recordings) {
                 $this->add('is_recorded', 'checkbox', ['label' => trans('partymeister-competitions::backend/entries.is_recorded')]);
             }
+            if ($data['competition']->competition_type->can_hide_author) {
+                $this->add('hide_author', 'checkbox', ['label' => trans('partymeister-competitions::backend/entries.hide_author')]);
+            }
             if ($data['competition']->competition_type->has_engine_options) {
                 $this->add('engine_option', 'select2', [
                     'label'   => trans('partymeister-competitions::backend/entries.engine_option'),
