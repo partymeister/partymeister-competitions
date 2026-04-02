@@ -137,6 +137,11 @@
                         {!! form_row($form->is_recorded) !!}
                     </div>
                 @endif
+                @if ($form->has('hide_author'))
+                    <div class="col-md-3">
+                        {!! form_row($form->hide_author) !!}
+                    </div>
+                @endif
             </div>
             @if ($form->has('platform'))
                 {!! form_row($form->platform) !!}
