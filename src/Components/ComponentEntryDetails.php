@@ -105,6 +105,11 @@ class ComponentEntryDetails
         }
         $entry['competition_name'] = Arr::get($entry, 'competition.name', '');
 
+        // Blank author for beamslide preview if hide_author is set
+        if ($record->hide_author || $record->competition->competition_type->is_anonymous) {
+            $entry['author'] = ' ';
+        }
+
         $competitionTemplate = SlideTemplate::where('template_for', 'competition')
                                             ->first();
 
