@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Partymeister\Competitions\Models\Competition;
 use Partymeister\Competitions\Models\Entry;
 use Partymeister\Core\Models\Callback;
+use Partymeister\Core\Models\Event;
 
 /**
  * Class CallbackHelper
@@ -58,6 +59,32 @@ class CallbackHelper
         $callback->action = 'notification';
         $callback->title = 'Prizegiving';
         $callback->body = 'Prizegiving is starting';
+        $callback->hash = $hash;
+        $callback->destination = 'events';
+        $callback->save();
+
+        return $callback;
+    }
+
+    /**
+     * @param  Event  $event
+     * @return Builder|Model|object|callable|null
+     */
+    public static function eventStarts(Event $event)
+    {
+        $hash = hash_hmac('sha256', $event->id.'event_starts', 20);
+
+        $callback = Callback::where('hash', '=', $hash)
+                            ->first();
+
+        if (is_null($callback)) {
+            $callback = new Callback();
+        }
+
+        $callback->name = 'Event: '.$event->name.' starts';
+        $callback->action = 'notification';
+        $callback->title = 'Event';
+        $callback->body = $event->name.' is starting';
         $callback->hash = $hash;
         $callback->destination = 'events';
         $callback->save();
