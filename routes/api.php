@@ -16,6 +16,8 @@ use Partymeister\Competitions\Http\Controllers\Api\VotesController;
 use Partymeister\Competitions\Http\Controllers\Api\Votes\ResultsController;
 use Partymeister\Competitions\Http\Controllers\Api\ShaderShowdownController;
 use Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys\GenerateController;
+use Partymeister\Competitions\Http\Controllers\Api\ExportController;
+use Partymeister\Competitions\Http\Middleware\ExportTokenAuth;
 use Partymeister\Competitions\Http\Middleware\ShaderShowdownTokenAuth;
 
 Route::group([
@@ -71,6 +73,13 @@ Route::group([
 ], function () {
     Route::post('access_keys/generate', [GenerateController::class, 'store'])
          ->name('access_keys.generate');
+});
+
+Route::group([
+    'middleware' => [ExportTokenAuth::class],
+    'prefix' => 'api/export',
+], function () {
+    Route::get('entries', [ExportController::class, 'entries']);
 });
 
 Route::group([
