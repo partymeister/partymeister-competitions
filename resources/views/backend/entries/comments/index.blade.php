@@ -1,9 +1,20 @@
 @extends('motor-backend::layouts.backend')
 
-@section('view_scripts')
+@section('view_styles')
     <style type="text/css">
         .unread {
             background-color: #ff9fb1;
+        }
+        .visitor-message {
+            background-color: #e1e1e1;
+        }
+        .c-dark-theme .unread {
+            background-color: #6b2233;
+            color: #d0d4da;
+        }
+        .c-dark-theme .visitor-message {
+            background-color: #2a2f35;
+            color: #d0d4da;
         }
     </style>
 @endsection
@@ -31,7 +42,7 @@
                             on {{date('Y-m-d H:i', strtotime($comment->created_at))}}</div>
                     @endif
                 </div>
-                <div class="@boxBody @if(!$comment->read_by_organizer) unread @endif" style="@if ($comment->author == '') background-color: #e1e1e1 @endif">
+                <div class="@boxBody @if(!$comment->read_by_organizer) unread @endif @if ($comment->author == '') visitor-message @endif">
                     {!! nl2br(e($comment->message)) !!}
                 </div>
             @endforeach
