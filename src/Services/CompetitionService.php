@@ -141,6 +141,16 @@ class CompetitionService extends BaseService
 
         // Hardlink the files in the correct order, clear directory beforehand
         foreach ($competition->qualified_entries as $entry) {
+            // Auto-assign final_file_media_id if only one file and not yet set
+            if (! $entry->final_file_media_id) {
+                $files = $entry->getMedia('file');
+                if ($files->count() === 1) {
+                    $entry->final_file_media_id = $files->first()->id;
+                    $entry->save();
+                    Log::info("Auto-assigned final file for \"{$entry->title}\" in \"{$competition->name}\"");
+                }
+            }
+
             if ($entry->final_file_media_id > 0) {
                 $media = Media::find($entry->final_file_media_id);
                 if (is_null($media)) {
