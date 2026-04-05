@@ -110,9 +110,8 @@ class EntryService extends BaseService
         if (! is_null($this->form)) {
             $prefix = $this->form->getName() ? $this->form->getName().'.' : '';
         }
+        $this->record->options()->detach();
         if (count($this->request->input($prefix.'options', [])) > 0) {
-            $this->record->options()
-                         ->detach();
             $this->addOptions();
         }
         $this->addImages();
