@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 use Kra8\Snowflake\HasShortflakePrimary;
+use Mattiverse\Userstamps\Traits\Userstamps;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 use Partymeister\Competitions\Database\Factories\VoteCategoryFactory;
-use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Partymeister\Competitions\Models\VoteCategory
@@ -58,11 +58,11 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  */
 class VoteCategory extends Model
 {
-    use BlameableTrait;
     use Filterable;
     use HasFactory;
     use HasShortflakePrimary;
     use Searchable;
+    use Userstamps;
 
     protected static function newFactory()
     {

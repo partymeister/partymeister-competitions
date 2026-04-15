@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Kra8\Snowflake\HasShortflakePrimary;
+use Mattiverse\Userstamps\Traits\Userstamps;
 use Motor\Admin\Models\User;
 use Motor\Core\Filter\Filter;
 use Motor\Core\Traits\Filterable;
 use Motor\Core\Traits\Searchable;
 use Partymeister\Competitions\Database\Factories\OptionGroupFactory;
-use RichanFongdasen\EloquentBlameable\BlameableTrait;
 
 /**
  * Partymeister\Competitions\Models\OptionGroup
@@ -54,11 +54,11 @@ use RichanFongdasen\EloquentBlameable\BlameableTrait;
  */
 class OptionGroup extends Model
 {
-    use BlameableTrait;
     use Filterable;
     use HasFactory;
     use HasShortflakePrimary;
     use Searchable;
+    use Userstamps;
 
     protected static function newFactory()
     {

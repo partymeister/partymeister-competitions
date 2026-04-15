@@ -1,5 +1,6 @@
 <?php
 
+use Motor\Core\Http\Middleware\V2\V2ErrorHandler;
 use Partymeister\Competitions\Http\Controllers\Api\AccessKeysController;
 use Partymeister\Competitions\Http\Controllers\Api\CompetitionPlaylistController;
 use Partymeister\Competitions\Http\Controllers\Api\CompetitionPrizesController;
@@ -12,12 +13,10 @@ use Partymeister\Competitions\Http\Controllers\Api\OptionGroupsController;
 use Partymeister\Competitions\Http\Controllers\Api\PrizegivingPlaylistController;
 use Partymeister\Competitions\Http\Controllers\Api\ShaderShowdownController;
 use Partymeister\Competitions\Http\Controllers\Api\SyncController;
+use Partymeister\Competitions\Http\Controllers\Api\V2;
 use Partymeister\Competitions\Http\Controllers\Api\VoteCategoriesController;
 use Partymeister\Competitions\Http\Controllers\Api\Votes\ResultsController;
 use Partymeister\Competitions\Http\Controllers\Api\VotesController;
-use Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys\GenerateController;
-use Partymeister\Competitions\Http\Middleware\ShaderShowdownTokenAuth;
-
 // V1 routes commented out — V2 API is the active API
 /*
 Route::group([
@@ -86,8 +85,8 @@ Route::group([
 });
 */
 
-use Motor\Core\Http\Middleware\V2\V2ErrorHandler;
-use Partymeister\Competitions\Http\Controllers\Api\V2;
+use Partymeister\Competitions\Http\Controllers\ApiRPC\AccessKeys\GenerateController;
+use Partymeister\Competitions\Http\Middleware\ShaderShowdownTokenAuth;
 
 // V2 API routes
 Route::prefix('api/v2')
