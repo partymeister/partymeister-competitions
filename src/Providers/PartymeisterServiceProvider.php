@@ -50,7 +50,6 @@ class PartymeisterServiceProvider extends ServiceProvider
         $this->registerCommands();
         $this->migrations();
         $this->publishResourceAssets();
-        $this->components();
         merge_local_config_with_db_configuration_variables('partymeister-competitions');
     }
 
@@ -63,7 +62,6 @@ class PartymeisterServiceProvider extends ServiceProvider
     public function routes()
     {
         if (! $this->app->routesAreCached()) {
-            require __DIR__.'/../../routes/web.php';
             require __DIR__.'/../../routes/api.php';
             require __DIR__.'/../../routes/api_v2_votes.php';
         }
@@ -186,11 +184,5 @@ class PartymeisterServiceProvider extends ServiceProvider
         ];
 
         $this->publishes($assets, 'partymeister-competitions-install-resources');
-    }
-
-    public function components()
-    {
-        $config = $this->app['config']->get('motor-cms-page-components', []);
-        $this->app['config']->set('motor-cms-page-components', array_replace_recursive(require __DIR__.'/../../config/motor-cms-page-components.php', $config));
     }
 }
